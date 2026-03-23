@@ -36,11 +36,23 @@
                         <p class="c-bold">Vul de onderstaande velden in:</p>
                     </div>
                     <div class="create-form">
-                        <form action='/pages/store' method="POST">
+                        <form action='/pages/store' method="POST" enctype="multipart/form-data">
                             @csrf
+                             
                             <p class="c-bold">App details:<br/><br/>
                             <input type="text" name='name' placeholder="Naam van de app..." required><br/><br/>
                              
+                            
+                            
+                            <div class="app-image mb-4">
+                                <p>App afbeelding:</p> 
+                                <input type='file' name='page_thumbnail' class='file' id='imgInp'>
+                                <label for="imgInp"  class="file-input text-center"  >  <img src="{{ asset('/storage/gkb-groen.png') }}" id="img"> </label>
+                            </div>
+                             
+                                                 
+                           
+                            
                             <textarea name='description' placeholder="Omschrijving..." ></textarea><br/><br/>
 
                             <p class="c-bold">Repository:<br/><br/>

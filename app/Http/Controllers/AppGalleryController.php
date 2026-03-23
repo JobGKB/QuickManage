@@ -57,28 +57,42 @@ class AppGalleryController extends Controller
     {   
         $app_category = AppCategorie::where('id', $unique)->first();
 
-        $apps = Page::where('cat_id', $app_category->id)->get();
+        $all_apps = Page::all();
+
+        $apps_w_cat_id = Page::where('cat_id', $app_category->id)->get();
+
+        // dd($apps_w_cat_id);
 
      
 
         return view('pages.app_gallery.app_category.show_cat', [
             'app_category' => $app_category,
-            'apps' => $apps
+            'apps_w_cat_id' => $apps_w_cat_id,
+            'all_apps' => $all_apps
         ]);
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'category_name' => 'required|string|max:255',
+            'category_name' => 'sometimes|required|string|max:255',
+            'description' => 'nullable|string|max:1000',
         ]);
 
         $app_category = AppCategorie::findOrFail($id);
-        $app_category->category_name = $request->category_name;
+
+        if ($request->has('category_name')) {
+            $app_category->category_name = $request->category_name;
+        }
+        if ($request->has('description')) {
+            $app_category->description = $request->description;
+        }
+
         $app_category->save();
 
         return response()->json([
             'category_name' => $app_category->category_name,
+            'description' => $app_category->description,
         ]);
     }
 

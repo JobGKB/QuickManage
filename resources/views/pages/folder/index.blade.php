@@ -15,7 +15,7 @@
             <div class="offset-lg-2 col-lg-9 col-md-12">
                 <div class="body-container">
                     <div class="create-item">
-                        <a href="/folder/create">Map aanmaken</a>
+                        <a href="/folder/create"><i class="fa-solid fa-plus"></i> Map aanmaken</a>
                     </div>
                      <div class="cat-wrapper">
                         @foreach($folder as $data)

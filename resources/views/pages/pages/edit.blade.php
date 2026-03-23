@@ -36,11 +36,16 @@
                         <p>Maak de pagina op met HTML Content:</p>
                     </div>
                     <div class="edit-form">
-                        <form action='/pages/update/{{$page->id}}' method="POST">
+                        <form action='/pages/update/{{$page->id}}' method="POST" enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf    
                             <p class="c-bold">HTML Pagina naam:</p>
                             <input type="text" name='name' value="{{ $page->name }}" required><br/><br/>
+                            <div class="app-image mb-4">
+                                <p>App afbeelding:</p> 
+                                <input type='file' name='page_thumbnail' class='file' id='imgInp'>
+                                <label for="imgInp"  class="file-input text-center"  >   @if($page->page_thumbnail)<img src="data:image/png;base64,{{ $page->page_thumbnail }} " id="img">@else <img src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif   </label>
+                            </div>
                             <p class="c-bold">Omschrijving:</p> 
                             <textarea name='description' >{{ $page->description }}</textarea><br/><br/>
 

@@ -18,7 +18,7 @@
                 <div class="body-container" style="height:100%;">
 
                     <div class="create-item">
-                        <a href="/template/create">Template aanmaken</a>  
+                        <a href="/template/create"><i class="fa-solid fa-plus"></i> Template aanmaken</a>  
                     </div>
                         
                     <div class="container template-wrapper">

@@ -32,7 +32,7 @@
             <div class="offset-lg-2 col-lg-9 col-md-12">
                 <div class="body-container">
                     <div class="create-item">
-                        <a href="/pages/create">Pagina aanmaken</a>
+                        <a href="/pages/create"> <i class="fa-solid fa-plus"></i> Pagina aanmaken</a>
                     </div>
                     <div class="table-wrapper">
                         <header>

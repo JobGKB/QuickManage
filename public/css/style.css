@@ -395,6 +395,65 @@ body {
   cursor: pointer;
 }
 
+.description-container {
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.description-container .description-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.description-container .description-actions-wrapper {
+  display: flex;
+  align-items: center;
+}
+.description-container .description-actions-wrapper .fa-pen-to-square, .description-container .description-actions-wrapper .fa-check, .description-container .description-actions-wrapper .fa-xmark {
+  margin-right: 8px;
+  padding: 6px;
+  border-radius: 4px;
+  color: #fff !important;
+  transition: 0.3s;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.description-container .description-actions-wrapper .fa-pen-to-square {
+  background-color: #439034;
+}
+.description-container .description-actions-wrapper .fa-pen-to-square:hover {
+  background-color: #347427;
+}
+.description-container .description-actions-wrapper .fa-check {
+  background-color: #439034;
+}
+.description-container .description-actions-wrapper .fa-check:hover {
+  background-color: #347427;
+}
+.description-container .description-actions-wrapper .fa-xmark {
+  background-color: #b90606;
+}
+.description-container .description-actions-wrapper .fa-xmark:hover {
+  background-color: #9c0505;
+}
+
+.description_change_textarea {
+  width: 100%;
+  font-size: 1rem;
+  color: #212529;
+  background-color: hsla(110, 50%, 30%, 0.05);
+  background-clip: padding-box;
+  border: none;
+  border-bottom: 1px solid #347427;
+  border-radius: 5px;
+  outline: none;
+  resize: vertical;
+  padding: 10px;
+}
+
 .body-container {
   margin-top: 100px;
   margin-bottom: 20px;
@@ -558,6 +617,7 @@ body {
   padding: 20px;
   padding-left: 10px;
   margin-bottom: 16px;
+  border-bottom: 1px solid rgba(52, 116, 39, 0.7882352941);
 }
 .body-container .create-item a {
   background-color: #439034;
@@ -565,8 +625,86 @@ body {
   text-decoration: none !important;
   color: #f0f0f0 !important;
   transition: 0.5s;
+  border-radius: 5px !important;
 }
 .body-container .create-item a:hover {
+  background-color: #347427;
+}
+.body-container .addAppModal .modal-dialog .modal-content {
+  background-color: #ebebeb;
+  border-radius: 5px;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-header {
+  border-bottom: none;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-header .modal-title {
+  font-weight: 600;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-body {
+  padding: 20px;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-body .search-input-form {
+  display: flex;
+  border-radius: 5px;
+  outline: none;
+  padding: 8px;
+  border: 1px solid #d6d6d6;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer {
+  background-color: #dddddd;
+  border: 1px solid #d6d6d6;
+  border-radius: 5px;
+  padding: 10px;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .app-badge {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  min-height: 200px;
+  color: #fff !important;
+  padding: 10px !important;
+  transition: 0.5s;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+  text-decoration: none !important;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .app-badge .badge-added {
+  display: block;
+  color: #d6d6d6 !important;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .app-badge img.img {
+  padding: 10px;
+  height: 120px;
+  border-radius: 5px;
+  width: auto;
+  background-color: #eeeeee !important;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .selected {
+  background-color: #235c18 !important;
+  border: 1px solid #347427;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .deselected {
+  background-color: #eeeeee !important;
+  border: 1px solid #d6d6d6;
+  cursor: pointer;
+  color: #000 !important;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-footer {
+  border-top: none;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-footer button {
+  border: none;
+  background-color: #439034;
+  color: #fff;
+  padding: 10px 20px;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+.body-container .addAppModal .modal-dialog .modal-content .modal-footer button:hover {
   background-color: #347427;
 }
 .body-container .table-wrapper {
@@ -655,16 +793,18 @@ body {
   align-items: center;
   padding: 20px;
   text-align: center;
-  background-color: #439034;
+  background-color: rgba(243, 243, 243, 0.2549019608);
+  color: #000;
   transition: 0.5s;
   height: 250px;
   border-radius: 5px;
+  border: 2px solid rgba(52, 116, 39, 0.5882352941);
 }
 .body-container .app-category-card .app-category-card-body:hover {
-  background-color: #347427;
+  background-color: hsla(110, 50%, 30%, 0.205);
 }
 .body-container .app-category-card .app-category-card-body img {
-  height: 100%;
+  height: 140px;
   padding: 20px;
 }
 .body-container .app-category-card .app-category-card-body p {
@@ -759,5 +899,12 @@ body {
   }
   .ham_menu {
     display: block;
+  }
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 750px;
+    margin-right: auto;
+    margin-left: auto;
   }
 }

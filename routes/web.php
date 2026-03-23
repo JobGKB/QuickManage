@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/app-gallery/category/{unique}', [App\Http\Controllers\AppGalleryController::class, 'show']);
     Route::get('/app-gallery/category/edit/{unique}', [App\Http\Controllers\AppGalleryController::class, 'edit']);
     Route::patch('/app-gallery/category/update/{id}', [App\Http\Controllers\AppGalleryController::class, 'update']);
+    Route::post('/app-gallery/category/update-apps/{id}', [App\Http\Controllers\PageController::class, 'updateCategoryApps']);
     Route::delete('/app-gallery/category/delete/{id}', [App\Http\Controllers\AppGalleryController::class, 'destroy']);
 
 

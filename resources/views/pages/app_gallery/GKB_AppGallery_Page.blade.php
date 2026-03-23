@@ -29,9 +29,7 @@
                     @foreach ($app_categories as $data)
                     <div class="header_home_screen" id="header_home_screen">
 
-                      
-                           
-                    
+
                         <h2 >{{ $data->category_name }}</h2>
                      
                            <br/> 

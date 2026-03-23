@@ -66,6 +66,8 @@ class PageController extends Controller
         $page->folder_id = session('folder_id');
         $page->cat_id = $request['category'];
         $page->hash_id = $unique;
+       
+        if ($request->hasFile('page_thumbnail')) { $page->page_thumbnail = base64_encode(file_get_contents($request->file('page_thumbnail'))); }
         $page->save();
 
  
@@ -117,12 +119,45 @@ class PageController extends Controller
         // dd($req->input());
         $page = Page::find($id);
         $page->name = $req->input('name');
+       
         $page->description = $req->input('description');
         $page->cat_id = $req->input('category');
+
+     
+
+        if ($req->hasFile('page_thumbnail')) {
+
+             $page->page_thumbnail = base64_encode(file_get_contents($req->file('page_thumbnail'))); 
+
+             }
 
         $page->save();
         //redirect
         return back()->with('success','Pagina bijgewerkt!');
+    }
+
+    public function updateCategoryApps(Request $request, $id)
+    {
+        $request->validate([
+            'app_ids' => 'present|array',
+            'app_ids.*' => 'integer|exists:pages,id',
+        ]);
+
+        $category = AppCategorie::findOrFail($id);
+        $selectedIds = $request->input('app_ids', []);
+
+        // Remove cat_id from pages that were in this category but are now deselected
+        Page::where('cat_id', $category->id)
+            ->whereNotIn('id', $selectedIds)
+            ->update(['cat_id' => null]);
+
+        // Assign cat_id to newly selected pages
+        if (!empty($selectedIds)) {
+            Page::whereIn('id', $selectedIds)
+                ->update(['cat_id' => $category->id]);
+        }
+
+        return response()->json(['success' => true]);
     }
 
     public function destroy($id)
