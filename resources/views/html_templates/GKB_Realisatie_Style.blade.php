@@ -11,11 +11,18 @@
             <!-- header -->
             <section class="header">
               <div class="container">
-                <div class="row header-logo">
-                  <div class="col-lg-12 text-center">
+                <div class="row header-logo align-items-center">
+                   <div class="col-md-4 fl-l">
+                     
+                    <a href="/app-gallery/overzicht" class="overzicht_link fl-l"> <img src="{{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps</a>
+
+                  </div> 
+
+                  <div class="col-md-4 text-center">
                     <img src="data:image/png;base64, {{ $data->template->header_logo }}" class="logo" />
                   </div>
                 </div>
+                
                 <div class="row">
                   <div class="offset-lg-1 col-lg-10 text-center">
                     <br/> 

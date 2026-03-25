@@ -1,3 +1,4 @@
+console.log('Category JS loaded');
 $(document).ready(function () {
     initCategoryNameEditing();
     initDescriptionEditing();
@@ -25,7 +26,7 @@ function initCategoryNameEditing() {
         var categoryId = $('#categoryTitle').data('id');
 
         $.ajax({
-            url: '/app-gallery/category/update/' + categoryId,
+            url: '/manage/app-gallery/category/update/' + categoryId,
             type: 'PATCH',
             data: {
                 category_name: newName,
@@ -86,7 +87,7 @@ function initDescriptionEditing() {
         var categoryId = $('#categoryTitle').data('id');
 
         $.ajax({
-            url: '/app-gallery/category/update/' + categoryId,
+            url: '/manage/app-gallery/category/update/' + categoryId,
             type: 'PATCH',
             data: {
                 description: newDescription,
@@ -165,7 +166,7 @@ function initAppSelection() {
         });
 
         $.ajax({
-            url: '/app-gallery/category/update-apps/' + categoryId,
+            url: '/manage/app-gallery/category/update-apps/' + categoryId,
             type: 'POST',
             data: {
                 app_ids: selectedAppIds,

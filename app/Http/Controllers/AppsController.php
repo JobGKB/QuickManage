@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Str;
-use App\Models\Page;
+use App\Models\App;
 use App\Models\AppCategorie;
 use App\Models\Template;
 use Illuminate\Http\Request;
@@ -12,16 +12,16 @@ use Illuminate\Support\Facades\Hash;
  
 use Hashids\Hashids;
 
-class PageController extends Controller
+class AppsController extends Controller
 {
     public function index()
     {
-        $pages = Page::get();
+        $apps = App::get();
         // $var = 'TEST'; 
-        // dd($pages);
+        // dd($apps);
         
-        return view('pages.pages.index',[
-            'pages' => $pages,
+        return view('pages.apps.index',[
+            'apps' => $apps,
             
         ]);
     }
@@ -36,13 +36,13 @@ class PageController extends Controller
         // $time = date("m-d-Y H:i:s:");
         // $id = $hashids->encode(23); // o2fXhV
         // $numbers = $hashids->decode($id); // [1, 2, 3]
-        // $pages = Page::get();
+        // $apps = App::get();
         // $var = 'TEST'; 
 
          $templates = Template::get();
          $categories = AppCategorie::get();
 
-        return view('pages.pages.create',[
+        return view('pages.apps.create',[
             'templates' => $templates,
             'categories' => $categories,
         ]);
@@ -56,34 +56,33 @@ class PageController extends Controller
     // Separate parameter_* fields
         $unique = Str::random(64);
         
-        $page = new Page();
-        $page->name = $request['name'];
-        $page->description = $request['description'];
-        $page->template_id = $request['template'];
-        $page->repository = $request['repo'];
-        $page->workspace = $request['workspace'];
-        $page->service = $request['service'];
-        $page->folder_id = session('folder_id');
-        $page->cat_id = $request['category'];
-        $page->hash_id = $unique;
+        $app = new App();
+        $app->name = $request['name'];
+        $app->description = $request['description'];
+        $app->template_id = $request['template'];
+        $app->repository = $request['repo'];
+        $app->workspace = $request['workspace'];
+        $app->service = $request['service'];
+        $app->folder_id = session('folder_id');
+        $app->cat_id = $request['category'];
+        $app->hash_id = $unique;
        
-        if ($request->hasFile('page_thumbnail')) { $page->page_thumbnail = base64_encode(file_get_contents($request->file('page_thumbnail'))); }
-        $page->save();
+        if ($request->hasFile('app_thumbnail')) { $app->app_thumbnail = base64_encode(file_get_contents($request->file('app_thumbnail'))); }
+        $app->save();
 
  
       
         // //redirect
-        return back()->with('success','Pagina aangemaakt!');
+        return back()->with('success','App aangemaakt!');
     }
 
     public function show($unique) 
     {
-        $data = Page::with('template')
+        $data = App::with('template')
         ->where('hash_id', $unique)
         ->first();
 
-        // $DBparameters = WorkspaceParameter::where('page_id', $data->id)->get();
-
+         
         // dd($DBparameters);
          
         // dd($data);   
@@ -98,18 +97,18 @@ class PageController extends Controller
 
     public function edit($id) 
     {
-        $page = Page::with('template','folder','app_category')
+        $app = App::with('template','folder','app_category')
         ->where('id', $id)
         ->first();
         $categories = AppCategorie::get();
      
 
 
-        // dd($page);
+        // dd($app);
 
         //redirect
-        return view('pages.pages.edit', [
-            'page' => $page,       
+        return view('pages.apps.edit', [
+            'app' => $app,       
             'categories' => $categories,
         ]);
     }
@@ -117,43 +116,43 @@ class PageController extends Controller
     public function update(Request $req, $id) 
     {
         // dd($req->input());
-        $page = Page::find($id);
-        $page->name = $req->input('name');
+        $app = App::find($id);
+        $app->name = $req->input('name');
        
-        $page->description = $req->input('description');
-        $page->cat_id = $req->input('category');
+        $app->description = $req->input('description');
+        $app->cat_id = $req->input('category');
 
      
 
-        if ($req->hasFile('page_thumbnail')) {
+        if ($req->hasFile('app_thumbnail')) {
 
-             $page->page_thumbnail = base64_encode(file_get_contents($req->file('page_thumbnail'))); 
+             $app->app_thumbnail = base64_encode(file_get_contents($req->file('app_thumbnail'))); 
 
              }
 
-        $page->save();
+        $app->save();
         //redirect
-        return back()->with('success','Pagina bijgewerkt!');
+        return back()->with('success','App bijgewerkt!');
     }
 
     public function updateCategoryApps(Request $request, $id)
     {
         $request->validate([
             'app_ids' => 'present|array',
-            'app_ids.*' => 'integer|exists:pages,id',
+            'app_ids.*' => 'integer|exists:apps,id',
         ]);
 
         $category = AppCategorie::findOrFail($id);
         $selectedIds = $request->input('app_ids', []);
 
-        // Remove cat_id from pages that were in this category but are now deselected
-        Page::where('cat_id', $category->id)
+        // Remove cat_id from apps that were in this category but are now deselected
+        App::where('cat_id', $category->id)
             ->whereNotIn('id', $selectedIds)
             ->update(['cat_id' => null]);
 
-        // Assign cat_id to newly selected pages
+        // Assign cat_id to newly selected apps
         if (!empty($selectedIds)) {
-            Page::whereIn('id', $selectedIds)
+            App::whereIn('id', $selectedIds)
                 ->update(['cat_id' => $category->id]);
         }
 
@@ -164,11 +163,11 @@ class PageController extends Controller
     {
         // $id = Hash::make('1');
          
-        $page = Page::where('id',$id)->delete();
+        $app = App::where('id',$id)->delete();
        
-        // $pages = Page::get();
+        // $apps = App::get();
         // $var = 'TEST'; 
-        // dd($pages);
-        return back()->with('success','Pagina verwijderd!');
+        // dd($apps);
+        return back()->with('success','App verwijderd!');
     }
 }

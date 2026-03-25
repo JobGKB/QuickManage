@@ -11,11 +11,7 @@ class TemplatesController extends Controller
 
     public function index()
     {
-        // $pages = Widget::get();
-        // $var = 'TEST'; 
-        // dd($pages);
-
-
+       
         $template = Template::get();
 
         // dd($template);

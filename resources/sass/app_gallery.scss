@@ -30,7 +30,7 @@ body {
     height: 25px;
   }
 
-  button.overzicht_link {
+  a.overzicht_link {
     padding: 8px;
     background-color: hsla(98, 64%, 29%, 0.041);
     text-decoration: none !important;
@@ -46,37 +46,40 @@ body {
     }
   }
 
-  .header_home_screen,
-  .header_gisapps_screen,
-  .header_administratie_screen,
-  .header_projecten_screen {
+  .header_home_screen
+  {
     margin-top: 20px;
     background-color: #f9f9f9;
     border-radius: 5px;
     padding: 20px;
   }
 
-  #header_gisapps_screen,
-  #header_administratie_screen,
-  #header_projecten_screen {
-    display: none;
-  }
+ 
+ 
 }
 /* end header */
 
 /* home screen */
 .home_screen {
-  .col_gisapps,
-  .col_administratie,
-  .col_projecten {
+   
+  .col_cat {
     padding: 10px;
     border-radius: 5px;
     margin-top: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 
-    button {
-      background-color: #509429;
+
+    a {
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      background-color: #509429 ;
       color: white;
       border: none;
+      text-decoration: none !important;
       padding: 15px 30px;
       min-height: 80px;
       font-size: 16px;
@@ -98,9 +101,14 @@ body {
 /* content */
 .body {
   padding: 30px;
-
-  .app_wrapper {
-    display: inline-grid;
+ a.link_app {
+    color: #000 !important;
+    text-decoration: none !important;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+ 
     background-color: rgba(230, 230, 230, 0.329);
     padding: 20px;
     border-radius: 5px;
@@ -114,21 +122,20 @@ body {
       box-shadow: 0px 0px 2px 2px #dfdfdf;
       background-color: hsla(109, 47%, 38%, 0.055);
     }
+  
+  .app_wrapper {
+    
 
     #app_logo {
       height: 80px;
       width: auto;
     }
-  }
-
-  a.link_app {
-    color: #000 !important;
-    text-decoration: none !important;
-
-    &:hover {
-      color: #000; 
+    .app_name{
+      word-break: break-word;
     }
   }
+} 
+ 
 
   .bold {
     font-weight: 600;

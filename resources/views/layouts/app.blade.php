@@ -55,7 +55,7 @@
     <script src="/js/menu.js"></script>
     <script src="/js/main.js"></script>
 
-    @if(Str::startsWith(request()->path(), 'app-gallery'))
+    @if(Str::startsWith(request()->path(), 'manage/app-gallery'))
     <script src="/js/app_gallery/category.js"></script>
     @endif
      

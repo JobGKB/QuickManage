@@ -35,11 +35,12 @@
                     <div class="body-header-text">
                         <p>Vul de onderstaande veld(en) in:</p>
                     </div>
-                     <form action='/app-gallery/category/store' method="POST">
+                     <form action='/manage/app-gallery/category/store' method="POST">
                         @csrf
                          
                         <input type="text" name='category_name' placeholder="Categorie naam..." required><br/><br/>
-                       
+                        <textarea name='category_description' placeholder="Geef deze categorie een beschrijving..."></textarea><br/><br/>
+                        <input type="hidden" name='gallery_id'  value="1" required><br/><br/>
 
                         <input type="submit" name="submit" value='Aanmaken'>
                         

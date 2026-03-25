@@ -35,7 +35,7 @@
                     <div class="body-header-text">
                         <p>Vul de onderstaande veld(en) in:</p>
                     </div>
-                     <form action='/folders/store' method="POST">
+                     <form action='/manage/folders/store' method="POST">
                         @csrf
                          
                         <input type="text" name='folder_name' placeholder="Mapnaam..." required><br/><br/>

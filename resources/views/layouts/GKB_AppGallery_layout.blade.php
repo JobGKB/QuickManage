@@ -37,7 +37,7 @@
             
     
 </head>
-<body  onload="onBodyLoad()">  
+<body>  
     <div id="app">
         <main>
             @yield('content')

@@ -1,8 +1,40 @@
 body {
- 
+  
   }
 
 /* header  */
+.header {
+  .header-logo {
+    background-color: hsla(110, 47%, 38%, 0.1);
+    padding: 10px;
+  } 
+
+  .logo {
+    height: 40px; 
+  } 
+
+  img.conversie_logo {
+    height: 25px;
+  }
+
+  a.overzicht_link {
+    padding: 8px;
+    background-color: hsla(98, 64%, 29%, 0.041);
+    text-decoration: none !important;
+    color: #5f5f5f !important;
+    font-weight: 400; 
+    transition: 0.5s !important;
+    border-radius: 5px;
+    border: 1px solid hsla(98, 63%, 23%, 0.075);
+
+    &:hover {
+      color: #326116 !important;
+      background-color: hsla(98, 64%, 29%, 0.096);
+    }
+  }
+
+  
+}
   .content {
     position: relative;
     height: 100%;

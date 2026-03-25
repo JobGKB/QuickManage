@@ -18,6 +18,13 @@ body {
   box-shadow: 0px 0px 6px 0px #aaaaaa;
 }
 
+.bc_orange {
+  background-color: #c5701c !important;
+}
+.bc_orange:hover {
+  background-color: #b05a0f !important;
+}
+
 .c-bold {
   font-weight: 600 !important;
 }
@@ -582,16 +589,23 @@ body {
 .body-container .create-form option, .body-container .edit-form option {
   background-color: #fff;
 }
-.body-container .create-form .workspace_parameters_title, .body-container .edit-form .workspace_parameters_title {
-  display: flex;
-  justify-content: space-between;
-}
 .body-container form input[type=text] {
   margin-top: 5px;
   outline: none;
   padding: 10px;
   width: 100%;
   border: 1px solid #eee;
+  border-radius: 5px;
+}
+.body-container form input[type=text]:focus {
+  border-color: #439034;
+  box-shadow: 0 0 0 2px rgba(67, 144, 52, 0.1);
+}
+.body-container form input[type=text]::-moz-placeholder {
+  color: #999;
+}
+.body-container form input[type=text]::placeholder {
+  color: #999;
 }
 .body-container form textarea {
   margin-top: 5px;
@@ -600,6 +614,17 @@ body {
   padding: 10px;
   width: 100%;
   border: 1px solid #eee;
+  border-radius: 5px;
+}
+.body-container form textarea:focus {
+  border-color: #439034;
+  box-shadow: 0 0 0 2px rgba(67, 144, 52, 0.1);
+}
+.body-container form textarea::-moz-placeholder {
+  color: #999;
+}
+.body-container form textarea::placeholder {
+  color: #999;
 }
 .body-container form input[type=submit] {
   margin-top: 50px;
@@ -613,10 +638,43 @@ body {
 .body-container form input[type=submit]:hover {
   background-color: #347427;
 }
+.body-container form .app-image {
+  margin: 15px 0 !important;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  border: 1px dashed #d6d6d6;
+  text-align: center;
+}
+.body-container form .app-image p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+.body-container form .app-image input[type=file] {
+  display: none;
+}
+.body-container form .app-image .file-input {
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.body-container form .app-image .file-input:hover {
+  transform: scale(1.02);
+}
+.body-container form .app-image .file-input img {
+  max-width: 100%;
+  height: auto;
+  max-height: 150px;
+  border-radius: 4px;
+  background-color: #eeeeee;
+  padding: 10px;
+}
 .body-container .create-item {
+  display: flex;
   padding: 20px;
   padding-left: 10px;
   margin-bottom: 16px;
+  justify-content: space-between;
   border-bottom: 1px solid rgba(52, 116, 39, 0.7882352941);
 }
 .body-container .create-item a {
@@ -628,83 +686,6 @@ body {
   border-radius: 5px !important;
 }
 .body-container .create-item a:hover {
-  background-color: #347427;
-}
-.body-container .addAppModal .modal-dialog .modal-content {
-  background-color: #ebebeb;
-  border-radius: 5px;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-header {
-  border-bottom: none;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-header .modal-title {
-  font-weight: 600;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-body {
-  padding: 20px;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-body .search-input-form {
-  display: flex;
-  border-radius: 5px;
-  outline: none;
-  padding: 8px;
-  border: 1px solid #d6d6d6;
-  width: 100%;
-  margin-bottom: 12px;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer {
-  background-color: #dddddd;
-  border: 1px solid #d6d6d6;
-  border-radius: 5px;
-  padding: 10px;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .app-badge {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  min-height: 200px;
-  color: #fff !important;
-  padding: 10px !important;
-  transition: 0.5s;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  width: 100%;
-  text-align: center;
-  text-decoration: none !important;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .app-badge .badge-added {
-  display: block;
-  color: #d6d6d6 !important;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .app-badge img.img {
-  padding: 10px;
-  height: 120px;
-  border-radius: 5px;
-  width: auto;
-  background-color: #eeeeee !important;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .selected {
-  background-color: #235c18 !important;
-  border: 1px solid #347427;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .deselected {
-  background-color: #eeeeee !important;
-  border: 1px solid #d6d6d6;
-  cursor: pointer;
-  color: #000 !important;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-footer {
-  border-top: none;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-footer button {
-  border: none;
-  background-color: #439034;
-  color: #fff;
-  padding: 10px 20px;
-  transition: 0.5s;
-  border-radius: 5px;
-}
-.body-container .addAppModal .modal-dialog .modal-content .modal-footer button:hover {
   background-color: #347427;
 }
 .body-container .table-wrapper {
@@ -793,15 +774,15 @@ body {
   align-items: center;
   padding: 20px;
   text-align: center;
-  background-color: rgba(243, 243, 243, 0.2549019608);
-  color: #000;
+  background-color: #439034;
+  color: #fff;
   transition: 0.5s;
   height: 250px;
   border-radius: 5px;
   border: 2px solid rgba(52, 116, 39, 0.5882352941);
 }
 .body-container .app-category-card .app-category-card-body:hover {
-  background-color: hsla(110, 50%, 30%, 0.205);
+  background-color: #347427;
 }
 .body-container .app-category-card .app-category-card-body img {
   height: 140px;
@@ -812,6 +793,206 @@ body {
   font-weight: 600;
   background-color: #439034;
   color: #fff !important;
+}
+.body-container .app-category-card .app-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  background-color: rgba(243, 243, 243, 0.2549019608);
+  color: #000;
+  transition: 0.5s;
+  height: 250px;
+  border-radius: 5px;
+  border: 2px solid rgba(52, 116, 39, 0.5882352941);
+}
+.body-container .app-category-card .app-card-body:hover {
+  background-color: hsla(110, 50%, 30%, 0.205);
+}
+.body-container .app-category-card .app-card-body img {
+  height: 140px;
+  padding: 20px;
+}
+.body-container .app-category-card .app-card-body p {
+  padding: 20px 0px;
+  font-weight: 600;
+  background-color: #439034;
+  color: #fff !important;
+}
+
+.addAppModal .modal-dialog .modal-content {
+  background-color: #ebebeb;
+  border-radius: 5px;
+}
+.addAppModal .modal-dialog .modal-content .modal-header {
+  border-bottom: none;
+}
+.addAppModal .modal-dialog .modal-content .modal-header .modal-title {
+  font-weight: 600;
+}
+.addAppModal .modal-dialog .modal-content .modal-body {
+  padding: 20px;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .search-input-form {
+  display: flex;
+  border-radius: 5px;
+  outline: none;
+  padding: 8px;
+  border: 1px solid #d6d6d6;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .search-input-form:focus {
+  border-color: #439034;
+  box-shadow: 0 0 0 2px rgba(67, 144, 52, 0.1);
+}
+.addAppModal .modal-dialog .modal-content .modal-body .search-input-form::-moz-placeholder {
+  color: #999;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .search-input-form::placeholder {
+  color: #999;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer {
+  background-color: #fff;
+  border: 1px solid #d6d6d6;
+  border-radius: 5px;
+  padding: 10px;
+  max-height: 700px;
+  overflow-y: scroll;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .app-badge {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  min-height: 200px;
+  color: #fff !important;
+  padding: 10px !important;
+  transition: 0.5s;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+  text-decoration: none !important;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .app-badge .badge-added {
+  display: block;
+  color: #d6d6d6 !important;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .app-badge img.img {
+  padding: 10px;
+  height: 120px;
+  border-radius: 5px;
+  width: auto;
+  background-color: #eeeeee !important;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .selected {
+  background-color: #235c18 !important;
+  border: 1px solid #347427;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .appSelectionContainer .deselected {
+  background-color: #eeeeee !important;
+  border: 1px solid #d6d6d6;
+  cursor: pointer;
+  color: #000 !important;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app {
+  display: grid !important;
+  align-items: center !important;
+  width: 100% !important;
+  gap: 12px;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app p {
+  margin: 0;
+  margin-top: 16px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #333;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app p:first-child {
+  margin-top: 0;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app input[type=text],
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app input[type=url],
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d6d6d6;
+  border-radius: 4px;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app input[type=text]:focus,
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app input[type=url]:focus,
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app textarea:focus {
+  border-color: #439034;
+  box-shadow: 0 0 0 2px rgba(67, 144, 52, 0.1);
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app input[type=text]::-moz-placeholder, .addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app input[type=url]::-moz-placeholder, .addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app textarea::-moz-placeholder {
+  color: #999;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app input[type=text]::placeholder,
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app input[type=url]::placeholder,
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app textarea::placeholder {
+  color: #999;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-size: 14px;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app .app-image {
+  margin: 15px 0 !important;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  border: 1px dashed #d6d6d6;
+  text-align: center;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app .app-image p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app .app-image input[type=file] {
+  display: none;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app .app-image .file-input {
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app .app-image .file-input:hover {
+  transform: scale(1.02);
+}
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app .app-image .file-input img {
+  max-width: 100%;
+  height: auto;
+  max-height: 150px;
+  border-radius: 4px;
+  background-color: #eeeeee;
+  padding: 10px;
+}
+.addAppModal .modal-dialog .modal-content .modal-footer {
+  border-top: none;
+}
+.addAppModal .modal-dialog .modal-content .modal-footer button {
+  border: none;
+  background-color: #439034;
+  color: #fff;
+  padding: 10px 20px;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+.addAppModal .modal-dialog .modal-content .modal-footer button:hover {
+  background-color: #347427;
 }
 
 .pf-container {
@@ -865,6 +1046,16 @@ body {
   outline: none;
   border-bottom: 1px solid #eee;
   padding: 8px;
+}
+.profile-wrapper .profile-form input[type=text]:focus {
+  border-color: #439034;
+  box-shadow: 0 0 0 2px rgba(67, 144, 52, 0.1);
+}
+.profile-wrapper .profile-form input[type=text]::-moz-placeholder {
+  color: #999;
+}
+.profile-wrapper .profile-form input[type=text]::placeholder {
+  color: #999;
 }
 .profile-wrapper .pf-btn {
   background-color: #439034;

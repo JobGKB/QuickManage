@@ -32,7 +32,7 @@
                         <i id="editIcon" class="fa-solid fa-pen-to-square " style="cursor:pointer;"></i>
                         <i id="saveIcon" class="fa-solid fa-check  " style="cursor:pointer; display:none; color:green;"></i>
                         <i id="cancelIcon" class="fa-solid fa-xmark " style="cursor:pointer; display:none; color:red;"></i> 
-                        <form action="/app-gallery/category/delete/{{$app_category->id}}" method="POST">
+                        <form action="/manage/app-gallery/category/delete/{{$app_category->id}}" method="POST">
 
                             @csrf  @method('DELETE')
 
@@ -94,7 +94,7 @@
                                                                 <div class="col-lg-4">
                                                                     <div class="app-badge @if($app->cat_id == $app_category->id) selected @else deselected @endif" data-app-id="{{ $app->id }}" style="cursor:pointer;">
 
-                                                                         @if($app->page_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->page_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
+                                                                         @if($app->app_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->app_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
 
                                                                         <span>{{ $app->name }}</span>
                                                                         
@@ -126,8 +126,8 @@
                                 @foreach($apps_w_cat_id as $app)
                                 <div class="col-lg-4">
                                     <div class="app-category-card">
-                                        <a href="/pages/edit/{{$app->id}}">
-                                            <div class="app-category-card-body">
+                                        <a href="/manage/apps/edit/{{$app->id}}">
+                                            <div class="app-card-body">
                                                  @if($app->page_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->page_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
                                                  {{$app->name}} 
                                                

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Folder;
-use App\Models\Page;
+use App\Models\App;
 
 class FoldersController extends Controller
 {
@@ -18,15 +18,15 @@ class FoldersController extends Controller
     }
 
     public function show($id) {
-        $pages = Page::where('folder_id', $id)->get();
+        $apps = App::where('folder_id', $id)->get();
             
         session(['folder_id' => $id]);
         $folder = session('folder_id');
        
 
-        // dd($pages);
+        // dd($apps);
         return view('pages.folder.show', [
-            'pages' => $pages, 
+            'apps' => $apps, 
             'folder' => $folder,      
         ]);
     }
@@ -55,9 +55,9 @@ class FoldersController extends Controller
         // $id = Hash::make('1');
         $map = Folder::where('id',$id)->delete();
         
-        // $pages = Page::get();
+        // $apps = App::get();
         // $var = 'TEST'; 
-        // dd($pages);
+        // dd($apps);
         return back()->with('success','Map verwijderd!');
     }
 }

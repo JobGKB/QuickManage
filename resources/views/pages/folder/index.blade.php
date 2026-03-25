@@ -15,11 +15,11 @@
             <div class="offset-lg-2 col-lg-9 col-md-12">
                 <div class="body-container">
                     <div class="create-item">
-                        <a href="/folder/create"><i class="fa-solid fa-plus"></i> Map aanmaken</a>
+                        <a href="/manage/folder/create"><i class="fa-solid fa-plus"></i> Map aanmaken</a>
                     </div>
                      <div class="cat-wrapper">
                         @foreach($folder as $data)
-                            <div class="map"><a href="/folders/view/{{$data->id}}"><i class="fa-solid fa-folder"></i> {{$data->folder_name}}</a>   </div>
+                            <div class="map"><a href="/manage/folders/view/{{$data->id}}"><i class="fa-solid fa-folder"></i> {{$data->folder_name}}</a>   </div>
                         @endforeach
                      </div>
                 </div>

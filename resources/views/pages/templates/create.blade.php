@@ -31,7 +31,7 @@
             <div class="offset-lg-2 col-lg-9">
                 <div class="body-container">
                      
-                     <form action='/template/store' method="POST" enctype='multipart/form-data'>
+                     <form action='/manage/template/store' method="POST" enctype='multipart/form-data'>
                         @csrf
                         <p class="c-bold">Template naam:</p>
                         <input type="text" name='name' placeholder="Template name..." required><br/><br/>

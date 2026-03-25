@@ -26,7 +26,7 @@
             <div class="offset-lg-2 col-lg-9">
                 <div class="header-container">
                     <h2 class="m-0">App Gallery</h2>
-                    <a href="/app-gallery/gkb" target="_blank">Bekijken</a>
+                    <a href="/app-gallery/overzicht" target="_blank">Bekijken</a>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
             <div class="offset-lg-2 col-lg-9 col-md-12">
                 <div class="body-container">
                     <div class="create-item">
-                        <a href="/app-gallery/category/create"><i class="fa-solid fa-plus"></i> Categorie aanmaken</a>
+                        <a href="/manage/app-gallery/category/create"><i class="fa-solid fa-plus"></i> Categorie aanmaken</a>
                     </div>
                    
                      <div class="container">
@@ -42,7 +42,7 @@
                                 @foreach($app_categories as $category)
                                 <div class="col-lg-4">
                                     <div class="app-category-card">
-                                        <a href="/app-gallery/category/{{$category->id}}">
+                                        <a href="/manage/app-gallery/category/{{$category->id}}">
                                             <div class="app-category-card-body">
                                                 {{$category->category_name}} 
                                             </div>

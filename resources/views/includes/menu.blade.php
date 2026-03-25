@@ -8,12 +8,12 @@
             
             <ul>
                 <li><a href="/dashboard" id="dashboard"> <i class="fa-solid fa-gauge"></i> <span> Dashboard   </span></a></li>
-                <li><a href="/profile/{{Auth::user()->id}}/edit" id="profile"> <i class="fa-solid fa-user"></i> <span> Profiel</span></a></li>
-                <li><a href="/app-gallery" id="app-gallery""> <i class="fa-solid fa-table-cells"></i> <span> App Gallery</span></a></li>
-                <li><a href="/folders" id="folders" class="pages""> <i class="fa-solid fa-file"></i> <span> HTML Pagina's</span></a></li>
-                <li><a href="/templates" id="templates"> <i class="fa-solid fa-pencil"></i> <span> Templates</span></a></li>
-                <li><a href="/accounts" id="accounts"> <i class="fa-solid fa-users"></i> <span> Accounts</span></a></li>
-                <li><a href="/settings" id="settings"> <i class="fa-sharp fa-solid fa-gear"></i><span> Instellingen</span></a></li>
+                <li><a href="/manage/profile/{{Auth::user()->id}}/edit" id="profile"> <i class="fa-solid fa-user"></i> <span> Profiel</span></a></li>
+                <li><a href="/manage/app-gallery" id="app-gallery""> <i class="fa-solid fa-table-cells"></i> <span> App Gallery</span></a></li>
+                <li><a href="/manage/folders" id="folders" class="apps""> <i class="fa-solid fa-file"></i> <span> Apps</span></a></li>
+                <li><a href="/manage/templates" id="templates"> <i class="fa-solid fa-pencil"></i> <span> Templates</span></a></li>
+                <li><a href="/manage/accounts" id="accounts"> <i class="fa-solid fa-users"></i> <span> Accounts</span></a></li>
+                <li><a href="/manage/settings" id="settings"> <i class="fa-sharp fa-solid fa-gear"></i><span> Instellingen</span></a></li>
                 <li class="log-out-btn"><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa-solid fa-right-from-bracket c-white"></i> <span> Uitloggen </span></a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
@@ -43,12 +43,12 @@
                 
                 <ul>
                     <li><a href="/dashboard" id="dashboard"> <i class="fa-solid fa-gauge"></i></a></li>
-                    <li><a href="/profile/{{Auth::user()->id}}/edit" id="profile"> <i class="fa-solid fa-user"></i></a></li>
-                    <li><a href="/app-gallery" id="app-gallery""> <i class="fa-solid fa-table-cells"></i></a></li>
-                    <li><a href="/folders" id="folders" class="pages"> <i class="fa-solid fa-file"></i></a></li>
-                    <li><a href="/templates"> <i class="fa-solid fa-pencil"></i></a></li>
-                    <li><a href="/accounts"> <i class="fa-solid fa-users"></i></a></li>
-                    <li><a href="/settings"> <i class="fa-sharp fa-solid fa-gear"></i></a></li>
+                    <li><a href="/manage/profile/{{Auth::user()->id}}/edit" id="profile"> <i class="fa-solid fa-user"></i></a></li>
+                    <li><a href="/manage/app-gallery" id="app-gallery""> <i class="fa-solid fa-table-cells"></i></a></li>
+                    <li><a href="/manage/folders" id="folders" class="apps"> <i class="fa-solid fa-file"></i></a></li>
+                    <li><a href="/manage/templates" id="templates"> <i class="fa-solid fa-pencil"></i></a></li>
+                    <li><a href="/manage/accounts" id="accounts"> <i class="fa-solid fa-users"></i></a></li>
+                    <li><a href="/manage/settings" id="settings"> <i class="fa-sharp fa-solid fa-gear"></i></a></li>
                     <li><a class="log-out-btn" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa-solid fa-right-from-bracket c-white"></i></a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
@@ -67,7 +67,7 @@
                     var d = document.getElementById("templates").id;
                     var e = document.getElementById("accounts").id;
                     var f = document.getElementById("settings").id;
-                    var g = document.getElementsByClassName("pages").folders.className;
+                    var g = document.getElementsByClassName("apps").folders.className;
                     // console.log(g)
                     if(a==firstPath){
                         var x = document.getElementById("dashboard");
@@ -102,7 +102,7 @@
                         x.classList.add("selected");
                     }
                     if(g==firstPath){
-                        var m = document.getElementsByClassName("pages").folders;   
+                        var m = document.getElementsByClassName("apps").folders;   
                         m.classList.add("selected");
   
                     }

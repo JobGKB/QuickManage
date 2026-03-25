@@ -33,7 +33,7 @@
             <div class="offset-lg-2 col-lg-9">
                 <div class="body-container">
                      
-                     <form action="/template/update/{{ $template->id }}" method="POST" enctype='multipart/form-data'>
+                     <form action="/manage/template/update/{{ $template->id }}" method="POST" enctype='multipart/form-data'>
                          @method('PATCH')
                         @csrf
                         <p class="c-bold">Template naam:</p>
