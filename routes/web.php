@@ -29,15 +29,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/manage/apps/create', [App\Http\Controllers\AppsController::class, 'create']);
     Route::post('/manage/apps/store', [App\Http\Controllers\AppsController::class, 'store']);
     Route::get('/manage/apps/edit/{unique}', [App\Http\Controllers\AppsController::class, 'edit']);
-    Route::patch('/manage/apps/update/{id}', [App\Http\Controllers\AppsController::class, 'update']);
-    Route::delete('/manage/apps/delete/{id}', [App\Http\Controllers\AppsController::class, 'destroy']);
+    Route::patch('/manage/apps/update/{unique}', [App\Http\Controllers\AppsController::class, 'update']);
+    Route::delete('/manage/apps/delete/{unique}', [App\Http\Controllers\AppsController::class, 'destroy']);
 
     // Manage Custom App routes
     Route::get('/manage/custom-apps/create', [App\Http\Controllers\CustomAppsController::class, 'create']);
     Route::post('/manage/custom-apps/store', [App\Http\Controllers\CustomAppsController::class, 'store']);
     Route::get('/manage/custom-apps/edit/{unique}', [App\Http\Controllers\CustomAppsController::class, 'edit']);
-    Route::patch('/manage/custom-apps/update/{id}', [App\Http\Controllers\CustomAppsController::class, 'update']);
-    Route::delete('/manage/custom-apps/delete/{id}', [App\Http\Controllers\CustomAppsController::class, 'destroy']);
+    Route::patch('/manage/custom-apps/update/{unique}', [App\Http\Controllers\CustomAppsController::class, 'update']);
+    Route::delete('/manage/custom-apps/delete/{unique}', [App\Http\Controllers\CustomAppsController::class, 'destroy']);
 
     // Manage App Gallery routes
     Route::get('/manage/app-gallery', [App\Http\Controllers\AppGalleryController::class, 'index']);
@@ -45,20 +45,21 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/manage/app-gallery/category/store', [App\Http\Controllers\AppGalleryController::class, 'storeCat']);
     Route::get('/manage/app-gallery/category/{unique}', [App\Http\Controllers\AppGalleryController::class, 'showCat']);
     Route::get('/manage/app-gallery/category/edit/{unique}', [App\Http\Controllers\AppGalleryController::class, 'editCat']);
-    Route::patch('/manage/app-gallery/category/update/{id}', [App\Http\Controllers\AppGalleryController::class, 'updateCat']);
-    Route::post('/manage/app-gallery/category/update-apps/{id}', [App\Http\Controllers\AppsController::class, 'updateCategoryApps']);
-    Route::delete('/manage/app-gallery/category/delete/{id}', [App\Http\Controllers\AppGalleryController::class, 'destroyCat']);
+    Route::patch('/manage/app-gallery/category/update/{unique}', [App\Http\Controllers\AppGalleryController::class, 'updateCat']);
+    Route::post('/manage/app-gallery/category/update-apps/{unique}', [App\Http\Controllers\AppsController::class, 'updateCategoryApps']);
+    Route::post('/manage/app-gallery/category/update-custom-apps/{unique}', [App\Http\Controllers\CustomAppsController::class, 'updateCategoryCustomApps']);
+    Route::delete('/manage/app-gallery/category/delete/{unique}', [App\Http\Controllers\AppGalleryController::class, 'destroyCat']);
 
     // Manage Folder routes
     Route::get('/manage/folders', [App\Http\Controllers\FoldersController::class, 'index']);
     Route::get('/manage/folder/create', [App\Http\Controllers\FoldersController::class, 'create']);
     Route::post('/manage/folders/store', [App\Http\Controllers\FoldersController::class, 'store']);
-    Route::get('/manage/folders/view/{id}', [App\Http\Controllers\FoldersController::class, 'show']);
-    Route::delete('/manage/folders/delete/{id}', [App\Http\Controllers\FoldersController::class, 'delete']);
+    Route::get('/manage/folders/{unique}/view', [App\Http\Controllers\FoldersController::class, 'show']);
+    Route::delete('/manage/folders/delete/{unique}', [App\Http\Controllers\FoldersController::class, 'delete']);
 
     // Manage Profile routes
-    Route::get('/manage/profile/{id}/edit', [App\Http\Controllers\ProfileController::class, 'edit']);
-    Route::patch('/manage/profile/{id}', [App\Http\Controllers\ProfileController::class, 'update']);
+    Route::get('/manage/profile/{unique}/edit', [App\Http\Controllers\ProfileController::class, 'edit']);
+    Route::patch('/manage/profile/{unique}', [App\Http\Controllers\ProfileController::class, 'update']);
 
     // Manage Template routes
     Route::get('/manage/templates', [App\Http\Controllers\TemplatesController::class, 'index']);

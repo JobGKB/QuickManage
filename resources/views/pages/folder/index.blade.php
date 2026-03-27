@@ -4,6 +4,23 @@
     @include('includes.menu')
 
     <div class="container-fluid">
+        <div class="message_block">
+                <div class="offset-lg-2 col-lg-9">
+                    @if ($message = Session::get('success'))
+                        <div id="successMessage" class="successMessage alert alert-success alert-block pt-3 text-center">  
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger alert-block pt-3 text-center">
+                                <strong>{{ $error }}</strong>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
         <div class="row">
             <div class="offset-lg-2 col-lg-9">
                 <div class="header-container">
@@ -19,27 +36,12 @@
                     </div>
                      <div class="cat-wrapper">
                         @foreach($folder as $data)
-                            <div class="map"><a href="/manage/folders/view/{{$data->id}}"><i class="fa-solid fa-folder"></i> {{$data->folder_name}}</a>   </div>
+                            <div class="map"><a href="/manage/folders/{{$data->uniqid}}/view"><i class="fa-solid fa-folder"></i> {{$data->folder_name}}</a>   </div>
                         @endforeach
                      </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="offset-lg-2 col-lg-9"> 
-                @if ($message = Session::get('success'))
-                    <div class="successMessage alert alert-success alert-block pt-3">  
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @endif
-                @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                        <div class="alert alert-danger alert-block pt-3">
-                            <strong>{{ $error }}</strong>
-                        </div>
-                    @endforeach 
-                @endif
-            </div>
-        </div>
+        
     </div> 
 @endsection

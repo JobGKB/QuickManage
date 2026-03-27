@@ -4,6 +4,7 @@
 
 body {
     background-color:#f7f7f7 !important;  
+    font-size: 15px;
 } 
 .message_block{
 position: absolute;
@@ -113,7 +114,7 @@ width: 40%;
     display: block ;
     .menu-wrapper {
         height: 100vh;
-        width: 250px;
+        width: 210px;
         position: fixed;
         background-color: #2C2C2C;
         z-index:1;
@@ -502,7 +503,7 @@ width: 40%;
     
     background-color: rgb(255, 255, 255);
     border-radius:  10px;
-    padding:8px;
+    padding:18px;
     .template-upload-image{
         margin-top:20px;
         padding:20px;
@@ -727,8 +728,8 @@ width: 40%;
     }
     .create-item {
         display: flex;
-        padding:20px;
-        padding-left:10px;
+        padding-bottom:18px;
+         
         margin-bottom:16px;
         justify-content: space-between;
          
@@ -754,6 +755,8 @@ width: 40%;
     .table-wrapper {
         display: table;
         width: 100%;
+        border: 1px solid #347427c9;
+        border-radius: 5px;
         * {
             display: table-row;
         }
@@ -762,29 +765,59 @@ width: 40%;
             background-color: #439034;
             color:#fff;
             padding:14px;
+            border: 1px solid #347427c9;
+            vertical-align: middle;
         }
         .wr-row{
+             
             &:nth-child(odd){
                 background-color: hsla(110, 47%, 38%, 0.11);
             }
+            button {
+                border:none;
+                background-color: transparent;
+                color:#000;
+                padding:0px;
+                transition: 0.5s;
+                &:hover {
+                    color:#439034 !important;
+                }
+            }
+             
         }
         .wr-col {
-            padding:12px;
+            padding:8px;
             display: table-cell; 
+            border: 1px solid #347427c9;
+            vertical-align: middle;
         }
         .wr-col-act
         {
-            padding:12px;
+            padding:6px;
             display: flex;
+            align-items: center;
+            justify-content: center;
+
+            a{
+                
+                margin-right: 3px;
+                
+            }
+             form {
+                margin: 0;
+                display: flex;
+                align-items: center;
+            }
+            
         }
         i.eye {
             background-color: #439034;
-            padding:10px !important; 
+            padding:8px !important; 
             color:#ffffff !important;
             transition: 0.5s;
             float: left;
             width: 100%;
-   
+            border-radius: 3px;
             text-align: center;
             &:hover {
                 background-color: #347427;
@@ -792,12 +825,13 @@ width: 40%;
         }
         i.pencil {
             background-color: #439034;
-            padding:10px !important;
+            padding:8px !important;
             color:#ffffff !important;
             transition: 0.5s;
             float: left;
             width: 100%;
             text-align: center;
+            border-radius: 3px;
             
             &:hover {
                 background-color: #347427;
@@ -805,12 +839,13 @@ width: 40%;
         }
         i.trash {
             background-color: #d30000;
-            padding:10px !important;
+            padding:8px !important;
             color:#ffffff !important;
             transition: 0.5s;
             float: left;
             width: 100%;
             text-align: center;
+            border-radius: 3px;
             
             &:hover {
                 color:#fff !important;
@@ -1068,6 +1103,12 @@ width: 40%;
                                 }
                             }
                         }
+                        select{
+                            background-color: hsla(109, 47%, 38%, 0.041) !important;
+                            border:none;
+                            padding:10px;
+                            width:100%;
+                        }
  
                     }
                             
@@ -1209,6 +1250,12 @@ width: 40%;
     .ham_menu{
         display: block ;
     }
+  }
+
+  @media (max-width: 1050px) {
+    body {
+        font-size: 14px!important;
+     }
   }
 
 //   @media (max-width: 991px) {

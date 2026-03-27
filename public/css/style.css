@@ -1,6 +1,7 @@
 @import url(https://js.arcgis.com/4.28/@arcgis/core/assets/esri/themes/light/main.css);
 body {
   background-color: #f7f7f7 !important;
+  font-size: 15px;
 }
 
 .message_block {
@@ -113,7 +114,7 @@ body {
 }
 .menu .menu-wrapper {
   height: 100vh;
-  width: 250px;
+  width: 210px;
   position: fixed;
   background-color: #2C2C2C;
   z-index: 1;
@@ -466,7 +467,7 @@ body {
   margin-bottom: 20px;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
-  padding: 8px;
+  padding: 18px;
 }
 .body-container .template-upload-image {
   margin-top: 20px;
@@ -671,8 +672,7 @@ body {
 }
 .body-container .create-item {
   display: flex;
-  padding: 20px;
-  padding-left: 10px;
+  padding-bottom: 18px;
   margin-bottom: 16px;
   justify-content: space-between;
   border-bottom: 1px solid rgba(52, 116, 39, 0.7882352941);
@@ -691,6 +691,8 @@ body {
 .body-container .table-wrapper {
   display: table;
   width: 100%;
+  border: 1px solid rgba(52, 116, 39, 0.7882352941);
+  border-radius: 5px;
 }
 .body-container .table-wrapper * {
   display: table-row;
@@ -700,25 +702,50 @@ body {
   background-color: #439034;
   color: #fff;
   padding: 14px;
+  border: 1px solid rgba(52, 116, 39, 0.7882352941);
+  vertical-align: middle;
 }
 .body-container .table-wrapper .wr-row:nth-child(odd) {
   background-color: hsla(110, 47%, 38%, 0.11);
 }
+.body-container .table-wrapper .wr-row button {
+  border: none;
+  background-color: transparent;
+  color: #000;
+  padding: 0px;
+  transition: 0.5s;
+}
+.body-container .table-wrapper .wr-row button:hover {
+  color: #439034 !important;
+}
 .body-container .table-wrapper .wr-col {
-  padding: 12px;
+  padding: 8px;
   display: table-cell;
+  border: 1px solid rgba(52, 116, 39, 0.7882352941);
+  vertical-align: middle;
 }
 .body-container .table-wrapper .wr-col-act {
-  padding: 12px;
+  padding: 6px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.body-container .table-wrapper .wr-col-act a {
+  margin-right: 3px;
+}
+.body-container .table-wrapper .wr-col-act form {
+  margin: 0;
+  display: flex;
+  align-items: center;
 }
 .body-container .table-wrapper i.eye {
   background-color: #439034;
-  padding: 10px !important;
+  padding: 8px !important;
   color: #ffffff !important;
   transition: 0.5s;
   float: left;
   width: 100%;
+  border-radius: 3px;
   text-align: center;
 }
 .body-container .table-wrapper i.eye:hover {
@@ -726,24 +753,26 @@ body {
 }
 .body-container .table-wrapper i.pencil {
   background-color: #439034;
-  padding: 10px !important;
+  padding: 8px !important;
   color: #ffffff !important;
   transition: 0.5s;
   float: left;
   width: 100%;
   text-align: center;
+  border-radius: 3px;
 }
 .body-container .table-wrapper i.pencil:hover {
   background-color: #347427;
 }
 .body-container .table-wrapper i.trash {
   background-color: #d30000;
-  padding: 10px !important;
+  padding: 8px !important;
   color: #ffffff !important;
   transition: 0.5s;
   float: left;
   width: 100%;
   text-align: center;
+  border-radius: 3px;
 }
 .body-container .table-wrapper i.trash:hover {
   color: #fff !important;
@@ -980,6 +1009,12 @@ body {
   background-color: #eeeeee;
   padding: 10px;
 }
+.addAppModal .modal-dialog .modal-content .modal-body .wrapper-create-form-custom-app form.create-form-custom-app select {
+  background-color: hsla(109, 47%, 38%, 0.041) !important;
+  border: none;
+  padding: 10px;
+  width: 100%;
+}
 .addAppModal .modal-dialog .modal-content .modal-footer {
   border-top: none;
 }
@@ -1090,6 +1125,11 @@ body {
   }
   .ham_menu {
     display: block;
+  }
+}
+@media (max-width: 1050px) {
+  body {
+    font-size: 14px !important;
   }
 }
 @media (min-width: 576px) {

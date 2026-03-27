@@ -3,7 +3,13 @@
 @section('content')
 <div class="login-wrapper"> 
     <div class="login-container">
-   
+    @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger alert-block pt-3 text-center">
+                    <strong>{{ $error }}</strong>
+                </div>
+            @endforeach
+            @endif
         <img src="{{ asset('storage/logo-cm.png') }}">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
@@ -16,6 +22,8 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
+                        
+                             
 
                             <div><label for="email" >{{ __('E-mailadres') }}</label></div>
                             <div><input id="email" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"></div>

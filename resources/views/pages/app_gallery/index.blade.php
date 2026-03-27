@@ -42,7 +42,7 @@
                                 @foreach($app_categories as $category)
                                 <div class="col-lg-4">
                                     <div class="app-category-card">
-                                        <a href="/manage/app-gallery/category/{{$category->id}}">
+                                        <a href="/manage/app-gallery/category/{{$category->uniqid}}">
                                             <div class="app-category-card-body">
                                                 {{$category->category_name}} 
                                             </div>

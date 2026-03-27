@@ -14,7 +14,7 @@
                 <div class="row header-logo  align-items-center">
 
                   <div class="col-md-4 fl-l">
-                     
+ 
                     <a href="/app-gallery/overzicht" class="overzicht_link fl-l"> <img src="{{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps</a>
 
                   </div>
@@ -65,6 +65,23 @@
                         <div class="app_wrapper"> 
                           <div class="app_logo">
                             <img src="data:image/png;base64,{{ $data->app_thumbnail }} " id="app_logo">
+                          </div>
+                          <div class="app_name ">
+                            <p class="bold"> {{ $data->name }} </p>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+
+                  @endforeach
+
+                  @foreach ($category_custom_apps as  $data)    
+                   
+                    <div class="col-lg-3 text-center  mt-4">
+                      <a href="{{ $data->custom_app_url }}" class="link_app" target="_blank">
+                        <div class="app_wrapper"> 
+                          <div class="app_logo">
+                            <img src="data:image/png;base64,{{ $data->custom_app_thumbnail }} " id="app_logo">
                           </div>
                           <div class="app_name ">
                             <p class="bold"> {{ $data->name }} </p>

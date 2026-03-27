@@ -26,13 +26,13 @@
 
                 <div class="header-container">
 
-                    <h2 class="m-0" id="categoryTitle" data-id="{{ $app_category->id }}">Overzicht categorie: <span id="categoryName">{{ $app_category->category_name }}</span></h2>
+                    <h2 class="m-0" id="categoryTitle" data-uniqid="{{ $app_category->uniqid }}">Overzicht categorie: <span id="categoryName">{{ $app_category->category_name }}</span></h2>
                  
                     <div class="actions-wrapper">
                         <i id="editIcon" class="fa-solid fa-pen-to-square " style="cursor:pointer;"></i>
                         <i id="saveIcon" class="fa-solid fa-check  " style="cursor:pointer; display:none; color:green;"></i>
                         <i id="cancelIcon" class="fa-solid fa-xmark " style="cursor:pointer; display:none; color:red;"></i> 
-                        <form action="/manage/app-gallery/category/delete/{{$app_category->id}}" method="POST">
+                        <form action="/manage/app-gallery/category/delete/{{$app_category->uniqid}}" method="POST">
 
                             @csrf  @method('DELETE')
 
@@ -72,51 +72,68 @@
                                     <h1 class="modal-title fs-3" id="exampleModalLabel">App toevoegen aan: {{ $app_category->category_name }}</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="search">
-                                                    <input type="text" id="appSearchInput" class="search-input-form" placeholder="Zoek app...">
-                                                </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="search">
+                                                        <input type="text" id="appSearchInput" class="search-input-form" placeholder="Zoek app...">
+                                                    </div>
 
-                                                <div class="appSelectionContainer">
-                                                    <div class="container">
-                                                         
-                                                        <div class="row">
+                                                    <div class="appSelectionContainer">
+                                                        <div class="container">
+                                                            
+                                                            <div class="row">
 
-                                                            <div class="title-header mb-4">
-                                                                <strong>Alle apps:</strong>                                                        
+                                                                <div class="title-header mb-4">
+                                                                    <strong>FME apps:</strong>  
+                                                                </div>  
+
+                                                                @foreach($fme_apps as $app)
+                                                                    
+                                                                    <div class="col-lg-4">
+                                                                        <div class="app-badge @if($app->cat_id == $app_category->id) selected @else deselected @endif" data-app-id="{{ $app->id }}" style="cursor:pointer;">
+
+                                                                            @if($app->app_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->app_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
+
+                                                                            <span>{{ $app->name }}</span>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                @endforeach
+
+                                                                 <div class="title-header mt-4 mb-4">
+                                                                    <strong>Custom apps:</strong>  
+                                                                </div>  
+
+                                                                @foreach($custom_apps as $app)
+                                                                    
+                                                                    <div class="col-lg-4">
+                                                                        <div class="app-badge @if($app->cat_id == $app_category->id) selected @else deselected @endif" data-custom-app-id="{{ $app->id }}" style="cursor:pointer;">
+
+                                                                            @if($app->custom_app_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->custom_app_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
+
+                                                                            <span>{{ $app->name }}</span>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                @endforeach
                                                             </div>
 
-                                                            @foreach($all_apps as $app)
-                                                                 
-                                                                <div class="col-lg-4">
-                                                                    <div class="app-badge @if($app->cat_id == $app_category->id) selected @else deselected @endif" data-app-id="{{ $app->id }}" style="cursor:pointer;">
-
-                                                                         @if($app->app_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->app_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
-
-                                                                        <span>{{ $app->name }}</span>
-                                                                        
-                                                                        
-                                                                        
-
-                                                                    </div>
-                                                                </div>
-                                                                 
-                                                            @endforeach
                                                         </div>
-
                                                     </div>
-                                                </div>
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" id="update_appBTN">Opslaan</button>
-                                </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" id="update_appBTN">Opslaan</button>
+                                    </div>
+
                             </div>
                         </div>
                     </div>
@@ -126,9 +143,23 @@
                                 @foreach($apps_w_cat_id as $app)
                                 <div class="col-lg-4">
                                     <div class="app-category-card">
-                                        <a href="/manage/apps/edit/{{$app->id}}">
+                                        <a href="/manage/apps/edit/{{$app->hash_id}}" class="app-card-link">
                                             <div class="app-card-body">
-                                                 @if($app->page_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->page_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
+                                                 @if($app->app_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->app_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
+                                                 {{$app->name}} 
+                                               
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                @endforeach
+
+                                @foreach($custom_apps_w_cat_id as $app)
+                                <div class="col-lg-4">
+                                    <div class="app-category-card">
+                                        <a href="/manage/custom-apps/edit/{{$app->uniqid}}" class="app-card-link">
+                                            <div class="app-card-body">
+                                                 @if($app->custom_app_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->custom_app_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
                                                  {{$app->name}} 
                                                
                                             </div>

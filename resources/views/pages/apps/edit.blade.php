@@ -32,14 +32,12 @@
         <div class="row">
             <div class="offset-lg-2 col-lg-9">
                 <div class="body-container">
-                    <div class="body-header-text">
-                        <p>Maak de app op met HTML Content:</p>
-                    </div>
+                     
                     <div class="edit-form">
-                        <form action='/manage/apps/update/{{$app->id}}' method="POST" enctype="multipart/form-data">
+                        <form action='/manage/apps/update/{{$app->hash_id}}' method="POST" enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf    
-                            <p class="c-bold">HTML Pagina naam:</p>
+                            <p class="c-bold">App naam:</p>
                             <input type="text" name='name' value="{{ $app->name }}" required><br/><br/>
                             <div class="app-image mb-4">
                                 <p>App afbeelding:</p> 
@@ -54,7 +52,7 @@
                                     <option value="{{ $app->app_category->id ?? ' ' }}">{{  $app->app_category->category_name ?? 'Selecteer een categorie' }}</option>
                                 @foreach($categories as $data)
     
-                                    <option value="{{ $data->id }}"  >{{ $data->category_name }}</option>
+                                    <option value="{{ $data->id }}"  >{{ $data->category_name }}</option>   
     
                                 @endforeach
                                 </select><br/> 

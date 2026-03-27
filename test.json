@@ -1,0 +1,64 @@
+{
+    "type":"FeatureCollection",
+    "crs":{
+        "type":"name",
+        "properties":{
+            "name":"EPSG:4326"
+            }
+        },
+
+        "features":[
+
+            {
+            "type":"Feature",
+            "id":1,
+            "geometry":{
+                "type":"Point",
+                    "coordinates":[
+                        4.4579740911774,51.8691368583433
+                        ]
+                },
+                    
+            "properties":{
+                "OBJECTID":1,
+                "CreationDate":"Wed, 26 Mar 2025 09:32:15 GMT",
+                "Creator":"ecologie_GKB",
+                "EditDate":"Wed, 29 Oct 2025 13:01:01 GMT",
+                "Editor":"gisadmin_GKB",
+                "Projectcode":"ROIB24504-002",
+                "Vaknummer":"mv 09",
+                "Profielcode":"028",
+                "Opmerking":null,
+                "Type_Opmerking":"Ecoloog"
+                }
+            },
+                
+            {
+            "type":"Feature",
+            "id":2,
+            "geometry":{
+                "type":"Point",
+                    "coordinates":[
+                        4.44898136208409,51.8685175263221
+                    ]
+                },
+
+            "properties": {
+
+                "OBJECTID":2,
+                "CreationDate":"Wed, 26 Mar 2025 10:01:18 GMT",
+                "Creator":"ecologie_GKB",
+                "EditDate":"Wed, 29 Oct 2025 13:01:01 GMT",
+                "Editor":"gisadmin_GKB",
+                "Projectcode":"ROIB24504-002",
+                "Vaknummer":"mv 01",
+                "Profielcode":"004",
+                "Opmerking":"tegen de stuw",
+                "Type_Opmerking":"Ecoloog"
+
+                }
+
+            }
+        ]
+
+}

@@ -8,7 +8,7 @@
             
             <ul>
                 <li><a href="/dashboard" id="dashboard"> <i class="fa-solid fa-gauge"></i> <span> Dashboard   </span></a></li>
-                <li><a href="/manage/profile/{{Auth::user()->id}}/edit" id="profile"> <i class="fa-solid fa-user"></i> <span> Profiel</span></a></li>
+                <li><a href="/manage/profile/{{Auth::user()->uniqid}}/edit" id="profile"> <i class="fa-solid fa-user"></i> <span> Profiel</span></a></li>
                 <li><a href="/manage/app-gallery" id="app-gallery""> <i class="fa-solid fa-table-cells"></i> <span> App Gallery</span></a></li>
                 <li><a href="/manage/folders" id="folders" class="apps""> <i class="fa-solid fa-file"></i> <span> Apps</span></a></li>
                 <li><a href="/manage/templates" id="templates"> <i class="fa-solid fa-pencil"></i> <span> Templates</span></a></li>
@@ -43,7 +43,7 @@
                 
                 <ul>
                     <li><a href="/dashboard" id="dashboard"> <i class="fa-solid fa-gauge"></i></a></li>
-                    <li><a href="/manage/profile/{{Auth::user()->id}}/edit" id="profile"> <i class="fa-solid fa-user"></i></a></li>
+                    <li><a href="/manage/profile/{{Auth::user()->uniqid}}/edit" id="profile"> <i class="fa-solid fa-user"></i></a></li>
                     <li><a href="/manage/app-gallery" id="app-gallery""> <i class="fa-solid fa-table-cells"></i></a></li>
                     <li><a href="/manage/folders" id="folders" class="apps"> <i class="fa-solid fa-file"></i></a></li>
                     <li><a href="/manage/templates" id="templates"> <i class="fa-solid fa-pencil"></i></a></li>

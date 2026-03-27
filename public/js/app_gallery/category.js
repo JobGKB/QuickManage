@@ -23,7 +23,7 @@ function initCategoryNameEditing() {
         var newName = $('#categoryInput').val().trim();
         if (!newName) return;
 
-        var categoryId = $('#categoryTitle').data('id');
+        var categoryId = $('#categoryTitle').data('uniqid');
 
         $.ajax({
             url: '/manage/app-gallery/category/update/' + categoryId,
@@ -84,8 +84,8 @@ function initDescriptionEditing() {
 
     function saveDescription() {
         var newDescription = $('#descriptionInput').val().trim();
-        var categoryId = $('#categoryTitle').data('id');
-
+        var categoryId = $('#categoryTitle').data('uniqid');
+        
         $.ajax({
             url: '/manage/app-gallery/category/update/' + categoryId,
             type: 'PATCH',
@@ -158,11 +158,13 @@ function initAppSelection() {
 
     // Save selected apps on update button click
     $('#update_appBTN').on('click', function () {
-        var categoryId = $('#categoryTitle').data('id');
+        var categoryId = $('#categoryTitle').data('uniqid');
         var selectedAppIds = [];
+        var selectedCustomAppIds = [];
 
         $('.appSelectionContainer .app-badge.selected').each(function () {
             selectedAppIds.push($(this).data('app-id'));
+            selectedCustomAppIds.push($(this).data('custom-app-id'));
         });
 
         $.ajax({
@@ -170,6 +172,21 @@ function initAppSelection() {
             type: 'POST',
             data: {
                 app_ids: selectedAppIds,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function () {
+                location.reload();
+            },
+            error: function () {
+                alert('Er ging iets mis bij het opslaan van de apps.');
+            }
+        });
+
+        $.ajax({
+            url: '/manage/app-gallery/category/update-custom-apps/' + categoryId,
+            type: 'POST',
+            data: {
+                custom_app_ids: selectedCustomAppIds,
                 _token: $('meta[name="csrf-token"]').attr('content')
             },
             success: function () {

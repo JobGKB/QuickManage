@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Folder;
+use Illuminate\Support\Str;
 use App\Models\App;
+use App\Models\CustomApp;
+use App\Models\AppCategorie;
 
 class FoldersController extends Controller
 {
@@ -17,17 +20,26 @@ class FoldersController extends Controller
         ]);
     }
 
-    public function show($id) {
+    public function show($uniqid) {
+
+        $folder = Folder::where('uniqid', $uniqid)->firstOrFail();
+            $id = $folder->id;
+
         $apps = App::where('folder_id', $id)->get();
             
         session(['folder_id' => $id]);
         $folder = session('folder_id');
-       
+        $categories = AppCategorie::get();
+
+        $custom_apps = CustomApp::where('folder_id', $id)->get();
+        // dd($custom_apps);
 
         // dd($apps);
         return view('pages.folder.show', [
             'apps' => $apps, 
             'folder' => $folder,      
+            'categories' => $categories,
+            'custom_apps' => $custom_apps,
         ]);
     }
 
@@ -43,11 +55,19 @@ class FoldersController extends Controller
         $request->validate([
             'folder_name' => 'required',
         ]); 
+
+        do {
+            $uniqid = Str::uuid();
+        } while (Folder::where('uniqid', $uniqid)->exists());
+
+
+        
         $map = new Folder;
         $map->folder_name = $request['folder_name'];
+        $map->uniqid = $uniqid;
         $map->save();
 
-        return back()->with('success','Map aangemaakt!');
+        return redirect('/manage/folders')->with('success','Map aangemaakt!');
 
     }
     public function delete($id)

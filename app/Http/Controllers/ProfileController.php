@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function edit($id) 
+    public function edit($uniqid) 
     {
-        if (Auth::id() != $id) {
+        if (Auth::user()->uniqid != $uniqid) {
             abort(403);
         }
 
@@ -18,9 +18,9 @@ class ProfileController extends Controller
                
         ]);
     }
-    public function update(Request $request, $id) 
+    public function update(Request $request, $uniqid) 
     {
-        if (Auth::id() != $id) {
+        if (Auth::user()->uniqid != $uniqid) {
             abort(403);
         }
 
@@ -30,7 +30,7 @@ class ProfileController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:2048',
         ]);
 
-        $data = User::findOrFail($id);
+        $data = User::where('uniqid', $uniqid)->firstOrFail();
         if ($request->filled('name')) { $data->name = $request['name']; }
         if ($request->filled('email')) { $data->email = $request['email']; }
         if ($request->hasFile('image')) { $data->image = base64_encode(file_get_contents($request->file('image'))); }

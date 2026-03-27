@@ -54,7 +54,10 @@ class AppsController extends Controller
         $allData = $request->all();
       
     // Separate parameter_* fields
-        $unique = Str::random(64);
+        do {
+            $uniqid = Str::uuid();
+        } while (App::where('hash_id', $uniqid)->exists());
+
         
         $app = new App();
         $app->name = $request['name'];
@@ -65,7 +68,7 @@ class AppsController extends Controller
         $app->service = $request['service'];
         $app->folder_id = session('folder_id');
         $app->cat_id = $request['category'];
-        $app->hash_id = $unique;
+        $app->hash_id = $uniqid;
        
         if ($request->hasFile('app_thumbnail')) { $app->app_thumbnail = base64_encode(file_get_contents($request->file('app_thumbnail'))); }
         $app->save();
@@ -95,10 +98,10 @@ class AppsController extends Controller
         ]);
     }
 
-    public function edit($id) 
+    public function edit($uniqid) 
     {
         $app = App::with('template','folder','app_category')
-        ->where('id', $id)
+        ->where('hash_id', $uniqid)
         ->first();
         $categories = AppCategorie::get();
      
@@ -113,10 +116,10 @@ class AppsController extends Controller
         ]);
     }
 
-    public function update(Request $req, $id) 
+    public function update(Request $req, $uniqid) 
     {
         // dd($req->input());
-        $app = App::find($id);
+        $app = App::where('hash_id', $uniqid)->firstOrFail();
         $app->name = $req->input('name');
        
         $app->description = $req->input('description');
@@ -135,14 +138,14 @@ class AppsController extends Controller
         return back()->with('success','App bijgewerkt!');
     }
 
-    public function updateCategoryApps(Request $request, $id)
+    public function updateCategoryApps(Request $request, $uniqid)
     {
         $request->validate([
-            'app_ids' => 'present|array',
-            'app_ids.*' => 'integer|exists:apps,id',
+            'app_ids' => ' ',
+            'app_ids.*' => ' ',
         ]);
 
-        $category = AppCategorie::findOrFail($id);
+        $category = AppCategorie::where('uniqid', $uniqid)->firstOrFail();
         $selectedIds = $request->input('app_ids', []);
 
         // Remove cat_id from apps that were in this category but are now deselected
@@ -159,11 +162,11 @@ class AppsController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function destroy($id)
+    public function destroy($uniqid)
     {
         // $id = Hash::make('1');
          
-        $app = App::where('id',$id)->delete();
+        $app = App::where('hash_id',$uniqid)->delete();
        
         // $apps = App::get();
         // $var = 'TEST'; 

@@ -31,7 +31,7 @@
             <div class="offset-lg-2 col-lg-6 col-md-12">
                  <div class="profile-wrapper pf-container mt-80">
                     <h4>Gegevens bewerken</h4>
-                    <form class="profile-form" action="/manage/profile/{{Auth::user()->id}}" method="POST">
+                    <form class="profile-form" action="/manage/profile/{{Auth::user()->uniqid}}" method="POST">
                         @method('PATCH')
                         @csrf
                         <label>Naam:</label>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="pf-container mt-80">
-                        <form action="/manage/profile/{{Auth::user()->id}}" method="POST" enctype='multipart/form-data'>
+                        <form action="/manage/profile/{{Auth::user()->uniqid}}" method="POST" enctype='multipart/form-data'>
                         @method('PATCH')
                         @csrf
                         <div class="pf-image">
