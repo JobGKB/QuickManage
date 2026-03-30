@@ -36,7 +36,7 @@
                         <h2 >{{ $category_items->category_name }}</h2>
                      
                            <br/> 
-                        <p>{{ $category_items->description }}</p> 
+                        <p>{!! $category_items->description !!}</p> 
                         
                     </div>
  
@@ -66,7 +66,7 @@
                           <div class="app_logo">
                             <img src="data:image/png;base64,{{ $data->app_thumbnail }} " id="app_logo">
                           </div>
-                          <div class="app_name ">
+                          <div class="app_name pt-3">
                             <p class="bold"> {{ $data->name }} </p>
                           </div>
                         </div>
@@ -83,7 +83,7 @@
                           <div class="app_logo">
                             <img src="data:image/png;base64,{{ $data->custom_app_thumbnail }} " id="app_logo">
                           </div>
-                          <div class="app_name ">
+                          <div class="app_name pt-3">
                             <p class="bold"> {{ $data->name }} </p>
                           </div>
                         </div>

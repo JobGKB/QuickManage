@@ -23,6 +23,22 @@
 
     <div class="container-fluid">
         <div class="row">
+                <div class="offset-lg-2 col-lg-9">
+                    <div class="breadcrumbs">
+                         <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+
+                                <li class="breadcrumb-item"><a href="/manage/folders">Mappen</a></li>
+                                
+                                <li class="breadcrumb-item"><a href="/manage/folders/{{ session('folder_url') }}/view">{{ session('folder_name') }}</a></li>
+                                 
+                                <li class="breadcrumb-item active" aria-current="page">FME app aanmaken</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+         </div>
+        <div class="row">
             <div class="offset-lg-2 col-lg-9">
                 <div class="header-container">
                     <h2 class="m-0">FME app aanmaken</h2>

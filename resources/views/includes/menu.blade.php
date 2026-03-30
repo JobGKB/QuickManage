@@ -57,7 +57,9 @@
             </div>
         </div>
             <script>
-                    const firstPath = location.pathname.split('/')[1];
+                    const dashboard = location.pathname.split('/')[1];
+
+                    const firstPath = location.pathname.split('/')[2];
 
                     var a = document.getElementById("dashboard").id;
                     var b = document.getElementById("profile").id;
@@ -69,7 +71,7 @@
                     var f = document.getElementById("settings").id;
                     var g = document.getElementsByClassName("apps").folders.className;
                     // console.log(g)
-                    if(a==firstPath){
+                    if(a==dashboard){
                         var x = document.getElementById("dashboard");
                         x.classList.add("selected");
                     }

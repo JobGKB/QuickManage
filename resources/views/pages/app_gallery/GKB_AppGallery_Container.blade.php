@@ -30,7 +30,7 @@
                           <h2 >{{ $app_gallery_items->name }}</h2>
                       
                             <br/> 
-                          <p  >{{ $app_gallery_items->description }}</p>
+                          <p  >{!! $app_gallery_items->description !!}</p>
                           
                       </div>
                     </div>

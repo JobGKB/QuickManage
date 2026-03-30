@@ -5,6 +5,19 @@
 
     <div class="container-fluid">
         <div class="row">
+                <div class="offset-lg-2 col-lg-9">
+                    <div class="breadcrumbs">
+                         <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                {{-- <li class="breadcrumb-item"><a href="#">Mappen</a></li> --}}
+                                 
+                                <li class="breadcrumb-item active" aria-current="page">Templates</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+         </div>
+        <div class="row">
             <div class="offset-lg-2 col-lg-9">
                 <div class="header-container">
                     <h2 class="m-0">Templates</h2>

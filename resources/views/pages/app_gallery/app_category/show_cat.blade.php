@@ -21,6 +21,20 @@
                     @endif
                 </div>
             </div>
+
+            <div class="row">
+                <div class="offset-lg-2 col-lg-9">
+                    <div class="breadcrumbs">
+                         <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/manage/app-gallery">App Gallery overzicht</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $app_category->category_name }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+              
         <div class="row">
             <div class="offset-lg-2 col-lg-9">
 
@@ -32,6 +46,9 @@
                         <i id="editIcon" class="fa-solid fa-pen-to-square " style="cursor:pointer;"></i>
                         <i id="saveIcon" class="fa-solid fa-check  " style="cursor:pointer; display:none; color:green;"></i>
                         <i id="cancelIcon" class="fa-solid fa-xmark " style="cursor:pointer; display:none; color:red;"></i> 
+
+                       
+
                         <form action="/manage/app-gallery/category/delete/{{$app_category->uniqid}}" method="POST">
 
                             @csrf  @method('DELETE')
@@ -141,7 +158,7 @@
                      <div class="container">
                         <div class="row">
                                 @foreach($apps_w_cat_id as $app)
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="app-category-card">
                                         <a href="/manage/apps/edit/{{$app->hash_id}}" class="app-card-link">
                                             <div class="app-card-body">
@@ -155,7 +172,7 @@
                                 @endforeach
 
                                 @foreach($custom_apps_w_cat_id as $app)
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="app-category-card">
                                         <a href="/manage/custom-apps/edit/{{$app->uniqid}}" class="app-card-link">
                                             <div class="app-card-body">

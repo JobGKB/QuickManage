@@ -21,12 +21,24 @@
                     @endif
                 </div>
             </div>
-            
+
+        <div class="row">
+            <div class="offset-lg-2 col-lg-9">
+                <div class="breadcrumbs">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">      
+                            <li class="breadcrumb-item active" aria-current="page">App Gallery overzicht</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="offset-lg-2 col-lg-9">
                 <div class="header-container">
                     <h2 class="m-0">App Gallery</h2>
-                    <a href="/app-gallery/overzicht" target="_blank">Bekijken</a>
+                    <a href="/app-gallery/overzicht" target="_blank" class="btn_view"><i class="fa-solid fa-eye eye"></i> Open Gallery</a>
                 </div>
             </div>
         </div>
@@ -40,7 +52,7 @@
                      <div class="container">
                         <div class="row">
                                 @foreach($app_categories as $category)
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="app-category-card">
                                         <a href="/manage/app-gallery/category/{{$category->uniqid}}">
                                             <div class="app-category-card-body">

@@ -23,9 +23,25 @@
     
     <div class="container-fluid">
         <div class="row">
+                <div class="offset-lg-2 col-lg-9">
+                    <div class="breadcrumbs">
+                         <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+
+                                <li class="breadcrumb-item"><a href="/manage/folders">Mappen</a></li>
+                                
+                                <li class="breadcrumb-item"><a href="/manage/folders/{{ session('folder_url') }}/view">{{ session('folder_name') }}</a></li>
+                                 
+                                <li class="breadcrumb-item active" aria-current="page">{{ $custom_app->name }} bewerken</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+         </div>
+        <div class="row">
             <div class="offset-lg-2 col-lg-9">
                 <div class="header-container">
-                    <h2 class="m-0">Custom App: {{ $custom_app->name }} bewerken</h2>
+                    <h2 class="m-0">Custom App: {{ $custom_app->name }} </h2>
                 </div>
             </div>
         </div>

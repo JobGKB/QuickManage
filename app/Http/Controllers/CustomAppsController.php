@@ -73,8 +73,6 @@ class CustomAppsController extends Controller
         ->first();
 
         $categories = AppCategorie::get();
-     
-
 
         // dd($custom_app);
 
@@ -94,9 +92,7 @@ class CustomAppsController extends Controller
        
         $custom_app->description = $req->input('description');
         $custom_app->cat_id = $req->input('category');
-
-     
-
+ 
         if ($req->hasFile('app_thumbnail')) {
 
              $custom_app->custom_app_thumbnail = base64_encode(file_get_contents($req->file('app_thumbnail'))); 

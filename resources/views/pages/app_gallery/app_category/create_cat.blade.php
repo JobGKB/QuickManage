@@ -22,13 +22,27 @@
 
     
     <div class="container-fluid">
-        <div class="row">
-            <div class="offset-lg-2 col-lg-9">
-                <div class="header-container">
-                    <h2 class="m-0">App categorie aanmaken</h2>
+            <div class="row">
+                <div class="offset-lg-2 col-lg-9">
+                    <div class="breadcrumbs">
+                         <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/manage/app-gallery">App Gallery overzicht</a></li>            
+                                <li class="breadcrumb-item active" aria-current="page">Categorie aanmaken</li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
             </div>
-        </div>
+        
+            <div class="row">
+                <div class="offset-lg-2 col-lg-9">
+                    <div class="header-container">
+                        <h2 class="m-0">App categorie aanmaken</h2>
+                    </div>
+                </div>
+            </div>
+
         <div class="row">
             <div class="offset-lg-2 col-lg-9">
                 <div class="body-container">
@@ -43,8 +57,7 @@
                         <input type="hidden" name='gallery_id'  value="1" required><br/><br/>
 
                         <input type="submit" name="submit" value='Aanmaken'>
-                        
-
+                    
                      </form>
                 </div>
                       

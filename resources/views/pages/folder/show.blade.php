@@ -21,6 +21,19 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="offset-lg-2 col-lg-9">
+                    <div class="breadcrumbs">
+                         <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/manage/folders">Mappen</a></li>
+                                
+                                <li class="breadcrumb-item active" aria-current="page">{{ $folder->folder_name }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
         <div class="row">
             <div class="offset-lg-2 col-lg-9">
                 <div class="header-container">

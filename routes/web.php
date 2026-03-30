@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/manage/apps/delete/{unique}', [App\Http\Controllers\AppsController::class, 'destroy']);
 
     // Manage Custom App routes
-    Route::get('/manage/custom-apps/create', [App\Http\Controllers\CustomAppsController::class, 'create']);
+    // Route::get('/manage/custom-apps/create', [App\Http\Controllers\CustomAppsController::class, 'create']);
     Route::post('/manage/custom-apps/store', [App\Http\Controllers\CustomAppsController::class, 'store']);
     Route::get('/manage/custom-apps/edit/{unique}', [App\Http\Controllers\CustomAppsController::class, 'edit']);
     Route::patch('/manage/custom-apps/update/{unique}', [App\Http\Controllers\CustomAppsController::class, 'update']);

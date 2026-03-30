@@ -23,12 +23,22 @@ class FoldersController extends Controller
     public function show($uniqid) {
 
         $folder = Folder::where('uniqid', $uniqid)->firstOrFail();
-            $id = $folder->id;
+        $id = $folder->id;
+        $folder_name = $folder->folder_name;
+        $folder_url = $folder->uniqid;
 
+        // dd($folder->folder_name);
         $apps = App::where('folder_id', $id)->get();
             
         session(['folder_id' => $id]);
-        $folder = session('folder_id');
+        $folder_id = session('folder_id');
+
+        session(['folder_name' => $folder_name]);
+        $folder_name = session('folder_name');
+
+        session(['folder_url' => $folder_url]);
+        $folder_url = session('folder_url');
+
         $categories = AppCategorie::get();
 
         $custom_apps = CustomApp::where('folder_id', $id)->get();
@@ -60,8 +70,6 @@ class FoldersController extends Controller
             $uniqid = Str::uuid();
         } while (Folder::where('uniqid', $uniqid)->exists());
 
-
-        
         $map = new Folder;
         $map->folder_name = $request['folder_name'];
         $map->uniqid = $uniqid;
