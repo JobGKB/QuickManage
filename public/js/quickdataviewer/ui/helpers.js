@@ -41,9 +41,17 @@ export const clearError = () => {
 export const setLoading = (on, msg = "Bestand verwerken…") => { 
   const loadingOverlay = document.getElementById("loading-overlay");
   const loadingMsg = document.getElementById("loading-msg");
+  const backZoneLoading = document.getElementById("back-zone-loading");
+  const backZoneLoadingMsg = document.getElementById("back-zone-loading-msg");
+
   if (loadingOverlay && loadingMsg) {
     loadingMsg.textContent = msg; 
     loadingOverlay.classList.toggle("hidden", !on); 
+  }
+
+  if (backZoneLoading && backZoneLoadingMsg) {
+    backZoneLoadingMsg.textContent = msg;
+    backZoneLoading.classList.toggle("hidden", !on);
   }
 };
 

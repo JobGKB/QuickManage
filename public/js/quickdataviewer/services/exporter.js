@@ -2,29 +2,27 @@
 // Export Functionality
 // ===========================
 import { showError } from '../ui/helpers.js';
+import { getAllFeatures } from '../core/map.js';
 
 // Sanitize sheet name: remove invalid Excel characters and truncate to 31 chars
 const sanitizeSheetName = (name) => name.replace(/[\[\]:*?/\\]/g, '_').substring(0, 31);
 
 // Export visible features to Excel workbook with one sheet per layer
-export const exportToExcel = (vectorSource) => {
+export const exportToExcel = () => {
   // Check XLSX library is loaded
   if (typeof XLSX === 'undefined') { showError("Excel library is nog niet geladen."); return; }
-  const features = vectorSource.getFeatures();
+  const features = getAllFeatures();
   if (!features.length) { showError("Geen data om te exporteren."); return; }
 
   const layerData = {};
-  // Collect visible features grouped by layer, extracting only attribute properties
+  // Collect features grouped by layer, extracting only attribute properties
   features.forEach(f => {
-    const visible = f.get('_visible') !== false;
-    if (!visible) return;
     const layer = f.get('_layerName') || 'Default';
     if (!layerData[layer]) layerData[layer] = [];
     const props = { ...f.getProperties() };
     delete props.geometry;
     delete props._layerName;
-    delete props._visible;
-    delete props._selected;
+    delete props.selected;
     layerData[layer].push(props);
   });
 

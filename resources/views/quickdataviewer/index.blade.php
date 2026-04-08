@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>QuickDataViewer</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.9.2/proj4.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ol@9.2.4/dist/ol.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ol@10.8.0/dist/ol.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://unpkg.com/shpjs@latest/dist/shp.min.js"></script>
 <script src="https://unpkg.com/xlsx@latest/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@ngageoint/geopackage@4/dist/geopackage.min.js"></script>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css" integrity="sha512-yDUXOUWwbHH4ggxueDnC5vJv4tmfySpVdIcN1LksGZi8W8EVZv4uKGrQc0pVf66zS7LDhFJM7Zdeow1sw1/8Jw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -84,7 +86,7 @@
                             <p class="drop-label">
                               <strong>Kies een bestand</strong> of sleep het hierin.
                             </p>
-                            <p class="drop-hint">Ondersteund: Shapefile (.zip)</p>
+                            <p class="drop-hint">Ondersteund: Shapefile (.zip) & File Geodatabase (.gdb.zip)</p>
 
                           </div>
 
@@ -94,8 +96,8 @@
                           </div>
 
                           <div id="loading-overlay" class="loading-overlay hidden" aria-live="polite">
-                            <div class="spinner"></div>
-                            <p id="loading-msg"> </p>
+                            <p id="loading-msg"></p>
+                            <span class="spinner" aria-hidden="true"></span>
                           </div>
 
                       </div>
@@ -158,7 +160,7 @@
                 <p class="drop-label">
                   <strong>Kies een bestand</strong> of sleep het hierin.
                 </p>
-                <p class="drop-hint">Ondersteund: Shapefile (.zip)</p>
+                <p class="drop-hint">Ondersteund: Shapefile (.zip) & File Geodatabase (.gdb.zip)</p>
               </div>
 
               <!-- Loaded file display (hidden by default) -->
@@ -166,6 +168,10 @@
                 <p class="loaded-file-label">📁 Geladen bestand:</p>
                 <p id="back-zone-file-name" class="loaded-file-name"></p>
                 <p class="back-zone-reload-hint">Klik of sleep voor nieuw bestand</p>
+                <div id="back-zone-loading" class="loading-overlay hidden" aria-live="polite">
+                  <span id="back-zone-loading-msg"></span>
+                  <span class="spinner" aria-hidden="true"></span>
+                </div>
               </div>
 
             </div>
@@ -208,7 +214,8 @@
         'ol': () => typeof ol !== 'undefined',
         'JSZip': () => typeof JSZip !== 'undefined',
         'shp': () => typeof window.shp !== 'undefined',
-        'XLSX': () => typeof XLSX !== 'undefined'
+        'XLSX': () => typeof XLSX !== 'undefined',
+        'GeoPackage': () => typeof GeoPackage !== 'undefined' && typeof GeoPackage.GeoPackageAPI !== 'undefined'
       };
 
       const checkDeps = setInterval(() => {

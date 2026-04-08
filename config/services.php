@@ -41,4 +41,9 @@ return [
     'redirect_uri'  => env('ARCGIS_REDIRECT_URI'),
 ],
 
+    'fme' => [
+        'url'   => env('FME_SERVER_URL'),     // e.g. https://your-fme-server.com/fmerest/v3/transformations/submit/...
+        'token' => env('FME_SERVER_TOKEN'),
+    ],
+
 ];

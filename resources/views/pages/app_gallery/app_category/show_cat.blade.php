@@ -39,9 +39,9 @@
             <div class="offset-lg-2 col-lg-9">
 
                 <div class="header-container">
-
+                    
                     <h2 class="m-0" id="categoryTitle" data-uniqid="{{ $app_category->uniqid }}">Overzicht categorie: <span id="categoryName">{{ $app_category->category_name }}</span></h2>
-                 
+
                     <div class="actions-wrapper">
                         <i id="editIcon" class="fa-solid fa-pen-to-square " style="cursor:pointer;"></i>
                         <i id="saveIcon" class="fa-solid fa-check  " style="cursor:pointer; display:none; color:green;"></i>

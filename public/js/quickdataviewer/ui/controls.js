@@ -1,7 +1,7 @@
 // ===========================
 // Control Panel Setup
 // ===========================
-import { map, vectorSource } from '../core/map.js';
+import { map, clearAllDataLayers, getAllFeatures } from '../core/map.js';
 import { lastDataExtent, resetAllState } from '../core/state.js';
 import { showError } from './helpers.js';
 import { resetBackDropZoneDisplay } from './dropzone.js';
@@ -29,22 +29,14 @@ export const createControlPane = (closePopupFn) => {
         showError("Geen layer geladen om naar te zoomen.");
       }
     } else if (action === "clear") {
-      if (!vectorSource) {
-        showError("Map not initialized");
-        return;
-      }
-      vectorSource.clear(true);
+      clearAllDataLayers();
       closePopupFn?.();
       resetAllState();
       const layerNames = document.getElementById("layerNames");
       if (layerNames) layerNames.style.display = "none";
       resetBackDropZoneDisplay();
     } else if (action === "export") {
-      if (!vectorSource) {
-        showError("Map not initialized");
-        return;
-      }
-      exportToExcel(vectorSource);
+      exportToExcel();
     }
   });
 

@@ -1,7 +1,6 @@
 // ===========================
 // Feature Popup Overlay
 // ===========================
-import { vectorLayer } from '../core/map.js';
 import { selectedFeature, setSelectedFeature, clearSelection } from '../core/state.js';
 
 // Creates interactive popup displayed when clicking on features
@@ -31,12 +30,10 @@ export const createPopup = (map) => {
   map.addOverlay(overlay);
 
   const closePopup = () => {
-    // Clear selection when popup closes
-    if (selectedFeature) {
-      selectedFeature.set('_selected', false);
-      clearSelection();
-      vectorLayer.changed(); // Trigger redraw to remove blue highlight
+    if (selectedFeature && typeof selectedFeature.set === 'function') {
+      selectedFeature.set('selected', 0);
     }
+    clearSelection();
     overlay.setPosition(undefined);
   };
   
@@ -44,23 +41,24 @@ export const createPopup = (map) => {
 
   map.on("pointermove", (evt) => (map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? "pointer" : ""));
   map.on("singleclick", (evt) => {
-    const feature = map.forEachFeatureAtPixel(evt.pixel, (f) => f);
+    let feature = map.forEachFeatureAtPixel(evt.pixel, (f) => f);
     if (!feature) { closePopup(); return; }
     
     // Clear previous selection
-    if (selectedFeature) {
-      selectedFeature.set('_selected', false);
+    if (selectedFeature && typeof selectedFeature.set === 'function') {
+      selectedFeature.set('selected', 0);
     }
     // Set new feature as selected and highlight in blue
     setSelectedFeature(feature);
-    feature.set('_selected', true);
-    vectorLayer.changed(); // Trigger redraw to show blue highlight
+    if (typeof feature.set === 'function') {
+      feature.set('selected', 1);
+    }
     
     const props = { ...feature.getProperties() };
     delete props.geometry;
-    delete props._visible;
-    delete props._selected;
+    delete props.selected;
     delete props._layerName;
+    delete props.features;
     const keys = Object.keys(props);
 
     title.textContent = keys.length ? "Attributes" : "No attributes";

@@ -82,6 +82,7 @@ Route::get('/app-gallery/{cat_uniqid}', [App\Http\Controllers\AppGalleryControll
 Route::get('/apps/view/{unique}', [App\Http\Controllers\AppsController::class, 'show']);
 
 Route::get('/manage/quickdataviewer', [App\Http\Controllers\QuickDataViewerController::class, 'index']);
+Route::post('/api/quickdataviewer/convert-gdb', [App\Http\Controllers\QuickDataViewerController::class, 'convertGdb']);
 
 
 // ArcGIS OAuth routes

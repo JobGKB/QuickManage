@@ -10,6 +10,16 @@ import { createControlPane } from './ui/controls.js';
 import { createPopup } from './ui/popup.js';
 import { setupDropZone, initializeBackDropZone, updateBackDropZoneDisplay } from './ui/dropzone.js';
 import { loadShapefileZip } from './services/shapefileLoader.js';
+import { convertGdbToGpkg } from './services/fmeConverter.js';
+import { loadGpkgBuffer } from './services/gpkgLoader.js';
+
+// Inspect ZIP contents to determine if it contains a File Geodatabase (.gdb folder)
+async function detectGdbZip(file) {
+  const zipBuf = await file.arrayBuffer();
+  const zip = await JSZip.loadAsync(zipBuf);
+  const paths = Object.keys(zip.files);
+  return paths.some(p => /\.gdb\//i.test(p) || /\.gdb$/i.test(p));
+}
 
 // Initialize application
 async function initializeApp() {
@@ -51,16 +61,29 @@ async function initializeApp() {
 
     const handleFile = async (file) => {
       clearError();
+      const name = file.name.toLowerCase();
       
       // Validate file is a ZIP file
-      if (!file.name.toLowerCase().endsWith(".zip")) { 
-        showError("Upload een .zip shapefile."); 
+      if (!name.endsWith(".zip")) { 
+        showError("Upload een .zip bestand (shapefile of geodatabase)."); 
         return; 
       }
       
       try {
         setLoading(true);
-        await loadShapefileZip(file, closePopup, setLoading);
+
+        // Detect file type: check if ZIP contains a .gdb folder
+        const isGdb = await detectGdbZip(file);
+
+        if (isGdb) {
+          // GDB flow: upload to FME Server → receive GPKG → render on map
+          const gpkgBuffer = await convertGdbToGpkg(file, setLoading);
+          await loadGpkgBuffer(gpkgBuffer, closePopup, setLoading);
+        } else {
+          // Shapefile flow: parse locally in browser
+          await loadShapefileZip(file, closePopup, setLoading);
+        }
+
         setLoading(false);
         // Update back button display with loaded filename
         updateBackDropZoneDisplay(file.name);

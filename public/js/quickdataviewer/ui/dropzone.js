@@ -9,6 +9,12 @@ export const setupDropZone = (zone, input, handler) => {
     return;
   }
 
+  // Prevent duplicate listeners when a zone is initialized more than once.
+  if (zone.dataset.dropZoneBound === "true") {
+    return;
+  }
+  zone.dataset.dropZoneBound = "true";
+
   // Click handler: open file picker when clicking zone
   zone.addEventListener("click", () => {
     console.log("Drop zone clicked, opening file picker");
@@ -103,7 +109,8 @@ export const initializeBackDropZone = (handleFile) => {
     return; 
   }
   
-  // Reuse drop zone setup for back button functionality
+  // Reuse drop zone setup for back button functionality.
+  // setupDropZone is idempotent and will ignore repeated initialization.
   setupDropZone(zone, input, handleFile);
   console.log("Back drop zone initialized");
 };
