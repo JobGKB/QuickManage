@@ -3,6 +3,20 @@
 // ===========================
 import { layerVisibility } from '../core/state.js';
 import { dataLayers } from '../core/state.js';
+import { zoomToData } from '../core/map.js';
+
+// Toggle all layers on/off and sync checkboxes + button label
+const toggleAllLayers = () => {
+  const btn = document.getElementById('layerToggleBtn');
+  const visible = btn?.textContent === 'Alles aan';
+  Object.keys(dataLayers).forEach(name => {
+    layerVisibility[name] = visible;
+    dataLayers[name].setVisible(visible);
+    const cb = document.getElementById(`layer-${name}`);
+    if (cb) cb.checked = visible;
+  });
+  if (btn) btn.textContent = visible ? 'Alles uit' : 'Alles aan';
+};
 
 /**
  * Show or hide a small rendering spinner next to a layer's label.
@@ -35,11 +49,18 @@ export const showLoadingLayers = (names) => {
   const div = document.getElementById("layerNames");
   if (!names?.length) { div.style.display = "none"; return; }
 
-  div.innerHTML = "<strong>Lagen laden:</strong><br/>" + names.map(name => {
+  div.innerHTML = "<strong>Lagen laden:</strong>" + names.map(name => {
     const rowId = `layer-row-${name}`;
     return `<div id="${rowId}" class="layer-row"><span class="layer-spinner"></span><label class="layer-label" style="opacity:0.6;">⏳ <strong>${name}</strong> laden…</label></div>`;
   }).join("");
   div.style.display = "block";
+
+  // Hide toggler while loading
+  const togglerContainer = document.getElementById('layerTogglerContainer');
+  if (togglerContainer) {
+    togglerContainer.innerHTML = '';
+    togglerContainer.style.display = 'none';
+  }
 };
 
 /**
@@ -58,6 +79,15 @@ export const markLayerLoaded = (name, featureCount) => {
   const strong = div?.querySelector(':scope > strong');
   if (strong) strong.textContent = 'Lagen geladen:';
 
+  // Ensure the toggle button is present outside layerNames
+  const togglerContainer = document.getElementById('layerTogglerContainer');
+  if (togglerContainer && !togglerContainer.querySelector('#layerToggleBtn')) {
+    togglerContainer.innerHTML = '<button id="layerToggleBtn">Alles uit</button><button class="btn zoomTodata" id="layerZoomBtn"><i class="fa-solid fa-house"></i></button>';
+    togglerContainer.querySelector('#layerToggleBtn').addEventListener('click', toggleAllLayers);
+    togglerContainer.querySelector('#layerZoomBtn').addEventListener('click', () => zoomToData());
+  }
+  if (togglerContainer) togglerContainer.style.display = 'flex';
+
   // Attach visibility toggle
   const cb = row.querySelector('input[type="checkbox"]');
   cb?.addEventListener('change', (e) => {
@@ -72,11 +102,19 @@ export const displayLayerInfo = (layers) => {
   const div = document.getElementById("layerNames");
   if (!layers?.length) { div.style.display = "none"; return; }
   
-  div.innerHTML = "<strong>Lagen geladen:</strong><br/>" + layers.map(l => {
+  div.innerHTML = '<strong>Lagen geladen:</strong>' + layers.map(l => {
     const id = `layer-${l.name}`;
     return `<div id="layer-row-${l.name}" class="layer-row"><input type="checkbox" id="${id}" data-layer="${l.name}" ${layerVisibility[l.name] !== false ? 'checked' : ''} style="cursor: pointer; flex-shrink: 0; margin-top: 2px;" /><label for="${id}" class="layer-label"> <strong>${l.name}</strong> (${l.featureCount})</label></div>`;
   }).join("");
   div.style.display = "block";
+
+  const togglerContainer = document.getElementById('layerTogglerContainer');
+  if (togglerContainer) {
+    togglerContainer.innerHTML = '<button id="layerToggleBtn">Alles uit</button><button class="btn zoomTodata" id="layerZoomBtn"><i class="fa-solid fa-house"></i></button>';
+    togglerContainer.style.display = 'flex';
+    togglerContainer.querySelector('#layerToggleBtn')?.addEventListener('click', toggleAllLayers);
+    togglerContainer.querySelector('#layerZoomBtn')?.addEventListener('click', () => zoomToData());
+  }
 
   div.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', (e) => {
     const name = e.target.dataset.layer;

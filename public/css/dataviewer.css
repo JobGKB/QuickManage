@@ -127,6 +127,99 @@ body {
   padding: 10px;
 }
 
+.header-logo-file {
+  position: absolute;
+  background-color: #fff;
+  color: #000;
+  padding: 7px;
+  z-index: 1;
+  left: 280px;
+  right: 0px;
+  border-bottom: 1px solid #d9d9d9;
+}
+.header-logo-file .header-spacer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-logo-file .address-search {
+  position: relative;
+  flex: 1;
+  max-width: 360px;
+  margin: 0 16px;
+}
+.header-logo-file .address-search .address-search-input-wrap {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  padding: 0 8px;
+  transition: border-color 0.2s;
+}
+.header-logo-file .address-search .address-search-input-wrap:focus-within {
+  border-color: #3a8c3a;
+}
+.header-logo-file .address-search .address-search-icon {
+  color: #888;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.header-logo-file .address-search #address-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 7px 8px;
+  font-size: 13px;
+  background: transparent;
+  min-width: 0;
+}
+.header-logo-file .address-search .address-search-clear {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #999;
+  padding: 0 2px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.header-logo-file .address-search .address-search-clear:hover {
+  color: #333;
+}
+.header-logo-file .address-search .address-search-results {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+.header-logo-file .address-search .address-search-results li {
+  padding: 8px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.15s;
+}
+.header-logo-file .address-search .address-search-results li:last-child {
+  border-bottom: none;
+}
+.header-logo-file .address-search .address-search-results li:hover {
+  background: #eaf5ea;
+}
+
 .logo {
   height: 40px;
 }
@@ -187,11 +280,22 @@ a.overzicht_link_viewer {
   top: 0px;
   bottom: 0px;
   gap: 10px;
-  padding: 10px;
+  border-right: 1px solid #d9d9d9;
   height: 100vh;
   background-color: #fff;
   opacity: 90%;
   max-width: 280px;
+}
+.quickDataViewer .controlpanel_dataviewer .home-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsla(109, 47%, 38%, 0.979);
+  padding: 7px;
+}
+.quickDataViewer .controlpanel_dataviewer .home-btn .logo-cm img {
+  height: 45px;
+  border-radius: 5px;
 }
 .quickDataViewer .controlpanel_dataviewer .btn {
   margin-top: 10px;
@@ -204,14 +308,6 @@ a.overzicht_link_viewer {
   display: flex;
   flex-direction: column;
   padding: 10px;
-}
-.quickDataViewer .controlpanel_dataviewer .action_buttons .zoomTodata {
-  background-color: #cd7b00;
-  color: #fff;
-  opacity: 100%;
-}
-.quickDataViewer .controlpanel_dataviewer .action_buttons .zoomTodata:hover {
-  background-color: #aa6600 !important;
 }
 .quickDataViewer .controlpanel_dataviewer .action_buttons .removeData {
   background-color: transparent;
@@ -233,10 +329,15 @@ a.overzicht_link_viewer {
   background-color: #009700 !important;
 }
 .quickDataViewer .controlpanel_dataviewer .menu_dataviewer {
+  padding: 10px;
   position: relative;
 }
+.quickDataViewer .controlpanel_dataviewer .menu_dataviewer #layerNames {
+  max-height: 500px;
+  overflow-y: auto;
+}
 .quickDataViewer .controlpanel_dataviewer .menu_dataviewer .back-drop-zone {
-  margin-top: 50px;
+  margin-top: 10px;
   width: 100%;
   border: 2.5px dashed #3a8c3a;
   border-radius: 10px;
@@ -300,13 +401,52 @@ a.overzicht_link_viewer {
   color: #fff;
   opacity: 100%;
 }
+.quickDataViewer .controlpanel_dataviewer .menu_dataviewer .layerToggler {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  background-color: rgb(245, 245, 245);
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-top: 10px;
+  justify-content: space-between;
+}
+.quickDataViewer .controlpanel_dataviewer .menu_dataviewer .layerToggler button {
+  padding: 4px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  min-width: 80px !important;
+}
+.quickDataViewer .controlpanel_dataviewer .menu_dataviewer .layerToggler button#layerToggleBtn {
+  color: #000;
+  border: 1px solid #28a745;
+}
+.quickDataViewer .controlpanel_dataviewer .menu_dataviewer .layerToggler button#layerToggleBtn:hover {
+  color: #fff !important;
+  background-color: #3e7a1b !important;
+}
+.quickDataViewer .controlpanel_dataviewer .menu_dataviewer .layerToggler button#layerZoomBtn {
+  padding: 4px 12px;
+  border: 1px solid #cd7b00;
+  font-size: 12px;
+  background-color: #cd7b00;
+  color: #fff;
+  opacity: 100%;
+  margin: 0 !important;
+}
+.quickDataViewer .controlpanel_dataviewer .menu_dataviewer .layerToggler button#layerZoomBtn:hover {
+  background-color: #aa6600 !important;
+}
 .quickDataViewer .footer_dataviewer {
   z-index: 999;
   position: fixed;
   bottom: 0px;
   background-color: hsla(109, 47%, 38%, 0.979);
   opacity: 80%;
-  width: 100%;
+  width: 280px;
   padding: 4px;
 }
 .quickDataViewer {
@@ -375,8 +515,15 @@ a.overzicht_link_viewer {
   padding: 20px;
 }
 
+.footer-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+}
+
 .footer-img img {
-  height: 12px;
+  height: 11px;
   opacity: 90%;
 }
 

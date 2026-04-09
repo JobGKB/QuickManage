@@ -2,6 +2,7 @@
 // Feature Popup Overlay
 // ===========================
 import { selectedFeature, setSelectedFeature, clearSelection } from '../core/state.js';
+import { dataLayers } from '../core/state.js';
 
 // Creates interactive popup displayed when clicking on features
 export const createPopup = (map) => {
@@ -20,6 +21,30 @@ export const createPopup = (map) => {
   title.textContent = "Attributes";
   popupEl.appendChild(title);
 
+  // Navigation bar for multiple features at the same location
+  const navBar = document.createElement("div");
+  navBar.style.cssText = "display: none; align-items: center; justify-content: space-between; margin-top: 6px; padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.1);";
+
+  const prevBtn = document.createElement("button");
+  prevBtn.innerHTML = "<i class=\"fa-solid fa-arrow-left\"></i>";
+  prevBtn.style.cssText = "border: none; background: #eee; border-radius: 4px; cursor: pointer; padding: 2px 10px; font-size: 14px;";
+  prevBtn.onmouseenter = () => (prevBtn.style.background = "#ddd");
+  prevBtn.onmouseleave = () => (prevBtn.style.background = "#eee");
+
+  const navLabel = document.createElement("span");
+  navLabel.style.cssText = "font-size: 12px; color: #555;";
+
+  const nextBtn = document.createElement("button");
+  nextBtn.innerHTML = "<i class=\"fa-solid fa-arrow-right\"></i>";
+  nextBtn.style.cssText = "border: none; background: #eee; border-radius: 4px; cursor: pointer; padding: 2px 10px; font-size: 14px;";
+  nextBtn.onmouseenter = () => (nextBtn.style.background = "#ddd");
+  nextBtn.onmouseleave = () => (nextBtn.style.background = "#eee");
+
+  navBar.appendChild(prevBtn);
+  navBar.appendChild(navLabel);
+  navBar.appendChild(nextBtn);
+  popupEl.appendChild(navBar);
+
   const content = document.createElement("div");
   content.style.cssText = "margin-top: 8px; max-height: 400px; overflow: auto;";
   popupEl.appendChild(content);
@@ -29,31 +54,21 @@ export const createPopup = (map) => {
   const overlay = new ol.Overlay({ element: popupEl, autoPan: true, autoPanAnimation: { duration: 200 }, offset: [0, -10] });
   map.addOverlay(overlay);
 
-  const closePopup = () => {
-    if (selectedFeature && typeof selectedFeature.set === 'function') {
-      selectedFeature.set('selected', 0);
-    }
-    clearSelection();
-    overlay.setPosition(undefined);
-  };
-  
-  closer.addEventListener("click", closePopup);
+  // State for multi-feature navigation
+  let hitFeatures = [];
+  let currentIndex = 0;
 
-  map.on("pointermove", (evt) => (map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? "pointer" : ""));
-  map.on("singleclick", (evt) => {
-    let feature = map.forEachFeatureAtPixel(evt.pixel, (f) => f);
-    if (!feature) { closePopup(); return; }
-    
-    // Clear previous selection
+  const renderFeature = (feature) => {
+    // Clear previous selection highlight
     if (selectedFeature && typeof selectedFeature.set === 'function') {
       selectedFeature.set('selected', 0);
     }
-    // Set new feature as selected and highlight in blue
+    // Highlight new feature
     setSelectedFeature(feature);
     if (typeof feature.set === 'function') {
       feature.set('selected', 1);
     }
-    
+
     const props = { ...feature.getProperties() };
     delete props.geometry;
     delete props.selected;
@@ -61,13 +76,17 @@ export const createPopup = (map) => {
     delete props.features;
     const keys = Object.keys(props);
 
-    title.textContent = keys.length ? "Attributes" : "No attributes";
+    // Show layer name in title if available
+    const layerName = feature.get('_layerName') || '';
+    title.textContent = keys.length
+      ? (layerName ? `Attributes — ${layerName}` : "Attributes")
+      : "No attributes";
+
     content.innerHTML = "";
 
     if (keys.length) {
       const table = document.createElement("table");
       table.style.cssText = "width: 100%; border-collapse: collapse;";
-      // Create table rows for each feature property (key-value pairs)
       keys.forEach(k => {
         const tr = document.createElement("tr");
         const tdK = document.createElement("td");
@@ -84,7 +103,76 @@ export const createPopup = (map) => {
     } else {
       content.textContent = "No attributes found on this feature.";
     }
+  };
 
+  const updateNav = () => {
+    if (hitFeatures.length > 1) {
+      navBar.style.display = "flex";
+      navLabel.textContent = `Feature ${currentIndex + 1} of ${hitFeatures.length}`;
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+      prevBtn.style.opacity = "1";
+      nextBtn.style.opacity = "1";
+    } else {
+      navBar.style.display = "none";
+    }
+  };
+
+  prevBtn.addEventListener("click", () => {
+    if (!hitFeatures.length) return;
+    currentIndex = (currentIndex - 1 + hitFeatures.length) % hitFeatures.length;
+    renderFeature(hitFeatures[currentIndex]);
+    updateNav();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if (!hitFeatures.length) return;
+    currentIndex = (currentIndex + 1) % hitFeatures.length;
+    renderFeature(hitFeatures[currentIndex]);
+    updateNav();
+  });
+
+  const closePopup = () => {
+    if (selectedFeature && typeof selectedFeature.set === 'function') {
+      selectedFeature.set('selected', 0);
+    }
+    clearSelection();
+    hitFeatures = [];
+    currentIndex = 0;
+    overlay.setPosition(undefined);
+  };
+  
+  closer.addEventListener("click", closePopup);
+
+  map.on("pointermove", (evt) => (map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? "pointer" : ""));
+  map.on("singleclick", (evt) => {
+    // Collect ALL features at the clicked location across all visible layers,
+    // including multiple features within the same layer.
+    const resolution = map.getView().getResolution();
+    const toleranceMap = resolution * 10; // 10px tolerance in map units
+    const coord = evt.coordinate;
+    const extent = [
+      coord[0] - toleranceMap, coord[1] - toleranceMap,
+      coord[0] + toleranceMap, coord[1] + toleranceMap,
+    ];
+
+    const features = [];
+    Object.values(dataLayers).forEach(layer => {
+      if (!layer.getVisible()) return;
+      const src = layer.get('_featureSource');
+      if (!src) return;
+      src.forEachFeatureInExtent(extent, (f) => {
+        features.push(f);
+      });
+    });
+
+    if (!features.length) { closePopup(); return; }
+
+    hitFeatures = features;
+    currentIndex = 0;
+
+    renderFeature(hitFeatures[0]);
+    updateNav();
     overlay.setPosition(evt.coordinate);
   });
 

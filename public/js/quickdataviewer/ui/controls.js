@@ -34,6 +34,8 @@ export const createControlPane = (closePopupFn) => {
       resetAllState();
       const layerNames = document.getElementById("layerNames");
       if (layerNames) layerNames.style.display = "none";
+      const togglerContainer = document.getElementById("layerTogglerContainer");
+      if (togglerContainer) togglerContainer.style.display = "none";
       resetBackDropZoneDisplay();
     } else if (action === "export") {
       exportToExcel();

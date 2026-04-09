@@ -135,6 +135,103 @@ body {
   padding: 10px;
 }
 
+.header-logo-file{
+    position: absolute;
+    background-color: #fff;
+    color: #000;
+    padding: 7px;
+    z-index: 1;
+    left: calc(280px);
+    right: 0px;
+     
+    border-bottom: 1px solid #d9d9d9;
+    .header-spacer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    // ── Address Search (in header) ──────────────────
+    .address-search {
+      position: relative;
+      flex: 1;
+      max-width: 360px;
+      margin: 0 16px;
+
+      .address-search-input-wrap {
+        display: flex;
+        align-items: center;
+        background: #f5f5f5;
+        border: 1px solid #bbb;
+        border-radius: 6px;
+        padding: 0 8px;
+        transition: border-color 0.2s;
+
+        &:focus-within {
+          border-color: #3a8c3a;
+        }
+      }
+
+      .address-search-icon {
+        color: #888;
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+
+      #address-search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 7px 8px;
+        font-size: 13px;
+        background: transparent;
+        min-width: 0;
+      }
+
+      .address-search-clear {
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 18px;
+        color: #999;
+        padding: 0 2px;
+        line-height: 1;
+        transition: color 0.2s;
+        &:hover { color: #333; }
+      }
+
+      .address-search-results {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-top: none;
+        border-radius: 0 0 6px 6px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-height: 240px;
+        overflow-y: auto;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+
+        li {
+          padding: 8px 10px;
+          font-size: 12px;
+          cursor: pointer;
+          color: #333;
+          border-bottom: 1px solid #f0f0f0;
+          transition: background 0.15s;
+
+          &:last-child { border-bottom: none; }
+          &:hover { background: #eaf5ea; }
+        }
+      }
+    }
+}
 .logo {
   height: 40px;
 }
@@ -210,11 +307,24 @@ a.overzicht_link_viewer {
     top: 0px;
     bottom: 0px;
     gap: 10px;
-    padding: 10px;
+     border-right: 1px solid #d9d9d9;
     height: 100vh;
     background-color: #fff;
     opacity: 90%;
     max-width: 280px;
+ 
+ 
+    .home-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: hsla(109, 47%, 38%, 0.979);
+      padding:7px;
+      .logo-cm img{
+        height: 45px;
+        border-radius: 5px;
+      }
+    }
 
     .btn{   
 
@@ -232,15 +342,7 @@ a.overzicht_link_viewer {
             flex-direction: column;
             padding: 10px;
 
-          .zoomTodata {
-            background-color: #cd7b00;
-            color: #fff;
-            opacity: 100%;
-            &:hover {
-              background-color: #aa6600 !important;
-            
-             }
-          }
+          
 
           .removeData {
             background-color: transparent;
@@ -270,19 +372,20 @@ a.overzicht_link_viewer {
 
 
     .menu_dataviewer {
-
+      padding: 10px;
       position: relative;
     
       // float: left;      
 
       #layerNames {
-        
+        max-height: 500px;
+        overflow-y: auto;
    
       }
       
 
       .back-drop-zone {
-        margin-top: 50px;
+        margin-top: 10px;
         width: 100%;
         border: 2.5px dashed #3a8c3a;
         border-radius: 10px;
@@ -356,6 +459,52 @@ a.overzicht_link_viewer {
           color: #fff;
           opacity: 100%;
         }
+
+        .layerToggler {
+          
+          display: flex;
+          gap: 10px;
+          font-size: 14px;
+          background-color: rgb(245, 245, 245);;
+          padding: 8px;
+          border-radius: 4px;
+          font-size: 12px;
+          margin-top: 10px;
+          justify-content: space-between;
+          button {
+            padding: 4px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            min-width: 80px !important;
+            &#layerToggleBtn {
+              color: #000;
+              border: 1px solid #28a745;
+
+              &:hover {
+                color: #fff !important;
+                background-color: #3e7a1b !important;
+              }
+            }
+            &#layerZoomBtn {
+              padding: 4px 12px;
+              border: 1px solid #cd7b00;
+              font-size: 12px;
+              background-color: #cd7b00;
+              color: #fff;
+              opacity: 100%;
+              margin:0 !important;
+              &:hover {
+
+                background-color: #aa6600 !important;
+                      
+              }
+            }
+              
+          }
+        }
+        
         
     }
   }
@@ -366,7 +515,7 @@ a.overzicht_link_viewer {
       bottom: 0px;
       background-color: hsla(109, 47%, 38%, 0.979);
       opacity: 80%;
-      width: 100%;
+      width: 280px;
       padding:4px
      }
 
@@ -441,8 +590,15 @@ a.overzicht_link_viewer {
   padding: 20px;
 }
 
+.footer-img{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+}
 .footer-img img {
-  height: 12px;
+  
+  height: 11px;
   opacity: 90%;
 }
 

@@ -70,7 +70,7 @@
 
                       <div class="card-body">
 
-                          <div id="drop-zone" class="drop-zone" role="button" tabindex="0" aria-label="Bestand kiezen of slepen">
+                          <div id="drop-zone" class="drop-zone mb-4" role="button" tabindex="0" aria-label="Bestand kiezen of slepen">
 
                             <input type="file" id="file-input" accept=".zip" hidden />
 
@@ -134,18 +134,45 @@
 
   <div class="container-fluid quickDataViewer p-0" id="map"   style="display:none;">
     <div class="header_dataviewer">
-      <div class="row header-logo  align-items-center">
-          <div class="col-md-4 fl-l">
+       <div class="header-logo-file">
+          <div class="header-spacer">
+
+            <div> <h4 id="fileName"> </h4></div>
+
+            
+
+            <div class="d-flex align-items-center"> 
+              <!-- Address search bar -->
+              <div class="address-search">
+                <div class="address-search-input-wrap">
+                  <i class="fa-solid fa-magnifying-glass address-search-icon"></i>
+                  <input type="text" id="address-search-input" placeholder="Zoek adres..." autocomplete="off" />
+                  <button id="address-search-clear" class="address-search-clear" title="Wissen">&times;</button>
+                </div>
+                <ul id="address-search-results" class="address-search-results"></ul>
+              </div>
+
               <a href="https://gis.gkbgroep.nl/Apps/GKB-App-Gallery/index.html" class="overzicht_link_viewer fl-l"> <img src="{{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps </a>
-          </div>
-            <div class="col-md-4 text-center">
-              <h4>GKB GIS Viewer (beta)</h4>
             </div>
+
+          </div>
         </div>
     </div>
     <div id="controlpanel_dataviewer" class="controlpanel_dataviewer">
       <div class="row">
         <div class="col-lg-12 text-center">
+            <div class="menu-header">
+              <div class="home-btn mb-3">
+
+                
+                <a href="https://gis.gkbgroep.nl/Apps/GKB-App-Gallery/index.html"  class="logo-cm"> <img src="{{ asset('storage/logo-GKB-GIS-Viewer.png') }}"  ></a>
+
+
+              </div>
+               
+            </div>
+
+
           <div class="menu_dataviewer">
             
 
@@ -175,7 +202,11 @@
               </div>
 
             </div>
+            
             <div id="layerNames" style="margin-top: 20px; padding: 10px; background: #f5f5f5; border-radius: 5px; display: none;"></div>
+            <div id="layerTogglerContainer" class="layerToggler" style="display: none;"></div>
+            
+
 
             
 
@@ -184,21 +215,18 @@
       </div>
    
         <div class="action_buttons">
-          <button id="zoom-button" class="btn zoomTodata" data-action="zoom">Zoom naar data</button>
-          <button id="export-button" class="btn export" data-action="export"><i class="fa-solid fa-arrow-right"></i> Excel</button>
+          <button id="export-button" class="btn export" data-action="export"><i class="fa-solid fa-download"></i> Excel</button>
           <button id="clear-button" class="btn removeData" data-action="clear"><i class="fa-solid fa-trash"></i></button>
         </div>
 
     </div>
     <div class="footer_dataviewer">
-      <div class="row">
-        <div class="col-lg-12 text-center">
+ 
           <div class="footer-img">
             <img src="{{ asset('storage/footer.png') }}" class="logo" />
               
           </div>
-        </div>
-      </div>
+       
     </div>
   </div>
    

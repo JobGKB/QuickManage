@@ -12,6 +12,7 @@ import { setupDropZone, initializeBackDropZone, updateBackDropZoneDisplay } from
 import { loadShapefileZip } from './services/shapefileLoader.js';
 import { convertGdbToGpkg } from './services/fmeConverter.js';
 import { loadGpkgBuffer } from './services/gpkgLoader.js';
+import { initAddressSearch } from './search/addressSearch.js';
 
 // Inspect ZIP contents to determine if it contains a File Geodatabase (.gdb folder)
 async function detectGdbZip(file) {
@@ -45,6 +46,10 @@ async function initializeApp() {
     // STEP 5: Create and attach control panel
     map.addControl(createControlPane(closePopup));
     console.log("✓ Control panel created");
+
+    // STEP 5b: Initialize address search
+    initAddressSearch();
+    console.log("✓ Address search initialized");
 
     // STEP 6: Setup main drop zone
     const dropZone = document.getElementById("drop-zone");
@@ -87,6 +92,8 @@ async function initializeApp() {
         setLoading(false);
         // Update back button display with loaded filename
         updateBackDropZoneDisplay(file.name);
+        const fileNameEl = document.getElementById('fileName');
+        if (fileNameEl) fileNameEl.textContent = "Bestand: "+ file.name;
         switchToMapScreen(() => initializeBackDropZone(handleFile));
       } catch (err) {
         console.error("❌ File processing error:", err);

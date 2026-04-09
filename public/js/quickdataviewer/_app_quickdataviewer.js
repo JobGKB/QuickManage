@@ -325,11 +325,20 @@ const displayLayerInfo = (layers) => {
   if (!layers?.length) { div.style.display = "none"; return; }
   
   // Build HTML for layer list with checkboxes
-  div.innerHTML = "<strong>Lagen geladen:</strong><br/>" + layers.map(l => {
+  div.innerHTML = '<strong>Lagen geladen:</strong><div class="layerToggler">Alle lagen: <button id="layersOn">Aan</button><button id="layersOff">Uit</button></div><br/>' + layers.map(l => {
     const id = `layer-${l.name}`;
     return `<div style="padding: 6px 0; font-size: 12px; display: flex; align-items: flex-start; gap: 6px; min-width: 0;"><input type="checkbox" id="${id}" data-layer="${l.name}" ${layerVisibility[l.name] !== false ? 'checked' : ''} style="cursor: pointer; flex-shrink: 0; margin-top: 2px;" /><label for="${id}" class="layer-label">📍 <strong>${l.name}</strong> (${l.featureCount})</label></div>`;
   }).join("");
   div.style.display = "block";
+
+  div.querySelector('#layersOn')?.addEventListener('click', () => {
+    Object.keys(layerVisibility).forEach(name => { layerVisibility[name] = true; });
+    div.querySelectorAll('input[type="checkbox"]').forEach(cb => { cb.checked = true; cb.dispatchEvent(new Event('change')); });
+  });
+  div.querySelector('#layersOff')?.addEventListener('click', () => {
+    Object.keys(layerVisibility).forEach(name => { layerVisibility[name] = false; });
+    div.querySelectorAll('input[type="checkbox"]').forEach(cb => { cb.checked = false; cb.dispatchEvent(new Event('change')); });
+  });
 
   // Attach change event listeners to all layer visibility checkboxes
   div.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', (e) => {
