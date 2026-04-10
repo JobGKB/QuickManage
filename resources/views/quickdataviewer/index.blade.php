@@ -72,7 +72,7 @@
 
                           <div id="drop-zone" class="drop-zone mb-4" role="button" tabindex="0" aria-label="Bestand kiezen of slepen">
 
-                            <input type="file" id="file-input" accept=".zip" hidden />
+                            <input type="file" id="file-input" accept=".zip,.dwg" hidden />
 
                             <div class="drop-icon">
                               <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -180,7 +180,7 @@
 
               <button id="back-button"   style="width: 100%; pointer-events: none; border: none; background: none; color: inherit;"></button>
 
-              <input type="file" id="back-file-input" accept=".zip" hidden />
+              <input type="file" id="back-file-input" accept=".zip,.dwg" hidden />
               
               <!-- Upload prompt (shown when no file loaded) -->
               <div id="back-zone-upload-prompt" class="back-zone-content">
@@ -195,16 +195,26 @@
                 <p class="loaded-file-label">📁 Geladen bestand:</p>
                 <p id="back-zone-file-name" class="loaded-file-name"></p>
                 <p class="back-zone-reload-hint">Klik of sleep voor nieuw bestand</p>
-                <div id="back-zone-loading" class="loading-overlay hidden" aria-live="polite">
-                  <span id="back-zone-loading-msg"></span>
-                  <span class="spinner" aria-hidden="true"></span>
-                </div>
+              </div>
+
+              <!-- Loading indicator (always accessible, independent of upload/loaded state) -->
+              <div id="back-zone-loading" class="loading-overlay hidden" aria-live="polite">
+                <span id="back-zone-loading-msg"></span>
+                <span class="spinner" aria-hidden="true"></span>
+              </div>
+
+              <!-- Error message for back drop zone -->
+              <div id="back-zone-error" class="back-zone-error hidden" role="alert">
+                <p id="back-zone-error-msg"></p>
               </div>
 
             </div>
             
-            <div id="layerNames" style="margin-top: 20px; padding: 10px; background: #f5f5f5; border-radius: 5px; display: none;"></div>
-            <div id="layerTogglerContainer" class="layerToggler" style="display: none;"></div>
+            
+            <div id="layerNamesTitle" ><div id="layerTogglerContainer" class="layerToggler" style="display: none;"></div>   <strong>Lagen geladen:</strong></div>
+            <div id="layerNames" style="padding: 0px 10px 10px 10px; background: #f5f5f5; border-radius: 5px; display: none;">
+              
+            </div>
             
 
 
@@ -220,6 +230,38 @@
         </div>
 
     </div>
+    {{-- Floating attribute table toggle button --}}
+    <button id="attr-table-toggle" class="attr-table-toggle" title="Attributentabel">
+      <i class="fa-solid fa-table"></i>
+    </button>
+
+    {{-- Floating zoom-to-data button (below attr-table-toggle) --}}
+    <button id="layerZoomBtn" class="zoom-data-toggle" style="display:none;" title="Zoom naar data">
+      <i class="fa-solid fa-house"></i>
+    </button>
+
+    {{-- Attribute table panel --}}
+    <div id="attribute-table-panel" class="attribute-table-panel" style="display:none;">
+      <div id="attr-table-resize-handle" class="attr-table-resize-handle"></div>
+      <div class="attr-table-inner">
+        <div id="attr-table-sidebar" class="attr-table-sidebar">
+          <button id="attr-table-zoom-btn" class="attr-table-zoom-btn" title="Zoom naar geselecteerde features">
+            <i class="fa-solid fa-location-crosshairs"></i>
+          </button>
+          <button id="attr-table-export-btn" class="attr-table-export-btn" title="Download als Excel">
+            <i class="fa-solid fa-download"></i> Excel
+          </button>
+        </div>
+        <div class="attr-table-main">
+          <div class="attr-table-header">
+            <div id="attr-table-tabs" class="attr-table-tabs"></div>
+            <button id="attr-table-close-btn" class="attr-table-close-btn" title="Sluiten">&times;</button>
+          </div>
+          <div id="attr-table-body" class="attr-table-body"></div>
+        </div>
+      </div>
+    </div>
+
     <div class="footer_dataviewer">
  
           <div class="footer-img">

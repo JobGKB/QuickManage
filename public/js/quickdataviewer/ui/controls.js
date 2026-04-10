@@ -34,8 +34,14 @@ export const createControlPane = (closePopupFn) => {
       resetAllState();
       const layerNames = document.getElementById("layerNames");
       if (layerNames) layerNames.style.display = "none";
+      const layerNamesTitle = document.getElementById("layerNamesTitle");
+      if (layerNamesTitle) layerNamesTitle.style.display = "none";
       const togglerContainer = document.getElementById("layerTogglerContainer");
       if (togglerContainer) togglerContainer.style.display = "none";
+      const zoomBtn = document.getElementById("layerZoomBtn");
+      if (zoomBtn) zoomBtn.style.display = "none";
+      const fileNameEl = document.getElementById("fileName");
+      if (fileNameEl) fileNameEl.textContent = "Geen bestand geladen";
       resetBackDropZoneDisplay();
     } else if (action === "export") {
       exportToExcel();

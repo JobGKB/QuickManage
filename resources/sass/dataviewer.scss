@@ -89,6 +89,20 @@ body {
 
 }
 
+.back-zone-error {
+  margin-top: 8px;
+  width: 100%;
+  text-align: center;
+
+  p {
+    margin: 0;
+    font-size: .8rem;
+    color: #cc0000;
+    font-weight: 500;
+    word-break: break-word;
+  }
+}
+
 .loading-overlay {
   display: inline-flex;
   align-items: center;
@@ -376,6 +390,15 @@ a.overzicht_link_viewer {
       position: relative;
     
       // float: left;      
+      #layerNamesTitle {
+        margin-top: 20px;
+        display: none;
+        padding: 10px;
+        background: #f5f5f5;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom: 1px solid #a8a8a8;
+      }
 
       #layerNames {
         max-height: 500px;
@@ -462,43 +485,23 @@ a.overzicht_link_viewer {
 
         .layerToggler {
           
-          display: flex;
-          gap: 10px;
-          font-size: 14px;
-          background-color: rgb(245, 245, 245);;
-          padding: 8px;
-          border-radius: 4px;
-          font-size: 12px;
-          margin-top: 10px;
-          justify-content: space-between;
+           
           button {
-            padding: 4px 12px;
+            margin-right: 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
-            min-width: 80px !important;
+            font-size: 10px;
+            min-width: 25px;
             &#layerToggleBtn {
-              color: #000;
-              border: 1px solid #28a745;
+              color: #fff;
+              border: 1px solid #3e7a1b;
+              background-color: #3e7a1b;
 
               &:hover {
                 color: #fff !important;
                 background-color: #3e7a1b !important;
-              }
-            }
-            &#layerZoomBtn {
-              padding: 4px 12px;
-              border: 1px solid #cd7b00;
-              font-size: 12px;
-              background-color: #cd7b00;
-              color: #fff;
-              opacity: 100%;
-              margin:0 !important;
-              &:hover {
-
-                background-color: #aa6600 !important;
-                      
               }
             }
               
@@ -530,8 +533,334 @@ a.overzicht_link_viewer {
 #map {
   width: 100%;
   height: 100vh;
+  transition: height 0.3s ease;
+
+  // &.attr-table-open {
+  //   height: calc(100vh - 500px);
+  // }
 }
 /* end content  */
+
+// ── Attribute Table Toggle Button ──────────────
+.attr-table-toggle {
+  position: fixed;
+  bottom: 20px;
+  left: 300px;
+  // transform: translateX(-50%);
+  z-index: 1000;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 8px;
+  background-color: #006600;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  // box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: background-color 0.3s, bottom 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: #009700;
+  }
+
+  &.attr-table-toggle--open {
+    // bottom is set dynamically by JS based on panel height
+  }
+}
+
+// ── Zoom to Data Floating Button (below attr-table-toggle) ──
+.zoom-data-toggle {
+  position: fixed;
+  bottom: 74px;
+  left: 300px;
+  z-index: 1000;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #cd7b00;
+  border-radius: 8px;
+  background-color: #cd7b00;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s, bottom 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: #aa6600;
+  }
+
+  &.zoom-data-toggle--open {
+    // bottom is set dynamically by JS based on panel height
+  }
+}
+
+// ── Attribute Table Panel ──────────────────────
+.attribute-table-panel {
+  position: fixed;
+  bottom: 0;
+  left: 280px;
+  right: 0;
+  height: 500px;
+  z-index: 998;
+  background: #fff;
+  border-top: 2px solid #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+
+  .attr-table-resize-handle {
+    height: 6px;
+    cursor: ns-resize;
+    background: transparent;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transition: background-color 0.2s;
+
+    &:hover, &:active {
+      background-color: rgba(0, 102, 0, 0.25);
+    }
+  }
+
+  .attr-table-inner {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .attr-table-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .attr-table-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    background: #f9f9f9;
+    flex-shrink: 0;
+  }
+
+  .attr-table-tabs {
+    display: flex;
+    overflow-x: auto;
+    flex: 1;
+    gap: 0;
+    padding: 0 8px;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 2px;
+    }
+  }
+
+  .attr-tab {
+    padding: 10px 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    color: #555;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+
+    &:hover {
+      color: #006600;
+    }
+
+    &.attr-tab--active {
+      color: #006600;
+      border-bottom-color: #006600;
+      font-weight: 600;
+    }
+  }
+
+  .attr-tab-empty {
+    padding: 10px 16px;
+    font-size: 12px;
+    color: #999;
+  }
+
+  .attr-table-close-btn {
+    border: none;
+    background: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #888;
+    padding: 6px 14px;
+    flex-shrink: 0;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #333;
+    }
+  }
+
+  .attr-table-body {
+    flex: 1;
+    overflow: auto;
+    padding: 0;
+  }
+
+  .attr-table-empty {
+    padding: 20px;
+    color: #999;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .attr-table-sentinel {
+    text-align: center;
+    padding: 12px;
+    color: #888;
+    font-size: 13px;
+  }
+  .attr-table-sentinel-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(0,0,0,0.15);
+    border-top-color: #006600;
+    border-radius: 50%;
+    animation: layer-spin 0.6s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  // Sidebar
+  .attr-table-sidebar {
+    width: 60px;
+    background: #f5f5f5;
+    border-right: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 12px;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .attr-table-zoom-btn {
+    width: 46px;
+    height: 36px;
+   
+    border-radius: 6px;
+    background: #fff;
+    border: 1px solid #d4d4d4;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background: #aa6600;
+    }
+  }
+
+  .attr-table-export-btn {
+    width: 46px;
+    border-radius: 6px;
+    background: #fff;
+    border: 1px solid #d4d4d4;
+    color: #000;
+    font-size: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px 4px;
+    transition: background-color 0.3s;
+
+    i {
+      font-size: 14px;
+    }
+
+    &:hover {
+      background: #1e7e34;
+    }
+  }
+}
+
+// ── Attribute Data Table ───────────────────────
+.attr-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+
+  th, td {
+    padding: 6px 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    th {
+      background: #f0f0f0;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 2px solid #d0d0d0;
+    }
+  }
+
+  tbody tr {
+    transition: background-color 0.15s;
+
+    &:hover {
+      background-color: #f5faf5;
+    }
+
+    &.attr-row--checked {
+      background-color: rgba(0, 102, 204, 0.08);
+    }
+  }
+
+  .attr-col-check {
+    width: 36px;
+    text-align: center;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: inherit;
+
+    input[type="checkbox"] {
+      accent-color: #3e7a1b;
+      cursor: pointer;
+    }
+  }
+
+  thead .attr-col-check {
+    background: #f0f0f0;
+  }
+}
 
 /* Layer names styling */
 .layer-label {

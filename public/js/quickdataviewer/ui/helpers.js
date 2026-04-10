@@ -25,6 +25,13 @@ export const showError = (msg) => {
     errorMsg.textContent = msg; 
     errorBox.classList.remove("hidden"); 
   }
+
+  const backErrorBox = document.getElementById("back-zone-error");
+  const backErrorMsg = document.getElementById("back-zone-error-msg");
+  if (backErrorMsg && backErrorBox) {
+    backErrorMsg.textContent = msg;
+    backErrorBox.classList.remove("hidden");
+  }
 };
 
 // Hide error message
@@ -34,6 +41,13 @@ export const clearError = () => {
   if (errorMsg && errorBox) {
     errorMsg.textContent = ""; 
     errorBox.classList.add("hidden"); 
+  }
+
+  const backErrorBox = document.getElementById("back-zone-error");
+  const backErrorMsg = document.getElementById("back-zone-error-msg");
+  if (backErrorMsg && backErrorBox) {
+    backErrorMsg.textContent = "";
+    backErrorBox.classList.add("hidden");
   }
 };
 

@@ -42,8 +42,9 @@ return [
 ],
 
     'fme' => [
-        'url'   => env('FME_SERVER_URL'),     // e.g. https://your-fme-server.com/fmerest/v3/transformations/submit/...
-        'token' => env('FME_SERVER_TOKEN'),
+        'url'     => env('FME_SERVER_URL'),      // GDB workspace URL
+        'dwg_url' => env('FME_DWG_SERVER_URL'),  // DWG workspace URL
+        'token'   => env('FME_SERVER_TOKEN'),
     ],
 
 ];

@@ -11,8 +11,10 @@ import { createPopup } from './ui/popup.js';
 import { setupDropZone, initializeBackDropZone, updateBackDropZoneDisplay } from './ui/dropzone.js';
 import { loadShapefileZip } from './services/shapefileLoader.js';
 import { convertGdbToGpkg } from './services/fmeConverter.js';
+import { convertDwgToGpkg } from './services/dwgConverter.js';
 import { loadGpkgBuffer } from './services/gpkgLoader.js';
 import { initAddressSearch } from './search/addressSearch.js';
+import { initAttributeTable } from './ui/attributeTable.js';
 
 // Inspect ZIP contents to determine if it contains a File Geodatabase (.gdb folder)
 async function detectGdbZip(file) {
@@ -51,6 +53,10 @@ async function initializeApp() {
     initAddressSearch();
     console.log("✓ Address search initialized");
 
+    // STEP 5c: Initialize attribute table
+    initAttributeTable(map);
+    console.log("✓ Attribute table initialized");
+
     // STEP 6: Setup main drop zone
     const dropZone = document.getElementById("drop-zone");
     const fileInput = document.getElementById("file-input");
@@ -68,25 +74,31 @@ async function initializeApp() {
       clearError();
       const name = file.name.toLowerCase();
       
-      // Validate file is a ZIP file
-      if (!name.endsWith(".zip")) { 
-        showError("Upload een .zip bestand (shapefile of geodatabase)."); 
+      // Validate file is a ZIP or DWG file
+      if (!name.endsWith(".zip") && !name.endsWith(".dwg")) { 
+        showError("Upload een .zip bestand (shapefile of geodatabase) of een .dwg bestand."); 
         return; 
       }
       
       try {
         setLoading(true);
 
-        // Detect file type: check if ZIP contains a .gdb folder
-        const isGdb = await detectGdbZip(file);
-
-        if (isGdb) {
-          // GDB flow: upload to FME Server → receive GPKG → render on map
-          const gpkgBuffer = await convertGdbToGpkg(file, setLoading);
+        if (name.endsWith(".dwg")) {
+          // DWG flow: upload to FME Server → receive GPKG → render on map
+          const gpkgBuffer = await convertDwgToGpkg(file, setLoading);
           await loadGpkgBuffer(gpkgBuffer, closePopup, setLoading);
         } else {
-          // Shapefile flow: parse locally in browser
-          await loadShapefileZip(file, closePopup, setLoading);
+          // Detect file type: check if ZIP contains a .gdb folder
+          const isGdb = await detectGdbZip(file);
+
+          if (isGdb) {
+            // GDB flow: upload to FME Server → receive GPKG → render on map
+            const gpkgBuffer = await convertGdbToGpkg(file, setLoading);
+            await loadGpkgBuffer(gpkgBuffer, closePopup, setLoading);
+          } else {
+            // Shapefile flow: parse locally in browser
+            await loadShapefileZip(file, closePopup, setLoading);
+          }
         }
 
         setLoading(false);
