@@ -97,9 +97,9 @@ workspaceSelect.addEventListener("change", async function () {
   // Clear previous service options
   serviceSelect.innerHTML = '<option value="0">Selecteer een Service:</option>';
   serviceSelect.disabled = true;
-  //
+   
+  ////
 
-  // 
 
   // ophalen services
   try {
@@ -206,26 +206,3 @@ try {
 
 
 });
-
-// document.addEventListener("DOMContentLoaded", function() {
-
-//         console.log('oke')
-        
-//     const req = $.ajax({
-//     url: "https://fme-gkb.fmecloud.com/fmerest/v3/repositories",
-//     type: "GET",
-//     headers: {
-//     "Authorization":"fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",
-//     "Accept":"application/json",
-//         },
-//             success: function(response, fileUpload, name) {
-//             console.log(response.items)
-//         },
-//             error: function(xhr, status, error) {
-//             console.error("Upload failed:", error);
-//             console.error("Upload status:", status);
-//             console.error("Upload xhr:", xhr);
-        
-//     }
-//     })
-// });

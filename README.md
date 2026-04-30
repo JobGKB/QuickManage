@@ -1,59 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# QuickManage
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel 12 web application for managing FME-backed GIS "apps", external ("custom") apps, HTML page templates, a public app gallery, a geospatial file viewer ([QuickDataViewer](docs/modules/quickdataviewer.md)), and an AI-powered natural-language-to-SQL WHERE-clause tool for ArcGIS feature layers.
 
-## About Laravel
+- **Framework**: Laravel 12 (PHP 8.2+)
+- **Auth scaffolding**: `laravel/ui`
+- **Frontend build**: Laravel Mix (webpack) — see [docs/frontend.md](docs/frontend.md)
+- **UI**: Bootstrap 5.2, jQuery, Font Awesome, ArcGIS JS API 4.28 (CDN-loaded in [resources/views/layouts/app.blade.php](resources/views/layouts/app.blade.php))
+- **Map**: OpenLayers + proj4 (EPSG:28992 / Dutch RD)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Architecture at a glance
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```mermaid
+flowchart LR
+  U[Browser]
+  U -->|HTTP| R[routes/web.php]
+  R --> M{middleware}
+  M -->|public| C1[Controllers]
+  M -->|auth| C1
+  M -->|auth + arcgis.required| AI[AIController]
+  C1 --> MD[(Eloquent Models)]
+  C1 --> V[Blade Views]
+  AI -->|OAuth2| AGOL[ArcGIS Online]
+  AI -->|HTTP /api/chat| OLL[Ollama gemma3:12b]
+  QDV[QuickDataViewerController] -->|fmetoken| FME[FME Flow v4]
+  U -.->|OL map, proj4| QDV
+```
 
-## Learning Laravel
+See [docs/architecture.md](docs/architecture.md) for the full write-up.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Requirements
 
-## Laravel Sponsors
+- PHP **8.2+** with extensions: `pdo`, `mbstring`, `openssl`, `curl`, `zip`, `fileinfo`, `bcmath`
+- Composer 2.x
+- Node.js **18+** and npm
+- A relational database (MySQL/MariaDB or PostgreSQL; SQLite works for local dev)
+- For the AI module: a local [Ollama](https://ollama.com) server on `127.0.0.1:11434` with the `gemma3:12b` model pulled
+- For GDB/DWG conversion: reachable FME Flow instance (`FME_SERVER_URL`, `FME_DWG_SERVER_URL`) and token
+- For the AI module OAuth: ArcGIS Online app credentials (`ARCGIS_*`)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## Install & run
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```powershell
+git clone <repo> QuickManage
+cd QuickManage
+composer install
+npm install
+copy .env.example .env
+php artisan key:generate
+# Configure DB + integration env vars (see below), then:
+php artisan migrate
+npm run dev          # build assets (or: npm run watch)
+php artisan serve    # http://127.0.0.1:8000
+```
 
-## Contributing
+> Note: `php artisan migrate` will only create the Laravel stock tables (`users`, `sessions`, `cache`, `jobs`, …). The feature tables (`apps`, `custom_apps`, `app_categories`, `app_galleries`, `folders`, `templates`) have no committed migrations — see [docs/data-model.md](docs/data-model.md) and [docs/known-issues.md](docs/known-issues.md).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### npm scripts
 
-## Code of Conduct
+| Script | Purpose |
+|---|---|
+| `npm run dev` | One-off dev build via Laravel Mix |
+| `npm run watch` | Rebuild on change + BrowserSync proxy of `http://127.0.0.1:8000` |
+| `npm run hot` | HMR-style watch |
+| `npm run prod` | Production build (minified) |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+> `vite.config.js` exists but is **not** used by the npm scripts. The active build tool is Laravel Mix (`webpack.mix.js`). Details: [docs/frontend.md](docs/frontend.md).
 
-## Security Vulnerabilities
+### Tests
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```powershell
+php artisan test
+```
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Environment variables
+
+Standard Laravel keys (`APP_KEY`, `DB_*`, `MAIL_*`, `SESSION_*`) plus the following integration keys consumed by [config/services.php](config/services.php):
+
+| Variable | Used by | Notes |
+|---|---|---|
+| `ARCGIS_PORTAL` | OAuth redirect, [AIController](app/Http/Controllers/AIController.php) | Default `https://gkb.maps.arcgis.com/...` |
+| `ARCGIS_CLIENT_ID` | OAuth | ArcGIS Online app client id |
+| `ARCGIS_CLIENT_SECRET` | OAuth token exchange | |
+| `ARCGIS_REDIRECT_URI` | OAuth | Must match the registered redirect (e.g. `http://127.0.0.1:8000/oauth-callback`) |
+| `FME_SERVER_URL` | [QuickDataViewerController@convertGdb](app/Http/Controllers/QuickDataViewerController.php) | FME Flow v4 workspace URL for GDB→GPKG |
+| `FME_DWG_SERVER_URL` | [QuickDataViewerController@convertDwg](app/Http/Controllers/QuickDataViewerController.php) | DWG→GPKG workspace URL |
+| `FME_SERVER_TOKEN` | both QDV endpoints | `fmetoken` for FME auth |
+
+See [docs/integrations.md](docs/integrations.md) for details.
+
+---
+
+## Feature map
+
+| Feature | Controller | Client code | Docs |
+|---|---|---|---|
+| FME-backed Apps | [AppsController](app/Http/Controllers/AppsController.php) | [public/js/CreateHTMLPage_Form.js](public/js/CreateHTMLPage_Form.js), [displayHTMLpage.js](public/js/displayHTMLpage.js) | [modules/apps.md](docs/modules/apps.md) |
+| Custom (external URL) apps | [CustomAppsController](app/Http/Controllers/CustomAppsController.php) | [public/js/custom_app/create.js](public/js/custom_app/create.js) | [modules/custom-apps.md](docs/modules/custom-apps.md) |
+| App Gallery (public + admin) | [AppGalleryController](app/Http/Controllers/AppGalleryController.php) | [public/js/app_gallery/](public/js/app_gallery/) | [modules/app-gallery.md](docs/modules/app-gallery.md) |
+| Folders | [FoldersController](app/Http/Controllers/FoldersController.php) | — | [modules/folders.md](docs/modules/folders.md) |
+| HTML page Templates | [TemplatesController](app/Http/Controllers/TemplatesController.php) | — | [modules/templates.md](docs/modules/templates.md) |
+| QuickDataViewer (geo files) | [QuickDataViewerController](app/Http/Controllers/QuickDataViewerController.php) | [public/js/quickdataviewer/](public/js/quickdataviewer/) | [modules/quickdataviewer.md](docs/modules/quickdataviewer.md) |
+| AI NL→WHERE (ArcGIS) | [AIController](app/Http/Controllers/AIController.php) | [public/js/testAI.js](public/js/testAI.js) | [modules/ai.md](docs/modules/ai.md) |
+| Auth | [app/Http/Controllers/Auth/](app/Http/Controllers/Auth) | — | [modules/auth.md](docs/modules/auth.md) |
+
+---
+
+## Documentation index
+
+- [docs/architecture.md](docs/architecture.md) — request lifecycle, layering, session state, exception handling
+- [docs/routes.md](docs/routes.md) — full route table by middleware group
+- [docs/data-model.md](docs/data-model.md) — models, fields, relationships, migration gaps
+- [docs/frontend.md](docs/frontend.md) — build pipeline, SCSS→CSS mapping, layouts, view structure
+- [docs/integrations.md](docs/integrations.md) — ArcGIS, Ollama, FME Flow, Mail
+- [docs/conventions.md](docs/conventions.md) — code patterns in use across the app
+- [docs/known-issues.md](docs/known-issues.md) — security flags, dead code, missing migrations
+- `docs/modules/` — per-feature reference

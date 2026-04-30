@@ -68,19 +68,19 @@
 
                             <p class="c-bold">Repository:<br/><br/>
 
-                            <select name="repo" id="repoSelect" enabled>
+                            <select name="repo" id="repoSelect" enabled >
                                 <option value="0">Selecteer een Repository:</option>
                             </select><br/><br/>
 
                             <p class="c-bold">Workspace:</p>
 
-                            <select name="workspace" id="workspaceSelect" disabled>
+                            <select name="workspace" id="workspaceSelect" disabled >
                                 <option value="0">Selecteer een Workspace:</option>
                             </select><br/><br/>
 
                             <p class="c-bold">Service:</p>
 
-                            <select name="service" id="serviceSelect" disabled>
+                            <select name="service" id="serviceSelect" disabled >
                                 <option value="0">Selecteer een Service:</option>
                             </select><br/><br/>
 
@@ -88,7 +88,7 @@
 
                             @foreach($templates as $data)
                           
-                            {{ $data->name }}  <input type="radio" name="template" value="{{ $data->id }}"><br/>
+                            {{ $data->name }}  <input type="radio" name="template" value="{{ $data->id }}" required><br/>
                             
                             @endforeach
 

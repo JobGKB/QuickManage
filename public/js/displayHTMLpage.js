@@ -1,7 +1,9 @@
 const data = window.templateChoice;
-   
+    console.log(data)
     const repo = data['repository'];
     const workspaceName = data['workspace'];
+    const serviceName = data['service'];
+    console.log(serviceName)
     
     if (data?.template?.name === "GKB Form template") {
         console.log('GKB Form template');
@@ -315,45 +317,147 @@ const data = window.templateChoice;
                     // run workspace with the publishedParameters
                     const repo = window.templateChoice.repository;
                     const workspaceName = window.templateChoice.workspace;
+                    const serviceName = window.templateChoice.service;
 
                     // Convert array of {name, value} to object {name: value}
+                    
                     const paramsObject = {};
+                    
                     publishedParameters.forEach(p => {
                         paramsObject[p.name] = p.value;
                     });
-                    console.log(paramsObject)
-                    fetch(`https://fme-gkb.fmecloud.com/fmeapiv4/jobs/sync`, {
-                        method: 'POST',
-                        headers: {
-                            "Authorization":"fmetoken token=653d48815e91626f06f6ed871b3810605193ac02", 
-                            "Content-Type":"application/json",
-                            "Accept":"application/json",
-                        },
-                        body: JSON.stringify({
-                            repository: repo,
-                            workspace: workspaceName,
-                            publishedParameters: paramsObject,
+                    
+                    if (serviceName === 'fmedatastreaming') {
+                        // Construct params string from publishedParameters
+                        let paramsString = '';
+                        publishedParameters.forEach(p => {
+                            paramsString += '&' + p.name + '=' + encodeURIComponent(p.value);
+                        });
+                        
+                        // Use workspace and repo as project and file variables
+                        const projectName = repo;
+                        const fmwFile = workspaceName;
+                        
+                        const url = "https://fme-gkb.fmecloud.com/fmedatastreaming/" + projectName + "/" + fmwFile + "?" + paramsString + "&opt_responseformat=json&token=653d48815e91626f06f6ed871b3810605193ac02";
+                        
+                        console.log(url);
+                        
+                        // Write html response in iframe or download file based on content-type
+                        fetch(url)
+                            .then(r => {
+                                if (r.status !== 200) {
+                                    console.error("Request failed with status: " + r.status);
+                                    document.getElementById("loading").style.display = 'none';
+                                    document.getElementById("mess1").style.display = 'none';
+                                    document.getElementById("errorMessage").style.display = "block";
+                                    document.getElementById('errorMessage').innerHTML = 'Error... conversie kan niet gestart worden.<br/><div class="bold"> Neem contact op met Dirk-Jan of Job</div>';
+                                    return;
+                                }
+                                const contentType = r.headers.get('content-type') || '';
+                                console.log(contentType);
+                                if (contentType ==='text/html' ) {
+                                    return r.text().then(html => {
+                                        const iframe = document.getElementById('fmeFrame');
+                                        iframe.style.display = 'block';
+                                        const doc = iframe.contentWindow.document;
+                                        doc.open();
+                                        doc.write(html);
+                                        doc.close();
+                                        document.getElementById("mess1").style.display = 'none';
+                                        document.getElementById("loading").style.display = 'none';
+                                    });
+                                } else {
+                                    const disposition = r.headers.get('content-disposition') || '';
+                                    console.log('content-disposition header:', disposition);
+                                    console.log('all exposed response headers:');
+                                    r.headers.forEach((v, k) => console.log('  ', k, ':', v));
+                                    let filename = '';
+                                    // Prefer RFC 5987 filename*=UTF-8''... if present
+                                    const starMatch = disposition.match(/filename\*=(?:([\w-]+)'[^']*')?([^;]+)/i);
+                                    const plainMatch = disposition.match(/filename="?([^;"]+)"?/i);
+                                    if (starMatch) {
+                                        try { filename = decodeURIComponent(starMatch[2].trim()); }
+                                        catch (e) { filename = starMatch[2].trim(); }
+                                    } else if (plainMatch) {
+                                        filename = plainMatch[1].trim();
+                                    }
+                                    // Fallback: build filename from workspace name + extension guessed from content-type
+                                    if (!filename) {
+                                        const extMap = {
+                                            'text/csv': 'csv',
+                                            'application/json': 'json',
+                                            'application/zip': 'zip',
+                                            'application/pdf': 'pdf',
+                                            'application/xml': 'xml',
+                                            'text/xml': 'xml',
+                                            'text/plain': 'txt',
+                                            'application/vnd.ms-excel': 'xls',
+                                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
+                                        };
+                                        const ct = (contentType.split(';')[0] || '').trim().toLowerCase();
+                                        const ext = extMap[ct] || 'dat';
+                                        const base = (workspaceName || 'download').replace(/\.[^.]+$/, '');
+                                        filename = `${base}.${ext}`;
+                                        console.warn('No content-disposition filename available (likely CORS: server must send "Access-Control-Expose-Headers: Content-Disposition"). Falling back to:', filename);
+                                    }
+                                    return r.blob().then(blob => {
+                                        const blobUrl = URL.createObjectURL(blob);
+                                        const a = document.createElement('a');
+                                        a.href = blobUrl;
+                                        a.download = filename;
+                                        document.body.appendChild(a);
+                                        a.click();
+                                        a.remove();
+                                        URL.revokeObjectURL(blobUrl);
+                                        document.getElementById("mess1").style.display = 'none';
+                                        document.getElementById("loading").style.display = 'none';
+                                    });
+                                }
+                            })
+                            .catch(err => {
+                                console.error("Request failed with status: " + err);
+                                document.getElementById("loading").style.display = 'none';
+                                document.getElementById("mess1").style.display = 'none';
+                                document.getElementById("errorMessage").style.display = "block";
+                                document.getElementById('errorMessage').innerHTML = 'Error... conversie kan niet gestart worden.<br/><div class="bold"> Neem contact op met Dirk-Jan of Job</div>';
+                            });
+                    } else if (serviceName === 'fmejobsubmitter') {
+                        console.log(paramsObject)
+                        fetch(`https://fme-gkb.fmecloud.com/fmeapiv4/jobs/sync`, {
+                            method: 'POST',
+                            headers: {
+                                "Authorization":"fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",
+                                "Content-Type":"application/json",
+                                "Accept":"application/json",
+                            },
+                            body: JSON.stringify({
+                                repository: repo,
+                                workspace: workspaceName,
+                                publishedParameters: paramsObject,
+                            })
                         })
-                    })
-                    .then(res => {
-                        if (!res.ok) throw new Error(`Workspace start failed: ${res.status}`);
-                        return res.json();
-                    })
-                    .then(data => {
-                        console.log(data)
+                        .then(res => {
+                            if (!res.ok) throw new Error(`Workspace start failed: ${res.status}`);
+                            return res.json();
+                        })
+                        .then(data => {
+                            console.log(data)
 
-                        document.getElementById("mess1").style.display = 'none';
-                        document.getElementById("loading").style.display = 'none';
-                        document.getElementById("mess2").style.display = 'block';
-                        document.getElementById("mess2").innerHTML = 'De conversie is klaar!';
-                    })
-                    .catch(err => {
-                        console.error("Request failed with status: " + err);
-                        document.getElementById("loading").style.display = 'none';
-                        document.getElementById("mess1").style.display = 'none';
-                        document.getElementById("errorMessage").style.display = "block";
-                        document.getElementById('errorMessage').innerHTML = 'Error... conversie kan niet gestart worden.<br/><div class="bold"> Neem contact op met Dirk-Jan of Job</div>';
-                    });
+                            document.getElementById("mess1").style.display = 'none';
+                            document.getElementById("loading").style.display = 'none';
+                            document.getElementById("mess2").style.display = 'block';
+                            document.getElementById("mess2").innerHTML = 'De conversie is klaar!';
+                        })
+                        .catch(err => {
+                            console.error("Request failed with status: " + err);
+                            document.getElementById("loading").style.display = 'none';
+                            document.getElementById("mess1").style.display = 'none';
+                            document.getElementById("errorMessage").style.display = "block";
+                            document.getElementById('errorMessage').innerHTML = 'Error... conversie kan niet gestart worden.<br/><div class="bold"> Neem contact op met Dirk-Jan of Job</div>';
+                        });
+                    } else if (serviceName === 'fmedatadownload') {
+                        console.log('datadownload');
+                    }
                 }
 
         }

@@ -28,11 +28,12 @@
                          <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
 
-                                <li class="breadcrumb-item"><a href="/manage/folders">Mappen</a></li>
                                 
+                                <li class="breadcrumb-item"><a href="/manage/folders">Mappen</a></li>
                                 <li class="breadcrumb-item"><a href="/manage/folders/{{ session('folder_url') }}/view">{{ session('folder_name') }} </a></li>
-                                 
                                 <li class="breadcrumb-item active" aria-current="page">{{ $app->name }} bewerken</li>
+
+
                             </ol>
                         </nav>
                     </div>

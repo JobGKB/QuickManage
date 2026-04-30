@@ -50,6 +50,11 @@ class AppsController extends Controller
 
     public function store(Request $request) 
     {
+        $request->validate([
+            'repo' => 'required',
+            'workspace' => 'required',
+            'service' => 'required',
+        ]);
 
         $allData = $request->all();
       

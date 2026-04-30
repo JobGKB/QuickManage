@@ -67,6 +67,9 @@
                           
                       </div> <br/>
 
+                      {{-- iframe for datastreaming --}}
+                      <iframe id="fmeFrame" style="width: 100%; height: 600px; border: 1px solid #ccc; display: none;"></iframe>
+
                      @else
 
                      @endif
