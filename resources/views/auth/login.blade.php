@@ -38,16 +38,16 @@
                         
                             <a class=" " href="{{ route('password.request') }}">
                                 {{ __('Wachtwoord vergeten?') }}
-                            </a><br/>
+                            </a> 
                     
                         @endif  
-                        @if (Route::has('password.request'))
+                        {{-- @if (Route::has('password.request'))
                         
                             <a class=" " href="{{ route('register') }}">
                                 {{ __('Registreren?') }}
                             </a>
                     
-                        @endif  
+                        @endif   --}}
                            <br/> <a href="/testAI" class="ai-btn">Test AI met AGOL</a> 
                     </div>
                

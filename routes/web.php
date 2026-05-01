@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Auth::routes(['verify' => true]);
-
+Auth::routes(['verify' => true, 'register' => false]);
+ 
 // All routes below require authentication
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
@@ -33,11 +33,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/manage/apps/delete/{unique}', [App\Http\Controllers\AppsController::class, 'destroy']);
 
     // Manage Custom App routes
-    // Route::get('/manage/custom-apps/create', [App\Http\Controllers\CustomAppsController::class, 'create']);
-    Route::post('/manage/custom-apps/store', [App\Http\Controllers\CustomAppsController::class, 'store']);
-    Route::get('/manage/custom-apps/edit/{unique}', [App\Http\Controllers\CustomAppsController::class, 'edit']);
-    Route::patch('/manage/custom-apps/update/{unique}', [App\Http\Controllers\CustomAppsController::class, 'update']);
-    Route::delete('/manage/custom-apps/delete/{unique}', [App\Http\Controllers\CustomAppsController::class, 'destroy']);
+    // Route::get('/manage/custom-apps/create', [App\Http\Controllers\CustomAppsController::class, 'create']);          
+    Route::post('/manage/custom-apps/store', [App\Http\Controllers\CustomAppsController::class, 'store']);                  
+    Route::get('/manage/custom-apps/edit/{unique}', [App\Http\Controllers\CustomAppsController::class, 'edit']);            
+    Route::patch('/manage/custom-apps/update/{unique}', [App\Http\Controllers\CustomAppsController::class, 'update']);      
+    Route::delete('/manage/custom-apps/delete/{unique}', [App\Http\Controllers\CustomAppsController::class, 'destroy']);    
 
     // Manage App Gallery routes
     Route::get('/manage/app-gallery', [App\Http\Controllers\AppGalleryController::class, 'index']);
