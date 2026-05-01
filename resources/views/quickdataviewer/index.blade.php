@@ -42,7 +42,7 @@
               <div class="container">
                 <div class="row header-logo  align-items-center">
                   <div class="col-md-4 fl-l">
-                    <a href="https://gis.gkbgroep.nl/Apps/GKB-App-Gallery/index.html" class="overzicht_link fl-l"> <img src="
+                    <a href="/app-gallery/overzicht" class="overzicht_link fl-l"> <img src="
                       {{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps </a>
                   </div>
                   <div class="col-md-4 text-center">
@@ -152,7 +152,7 @@
                 <ul id="address-search-results" class="address-search-results"></ul>
               </div>
 
-              <a href="https://gis.gkbgroep.nl/Apps/GKB-App-Gallery/index.html" class="overzicht_link_viewer fl-l"> <img src="{{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps </a>
+              <a href="/app-gallery/overzicht" class="overzicht_link_viewer fl-l"> <img src="{{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps </a>
             </div>
 
           </div>
@@ -165,7 +165,7 @@
               <div class="home-btn mb-3">
 
                 
-                <a href="https://gis.gkbgroep.nl/Apps/GKB-App-Gallery/index.html"  class="logo-cm"> <img src="{{ asset('storage/logo-GKB-GIS-Viewer.png') }}"  ></a>
+                <a href="/app-gallery/overzicht"  class="logo-cm"> <img src="{{ asset('storage/logo-GKB-GIS-Viewer.png') }}"  ></a>
 
 
               </div>
