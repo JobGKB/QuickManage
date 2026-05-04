@@ -14,7 +14,7 @@ import { convertGdbToGpkg } from './services/fmeConverter.js';
 import { convertDwgToGpkg } from './services/dwgConverter.js';
 import { loadGpkgBuffer } from './services/gpkgLoader.js';
 import { initAddressSearch } from './search/addressSearch.js';
-import { initAttributeTable } from './ui/attributeTable.js';
+import { initAttributeTable, refreshAttributeTable } from './ui/attributeTable.js';
 
 // Inspect ZIP contents to determine if it contains a File Geodatabase (.gdb folder)
 async function detectGdbZip(file) {
@@ -107,6 +107,8 @@ async function initializeApp() {
         const fileNameEl = document.getElementById('fileName');
         if (fileNameEl) fileNameEl.textContent = "Bestand: "+ file.name;
         switchToMapScreen(() => initializeBackDropZone(handleFile));
+        // If the attribute table is open, refresh it to reflect the newly loaded layers
+        refreshAttributeTable();
       } catch (err) {
         console.error("❌ File processing error:", err);
         setLoading(false);

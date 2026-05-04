@@ -42,7 +42,7 @@
               <div class="container">
                 <div class="row header-logo  align-items-center">
                   <div class="col-md-4 fl-l">
-                    <a href="/app-gallery/overzicht" class="overzicht_link fl-l"> <img src="
+                    <a href="https://gis.gkbgroep.nl/Apps/GKB-App-Gallery/index.html" class="overzicht_link fl-l"> <img src="
                       {{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps </a>
                   </div>
                   <div class="col-md-4 text-center">
@@ -52,7 +52,7 @@
                 <div class="row">
                   <div class="offset-lg-1 col-lg-10 text-center">
                     <br/> 
-                      <h3>QuickDataViewer</h3>
+                      <h3>GIS Viewer</h3>
                     <br/>
                     
                   </div>
@@ -86,7 +86,7 @@
                             <p class="drop-label">
                               <strong>Kies een bestand</strong> of sleep het hierin.
                             </p>
-                            <p class="drop-hint">Ondersteund: Shapefile (.zip) & File Geodatabase (.gdb.zip)</p>
+                            <p class="drop-hint"><strong>Ondersteund:</strong> Shapefile (.zip),<br/> File Geodatabase gdb (.zip), AutoCAD (.dwg)</p>
 
                           </div>
 
@@ -152,7 +152,7 @@
                 <ul id="address-search-results" class="address-search-results"></ul>
               </div>
 
-              <a href="/app-gallery/overzicht" class="overzicht_link_viewer fl-l"> <img src="{{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps </a>
+              <a href="https://gis.gkbgroep.nl/Apps/GKB-App-Gallery/index.html" class="overzicht_link_viewer fl-l"> <img src="{{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps </a>
             </div>
 
           </div>
@@ -165,7 +165,7 @@
               <div class="home-btn mb-3">
 
                 
-                <a href="/app-gallery/overzicht"  class="logo-cm"> <img src="{{ asset('storage/logo-GKB-GIS-Viewer.png') }}"  ></a>
+                <a href="https://gis.gkbgroep.nl/Apps/GKB-App-Gallery/index.html"  class="logo-cm"> <img src="{{ asset('storage/logo-GKB-GIS-Viewer.png') }}"  ></a>
 
 
               </div>
@@ -187,7 +187,7 @@
                 <p class="drop-label">
                   <strong>Kies een bestand</strong> of sleep het hierin.
                 </p>
-                <p class="drop-hint">Ondersteund: Shapefile (.zip) & File Geodatabase (.gdb.zip)</p>
+                <p class="drop-hint">Ondersteund: Shapefile (.zip) & File Geodatabase (.zip), AutoCAD (.dwg)</p>
               </div>
 
               <!-- Loaded file display (hidden by default) -->

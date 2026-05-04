@@ -157,6 +157,20 @@ function buildTabs() {
   renderLayerTable(activeLayer);
 }
 
+/**
+ * Refresh tabs/content if the panel is currently open.
+ * Should be called after new data layers have been loaded onto the map
+ * so the user does not have to manually close & reopen the panel.
+ */
+export const refreshAttributeTable = () => {
+  if (!panelEl) return;
+  const isOpen = panelEl.style.display !== 'none';
+  if (!isOpen) return;
+  // Reset per-layer selection state since underlying layers may have changed
+  checkedFeatures = new Map();
+  buildTabs();
+};
+
 function renderLayerTable(layerName) {
   activeLayer = layerName;
   bodyEl.innerHTML = '';

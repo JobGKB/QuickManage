@@ -144,27 +144,31 @@ export const createPopup = (map) => {
   
   closer.addEventListener("click", closePopup);
 
-  map.on("pointermove", (evt) => (map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? "pointer" : ""));
+  const HIT_TOLERANCE_PX = 5;
+  map.on("pointermove", (evt) => (map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel, { hitTolerance: HIT_TOLERANCE_PX }) ? "pointer" : ""));
   map.on("singleclick", (evt) => {
-    // Collect ALL features at the clicked location across all visible layers,
-    // including multiple features within the same layer.
-    const resolution = map.getView().getResolution();
-    const toleranceMap = resolution * 10; // 10px tolerance in map units
-    const coord = evt.coordinate;
-    const extent = [
-      coord[0] - toleranceMap, coord[1] - toleranceMap,
-      coord[0] + toleranceMap, coord[1] + toleranceMap,
-    ];
+    // Collect features actually under the click pixel (geometry-accurate),
+    // using OpenLayers' built-in hit detection rather than a bounding-box scan.
+    const visibleLayers = new Set(Object.values(dataLayers).filter(l => l.getVisible()));
 
+    const seen = new Set();
     const features = [];
-    Object.values(dataLayers).forEach(layer => {
-      if (!layer.getVisible()) return;
-      const src = layer.get('_featureSource');
-      if (!src) return;
-      src.forEachFeatureInExtent(extent, (f) => {
-        features.push(f);
-      });
-    });
+    map.forEachFeatureAtPixel(
+      evt.pixel,
+      (feature, layer) => {
+        if (!layer || !visibleLayers.has(layer)) return;
+        // Expand cluster/multi features if applicable
+        const inner = feature.get('features');
+        const list = Array.isArray(inner) && inner.length ? inner : [feature];
+        list.forEach(f => {
+          if (!seen.has(f)) {
+            seen.add(f);
+            features.push(f);
+          }
+        });
+      },
+      { hitTolerance: HIT_TOLERANCE_PX }
+    );
 
     if (!features.length) { closePopup(); return; }
 
