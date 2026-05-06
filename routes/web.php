@@ -86,6 +86,10 @@ Route::post('/api/quickdataviewer/convert-gdb', [App\Http\Controllers\QuickDataV
 Route::post('/api/quickdataviewer/convert-dwg', [App\Http\Controllers\QuickDataViewerController::class, 'convertDwg']);
 
 
+Route::get('/PBA-FMUTA6-VerwerkWeekIndexatie', [App\Http\Controllers\PBA_IWController::class, 'index']);
+
+
+
 // ArcGIS OAuth routes
 Route::get('/arcgis/loginAGOL', function () {
     $portal = rtrim(config('services.arcgis.portal'), '/');

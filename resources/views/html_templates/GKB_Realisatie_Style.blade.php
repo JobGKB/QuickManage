@@ -167,6 +167,6 @@
         window.templateChoice = @json($data);
       </script>
       
-  <script type="text/javascript" src="{{ URL::asset ('js/displayHTMLpage.js') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset ('js/HTMLPage/displayHTMLpage.js') }}"></script>
     
 @endsection

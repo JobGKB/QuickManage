@@ -116,6 +116,6 @@
             </div>
         </div>
     </div> 
-  <script type="text/javascript" src="{{ URL::asset ('js/CreateHTMLPage_Form.js') }}"></script>
+  <script type="text/javascript" src="{{ URL::asset ('js/HTMLPage/CreateHTMLPage_Form.js') }}"></script>
     
 @endsection

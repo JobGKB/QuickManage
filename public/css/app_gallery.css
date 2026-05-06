@@ -116,6 +116,173 @@ body {
   font-weight: 600;
 }
 
+.c-red {
+  color: #ac0000;
+  font-weight: 600 !important;
+}
+
+.btn_cancel {
+  background-color: #ffffff;
+  color: #8b0000;
+  border: 2px solid #8b0000;
+  border-radius: 3px;
+  padding: 10px 25px;
+  transition: 0.5s;
+  font-weight: 600;
+}
+
+.btn_add {
+  background-color: #509429;
+  color: #fff;
+  border: 2px solid #357a0c;
+  border-radius: 3px;
+  padding: 10px 25px;
+  transition: 0.5s;
+  font-weight: 600;
+}
+
+.btn_edit {
+  background-color: #ca7a1d;
+  color: #fff;
+  border: 2px solid #aa5f0a;
+  border-radius: 3px;
+  padding: 10px 25px;
+  transition: 0.5s;
+  font-weight: 600;
+}
+
+.btn_edit_warning {
+  background-color: #ffffff;
+  color: #8b0000;
+  border: 2px solid #8b0000;
+  border-radius: 3px;
+  padding: 10px 25px;
+  transition: 0.5s;
+  font-weight: 600;
+}
+
+.download-excel {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 10px 25px;
+  background-color: #ffffff;
+  border: 2px solid #b3b3b3;
+  color: #5e5e5e;
+  border-radius: 3px;
+  text-decoration: none !important;
+  font-weight: 600;
+  transition: 0.5s;
+}
+
+.download-excel:hover {
+  background-color: #509429;
+  color: #fff;
+  border-radius: 3px;
+  text-decoration: none !important;
+  font-weight: 600;
+  border: 2px solid #326116;
+}
+
+.submit {
+  background-color: #3c8015;
+  color: #fff;
+  border: 2px solid #357a0c;
+  border-radius: 3px;
+  padding: 10px 25px;
+  transition: 0.5s;
+  font-weight: 600;
+}
+
+.input-form.submit:hover {
+  background-color: rgba(80, 148, 41, 0.8823529412) !important;
+  border: 2px solid #3e7a1b;
+  box-shadow: 0px 0px 3px 1px #326116;
+}
+
+.action-wrapper {
+  padding: 20px;
+  border-top: 1px solid #326116;
+}
+
+/* Stripe every 4 rows (per week group) */
+#indexatie-table tbody tr:nth-child(8n+1),
+#indexatie-table tbody tr:nth-child(8n+2),
+#indexatie-table tbody tr:nth-child(8n+3),
+#indexatie-table tbody tr:nth-child(8n+4) {
+  background-color: rgba(236, 243, 234, 0.4196078431);
+}
+
+#indexatie-table tbody tr:nth-child(8n+5),
+#indexatie-table tbody tr:nth-child(8n+6),
+#indexatie-table tbody tr:nth-child(8n+7),
+#indexatie-table tbody tr:nth-child(8n+8) {
+  background-color: #fff;
+}
+
+.table-wrapper {
+  max-height: 500px;
+  overflow-y: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+  background-color: #509429;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+tbody {
+  background-color: #fff;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-accent-bg: #ecf3ea6b !important;
+  color: var(--bs-table-striped-color);
+}
+
+#indexatie-table .table {
+  font-size: 0.9rem;
+}
+
+input.form_input {
+  display: block;
+  text-align: center;
+  outline: none;
+  width: 100%;
+  padding: 5px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: transparent;
+  background-clip: padding-box;
+  border: none;
+  border-bottom: 1px solid #326116;
+}
+
+#indexatie-table input.form_input {
+  display: block;
+  text-align: center;
+  outline: none;
+  width: 100%;
+  padding: 5px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: transparent;
+  background-clip: padding-box;
+  border: none;
+  border-bottom: 1px solid #326116;
+}
+
+#indexatie-table .btn-danger {
+  padding: 2px 8px;
+  font-size: 0.8rem;
+}
+
 /* end content */
 /* footer */
 .footer {
