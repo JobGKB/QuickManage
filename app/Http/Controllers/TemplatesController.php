@@ -33,19 +33,18 @@ class TemplatesController extends Controller
             'name' => 'required|unique:templates,name',
             'image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:2048',
         ]);
-        // dd($request['image']);
-        if($request['image']) {
-        $image = base64_encode(file_get_contents($request->file('image')));
-       
-          
-        } 
-        else {
-            $image = '';
-        }
+
         $template = new Template;
         $template->name = $request['name'];
-        if($request['image']){ $template->dummy_image = base64_encode(file_get_contents($request->file('image'))) ;}else{ }
         $template->save();
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = 'template_' . $template->id . '_dummy.' . $file->getClientOriginalExtension();
+            $file->storeAs('template_images', $filename, 'public');
+            $template->dummy_image = $filename;
+            $template->save();
+        }
  
         return back()->with('success','Template aangemaakt!');
 
@@ -74,16 +73,29 @@ class TemplatesController extends Controller
             'background_color' => 'nullable|string|regex:/^#[0-9a-fA-F]{3,6}$/',
         ]);
 
-        if($request['image_thumbnail']) {$image_thumbnail = base64_encode(file_get_contents($request->file('image_thumbnail')));} else {$image_thumbnail= '';}
-        if($request['header_logo']) {$header_logo = base64_encode(file_get_contents($request->file('header_logo')));} else {$header_logo = '';}
-        if($request['footer_image']) {$footer_image = base64_encode(file_get_contents($request->file('footer_image')));} else {$footer_image = '';}
- 
         $data = Template::find($unique);
-        if($request['name']){ $data->name = $request['name'] ;}else{ }
-        if($request['background_color']){ $data->background_color = $request['background_color'] ;}else{ }
-        if($request['image_thumbnail']){ $data->dummy_image = base64_encode(file_get_contents($request->file('image_thumbnail'))) ;}else{ }
-        if($request['header_logo']){ $data->header_logo = base64_encode(file_get_contents($request->file('header_logo'))) ;}else{ }
-        if($request['footer_image']){ $data->footer_image = base64_encode(file_get_contents($request->file('footer_image'))) ;}else{ }
+        if($request['name']){ $data->name = $request['name']; }
+        if($request['background_color']){ $data->background_color = $request['background_color']; }
+
+        if ($request->hasFile('image_thumbnail')) {
+            $file = $request->file('image_thumbnail');
+            $filename = 'template_' . $data->id . '_dummy.' . $file->getClientOriginalExtension();
+            $file->storeAs('template_images', $filename, 'public');
+            $data->dummy_image = $filename;
+        }
+        if ($request->hasFile('header_logo')) {
+            $file = $request->file('header_logo');
+            $filename = 'template_' . $data->id . '_header.' . $file->getClientOriginalExtension();
+            $file->storeAs('template_images', $filename, 'public');
+            $data->header_logo = $filename;
+        }
+        if ($request->hasFile('footer_image')) {
+            $file = $request->file('footer_image');
+            $filename = 'template_' . $data->id . '_footer.' . $file->getClientOriginalExtension();
+            $file->storeAs('template_images', $filename, 'public');
+            $data->footer_image = $filename;
+        }
+
         $data->update();
 
 

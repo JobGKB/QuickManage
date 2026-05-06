@@ -19,7 +19,7 @@
                   </div> 
 
                   <div class="col-md-4 text-center">
-                    <img src="data:image/png;base64, {{ $data->template->header_logo }}" class="logo" />
+                    <img src="{{ asset('storage/template_images/' . $data->template->header_logo) }}" class="logo" />
                   </div>
                 </div>
                 
@@ -43,7 +43,7 @@
 
                     <form class="form" method="GET" >
                       @csrf
-                      @if($data->template->name == 'GKB Form template')
+                      @if($data->template->name == 'Default FME Workflow')
 
                       {{-- Hier komt het formulier --}}
                       <div id='GKB_Form_Template'></div>
@@ -73,7 +73,7 @@
                      @else
 
                      @endif
-                      {{-- @if($data->template->name =='GKB Form template') 
+                      {{-- @if($data->template->name =='Default FME Workflow') 
                         <p>GKB FORM Style</p>
 
                           @foreach ( $DBparameters as $html)
@@ -151,7 +151,7 @@
                 <div class="row">
                   <div class="col-lg-12 text-center">
                     <div class="footer-img">
-                      <img src="data:image/png;base64,{{ $data->template->footer_image }}" />
+                      <img src="{{ asset('storage/template_images/' . $data->template->footer_image) }}" />
                     </div>
                   </div>
                 </div>

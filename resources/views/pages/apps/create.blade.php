@@ -21,6 +21,7 @@
         </div>
     </div>
 
+
     <div class="container-fluid">
         <div class="row">
                 <div class="offset-lg-2 col-lg-9">
@@ -28,11 +29,12 @@
                          <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
 
+
                                 <li class="breadcrumb-item"><a href="/manage/folders">Mappen</a></li>
-                                
                                 <li class="breadcrumb-item"><a href="/manage/folders/{{ session('folder_url') }}/view">{{ session('folder_name') }}</a></li>
-                                 
                                 <li class="breadcrumb-item active" aria-current="page">FME app aanmaken</li>
+
+
                             </ol>
                         </nav>
                     </div>
@@ -85,10 +87,10 @@
                             </select><br/><br/>
 
                             <p class="c-bold">Template:</p> 
-
+                                
                             @foreach($templates as $data)
                           
-                            {{ $data->name }}  <input type="radio" name="template" value="{{ $data->id }}" required><br/>
+                            <div style="background-color: #fdfdfd; padding: 10px; border:1px solid #ebebeb; margin-top: 10px;">{{ $data->name }}  <input type="radio" name="template" value="{{ $data->id }}" required><br/></div>
                             
                             @endforeach
 

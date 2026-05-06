@@ -59,7 +59,7 @@
                             <div class="app-image mb-4">
                                 <p>App afbeelding:</p> 
                                 <input type='file' name='app_thumbnail' class='file' id='imgInp'>
-                                <label for="imgInp"  class="file-input text-center"  >   @if($custom_app->custom_app_thumbnail)<img src="data:image/png;base64,{{ $custom_app->custom_app_thumbnail }} " id="img">@else <img src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif   </label>
+                                <label for="imgInp"  class="file-input text-center"  >   @if($custom_app->custom_app_thumbnail)<img src="{{ asset('storage/custom_app_thumbnails/' . $custom_app->custom_app_thumbnail) }}" id="img">@else <img src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif   </label>
                             </div>
                             <p class="c-bold">Omschrijving:</p> 
                             <textarea name='description' >{{ $custom_app->description }}</textarea><br/><br/>

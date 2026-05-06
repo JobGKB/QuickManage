@@ -21,13 +21,20 @@
             <div class="offset-lg-2 col-lg-9">
                 <div class="header-container">
                     <h2 class="m-0">Templates</h2>
+                        <span class="info-tooltip" tabindex="0"
+                            aria-label="Meer informatie over templates">
+                                <i class="fa-solid fa-circle-info" style="font-size: 22px;"></i>
+                                <span class="info-tooltip-text" role="tooltip">
+                                    Een template definieert hoe een app eruit ziet en zich gedraagt.
+                                    Het bevat de styling, de invoervelden (inputs) en hoe de antwoorden
+                                    (responses) worden weergegeven. 
+                                </span>
+                        </span>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="offset-lg-2 col-lg-9">
-
-
                 <div class="body-container" style="height:100%;">
 
                     <div class="create-item">
@@ -40,25 +47,20 @@
                         <div class="col-lg-4"> 
                             <a href="template/edit/{{ $data->id }}">
                                 <div class="template-box">
-                                
-                                    
-                                    <img src="data:image/png;base64,{{ $data->dummy_image }}"> 
+                                     
+                                    <img src="{{ asset('storage/template_images/' . $data->dummy_image) }}"> 
                                     <p>{!! $data->name !!}</p>
                                     
                                 </div>
                             </a>
                         </div>
                         @endforeach
-                            
-
-                              
+ 
                         </div>
                     </div>
-
-                      
+ 
                 </div>
-
-
+ 
             </div>
         </div>
         <div class="row">

@@ -62,7 +62,7 @@
                         @csrf
                         <div class="pf-image">
                             <input type='file' name='image' class='file' id='imgInp'>
-                            <label for="imgInp"  class="file-input text-center"> @if(Auth::user()->image)<img src="data:image/png;base64,{{ Auth::user()->image }} " id="img">@else <img src="{{ asset('/storage/user-pf.png') }}" id="img"> @endif </label>
+                            <label for="imgInp"  class="file-input text-center"> @if(Auth::user()->image)<img src="{{ asset('storage/profile_images/' . Auth::user()->image) }}" id="img">@else <img src="{{ asset('/storage/user-pf.png') }}" id="img"> @endif </label>
                             
                             <br> 
                         <p> Naam: {{Auth::user()->name}}</p>

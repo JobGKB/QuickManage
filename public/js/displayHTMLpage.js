@@ -5,8 +5,8 @@ const data = window.templateChoice;
     const serviceName = data['service'];
     console.log(serviceName)
     
-    if (data?.template?.name === "GKB Form template") {
-        console.log('GKB Form template');
+    if (data?.template?.name === "Default FME Workflow") {
+        console.log('Default FME Workflow');
         (async () => {
                     
             // laden parameter html elementen naar html elementen voor form
@@ -466,7 +466,7 @@ const data = window.templateChoice;
     } 
  
     else {
-        console.log("Template is not 'GKB Form template'; skipping fetch.");
+        console.log("Template is not 'Default FME Workflow'; skipping fetch.");
     } 
 
 

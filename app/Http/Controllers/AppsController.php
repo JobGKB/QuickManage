@@ -75,7 +75,12 @@ class AppsController extends Controller
         $app->cat_id = $request['category'];
         $app->hash_id = $uniqid;
        
-        if ($request->hasFile('app_thumbnail')) { $app->app_thumbnail = base64_encode(file_get_contents($request->file('app_thumbnail'))); }
+        if ($request->hasFile('app_thumbnail')) {
+            $file = $request->file('app_thumbnail');
+            $filename = $uniqid . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('app_thumbnails', $filename, 'public');
+            $app->app_thumbnail = $filename;
+        }
         $app->save();
 
  
@@ -129,14 +134,16 @@ class AppsController extends Controller
        
         $app->description = $req->input('description');
         $app->cat_id = $req->input('category');
+        $app->service = $req->input('service');
 
      
 
         if ($req->hasFile('app_thumbnail')) {
-
-             $app->app_thumbnail = base64_encode(file_get_contents($req->file('app_thumbnail'))); 
-
-             }
+            $file = $req->file('app_thumbnail');
+            $filename = $uniqid . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('app_thumbnails', $filename, 'public');
+            $app->app_thumbnail = $filename;
+        }
 
         $app->save();
         //redirect

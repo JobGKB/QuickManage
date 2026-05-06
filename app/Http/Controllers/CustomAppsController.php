@@ -47,8 +47,11 @@ class CustomAppsController extends Controller
         $app->cat_id = $request['category'] ?? null;
         $app->uniqid = $uniqid;
          
-        if ($request->hasFile('app_thumbnail')) { 
-            $app->custom_app_thumbnail = base64_encode(file_get_contents($request->file('app_thumbnail'))); 
+        if ($request->hasFile('app_thumbnail')) {
+            $file = $request->file('app_thumbnail');
+            $filename = $uniqid . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('custom_app_thumbnails', $filename, 'public');
+            $app->custom_app_thumbnail = $filename;
         }
         
         $app->save();
@@ -94,10 +97,11 @@ class CustomAppsController extends Controller
         $custom_app->cat_id = $req->input('category');
  
         if ($req->hasFile('app_thumbnail')) {
-
-             $custom_app->custom_app_thumbnail = base64_encode(file_get_contents($req->file('app_thumbnail'))); 
-
-             }
+            $file = $req->file('app_thumbnail');
+            $filename = $uniqid . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('custom_app_thumbnails', $filename, 'public');
+            $custom_app->custom_app_thumbnail = $filename;
+        }
 
         $custom_app->save();
         //redirect

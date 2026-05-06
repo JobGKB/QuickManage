@@ -111,7 +111,7 @@
                                                                     <div class="col-lg-4">
                                                                         <div class="app-badge @if($app->cat_id == $app_category->id) selected @else deselected @endif" data-app-id="{{ $app->id }}" style="cursor:pointer;">
 
-                                                                            @if($app->app_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->app_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
+                                                                            @if($app->app_thumbnail)<img class="img" src="{{ asset('storage/app_thumbnails/' . $app->app_thumbnail) }}" id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
 
                                                                             <span>{{ $app->name }}</span>
 
@@ -129,7 +129,7 @@
                                                                     <div class="col-lg-4">
                                                                         <div class="app-badge @if($app->cat_id == $app_category->id) selected @else deselected @endif" data-custom-app-id="{{ $app->id }}" style="cursor:pointer;">
 
-                                                                            @if($app->custom_app_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->custom_app_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
+                                                                            @if($app->custom_app_thumbnail)<img class="img" src="{{ asset('storage/custom_app_thumbnails/' . $app->custom_app_thumbnail) }}" id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
 
                                                                             <span>{{ $app->name }}</span>
 
@@ -162,7 +162,7 @@
                                     <div class="app-category-card">
                                         <a href="/manage/apps/edit/{{$app->hash_id}}" class="app-card-link">
                                             <div class="app-card-body">
-                                                 @if($app->app_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->app_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
+                                                 @if($app->app_thumbnail)<img class="img" src="{{ asset('storage/app_thumbnails/' . $app->app_thumbnail) }}" id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
                                                  {{$app->name}} 
                                                
                                             </div>
@@ -176,7 +176,7 @@
                                     <div class="app-category-card">
                                         <a href="/manage/custom-apps/edit/{{$app->uniqid}}" class="app-card-link">
                                             <div class="app-card-body">
-                                                 @if($app->custom_app_thumbnail)<img class="img" src="data:image/png;base64,{{ $app->custom_app_thumbnail }} " id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
+                                                 @if($app->custom_app_thumbnail)<img class="img" src="{{ asset('storage/custom_app_thumbnails/' . $app->custom_app_thumbnail) }}" id="img">@else <img class="img" src="{{ asset('/storage/gkb-groen.png') }}" id="img"> @endif 
                                                  {{$app->name}} 
                                                
                                             </div>

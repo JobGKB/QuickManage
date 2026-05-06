@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -33,7 +34,12 @@ class ProfileController extends Controller
         $data = User::where('uniqid', $uniqid)->firstOrFail();
         if ($request->filled('name')) { $data->name = $request['name']; }
         if ($request->filled('email')) { $data->email = $request['email']; }
-        if ($request->hasFile('image')) { $data->image = base64_encode(file_get_contents($request->file('image'))); }
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = $uniqid . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('profile_images', $filename, 'public');
+            $data->image = $filename;
+        }
         $data->update();
 
         return back()->with('success', 'Profiel bijgewerkt!');
