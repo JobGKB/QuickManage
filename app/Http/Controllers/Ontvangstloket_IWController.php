@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PBA_IWController extends Controller
+class Ontvangstloket_IWController extends Controller
 {
-    public function index()
+     public function index()
     {
         
         // $var = 'TEST'; 
         // dd($apps);
         
-        return view('pba_fmuta6_indexatie_tarieven_beheren.index',[
+        return view('ontvangstloket_iw.index',[
           
             
         ]);

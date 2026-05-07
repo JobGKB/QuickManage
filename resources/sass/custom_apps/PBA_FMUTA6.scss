@@ -1,0 +1,345 @@
+body {
+  background-color: #2c2c2c !important;
+}
+
+.content {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.content-wrapper {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background-color: #fff;
+  border-radius: 15px;
+}
+
+/* header */
+.header {
+  .header-logo {
+    background-color: hsla(110, 47%, 38%, 0.1);
+    padding: 10px;
+  }
+
+  .logo {
+    height: 40px;
+  }
+
+  img.conversie_logo {
+    height: 25px;
+  }
+
+  a.overzicht_link {
+    padding: 8px;
+    background-color: hsla(98, 64%, 29%, 0.041);
+    text-decoration: none !important;
+    color: #5f5f5f !important;
+    font-weight: 400; 
+    transition: 0.5s !important;
+    border-radius: 5px;
+    border: 1px solid hsla(98, 63%, 23%, 0.075);
+
+    &:hover {
+      color: #326116 !important;
+      background-color: hsla(98, 64%, 29%, 0.096);
+    }
+  }
+
+  .header_home_screen
+  {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+ 
+ 
+}
+/* end header */
+
+/* home screen */
+.home_screen {
+   
+  .col_cat {
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+
+    a {
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      background-color: #509429 ;
+      color: white;
+      border: none;
+      text-decoration: none !important;
+      padding: 15px 30px;
+      min-height: 80px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+      width: 100%;
+
+      &:hover {
+        background-color: #3d6f1f;
+        box-shadow: 0px 0px 8px 3px #dfdfdf;
+      }
+    }
+  }
+}
+/* end home screen */
+
+/* content */
+.body {
+  padding: 30px;
+ a.link_app {
+    color: #000 !important;
+    text-decoration: none !important;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+ 
+    background-color: rgba(230, 230, 230, 0.329);
+    padding: 20px;
+    border-radius: 5px;
+    min-height: 220px;
+    border: 2px solid #d5d5d5;
+    transition: 0.5s;
+    box-shadow: 0px 5px 8px 0px #d9d9d9;
+
+    &:hover {
+      border: 2px solid #429029;
+      box-shadow: 0px 0px 2px 2px #dfdfdf;
+      background-color: hsla(109, 47%, 38%, 0.055);
+    }
+  
+  .app_wrapper {
+    
+
+    #app_logo {
+      height: 80px;
+      width: auto;
+    }
+    .app_name{
+      word-break: break-word;
+    }
+  }
+} 
+ 
+
+  .bold {
+    font-weight: 600;
+  }
+}
+
+ .c-red{
+  color:#ac0000;
+  font-weight: 600 !important;
+}
+.btn_cancel {
+  background-color: #ffffff;
+  color:#8b0000;
+  border: 2px solid #8b0000;
+  border-radius: 3px;
+  padding:10px 25px;
+  transition: 0.5s;
+  font-weight: 600;
+  
+}
+.btn_add {
+  background-color: #509429;
+  color:#fff;
+  border: 2px solid #357a0c;
+  border-radius: 3px;
+  padding:10px 25px;
+  transition: 0.5s;
+  font-weight: 600;
+  
+}
+
+.btn_edit {
+  background-color: #ca7a1d;
+  color:#fff;
+  border: 2px solid #aa5f0a;
+  border-radius: 3px;
+  padding:10px 25px;
+  transition: 0.5s;
+  font-weight: 600;
+  
+}
+.btn_edit_warning {
+  background-color: #ffffff;
+  color:#8b0000;
+  border: 2px solid #8b0000;
+  border-radius: 3px;
+  padding:10px 25px;
+  transition: 0.5s;
+  font-weight: 600;
+  
+}
+
+.download-excel {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 10px 25px;
+  background-color: #ffffff;
+  border: 2px solid #b3b3b3;
+  color: #5e5e5e;
+  border-radius: 3px;
+  text-decoration: none !important;
+  font-weight: 600;
+  transition: 0.5s;
+}
+.download-excel:hover {
+   background-color: #509429;
+  color: #fff;
+  border-radius: 3px;
+  text-decoration: none !important;
+  font-weight: 600;
+  border: 2px solid #326116;
+
+}
+
+.submit {
+  background-color: #3c8015;
+  color:#fff;
+  border: 2px solid #357a0c;
+  border-radius: 3px;
+  padding:10px 25px;
+  transition: 0.5s;
+  font-weight: 600;
+  
+}
+
+.input-form.submit:hover {
+  background-color: #509429e1 !important;
+  border: 2px solid #3e7a1b;
+  box-shadow: 0px 0px 3px 1px #326116;
+}
+
+.action-wrapper {
+  padding:20px;
+  border-top: 1px solid #326116;
+}
+
+/* Stripe every 4 rows (per week group) */
+#indexatie-table tbody tr:nth-child(8n+1),
+#indexatie-table tbody tr:nth-child(8n+2),
+#indexatie-table tbody tr:nth-child(8n+3),
+#indexatie-table tbody tr:nth-child(8n+4) {
+  background-color: #ecf3ea6b ;
+}
+#indexatie-table tbody tr:nth-child(8n+5),
+#indexatie-table tbody tr:nth-child(8n+6),
+#indexatie-table tbody tr:nth-child(8n+7),
+#indexatie-table tbody tr:nth-child(8n+8) {
+  background-color: #fff;
+}
+
+
+.table-wrapper {
+    max-height: 500px;
+    overflow-y: auto;
+   
+    
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  } 
+table thead{
+  background-color:#509429;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+tbody{
+  background-color: #fff;
+}
+ 
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    --bs-table-accent-bg: #ecf3ea6b !important;
+    color: var(--bs-table-striped-color);
+}
+  
+  #indexatie-table .table {
+    font-size: 0.9rem; 
+    
+  }
+  
+  input.form_input {
+    display: block;
+    text-align: center;
+    outline: none;
+    width: 100%;
+    padding: 5px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: none;
+    border-bottom: 1px solid #326116;
+    
+     
+   
+  }
+  #indexatie-table input.form_input {
+    display: block;
+    text-align: center;
+    outline: none;
+    width: 100%;
+    padding: 5px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: none;
+    border-bottom: 1px solid #326116; 
+    
+     
+   
+  }
+  #indexatie-table .btn-danger {
+    padding: 2px 8px;
+    font-size: 0.8rem;
+  }
+
+/* end content */
+
+/* footer */
+.footer {
+  margin-top: 100px;
+
+  a.emailgis {
+    color: #000 !important;
+  }
+
+  .footer_logo {
+    padding: 20px;
+    background-color: hsla(110, 47%, 38%, 0.1);
+  }
+
+  .footer-img img {
+    height: 12px;
+    opacity: 90%;
+  }
+}
+/* end footer */
+
+@media screen and (max-width: 992px) {
+  .app_wrapper {
+    display: block;
+  }
+}

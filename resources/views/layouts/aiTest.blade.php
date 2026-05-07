@@ -26,7 +26,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/testAI.css') }}" >
+    <link rel="stylesheet" href="{{ asset('css/custom_apps/testAI.css') }}" >
 
     <!-- Scripts -->
     <link rel="stylesheet" href="https://js.arcgis.com/4.29/esri/themes/light/main.css">

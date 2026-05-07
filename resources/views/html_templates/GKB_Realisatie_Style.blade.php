@@ -73,74 +73,14 @@
                      @else
 
                      @endif
-                      {{-- @if($data->template->name =='Default FME Workflow') 
-                        <p>GKB FORM Style</p>
-
-                          @foreach ( $DBparameters as $html)
-
-                            @if($html->field_type == 'STRING')
-
-                            <div class="input-wrap">
-                              <label class="" id="label_email"> {{$html->parameter_name}}*: </label>
-                              <input class="input-form" type="text" name="{{ $html->parameter_name }}" id="email" class="input_email"  > 
-                            </div>
-
-                            @endif
-
-                             @if($html->field_type == 'FILE_OR_URL')
-
-                            <div class="input-wrap">
-                              <label class="" id="label_factuur"> {{$html->parameter_name}}*: <span class="file-name mb-3" id="file-name1">Alleen ( .xlsx ) bestand toegestaan</span></label>
-                                <input id="file1"  class="position-absolute invisible" type="file" multiple accept=".xls,.xlsx" />
-                              <label class="btn btn-upload mb-3 file-btn text-center" for="file1" id="label_file1">Selecteer hier uw bestand</label> <br/>    
-                            </div>
-
-                            @endif
-
-                          @endforeach
-
-                      @elseif($data->template->name == 'GKB Rapport template') 
-                        <p>gkb rapport</p>
-
-                      @endif --}}
-                       
-                       <!--
-                        <div class="input-wrap">
-                            <label class="" id="label_csv"> Naam CSV bestand (zonder extensie)*: </label>
-                            <input class="input-form" type="text" name="csv" id="csv" class="input_csv"  value="PBA-IW">
-                        </div>
-                        <div class="input-wrap">
-                            <label class="" id="label_factuur"> Factuurregel bestand*: <span class="file-name mb-3" id="file-name1">Alleen ( .xlsx ) bestand toegestaan</span></label>
-                            <input id="file1"  class="position-absolute invisible" type="file" multiple accept=".xls,.xlsx" />
-                            <label class="btn btn-upload mb-3 file-btn text-center" for="file1" id="label_file1">Selecteer hier uw bestand</label> <br/>    
-                        </div>
-                        <div class="input-wrap">
-                          <label class="" id="label_bonbestand"> Bonregel bestand*: <span class="file-name mb-3" id="file-name2">Alleen ( .xlsx ) bestand toegestaan</span></label>
-                          <input id="file2"  class="position-absolute invisible" type="file" multiple accept=".xls,.xlsx" />
-                          <label class="btn btn-upload mb-3 file-btn text-center" for="file2" id="label_file2">Selecteer hier uw bestand</label> <br/>    
-                        </div> -->
-
-                     
-                          <!-- <div class="mess1">
-                            <span id="mess1">Bezig met laden...</span>
-                            <div id="loading" class="loading">
-                              <img src="loading.png" />
-                            </div>
-                          </div>
-                          <div class="message2">
-                            <span id="mess2"></span>
-                          </div>
-                          <div class="message3">
-                            <span id="errorMessage"></span>
-                          </div>
-                        <!-- end loading  -->
+                      
 
                     </form>
 
                     
-                  {{-- </div>x b
-                </div>
-              </div>--}}
+                  {{-- </div> 
+                </div>sdf
+              </div> --}}
             </section>  
 
             <!-- end body  -->

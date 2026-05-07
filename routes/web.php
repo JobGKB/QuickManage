@@ -87,6 +87,7 @@ Route::post('/api/quickdataviewer/convert-dwg', [App\Http\Controllers\QuickDataV
 
 
 Route::get('/PBA-FMUTA6-VerwerkWeekIndexatie', [App\Http\Controllers\PBA_IWController::class, 'index']);
+Route::get('/Ontvangstloket-IW', [App\Http\Controllers\Ontvangstloket_IWController::class, 'index']);
 
 
 
