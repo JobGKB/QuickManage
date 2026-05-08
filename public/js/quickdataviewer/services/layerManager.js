@@ -4,6 +4,23 @@
 import { layerVisibility } from '../core/state.js';
 import { dataLayers } from '../core/state.js';
 import { zoomToData } from '../core/map.js';
+import { openFeatureSearch, closeFeatureSearch } from '../search/featureSearch/featureSearch.js';
+
+// Attach a single delegated click listener on #layerNames so kebab clicks
+// are handled regardless of how/when each row was rendered.
+const ensureLayerMenuDelegation = () => {
+  const div = document.getElementById('layerNames');
+  if (!div || div.dataset.menuBound === 'true') return;
+  div.addEventListener('click', (e) => {
+    const btn = e.target.closest('.layer-menu-btn');
+    if (!btn || !div.contains(btn)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const layerName = btn.dataset.layer;
+    if (layerName) openFeatureSearch(layerName, btn);
+  });
+  div.dataset.menuBound = 'true';
+};
 
 // Toggle all layers on/off and sync checkboxes + button label
 const toggleAllLayers = () => {
@@ -46,6 +63,8 @@ export const setLayerRendering = (name, rendering) => {
  * @param {string[]} names - Layer names to show as "loading"
  */
 export const showLoadingLayers = (names) => {
+  // Any popover opened against previous rows references stale layers/anchors.
+  closeFeatureSearch();
   const div = document.getElementById("layerNames");
   const titleDiv = document.getElementById("layerNamesTitle");
   if (!names?.length) { div.style.display = "none"; if (titleDiv) titleDiv.style.display = "none"; return; }
@@ -84,7 +103,8 @@ export const markLayerLoaded = (name, featureCount) => {
   const row = document.getElementById(`layer-row-${name}`);
   if (!row) return;
   const id = `layer-${name}`;
-  row.innerHTML = `<input type="checkbox" id="${id}" data-layer="${name}" ${layerVisibility[name] !== false ? 'checked' : ''} style="cursor: pointer; flex-shrink: 0; margin-top: 2px;" /><label for="${id}" class="layer-label"> <strong>${name}</strong> (${featureCount})</label>`;
+  row.innerHTML = `<input type="checkbox" id="${id}" data-layer="${name}" ${layerVisibility[name] !== false ? 'checked' : ''} style="cursor: pointer; flex-shrink: 0; margin-top: 2px;" /><label for="${id}" class="layer-label"> <strong>${name}</strong> (${featureCount})</label><button type="button" class="layer-menu-btn" data-layer="${name}" aria-label="Zoek in laag" title="Zoek in laag">⋮</button>`;
+  ensureLayerMenuDelegation();
 
   // Update title above the container
   const titleDiv = document.getElementById("layerNamesTitle");
@@ -139,11 +159,13 @@ export const displayLayerInfo = (layers) => {
     return `<div id="layer-row-${l.name}" class="layer-row">
       <input type="checkbox" id="${id}" data-layer="${l.name}" ${layerVisibility[l.name] !== false ? 'checked' : ''} style="cursor: pointer; flex-shrink: 0; margin-top: 2px;" />
       <label for="${id}" class="layer-label"> <strong>${l.name}</strong> (${l.featureCount})</label>
+      <button type="button" class="layer-menu-btn" data-layer="${l.name}" aria-label="Zoek in laag" title="Zoek in laag">⋮</button>
     </div>`;
   }).join("");
 
   div.innerHTML = rows;
   div.style.display = "block";
+  ensureLayerMenuDelegation();
 
   // Show toggler in title
   const togglerContainer = document.getElementById('layerTogglerContainer');

@@ -897,7 +897,7 @@ a.overzicht_link_viewer {
   font-size: 12px;
   display: flex;
   margin-top: 4px;
-  // align-items: flex-start;
+  align-items: center;
   gap: 6px;
   min-width: 0;
   transition: 0.5s;
@@ -910,6 +910,126 @@ a.overzicht_link_viewer {
   }
   input[type="checkbox"] {
     accent-color: #3e7a1b;
+  }
+}
+
+// ── Per-layer kebab (3-dot) menu button — opens feature search popover ──
+.layer-menu-btn {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0 4px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3px;
+  opacity: 0.65;
+  transition: opacity 0.15s, background-color 0.15s;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.25);
+    outline: none;
+  }
+}
+
+// ── Feature search popover (per-layer "search by field value") ──
+.feature-search-popover { 
+  background: #fff;
+  color: #222;
+  border: 1px solid #c8c8c8;
+  border-radius: 4px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  padding: 10px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .feature-search-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .feature-search-title {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .feature-search-close {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+    color: #666;
+
+    &:hover {
+      color: #000;
+    }
+  }
+
+  .feature-search-row {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .feature-search-label {
+    font-size: 11px;
+    color: #555;
+  }
+
+  .feature-search-field,
+  .feature-search-value {
+    width: 100%;
+    padding: 5px 6px;
+    font-size: 12px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: #fff;
+
+    &:focus {
+      outline: none;
+      border-color: #3e7a1b;
+      box-shadow: 0 0 0 2px rgba(62, 122, 27, 0.2);
+    }
+  }
+
+  .feature-search-suggestions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+
+    li {
+      padding: 6px 8px;
+      cursor: pointer;
+      border-bottom: 1px solid #f0f0f0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: #eaf3e3;
+      }
+    }
   }
 }
 /* end loading  */
