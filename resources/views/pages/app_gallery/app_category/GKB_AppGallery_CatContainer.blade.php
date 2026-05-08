@@ -64,7 +64,11 @@
                       <a href="/apps/view/{{ $data->hash_id }}" class="link_app">
                         <div class="app_wrapper"> 
                           <div class="app_logo">
+                            @if ($data->app_thumbnail)
                             <img src="{{ asset('storage/app_thumbnails/' . $data->app_thumbnail) }}" id="app_logo">
+                              @else
+                              <img src="{{ asset('storage/gkb-groen.png') }}" id="app_logo">
+                            @endif
                           </div>
                           <div class="app_name pt-3">
                             <p class="bold"> {{ $data->name }} </p>
@@ -81,7 +85,11 @@
                       <a href="{{ $data->custom_app_url }}" class="link_app" target="_blank">
                         <div class="app_wrapper"> 
                           <div class="app_logo">
+                            @if ($data->custom_app_thumbnail)
                             <img src="{{ asset('storage/custom_app_thumbnails/' . $data->custom_app_thumbnail) }}" id="app_logo">
+                              @else
+                              <img src="{{ asset('storage/gkb-groen.png') }}" id="app_logo">
+                            @endif
                           </div>
                           <div class="app_name pt-3">
                             <p class="bold"> {{ $data->name }} </p>
