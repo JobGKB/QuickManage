@@ -146,6 +146,23 @@ body {
   margin-top: 30px;
   width: 100%;
 }
+.form #screen2 {
+  display: none;
+}
+.form #screen2 #responseTableBody select {
+  width: 100%;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  outline: none;
+  padding: 5px;
+}
+.form #screen2 #responseTableBody input[type=number] {
+  width: 100%;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  outline: none;
+  padding: 5px;
+}
 
 .input-wrap {
   margin: 30px 0px;
@@ -176,6 +193,10 @@ select.input-form {
 .file-btn:hover {
   background-color: #509429 !important;
   color: #ffffff !important;
+}
+
+.c_red {
+  color: #ce1010 !important;
 }
 
 .outline_red2 {
@@ -210,6 +231,46 @@ select.input-form {
   justify-content: center;
   align-items: center;
 }
+.mess1 #mess1 {
+  display: none;
+}
+.mess1 #mess2 {
+  display: none;
+}
+.mess1 #errorMessage {
+  display: none;
+  color: #ac0000;
+  font-weight: 600;
+}
+.mess1 #loading {
+  display: none;
+}
+.mess1 #loading img {
+  height: 14px;
+}
+.mess1 .loading {
+  display: flex;
+  transform-origin: center center;
+  margin-left: 8px;
+  opacity: 0.9;
+  animation: loading 1s linear infinite;
+  -webkit-animation: loading 1s linear infinite;
+}
+.mess1 .loading img {
+  height: 14px;
+}
+@keyframes loading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+#responseTable th, #responseTable td {
+  vertical-align: middle;
+  text-align: center;
+}
 
 .message2 {
   margin-top: -40px;
@@ -219,27 +280,6 @@ select.input-form {
 .message3 {
   margin-top: -30px;
   padding-bottom: 30px;
-}
-
-#loading {
-  display: none;
-}
-#loading img {
-  height: 14px;
-}
-
-#mess1 {
-  display: none;
-}
-
-#mess2 {
-  display: none;
-}
-
-#errorMessage {
-  display: none;
-  color: #ac0000;
-  font-weight: 600;
 }
 
 /* end form */

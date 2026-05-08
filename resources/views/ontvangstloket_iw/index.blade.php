@@ -64,7 +64,8 @@
                     <br/> 
                       <h3>Ontvangstloket</h3>
                     <br/>
-                      <p>Importeer hier je bestanden</p>
+                      <p  id='screen1Descr'>Importeer hier je bestand</p>
+                      <p id="screen2Descr"></p>
                   </div>
                 </div>
               </div>
@@ -81,28 +82,26 @@
                       @csrf
 
                       {{-- Hier komt het formulier --}}
-                      <div id='GKB_Form_Template'></div>
+                      <div id='screen1'>
 
                         <div class="input-wrap">
-                          <label for="leveranciers">Leveranciers*</label>
-                          <select id="leveranciers" name="leveranciers" class="input-form">
+                          <label for="inputSelectionLeverancier" id="LabelLeverancier">Leveranciers*</label>
+                          <select id="inputSelectionLeverancier" name="leveranciers" class="input-form">
                             <option value="">-- Selecteer een leverancier --</option>
-                            <option value="test1">test1</option>
-                            <option value="test2">test2</option>
-                            <option value="test3">test3</option>
-                            <option value="test4">test4</option>
+                            <option value="Slufter">Slufter</option>
+                             
                           </select>
                         </div>
 
                         <div class="input-wrap">
-                          <label for="excelFile_req">Excel-bestand (.xlsx)*</label>
+                          <label for="excelFile_req" id="fileLabel">Excel-bestand (.xlsx)*</label>
                           <label id="excelFile_label" for="excelFile_req" class="btn btn-upload mb-3 file-btn text-center w-100">Selecteer hier uw bestand</label>
-                          <input type="file" id="excelFile_req" name="excelFile"
+                          <input type="file" id="excelFile_req" name="excelFile requiredInputFile"
                                  accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                                  class="position-absolute invisible"
                                  onchange="document.getElementById('excelFile_label').textContent = this.files[0] ? this.files[0].name : 'Selecteer hier uw bestand';">
                         </div>
-
+                      </div>
                       
 
                       <div class="mess1">
@@ -122,8 +121,35 @@
                         <input class="input-form submit" type="submit" id="myForm" name="submit" value="Start conversie" onclick="handleFormSubmit(event)">
                       </div> <br/>
 
+
+
+                      <div id="screen2">
+                        <table id="responseTable" class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Id</th>
+                              <th>Label</th>
+                              <th>Projectcode</th>
+                              <th>Tarief</th>
+                            </tr>
+                          </thead>
+
+                          <tbody id="responseTableBody">
+                          </tbody>
+                        </table>
+                        <div class="input-wrap-sumbit" >
+                          <input class="input-form submit" type="submit"  name="submit" value="Verzenden" onclick="sendResASInput(event)"  >
+                        </div> <br/>
+                      </div>
+
+                      <div id="screen3" style="display: none;">
+                        <p id="createdJSON"> </p>
+                        <p id="screen3Descr">Bestand succesvol verwerkt! Je kunt het resultaat hieronder bekijken:</p>
+                        <a href="#" id="downloadCsv">Download hier je csv</a>
+                      </div>   
+
                       {{-- iframe for datastreaming --}}
-                      <iframe id="fmeFrame" style="width: 100%; height: 600px; border: 1px solid #ccc; display: none;"></iframe>
+                      {{-- <iframe id="fmeFrame" style="width: 100%; height: 600px; border: 1px solid #ccc; display: none;"></iframe> --}}
 
                     </form>
  
