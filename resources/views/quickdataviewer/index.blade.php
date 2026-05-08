@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/x-icon" href="{{ asset('storage/fav-cm.png') }}">
 
-  <link rel="stylesheet" href="{{ asset('css/custom_apps/dataviewer.css') }}" >
+  <link rel="stylesheet" href="{{ asset('css/dataviewer.css') }}" >
 </head>
 <body>
 
