@@ -14,6 +14,11 @@ export let selectedFeature = null;
 // Track OL layer objects by name (layer name -> ol.layer instance)
 export const dataLayers = {};
 
+// Track the name of the currently uploaded file
+export let uploadedFileName = '';
+
+export const setUploadedFileName = (name) => { uploadedFileName = name; };
+
 // Update state properties
 export const updateLastExtent = (extent) => {
   lastDataExtent = extent;
@@ -30,6 +35,7 @@ export const clearSelection = () => {
 export const resetAllState = () => {
   lastDataExtent = null;
   selectedFeature = null;
+  uploadedFileName = '';
   Object.keys(layerVisibility).forEach(key => delete layerVisibility[key]);
   Object.keys(dataLayers).forEach(key => delete dataLayers[key]);
 };

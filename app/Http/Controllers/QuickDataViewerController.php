@@ -20,6 +20,9 @@ class QuickDataViewerController extends Controller
   */
  public function convertGdb(Request $request)
     {
+        set_time_limit(600);
+        ini_set('memory_limit', '512M');
+
         $request->validate([
             'file' => 'required|file|max:512000', // max 500MB
         ]);
@@ -124,6 +127,9 @@ class QuickDataViewerController extends Controller
   */
  public function convertDwg(Request $request)
     {
+        set_time_limit(600);
+        ini_set('memory_limit', '512M');
+
         $request->validate([
             'file' => 'required|file|max:512000', // max 500MB
         ]);

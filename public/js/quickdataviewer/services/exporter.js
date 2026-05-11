@@ -3,6 +3,7 @@
 // ===========================
 import { showError } from '../ui/helpers.js';
 import { getAllFeatures } from '../core/map.js';
+import { uploadedFileName } from '../core/state.js';
 
 // Sanitize sheet name: remove invalid Excel characters and truncate to 31 chars
 const sanitizeSheetName = (name) => name.replace(/[\[\]:*?/\\]/g, '_').substring(0, 31);
@@ -38,7 +39,10 @@ export const exportToExcel = () => {
       usedNames.add(finalName);
       XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(data), finalName);
     });
-    XLSX.writeFile(workbook, `quickdataviewer_export_${new Date().toISOString().slice(0, 10)}.xlsx`);
+    const baseName = uploadedFileName
+      ? uploadedFileName.replace(/\.[^.]+$/, '')   // strip extension
+      : 'export';
+    XLSX.writeFile(workbook, `${baseName}_Export_${new Date().toISOString().slice(0, 10)}.xlsx`);
   } catch (err) {
     console.error(err);
     showError("Er is een fout opgetreden bij het exporteren naar Excel.");

@@ -2,7 +2,7 @@
 // Map Initialization & Core Setup
 // ===========================
 import { RD_EXTENT } from '../config/projections.js';
-import { createBasemapSource } from '../config/basemap.js';
+import { createBasemapLayer } from '../config/basemap.js';
 import { getFeatureStyle } from './styles.js';
 import { updateLastExtent } from './state.js';
 import { dataLayers } from './state.js';
@@ -16,7 +16,7 @@ let basemapLayer = null;
 export const initializeMap = () => {
   console.log("🗺️ Initializing map...");
 
-  basemapLayer = new ol.layer.Tile({ source: createBasemapSource() });
+  basemapLayer = createBasemapLayer();
 
   map = new ol.Map({
     target: "map",

@@ -89,11 +89,14 @@ export const initAttributeTable = (olMap) => {
 };
 
 function updateFloatingButtonPositions(panelHeight) {
+  // Stack order bottom→top: basemap (70px) | table (44px) | zoom (44px)
   const offset = panelHeight + 10;
-  if (toggleBtn) toggleBtn.style.bottom = offset + 'px';
+  const basemapToggleBtn = document.getElementById('basemap-toggle-btn');
+  if (basemapToggleBtn) basemapToggleBtn.style.bottom = offset + 'px';
+  if (toggleBtn) toggleBtn.style.bottom = (offset + 80) + 'px';  // 70px + 10px gap
   const zoomDataBtn = document.getElementById('layerZoomBtn');
   if (zoomDataBtn && zoomDataBtn.style.display !== 'none') {
-    zoomDataBtn.style.bottom = (offset + 54) + 'px';
+    zoomDataBtn.style.bottom = (offset + 80 + 54) + 'px'; // + 44px + 10px gap
   }
 }
 
@@ -109,6 +112,8 @@ function togglePanel() {
       zoomDataBtn.classList.remove('zoom-data-toggle--open');
       zoomDataBtn.style.bottom = '';
     }
+    const basemapToggleBtn = document.getElementById('basemap-toggle-btn');
+    if (basemapToggleBtn) basemapToggleBtn.style.bottom = '';
     document.getElementById('map').classList.remove('attr-table-open');
   } else {
     panelEl.style.display = 'flex';

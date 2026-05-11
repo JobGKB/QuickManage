@@ -240,6 +240,14 @@
       <i class="fa-solid fa-house"></i>
     </button>
 
+    {{-- Floating basemap toggle button (below attr-table-toggle) --}}
+    <button id="basemap-toggle-btn" class="basemap-toggle" title="Schakel naar luchtfoto">
+      <img id="basemap-toggle-img"
+           src="{{ asset('storage/luchtfoto1.png') }}"
+           alt="Luchtfoto" />
+      <span class="basemap-toggle-label">Luchtfoto</span>
+    </button>
+
     {{-- Attribute table panel --}}
     <div id="attribute-table-panel" class="attribute-table-panel" style="display:none;">
       <div id="attr-table-resize-handle" class="attr-table-resize-handle"></div>

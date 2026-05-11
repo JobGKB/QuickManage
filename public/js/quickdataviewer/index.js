@@ -15,6 +15,8 @@ import { convertDwgToGpkg } from './services/dwgConverter.js';
 import { loadGpkgBuffer } from './services/gpkgLoader.js';
 import { initAddressSearch } from './search/addressSearch.js';
 import { initAttributeTable, refreshAttributeTable } from './ui/attributeTable.js';
+import { toggleBasemap } from './config/basemap.js';
+import { setUploadedFileName } from './core/state.js';
 
 // Inspect ZIP contents to determine if it contains a File Geodatabase (.gdb folder)
 async function detectGdbZip(file) {
@@ -56,6 +58,13 @@ async function initializeApp() {
     // STEP 5c: Initialize attribute table
     initAttributeTable(map);
     console.log("✓ Attribute table initialized");
+
+    // STEP 5d: Wire basemap toggle button
+    const basemapToggleBtn = document.getElementById('basemap-toggle-btn');
+    if (basemapToggleBtn) {
+      basemapToggleBtn.addEventListener('click', () => toggleBasemap());
+    }
+    console.log("✓ Basemap toggle initialized");
 
     // STEP 6: Setup main drop zone
     const dropZone = document.getElementById("drop-zone");
@@ -103,6 +112,7 @@ async function initializeApp() {
 
         setLoading(false);
         // Update back button display with loaded filename
+        setUploadedFileName(file.name);
         updateBackDropZoneDisplay(file.name);
         const fileNameEl = document.getElementById('fileName');
         if (fileNameEl) fileNameEl.textContent = "Bestand: "+ file.name;

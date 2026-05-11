@@ -544,7 +544,7 @@ a.overzicht_link_viewer {
 // ── Attribute Table Toggle Button ──────────────
 .attr-table-toggle {
   position: fixed;
-  bottom: 20px;
+  bottom: 100px;
   left: 300px;
   // transform: translateX(-50%);
   z-index: 1000;
@@ -571,10 +571,10 @@ a.overzicht_link_viewer {
   }
 }
 
-// ── Zoom to Data Floating Button (below attr-table-toggle) ──
+// ── Zoom to Data Floating Button (above attr-table-toggle) ──
 .zoom-data-toggle {
   position: fixed;
-  bottom: 74px;
+  bottom: 154px;
   left: 300px;
   z-index: 1000;
   width: 44px;
@@ -596,6 +596,57 @@ a.overzicht_link_viewer {
 
   &.zoom-data-toggle--open {
     // bottom is set dynamically by JS based on panel height
+  }
+}
+
+// ── Basemap Toggle Button (below attr-table-toggle) ─── image thumbnail ──
+.basemap-toggle {
+  position: fixed;
+  bottom: 20px;
+  left: 300px;
+  z-index: 1000;
+  width: 70px;
+  height: 70px;
+  padding: 0;
+  border: 3px solid #fff;
+  border-radius: 8px;
+  background: #000;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  transition: bottom 0.3s, border-color 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+
+  img {
+    width: 100%;
+    flex: 1;
+    
+    display: block;
+    min-height: 0;
+  }
+
+  .basemap-toggle-label {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    padding: 2px 4px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    border-color: #3a8c3a;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+  }
+
+  &.basemap-toggle--active {
+    border-color: #006600;
   }
 }
 
