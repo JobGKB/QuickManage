@@ -51,7 +51,7 @@
                         <p class="c-bold">Thumbnail afbeelding:</p>
                         <div class="template-upload-image">
                             <input type='file' name='image' class='image' id='imgInp'>
-                         
+                         <label for="imgInp"  class="file-input text-center"  >  <img src="{{ asset('/storage/gkb-groen.png') }}" id="img"> </label>
                         </div>
 
                         <input type="submit" name="submit" value='Aanmaken'>
