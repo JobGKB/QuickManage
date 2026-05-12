@@ -60,7 +60,7 @@
                         <p class="c-bold">Header logo:</p>
                         <div class="template-upload-image">
                             <input type='file' name='header_logo' class='file' id='imgInp2'>
-                            <label for="imgInp2"  class="file-input text-center"> @if($template->header_logo)<img src="{{ asset('storage/template_images/' . $template->header_logo) }}" id="img2">@else <img src="{{ asset('/storage/gkb_groen.png') }}" id="img2"> @endif </label>
+                            <label for="imgInp2"  class="file-input text-center"> @if($template->header_logo)<img src="{{ asset('storage/template_images/' . $template->header_logo) }}" id="img2">@else <img src="{{ asset('/storage/gkb-groen.png') }}" id="img2"> @endif </label>
                         </div><br/><br/>
                         <p class="c-bold">Footer afbeelding:</p>
                         <div class="template-upload-image">
