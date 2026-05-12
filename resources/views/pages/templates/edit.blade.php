@@ -55,17 +55,17 @@
                         <p class="c-bold">Thumbnail afbeelding:</p>
                         <div class="template-upload-image">
                             <input type='file' name='image_thumbnail' class='file' id='imgInp1'>
-                            <label for="imgInp1"  class="file-input text-center"> @if($template->dummy_image)<img src="{{ asset('storage/template_images/' . $template->dummy_image) }}" id="img1">@else <img src="{{ asset('/storage/default.png') }}" id="img1"> @endif </label>
+                            <label for="imgInp1"  class="file-input text-center"> @if($template->dummy_image)<img src="{{ asset('storage/template_images/' . $template->dummy_image) }}" id="img1">@else <img src="{{ asset('/storage/gkb_groen.png') }}" id="img1"> @endif </label>
                         </div><br/><br/>
                         <p class="c-bold">Header logo:</p>
                         <div class="template-upload-image">
                             <input type='file' name='header_logo' class='file' id='imgInp2'>
-                            <label for="imgInp2"  class="file-input text-center"> @if($template->header_logo)<img src="{{ asset('storage/template_images/' . $template->header_logo) }}" id="img2">@else <img src="{{ asset('/storage/default.png') }}" id="img2"> @endif </label>
+                            <label for="imgInp2"  class="file-input text-center"> @if($template->header_logo)<img src="{{ asset('storage/template_images/' . $template->header_logo) }}" id="img2">@else <img src="{{ asset('/storage/gkb_groen.png') }}" id="img2"> @endif </label>
                         </div><br/><br/>
                         <p class="c-bold">Footer afbeelding:</p>
                         <div class="template-upload-image">
                             <input type='file' name='footer_image' class='file' id='imgInp3'>
-                            <label for="imgInp3"  class="file-input text-center"> @if($template->footer_image)<img src="{{ asset('storage/template_images/' . $template->footer_image) }}" id="img3">@else <img src="{{ asset('/storage/default.png') }}" id="img3"> @endif </label>
+                            <label for="imgInp3"  class="file-input text-center"> @if($template->footer_image)<img src="{{ asset('storage/template_images/' . $template->footer_image) }}" id="img3">@else <img src="{{ asset('/storage/footer.png') }}" id="img3"> @endif </label>
                         </div><br/><br/>
 
                         <p class="c-bold">Achtergrond kleur:</p>
