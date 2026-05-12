@@ -31,7 +31,7 @@ class TemplatesController extends Controller
 
         $request->validate([
             'name' => 'required|unique:templates,name',
-            'image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:2048',
+            'image' => 'required',
         ]);
 
         $uniqid = Str::uuid();
