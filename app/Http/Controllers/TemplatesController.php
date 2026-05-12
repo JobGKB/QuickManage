@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Template;
-
+use Illuminate\Support\Str;
 
 class TemplatesController extends Controller
 {
@@ -34,17 +34,19 @@ class TemplatesController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,gif,webp|max:2048',
         ]);
 
+        $uniqid = Str::uuid();
         $template = new Template;
         $template->name = $request['name'];
-        $template->save();
+        
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = 'template_' . $template->id . '_dummy.' . $file->getClientOriginalExtension();
+            $filename = 'template_' . $uniqid . '_dummy.' . $file->getClientOriginalExtension();
             $file->storeAs('template_images', $filename, 'public');
             $template->dummy_image = $filename;
-            $template->save();
+            
         }
+        $template->save();
  
         return back()->with('success','Template aangemaakt!');
 
