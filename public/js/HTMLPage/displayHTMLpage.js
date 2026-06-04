@@ -47,6 +47,7 @@ const data = window.templateChoice;
 
                     let input;
                     let selectFileText;
+                    let checkboxWrapper;
                     // console.log(param)
                     // check if parameter type is string
                     if (param.type === 'text') { 
@@ -75,49 +76,77 @@ const data = window.templateChoice;
 
                         // check if parameter type is file
                     } else if (param.type === 'file' || param.type === 'list') {
-                        // als parameter required is ( dus hij is niet optioneel )
-                        if(param.required !== false) {
-                         
-                            selectFileText = document.createElement('label');
-                            selectFileText.id = 'data_label';
-                            selectFileText.textContent = 'Selecteer hier uw bestand';
-                            selectFileText.setAttribute('for', param.name+'_req');
-                            selectFileText.className = 'btn btn-upload mb-3 file-btn text-center';
-                            
-                            input = document.createElement('input');
-                            input.type = 'file';
-                            input.name = param.name;
-                            input.id = param.name+'_req';
-                            input.className = 'position-absolute invisible';
-                            input.setAttribute("data-required","true");
+                        const isRequired = param.required !== false;
+                        const inputId = param.name + '_req';
 
-                            input.addEventListener('change', (e) => {
-                            const file = e.target.files[0];
-                            selectFileText.textContent = file ? file.name : 'Selecteer hier uw bestand';
+                        input = document.createElement('input');
+                        input.type = 'file';
+                        input.name = param.name;
+                        input.id = inputId;
+                        input.className = 'position-absolute invisible dropzone-input';
+                        if (isRequired) input.setAttribute('data-required', 'true');
+
+                        selectFileText = document.createElement('label');
+                        selectFileText.id = 'data_label';
+                        selectFileText.setAttribute('for', inputId);
+                        selectFileText.className = 'btn btn-upload mb-3 file-btn text-center file-dropzone';
+                        selectFileText.innerHTML = `
+                            <div class="file-dropzone__text">
+                                <svg class="file-dropzone__icon" aria-hidden="true" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="8" y="40" width="48" height="16" rx="6" fill="currentColor" opacity="0.25"></rect>
+                                    <rect x="24" y="44" width="6" height="6" rx="3" fill="currentColor"></rect>
+                                    <path d="M32 8 L32 36" stroke="currentColor" stroke-width="5" stroke-linecap="round"></path>
+                                    <path d="M20 26 L32 38 L44 26" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                <span class="file-dropzone__link">Kies een bestand</span> of sleep het hierin.
+                            </div>
+                            <div class="file-dropzone__filename"></div>
+                        `;
+
+                        const filenameEl = selectFileText.querySelector('.file-dropzone__filename');
+
+                        const setFile = (file) => {
+                            if (file) {
+                                filenameEl.textContent = file.name;
+                                selectFileText.classList.add('has-file');
+                                selectFileText.classList.remove('outline_red2');
+                            } else {
+                                filenameEl.textContent = '';
+                                selectFileText.classList.remove('has-file');
+                            }
+                        };
+
+                        input.addEventListener('change', (e) => {
+                            setFile(e.target.files[0]);
+                        });
+
+                        ['dragenter', 'dragover'].forEach(ev => {
+                            selectFileText.addEventListener(ev, (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                selectFileText.classList.add('is-dragover');
                             });
-                        // als parameter niet required is ( dus hij is optioneel)
-                        } else if (param.required == false) {
-                                    
-                            selectFileText = document.createElement('label');
-                            selectFileText.id = 'data_label';
-                            selectFileText.textContent = 'Selecteer hier uw bestand';
-                            selectFileText.setAttribute('for', param.name);
-                            selectFileText.className = 'btn btn-upload mb-3 file-btn text-center';
-                            
-                            input = document.createElement('input');
-                            input.type = 'file';
-                            input.name = param.name;
-                            input.id = param.name+'_req';
-                            input.className = 'position-absolute invisible';
-
-                            input.addEventListener('change', (e) => {
-                            const file = e.target.files[0];
-                            selectFileText.textContent = file ? file.name : 'Selecteer hier uw bestand';
+                        });
+                        ['dragleave', 'dragend'].forEach(ev => {
+                            selectFileText.addEventListener(ev, (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                selectFileText.classList.remove('is-dragover');
                             });
+                        });
+                        selectFileText.addEventListener('drop', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            selectFileText.classList.remove('is-dragover');
+                            const dropped = e.dataTransfer && e.dataTransfer.files;
+                            if (dropped && dropped.length > 0) {
+                                const dt = new DataTransfer();
+                                dt.items.add(dropped[0]);
+                                input.files = dt.files;
+                                setFile(dropped[0]);
+                            }
+                        });
 
-                        }
-                    
-                        
                     } else if (param.type === 'checkbox') { 
                         if(param.required !== false){
                             input = document.createElement('input');
@@ -127,6 +156,7 @@ const data = window.templateChoice;
                             input.value = param.defaultValue || '';
                             input.className = 'input-form-checkbox';
                             input.setAttribute("data-required","true");
+                            input.checked = (param.defaultValue || '').toString().toUpperCase() === 'YES';
                         }
                             
                         else if(param.required == false){
@@ -135,9 +165,80 @@ const data = window.templateChoice;
                             input.name = param.name;
                             input.id = param.name;
                             input.className = 'input-form-checkbox';
+                            // input.value = param.defaultValue || '';
+                            input.checked = (param.defaultValue || '').toString().toUpperCase() === 'YES';
                             input.setAttribute("data-required","true");
+                            // console.log(input.value)
                         }
-                    } 
+
+                        checkboxWrapper = document.createElement('div');
+                        checkboxWrapper.className = 'checkbox-wrapper';
+                        checkboxWrapper.appendChild(input);
+                        checkboxWrapper.addEventListener('click', (e) => {
+                            if (e.target === input) return;
+                            input.checked = !input.checked;
+                            input.dispatchEvent(new Event('change', { bubbles: true }));
+                        });
+                        
+                    } else if (param.type === 'datetime') { 
+                        // FME datetime defaults are usually YYYYMMDDHHMMSS[.sss] or "YYYY-MM-DD HH:MM:SS";
+                        // datetime-local needs YYYY-MM-DDTHH:MM(:SS) or it silently shows empty.
+                        const toDatetimeLocal = (v) => {
+                            if (!v) return '';
+                            const s = String(v).trim();
+                            const digits = s.replace(/\D/g, '');
+                            if (digits.length >= 12) {
+                                const y = digits.slice(0, 4);
+                                const mo = digits.slice(4, 6);
+                                const d = digits.slice(6, 8);
+                                const h = digits.slice(8, 10);
+                                const mi = digits.slice(10, 12);
+                                const se = digits.slice(12, 14);
+                                return `${y}-${mo}-${d}T${h}:${mi}` + (se ? `:${se}` : '');
+                            }
+                            return s.replace(' ', 'T');
+                        };
+                        const nowLocal = () => {
+                            const n = new Date();
+                            const pad = (x) => String(x).padStart(2, '0');
+                            return `${n.getFullYear()}-${pad(n.getMonth() + 1)}-${pad(n.getDate())}T${pad(n.getHours())}:${pad(n.getMinutes())}`;
+                        };
+                        const normalizedDefault = toDatetimeLocal(param.defaultValue) || nowLocal();
+
+                        if(param.required !== false){
+                            input = document.createElement('input');
+                            input.type = 'datetime-local';
+                            input.name = param.name;
+                            input.id = param.name;
+                            input.value = normalizedDefault;
+                            input.className = 'input-form-datetime';
+                            input.setAttribute("data-required","true");
+
+                            console.log(param.defaultValue)
+                             
+                        }
+                            
+                        else if(param.required == false){
+                            input = document.createElement('input');
+                            input.type = 'datetime-local';
+                            input.name = param.name;
+                            input.id = param.name;
+                            input.className = 'input-form-datetime';
+                            input.value = normalizedDefault;
+                             
+                            input.setAttribute("data-required","true");
+                            // console.log(input.value)
+                        }
+
+                        const openPicker = () => {
+                            if (typeof input.showPicker === 'function') {
+                                try { input.showPicker(); } catch (e) { /* ignore */ }
+                            }
+                        };
+                        input.addEventListener('click', openPicker);
+                        input.addEventListener('focus', openPicker);
+
+                    }
                     
                     else {
                         input = document.createElement('input');
@@ -157,7 +258,11 @@ const data = window.templateChoice;
                         inputWrap.appendChild(label);
                     } 
                     
-                    inputWrap.appendChild(input);
+                    if (checkboxWrapper) {
+                        inputWrap.appendChild(checkboxWrapper);
+                    } else {
+                        inputWrap.appendChild(input);
+                    }
                     inputWrap.appendChild(document.createElement('br'));
 
                     container.appendChild(inputWrap);
@@ -215,21 +320,31 @@ const data = window.templateChoice;
                         if (input.type === 'checkbox') {
                             if (!input.value) {
                                 document.getElementById(input.name).classList.add('outline_red2');
-                                 
-                                  
+                                 if(input.checked) {
+                                    // Do something if the checkbox is checked
+                                    input.value = 'Yes';
+                                } else {
+                                    input.value = 'No';
+                                }
+                                console.log(input.value)  
                                 isValid = false;
                                 return;
                             }  else {
                                 document.getElementById(input.name).classList.remove('outline_red2'); 
-                                
+                                if(input.checked) {
+                                    // Do something if the checkbox is checked
+                                    input.value = 'Yes';
+                                } else {
+                                    input.value = 'No';
+                                }
+                                console.log(input.value)  
+
                             }
                             
                         }
                         
                 } else { }
-                            input.addEventListener('change', function () {
-                            console.log(this.value);
-                        });
+                            
                 });
                  
                 if (!isValid) {

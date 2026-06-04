@@ -11,8 +11,10 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('dashboard');
+        $ip = $request->ip();
+        dd($request);
+        return view('dashboard', ['ip' => $ip]);
     }
 }

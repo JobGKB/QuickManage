@@ -36,7 +36,7 @@
         <div class="row">
             <div class="offset-lg-2 col-lg-9">
                 <div class="header-container">
-                    <h2 class="m-0">Profiel</h2>
+                    <h2 class="m-0">Profiel user info</h2>
                 </div>
             </div>
         </div>
