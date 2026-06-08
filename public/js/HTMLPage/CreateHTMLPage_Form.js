@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function() {
     // ophalen repositories  
     try {
-        const response = await fetch("https://fme-gkb.fmecloud.com/fmerest/v3/repositories", {
+        const response = await fetch("https://fme-gkb.fmecloud.com/fmeapiv4/repositories", {
           method: "GET",
           headers: {
             "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",  // replace 'x' with your real token
@@ -49,7 +49,7 @@ repoSelect.addEventListener("change", async function () {
       workspaceSelect.disabled = true;
       //2. haal de workspaces op van de geselecteerde repo
       try {
-        const workspaceResponse = await fetch(`https://fme-gkb.fmecloud.com/fmerest/v3/repositories/${encodeURIComponent(selectedRepo)}/items`, {
+        const workspaceResponse = await fetch(`https://fme-gkb.fmecloud.com/fmeapiv4/repositories/${encodeURIComponent(selectedRepo)}/items`, {
           method: "GET",
           headers: {
             "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",  // Replace with real token
@@ -57,11 +57,13 @@ repoSelect.addEventListener("change", async function () {
           }
         });
 
+        
+
         if (!workspaceResponse.ok) throw new Error("Failed to load workspaces");
 
         const workspaceData = await workspaceResponse.json();
 
-        const workspaces = workspaceData.items.filter(item => item.type === "WORKSPACE");
+        const workspaces = workspaceData.items.filter(item => item.type === "workspace");
         // 3. maak lijstje met worspaces
         if (workspaces.length > 0) {
           workspaces.forEach(w => {
@@ -103,10 +105,10 @@ workspaceSelect.addEventListener("change", async function () {
 
   // ophalen services
   try {
-    const serviceResponse = await fetch(`https://fme-gkb.fmecloud.com/fmerest/v3/repositories/${encodeURIComponent(selectedRepo)}/items/${encodeURIComponent(selectedWorkspace)}/services`, {
+    const serviceResponse = await fetch(`https://fme-gkb.fmecloud.com/fmeapiv4/workspaces/${encodeURIComponent(selectedRepo)}/${encodeURIComponent(selectedWorkspace)}/services`, {
       method: "GET",
       headers: {
-        "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",  // Replace with your token
+        "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",  
         "Accept": "application/json"
       }
     });
@@ -114,20 +116,25 @@ workspaceSelect.addEventListener("change", async function () {
     if (!serviceResponse.ok) throw new Error("Failed to fetch services");
     
     const servicesData = await serviceResponse.json();
-console.log("Full services response:", servicesData);
-    const services = servicesData || [];
-    // create option list met services van de workspace
+
+    const services = Object.entries(servicesData || {})
+      .filter(([, details]) => details && details.registered === true)
+      .map(([serviceName]) => serviceName);
+
+    console.log("Full services response:", servicesData);
+    // create option list met enkel services met registered = true
     if (services.length > 0) {
+      
       services.forEach(service => {
         const option = document.createElement("option");
-        option.value = service.name;
-        option.textContent = service.name;
+        option.value = service;
+        option.textContent = service;
         serviceSelect.appendChild(option);
       });
 
       serviceSelect.disabled = false;
     } else {
-      console.log("No services available for this workspace.");
+      console.log("No registered services available for this workspace.");
     }
 
   } catch (err) {
@@ -143,7 +150,7 @@ parameterContainer.innerHTML = ""; // Clear previous
 
 try {
   const paramResponse = await fetch(
-    `https://fme-gkb.fmecloud.com/fmerest/v3/repositories/${encodeURIComponent(selectedRepo)}/items/${encodeURIComponent(selectedWorkspace)}/parameters`,
+    `https://fme-gkb.fmecloud.com/fmeapiv4/workspaces/${encodeURIComponent(selectedRepo)}/${encodeURIComponent(selectedWorkspace)}/parameters`,
     {
       method: "GET",
       headers: {

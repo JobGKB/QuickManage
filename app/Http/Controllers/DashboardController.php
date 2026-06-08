@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $ip = $request->ip();
-        dd($request);
+        // dd($request);
         return view('dashboard', ['ip' => $ip]);
     }
 }
