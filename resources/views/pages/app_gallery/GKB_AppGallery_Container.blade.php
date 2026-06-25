@@ -27,10 +27,10 @@
                     <div class="offset-lg-1 col-lg-10 text-center">
                       <div class="header_home_screen" id="header_home_screen">
 
-                          <h2 >{{ $app_gallery_items->name }}</h2>
-                      
+                          <h2>{{ $app_gallery_items->name }}</h2>
+                            
                             <br/> 
-                          <p  >{!! $app_gallery_items->description !!}</p>
+                          <p>{!! $app_gallery_items->description !!}</p>
                           
                       </div>
                     </div>

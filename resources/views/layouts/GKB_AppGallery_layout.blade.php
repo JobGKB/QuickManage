@@ -47,6 +47,7 @@
 <footer>
  
     <script src="/js/app_gallery/GKB_AppGallery_Page.js"></script>
+    <script src="/js/visitor-heartbeat.js"></script>
     
 
 </footer>

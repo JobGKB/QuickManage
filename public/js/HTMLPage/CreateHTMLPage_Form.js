@@ -81,7 +81,8 @@ repoSelect.addEventListener("change", async function () {
       } catch (err) {
         console.error("Error fetching workspaces:", err);
       }
-    });
+  }
+);
     //
 
     // als de waarde van workspaceSelect veranderd ( dus er wordt workspace geselecteed ) 

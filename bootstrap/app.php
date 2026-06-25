@@ -1,5 +1,7 @@
 <?php
 use App\Http\Middleware\RequireArcgisLogin;
+use App\Http\Middleware\SetVisitorIdCookie;
+use App\Http\Middleware\TrackPageVisit;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -11,8 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+         $middleware->web(append: [
+                SetVisitorIdCookie::class,
+        ]);
+    
         $middleware->alias([
             'arcgis.required' => RequireArcgisLogin::class,
+            'track.visit' => TrackPageVisit::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

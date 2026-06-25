@@ -23,6 +23,7 @@ Auth::routes(['verify' => true, 'register' => false]);
 // All routes below require authentication
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
+    Route::get('/dashboard/live-visitors', [App\Http\Controllers\DashboardController::class, 'liveVisitors']);
 
     // Route::get('/apps', [App\Http\Controllers\AppsController::class, 'index']);
     // Manage (fme) App routes
@@ -75,19 +76,23 @@ Route::middleware(['auth'])->group(function () {
 });
 // Public routes
 
-Route::get('/app-gallery/overzicht', [App\Http\Controllers\AppGalleryController::class, 'GKB_AppGallery_Container']);
+Route::middleware('track.visit')->group(function () {
+    Route::get('/visit-heartbeat', fn() => response()->noContent());
 
-Route::get('/app-gallery/{cat_uniqid}', [App\Http\Controllers\AppGalleryController::class, 'GKB_AppGallery_CatContainer']);
+    Route::get('/app-gallery/overzicht', [App\Http\Controllers\AppGalleryController::class, 'GKB_AppGallery_Container']);
 
-Route::get('/apps/view/{unique}', [App\Http\Controllers\AppsController::class, 'show']);
+    Route::get('/app-gallery/{cat_uniqid}', [App\Http\Controllers\AppGalleryController::class, 'GKB_AppGallery_CatContainer']);
 
-Route::get('/manage/quickdataviewer', [App\Http\Controllers\QuickDataViewerController::class, 'index']);
+    Route::get('/apps/view/{unique}', [App\Http\Controllers\AppsController::class, 'show']);
+
+    Route::get('/manage/quickdataviewer', [App\Http\Controllers\QuickDataViewerController::class, 'index']);
+
+    Route::get('/PBA-FMUTA6-VerwerkWeekIndexatie', [App\Http\Controllers\PBA_IWController::class, 'index']);
+    Route::get('/Ontvangstloket-IW', [App\Http\Controllers\Ontvangstloket_IWController::class, 'index']);
+});
+
 Route::post('/api/quickdataviewer/convert-gdb', [App\Http\Controllers\QuickDataViewerController::class, 'convertGdb']);
 Route::post('/api/quickdataviewer/convert-dwg', [App\Http\Controllers\QuickDataViewerController::class, 'convertDwg']);
-
-
-Route::get('/PBA-FMUTA6-VerwerkWeekIndexatie', [App\Http\Controllers\PBA_IWController::class, 'index']);
-Route::get('/Ontvangstloket-IW', [App\Http\Controllers\Ontvangstloket_IWController::class, 'index']);
 
 
 

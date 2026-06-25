@@ -96,6 +96,10 @@ class AppsController extends Controller
         ->first();
 
          
+        // dd($c); 
+
+        session(['app_id' => $data->id]);
+         
         // dd($DBparameters);
          
         // dd($data);   
@@ -135,7 +139,7 @@ class AppsController extends Controller
         $app->description = $req->input('description');
         $app->cat_id = $req->input('category');
         $app->service = $req->input('service');
-  
+                
 
         if ($req->hasFile('app_thumbnail')) {
             $file = $req->file('app_thumbnail');

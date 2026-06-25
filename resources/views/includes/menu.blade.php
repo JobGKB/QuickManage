@@ -25,13 +25,42 @@
 
         <div class="menu-top">
             <div class="container-fluid">
-                <div class="row"   >
-                    <div class="col-lg-12">
-                        <div class="d-flex-end">Test</div>
+                <div class="row  "   >
+                    <div class="col-lg-10">
+                         
                     </div>
+                    <div class="col-lg-1">
+                        <div class="menu_user_info">
+                            <div class="menu_user_info_btn">
+ 
+                                <button type="button" class="user-image"  onclick="toggleUserInfoModal()"> 
+                                    <i class="fa-solid fa-user "></i>
+                                </button>
+   
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+
+                    </div>
+                   
                 </div>
             </div>
         </div>
+
+        <div class="user_info_modal " id="userInfoModal">
+            <div class="user_info_modal_content">
+                <ul>
+
+                    <li class="userName"> {{ Auth::user()->name }} </li>
+                    <li class="userProfile"><a href="/manage/profile/{{Auth::user()->uniqid}}/edit"> Profiel bewerken </a></li>
+                    <li class="settings"><a href="/manage/settings"> Instellingen </a></li>
+                    <li class="logOut"><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();"> Uitloggen </a></li>
+
+                </ul>
+                
+            </div>                                
+         </div>
 
     <div class="ham_menu">
         <div class="menu-wrapper">
@@ -56,6 +85,9 @@
                 </ul>
             </div>
         </div>
+
+         
+
             <script>
                     const dashboard = location.pathname.split('/')[1];
 

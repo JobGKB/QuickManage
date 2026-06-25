@@ -175,7 +175,7 @@
 </body>
 <footer>
  
-     
+  <script src="/js/visitor-heartbeat.js"></script>
     
 
 </footer>

@@ -83,16 +83,20 @@ async function initializeApp() {
       clearError();
       const name = file.name.toLowerCase();
       
-      // Validate file is a ZIP or DWG file
-      if (!name.endsWith(".zip") && !name.endsWith(".dwg")) { 
-        showError("Upload een .zip bestand (shapefile of geodatabase) of een .dwg bestand."); 
+      // Validate file is a ZIP, DWG or GPKG file
+      if (!name.endsWith(".zip") && !name.endsWith(".dwg") && !name.endsWith(".gpkg")) { 
+        showError("Upload een .zip bestand (shapefile of geodatabase), een .dwg bestand of een .gpkg bestand."); 
         return; 
       }
       
       try {
         setLoading(true);
 
-        if (name.endsWith(".dwg")) {
+        if (name.endsWith(".gpkg")) {
+          // GeoPackage flow: parse locally in browser → render on map
+          const gpkgBuffer = await file.arrayBuffer();
+          await loadGpkgBuffer(gpkgBuffer, closePopup, setLoading);
+        } else if (name.endsWith(".dwg")) {
           // DWG flow: upload to FME Server → receive GPKG → render on map
           const gpkgBuffer = await convertDwgToGpkg(file, setLoading);
           await loadGpkgBuffer(gpkgBuffer, closePopup, setLoading);

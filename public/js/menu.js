@@ -31,3 +31,23 @@ function closeMenu() {
  
     }
   }
+
+  function toggleUserInfoModal() {
+    var modal = document.getElementById('userInfoModal');
+    if (modal.style.display === "block") {
+        modal.style.display = "none";
+    } else {
+        modal.style.display = "block";
+    }
+}
+
+// Close modal when clicking outside of it
+document.addEventListener('click', function(event) {
+    var modal = document.getElementById('userInfoModal');
+    var toggleBtn = document.querySelector('.user-image');
+    if (modal.style.display === "block" && 
+        !modal.contains(event.target) && 
+        !toggleBtn.contains(event.target)) {
+        modal.style.display = "none";
+    }
+});

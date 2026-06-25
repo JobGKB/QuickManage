@@ -12,9 +12,8 @@ use Illuminate\Support\Facades\Session;
 class CustomAppsController extends Controller
 {
     public function create() 
-    {   
-         
- 
+    {    
+
         return view('pages.custom_apps.create', [
              
 
@@ -37,8 +36,7 @@ class CustomAppsController extends Controller
         do {
             $uniqid = Str::uuid();
         } while (CustomApp::where('uniqid', $uniqid)->exists());
-         
-        
+          
         $app = new CustomApp();
         $app->name = $request['name'];
         $app->description = $request['description'] ?? '';

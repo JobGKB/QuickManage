@@ -72,7 +72,7 @@
 
                           <div id="drop-zone" class="drop-zone mb-4" role="button" tabindex="0" aria-label="Bestand kiezen of slepen">
 
-                            <input type="file" id="file-input" accept=".zip,.dwg" hidden />
+                            <input type="file" id="file-input" accept=".zip,.dwg,.gpkg" hidden />
 
                             <div class="drop-icon">
                               <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -86,7 +86,7 @@
                             <p class="drop-label">
                               <strong>Kies een bestand</strong> of sleep het hierin.
                             </p>
-                            <p class="drop-hint"><strong>Ondersteund:</strong> Shapefile (.zip),<br/> File Geodatabase gdb (.zip), AutoCAD (.dwg)</p>
+                            <p class="drop-hint"><strong>Ondersteund:</strong> Shapefile (.zip),<br/> File Geodatabase gdb (.zip), AutoCAD (.dwg), GeoPackage (.gpkg)</p>
 
                           </div>
 
@@ -180,14 +180,14 @@
 
               <button id="back-button"   style="width: 100%; pointer-events: none; border: none; background: none; color: inherit;"></button>
 
-              <input type="file" id="back-file-input" accept=".zip,.dwg" hidden />
+              <input type="file" id="back-file-input" accept=".zip,.dwg,.gpkg" hidden />
               
               <!-- Upload prompt (shown when no file loaded) -->
               <div id="back-zone-upload-prompt" class="back-zone-content">
                 <p class="drop-label">
                   <strong>Kies een bestand</strong> of sleep het hierin.
                 </p>
-                <p class="drop-hint">Ondersteund: Shapefile (.zip) & File Geodatabase (.zip), AutoCAD (.dwg)</p>
+                <p class="drop-hint">Ondersteund: Shapefile (.zip) & File Geodatabase (.zip), AutoCAD (.dwg), GeoPackage (.gpkg)</p>
               </div>
 
               <!-- Loaded file display (hidden by default) -->
@@ -343,6 +343,8 @@
         });
     });
   </script>
+
+  <script src="/js/visitor-heartbeat.js"></script>
 
 
 </body>
