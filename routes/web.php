@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Auth::routes(['verify' => true, 'register' => true]);
+Auth::routes(['verify' => true, 'register' => false]);
  
 // All routes below require authentication
 Route::middleware(['auth'])->group(function () {                                                                        

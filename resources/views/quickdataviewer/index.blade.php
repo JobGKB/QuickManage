@@ -42,7 +42,7 @@
               <div class="container">
                 <div class="row header-logo  align-items-center">
                   <div class="col-md-4 fl-l">
-                    <a href="https://gis.gkbgroep.nl/Apps/GKB-App-Gallery/index.html" class="overzicht_link fl-l"> <img src="
+                    <a href="http://gisdev.gkbgroep.nl/app-gallery/overzicht" class="overzicht_link fl-l"> <img src="
                       {{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps </a>
                   </div>
                   <div class="col-md-4 text-center">
