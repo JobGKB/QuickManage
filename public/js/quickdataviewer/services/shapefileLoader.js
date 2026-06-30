@@ -3,7 +3,7 @@
 // ===========================
 import { readZipAsRawGeoJSON } from './fileProcessor.js';
 import { detectDataProjection } from './projectionDetector.js';
-import { showLoadingLayers, markLayerLoaded } from './layerManager.js';
+import { showLoadingLayers, markLayerLoaded, dedupeLayerNames } from './layerManager.js';
 import { addDataLayer, clearAllDataLayers, zoomToData } from '../core/map.js';
 
 // Load shapefile from ZIP and render on map with all features
@@ -14,8 +14,13 @@ export const loadShapefileZip = async (file, closePopupFn, setLoadingFn) => {
 
   let dataProjection = null;
 
+  // Ensure layer names are unique so DOM rows and the layer registry never collide
+  // (e.g. two shapefiles with the same basename in different ZIP subfolders).
+  const uniqueNames = dedupeLayerNames(layers.map(l => l.name));
+  layers.forEach((l, i) => { l.name = uniqueNames[i]; });
+
   clearAllDataLayers();
-  showLoadingLayers(layers.map(l => l.name));
+  showLoadingLayers(uniqueNames);
 
   for (const layer of layers) {
     try {

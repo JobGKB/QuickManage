@@ -5,7 +5,7 @@
 // Uses @ngageoint/geopackage library (loaded globally as GeoPackageAPI).
 
 import { detectDataProjection } from './projectionDetector.js';
-import { showLoadingLayers, markLayerLoaded } from './layerManager.js';
+import { showLoadingLayers, markLayerLoaded, dedupeLayerNames } from './layerManager.js';
 import { addDataLayer, clearAllDataLayers, zoomToData } from '../core/map.js';
 
 // --- Raw WKB parser for curve geometry types ---
@@ -178,15 +178,18 @@ export const loadGpkgBuffer = async (gpkgBuffer, closePopupFn, setLoadingFn) => 
   }
 
   clearAllDataLayers();
-  showLoadingLayers(featureTableNames);
+  const displayNames = dedupeLayerNames(featureTableNames);
+  showLoadingLayers(displayNames);
 
   const allFeatures = [];
   const layers = [];
   const geojsonFormat = new ol.format.GeoJSON();
 
-  for (const tableName of featureTableNames) {
+  for (let tableIdx = 0; tableIdx < featureTableNames.length; tableIdx++) {
+    const tableName = featureTableNames[tableIdx];
+    const displayName = displayNames[tableIdx];
     try {
-      setLoadingFn(true, `Laag "${tableName}" verwerken…`);
+      setLoadingFn(true, `Laag "${displayName}" verwerken…`);
       const featureCollection = { type: "FeatureCollection", features: [] };
 
       // Manual row iteration to avoid library's internal geometry error logging
@@ -241,27 +244,35 @@ export const loadGpkgBuffer = async (gpkgBuffer, closePopupFn, setLoadingFn) => 
       }
 
       if (!featureCollection.features.length) {
-        console.warn(`⚠️ Layer "${tableName}": 0 features, skipping`);
-        markLayerLoaded(tableName, 0);
+        console.warn(`⚠️ Layer "${displayName}": 0 features, skipping`);
+        markLayerLoaded(displayName, 0);
         continue;
       }
 
-      const dataProjection = srs
-        ? [srs.organization.toUpperCase(), srs.organization_coordsys_id].join(':')
-        : detectDataProjection(featureCollection, "");
+      // Build a projection code from the table's SRS, but only trust it when it
+      // resolves to a projection OL/proj4 actually knows. An undefined SRS
+      // (organization "NONE"/null, or an unregistered code) falls back to
+      // coordinate-range based detection instead of producing an invalid code.
+      let dataProjection = null;
+      const srsOrg = srs && srs.organization ? String(srs.organization).toUpperCase() : null;
+      if (srsOrg && srsOrg !== 'NONE') {
+        const srsCode = `${srsOrg}:${srs.organization_coordsys_id}`;
+        if (ol.proj.get(srsCode)) dataProjection = srsCode;
+      }
+      if (!dataProjection) dataProjection = detectDataProjection(featureCollection, "");
 
-      console.log(`📐 Layer "${tableName}": projection=${dataProjection}, features=${featureCollection.features.length}`);
+      console.log(`📐 Layer "${displayName}": projection=${dataProjection}, features=${featureCollection.features.length}`);
 
       const olFeatures = geojsonFormat.readFeatures(featureCollection, {
         dataProjection,
         featureProjection: "EPSG:28992"
       });
       for (const f of olFeatures) {
-        f.set('_layerName', tableName);
+        f.set('_layerName', displayName);
       }
 
       layers.push({
-        name: tableName,
+        name: displayName,
         geojson: featureCollection,
         featureCount: featureCollection.features.length
       });
@@ -269,12 +280,12 @@ export const loadGpkgBuffer = async (gpkgBuffer, closePopupFn, setLoadingFn) => 
       allFeatures.push(...olFeatures);
 
       // Add layer to map and show checkbox immediately
-      addDataLayer(tableName, olFeatures);
-      markLayerLoaded(tableName, featureCollection.features.length);
-      console.log(`✅ Layer "${tableName}": ${olFeatures.length} OL features added`);
+      addDataLayer(displayName, olFeatures);
+      markLayerLoaded(displayName, featureCollection.features.length);
+      console.log(`✅ Layer "${displayName}": ${olFeatures.length} OL features added`);
     } catch (err) {
-      console.error(`❌ Error loading layer "${tableName}":`, err);
-      markLayerLoaded(tableName, 0);
+      console.error(`❌ Error loading layer "${displayName}":`, err);
+      markLayerLoaded(displayName, 0);
     }
 
     // Yield to browser so spinner updates render

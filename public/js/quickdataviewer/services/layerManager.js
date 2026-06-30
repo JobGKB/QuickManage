@@ -6,6 +6,27 @@ import { dataLayers } from '../core/state.js';
 import { zoomToData } from '../core/map.js';
 import { openFeatureSearch, closeFeatureSearch } from '../search/featureSearch/featureSearch.js';
 
+// Escape a string for safe insertion into HTML markup (text or attribute values).
+// Layer names come from user-uploaded files and may contain HTML-special chars.
+const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
+  { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+));
+
+// Ensure a list of layer names is unique by suffixing duplicates with _2, _3, …
+// Prevents collisions in the dataLayers registry and in generated DOM element IDs.
+export const dedupeLayerNames = (names) => {
+  const used = new Set();
+  return names.map((orig) => {
+    let candidate = orig == null ? '' : String(orig);
+    let n = 2;
+    while (used.has(candidate)) {
+      candidate = `${orig}_${n++}`;
+    }
+    used.add(candidate);
+    return candidate;
+  });
+};
+
 // Attach a single delegated click listener on #layerNames so kebab clicks
 // are handled regardless of how/when each row was rendered.
 const ensureLayerMenuDelegation = () => {
@@ -83,8 +104,8 @@ export const showLoadingLayers = (names) => {
     togglerContainer.style.display = 'none';
   }
   const rows = names.map(name => {
-    const rowId = `layer-row-${name}`;
-    return `<div id="${rowId}" class="layer-row"><span class="layer-spinner"></span><label class="layer-label" style="opacity:0.6;">⏳ <strong>${name}</strong> laden…</label></div>`;
+    const safe = escapeHtml(name);
+    return `<div id="layer-row-${safe}" class="layer-row"><span class="layer-spinner"></span><label class="layer-label" style="opacity:0.6;">⏳ <strong>${safe}</strong> laden…</label></div>`;
   }).join("");
   div.innerHTML = rows;
   div.style.display = "block";
@@ -102,8 +123,9 @@ export const showLoadingLayers = (names) => {
 export const markLayerLoaded = (name, featureCount) => {
   const row = document.getElementById(`layer-row-${name}`);
   if (!row) return;
-  const id = `layer-${name}`;
-  row.innerHTML = `<input type="checkbox" id="${id}" data-layer="${name}" ${layerVisibility[name] !== false ? 'checked' : ''} style="cursor: pointer; flex-shrink: 0; margin-top: 2px;" /><label for="${id}" class="layer-label"> <strong>${name}</strong> (${featureCount})</label><button type="button" class="layer-menu-btn" data-layer="${name}" aria-label="Zoek in laag" title="Zoek in laag">⋮</button>`;
+  const safe = escapeHtml(name);
+  const id = `layer-${safe}`;
+  row.innerHTML = `<input type="checkbox" id="${id}" data-layer="${safe}" ${layerVisibility[name] !== false ? 'checked' : ''} style="cursor: pointer; flex-shrink: 0; margin-top: 2px;" /><label for="${id}" class="layer-label"> <strong>${safe}</strong> (${featureCount})</label><button type="button" class="layer-menu-btn" data-layer="${safe}" aria-label="Zoek in laag" title="Zoek in laag">⋮</button>`;
   ensureLayerMenuDelegation();
 
   // Update title above the container
@@ -155,11 +177,12 @@ export const displayLayerInfo = (layers) => {
 
   // Build layer rows
   const rows = layers.map(l => {
-    const id = `layer-${l.name}`;
-    return `<div id="layer-row-${l.name}" class="layer-row">
-      <input type="checkbox" id="${id}" data-layer="${l.name}" ${layerVisibility[l.name] !== false ? 'checked' : ''} style="cursor: pointer; flex-shrink: 0; margin-top: 2px;" />
-      <label for="${id}" class="layer-label"> <strong>${l.name}</strong> (${l.featureCount})</label>
-      <button type="button" class="layer-menu-btn" data-layer="${l.name}" aria-label="Zoek in laag" title="Zoek in laag">⋮</button>
+    const safe = escapeHtml(l.name);
+    const id = `layer-${safe}`;
+    return `<div id="layer-row-${safe}" class="layer-row">
+      <input type="checkbox" id="${id}" data-layer="${safe}" ${layerVisibility[l.name] !== false ? 'checked' : ''} style="cursor: pointer; flex-shrink: 0; margin-top: 2px;" />
+      <label for="${id}" class="layer-label"> <strong>${safe}</strong> (${l.featureCount})</label>
+      <button type="button" class="layer-menu-btn" data-layer="${safe}" aria-label="Zoek in laag" title="Zoek in laag">⋮</button>
     </div>`;
   }).join("");
 

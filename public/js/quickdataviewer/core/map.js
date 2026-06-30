@@ -93,6 +93,8 @@ export const addDataLayer = (name, features) => {
 
   layer.set('_layerName', name);
   layer.set('_featureSource', source);
+  // Defensive: never leave an orphaned layer on the map if a name is reused.
+  if (dataLayers[name]) map.removeLayer(dataLayers[name]);
   dataLayers[name] = layer;
   map.addLayer(layer);
 

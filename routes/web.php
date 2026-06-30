@@ -18,30 +18,30 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Auth::routes(['verify' => true, 'register' => false]);
+Auth::routes(['verify' => true, 'register' => true]);
  
 // All routes below require authentication
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
-    Route::get('/dashboard/live-visitors', [App\Http\Controllers\DashboardController::class, 'liveVisitors']);
+Route::middleware(['auth'])->group(function () {                                                                        
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);                               
+    Route::get('/dashboard/live-visitors', [App\Http\Controllers\DashboardController::class, 'liveVisitors']);              
 
-    // Route::get('/apps', [App\Http\Controllers\AppsController::class, 'index']);
+    // Route::get('/apps', [App\Http\Controllers\AppsController::class, 'index']);                                          
     // Manage (fme) App routes
-    Route::get('/manage/apps/create', [App\Http\Controllers\AppsController::class, 'create']);
-    Route::post('/manage/apps/store', [App\Http\Controllers\AppsController::class, 'store']);
-    Route::get('/manage/apps/edit/{unique}', [App\Http\Controllers\AppsController::class, 'edit']);
-    Route::patch('/manage/apps/update/{unique}', [App\Http\Controllers\AppsController::class, 'update']);
-    Route::delete('/manage/apps/delete/{unique}', [App\Http\Controllers\AppsController::class, 'destroy']);
+    Route::get('/manage/apps/create', [App\Http\Controllers\AppsController::class, 'create']);                              
+    Route::post('/manage/apps/store', [App\Http\Controllers\AppsController::class, 'store']);                               
+    Route::get('/manage/apps/edit/{unique}', [App\Http\Controllers\AppsController::class, 'edit']);                         
+    Route::patch('/manage/apps/update/{unique}', [App\Http\Controllers\AppsController::class, 'update']);                   
+    Route::delete('/manage/apps/delete/{unique}', [App\Http\Controllers\AppsController::class, 'destroy']);                 
 
     // Manage Custom App routes
-    // Route::get('/manage/custom-apps/create', [App\Http\Controllers\CustomAppsController::class, 'create']);          
-    Route::post('/manage/custom-apps/store', [App\Http\Controllers\CustomAppsController::class, 'store']);                  
-    Route::get('/manage/custom-apps/edit/{unique}', [App\Http\Controllers\CustomAppsController::class, 'edit']);            
-    Route::patch('/manage/custom-apps/update/{unique}', [App\Http\Controllers\CustomAppsController::class, 'update']);      
-    Route::delete('/manage/custom-apps/delete/{unique}', [App\Http\Controllers\CustomAppsController::class, 'destroy']);    
+    // Route::get('/manage/custom-apps/create', [App\Http\Controllers\CustomAppsController::class, 'create']);                  
+    Route::post('/manage/custom-apps/store', [App\Http\Controllers\CustomAppsController::class, 'store']);                      
+    Route::get('/manage/custom-apps/edit/{unique}', [App\Http\Controllers\CustomAppsController::class, 'edit']);                
+    Route::patch('/manage/custom-apps/update/{unique}', [App\Http\Controllers\CustomAppsController::class, 'update']);          
+    Route::delete('/manage/custom-apps/delete/{unique}', [App\Http\Controllers\CustomAppsController::class, 'destroy']);        
 
     // Manage App Gallery routes
-    Route::get('/manage/app-gallery', [App\Http\Controllers\AppGalleryController::class, 'index']);
+    Route::get('/manage/app-gallery', [App\Http\Controllers\AppGalleryController::class, 'index']);                             
     Route::get('/manage/app-gallery/category/create', [App\Http\Controllers\AppGalleryController::class, 'createCat']);
     Route::post('/manage/app-gallery/category/store', [App\Http\Controllers\AppGalleryController::class, 'storeCat']);
     Route::get('/manage/app-gallery/category/{unique}', [App\Http\Controllers\AppGalleryController::class, 'showCat']);

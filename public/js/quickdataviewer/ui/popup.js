@@ -145,6 +145,57 @@ export const createPopup = (map) => {
   closer.addEventListener("click", closePopup);
 
   const HIT_TOLERANCE_PX = 5;
+  // Click radius used when gathering point features manually. Roughly matches the
+  // rendered point radius (see webglPointStyle in core/map.js) plus the hit tolerance.
+  const POINT_HIT_RADIUS_PX = 8;
+
+  // WebGL point layers (ol.layer.WebGLVector) only report the single top-most
+  // feature via forEachFeatureAtPixel, so overlapping points get missed. This
+  // gathers every point feature whose screen position is within the click radius
+  // by scanning the layer sources directly.
+  const collectPointFeaturesNearPixel = (evt) => {
+    const resolution = map.getView().getResolution();
+    if (!resolution) return [];
+
+    const tolPx = HIT_TOLERANCE_PX + POINT_HIT_RADIUS_PX;
+    const tolMap = tolPx * resolution;
+    const [cx, cy] = evt.coordinate;
+    const extent = [cx - tolMap, cy - tolMap, cx + tolMap, cy + tolMap];
+    const clickPixel = evt.pixel;
+
+    const found = [];
+    const localSeen = new Set();
+
+    Object.values(dataLayers).forEach(layer => {
+      if (!layer.getVisible()) return;
+      const src = layer.get('_featureSource');
+      if (!src || typeof src.forEachFeatureInExtent !== 'function') return;
+
+      src.forEachFeatureInExtent(extent, (f) => {
+        if (localSeen.has(f)) return;
+        const geom = f.getGeometry();
+        if (!geom) return;
+        const type = geom.getType();
+        if (type !== 'Point' && type !== 'MultiPoint') return;
+
+        const coordsList = type === 'Point' ? [geom.getCoordinates()] : geom.getCoordinates();
+        for (const c of coordsList) {
+          const px = map.getPixelFromCoordinate(c);
+          if (!px) continue;
+          const dx = px[0] - clickPixel[0];
+          const dy = px[1] - clickPixel[1];
+          if (dx * dx + dy * dy <= tolPx * tolPx) {
+            localSeen.add(f);
+            found.push(f);
+            break;
+          }
+        }
+      });
+    });
+
+    return found;
+  };
+
   map.on("pointermove", (evt) => (map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel, { hitTolerance: HIT_TOLERANCE_PX }) ? "pointer" : ""));
   map.on("singleclick", (evt) => {
     // Collect features actually under the click pixel (geometry-accurate),
@@ -169,6 +220,14 @@ export const createPopup = (map) => {
       },
       { hitTolerance: HIT_TOLERANCE_PX }
     );
+
+    // Add overlapping point features that WebGL hit-detection cannot report.
+    collectPointFeaturesNearPixel(evt).forEach(f => {
+      if (!seen.has(f)) {
+        seen.add(f);
+        features.push(f);
+      }
+    });
 
     if (!features.length) { closePopup(); return; }
 
