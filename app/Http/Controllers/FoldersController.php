@@ -86,6 +86,6 @@ class FoldersController extends Controller
         // $apps = App::get();
         // $var = 'TEST'; 
         // dd($apps);
-        return back()->with('success','Map verwijderd!');
+        return redirect('/manage/folders')->with('success','Map verwijderd!');
     }
 }

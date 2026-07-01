@@ -24,13 +24,16 @@
             <div class="row">
                 <div class="offset-lg-2 col-lg-9">
                     <div class="breadcrumbs">
+
                          <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
+
                                 <li class="breadcrumb-item"><a href="/manage/folders">Mappen</a></li>
-                                
                                 <li class="breadcrumb-item active" aria-current="page">{{ $folder->folder_name }}</li>
+
                             </ol>
                         </nav>
+
                     </div>
                 </div>
             </div>
@@ -38,7 +41,7 @@
             <div class="offset-lg-2 col-lg-9">
                 <div class="header-container">
                     <h2 class="m-0">Overzicht Apps</h2>
-                    <p></p>
+                    <a href="/manage/folders/delete/{{ $folder->id }}" class="deleteMap_BTN" data-bs-toggle="modal" data-bs-target="#deleteMap"> <i class="fa-solid fa-trash"></i> </a>
                 </div>
             </div>
         </div>
@@ -158,27 +161,26 @@
                                      <h2 class="m-0">Deze map verwijderen</h2>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <hr >
+                            
                                 <div class="modal-body">
                                     <div class="container-fluid">
- 
                                         <div class="row">
                                             <div class="offset-lg-1 col-lg-10">
- 
-                                                    <div class="wrapper-delete-form-map">
-                                                         Wilt u deze map verwijderen? <br> <strong>Let op:</strong> Alle apps in deze map worden ook verwijderd.
-                                                    </div>
-                                                
+                                                <div class="wrapper-delete-form-map">
+                                                        Wilt u deze map verwijderen? <br> <strong>Let op:</strong> Alle apps in deze map worden ook verwijderd.
+                                                </div>
                                             </div>
                                         </div>
                                     </div> 
                                 </div>
                                  
-                                <div class="modal-footer d-flex justify-content-center">
+                                <div class="modal-footer d-flex">
                                     <form action='/manage/folders/delete/{{ $folder->id }}' method="POST">
+                                        
                                         @csrf  @method('DELETE')
-                                        <button type="submit" class="btn btn-primary" id="delete_mapBTN">Verwijderen</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuleren</button>
+                                        
+                                        <button type="submit" class="btn btn-danger" id="delete_mapBTN">Verwijderen</button>
+                                         
                                     </form>
                                 </div>
                             </div>
