@@ -38,6 +38,7 @@
             <div class="offset-lg-2 col-lg-9">
                 <div class="header-container">
                     <h2 class="m-0">Overzicht Apps</h2>
+                    <p></p>
                 </div>
             </div>
         </div>
@@ -148,6 +149,41 @@
                 </div>
             </div>
         </div>
+
+
+                    <div class="modal fade deleteMap" id="deleteMap" tabindex="-1" aria-labelledby="deleteMap" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                     <h2 class="m-0">Deze map verwijderen</h2>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <hr >
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+ 
+                                        <div class="row">
+                                            <div class="offset-lg-1 col-lg-10">
+ 
+                                                    <div class="wrapper-delete-form-map">
+                                                         Wilt u deze map verwijderen? <br> <strong>Let op:</strong> Alle apps in deze map worden ook verwijderd.
+                                                    </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                                 
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <form action='/manage/folders/delete/{{ $folder->id }}' method="POST">
+                                        @csrf  @method('DELETE')
+                                        <button type="submit" class="btn btn-primary" id="delete_mapBTN">Verwijderen</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuleren</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                      {{-- //modal create custom app --}}

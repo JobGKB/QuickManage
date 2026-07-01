@@ -47,13 +47,18 @@ class QuickDataViewerController extends Controller
             // STEP 1: Upload the file to FME Server temp resources (v4 API)
             $uploadUrl = 'https://fme-gkb.fmecloud.com/fmeapiv4/resources/connections/FME_SHAREDRESOURCE_TEMP/upload?path&overwrite=true';
 
+            $uploadPath = $file->getRealPath() ?: $file->getPathname();
+            if (!$uploadPath || !is_readable($uploadPath)) {
+                return response()->json(['message' => 'Geüpload bestand kon niet worden gelezen.'], 422);
+            }
+
             $uploadResponse = Http::withoutVerifying()
                 ->timeout(300)
                 ->withHeaders([
                     'Authorization' => 'fmetoken token=' . $fmeToken,
                     'Accept' => 'application/json',
                 ])
-                ->attach('files', fopen($file->getRealPath(), 'r'), $fileName)
+                ->attach('files', fopen($uploadPath, 'r'), $fileName)
                 ->post($uploadUrl);
 
             if (!$uploadResponse->successful()) {
@@ -154,13 +159,18 @@ class QuickDataViewerController extends Controller
             // STEP 1: Upload the DWG file to FME Server temp resources (v4 API)
             $uploadUrl = 'https://fme-gkb.fmecloud.com/fmeapiv4/resources/connections/FME_SHAREDRESOURCE_TEMP/upload?path&overwrite=true';
 
+            $uploadPath = $file->getRealPath() ?: $file->getPathname();
+            if (!$uploadPath || !is_readable($uploadPath)) {
+                return response()->json(['message' => 'Geüpload bestand kon niet worden gelezen.'], 422);
+            }
+
             $uploadResponse = Http::withoutVerifying()
                 ->timeout(300)
                 ->withHeaders([
                     'Authorization' => 'fmetoken token=' . $fmeToken,
                     'Accept' => 'application/json',
                 ])
-                ->attach('files', fopen($file->getRealPath(), 'r'), $fileName)
+                ->attach('files', fopen($uploadPath, 'r'), $fileName)
                 ->post($uploadUrl);
 
             if (!$uploadResponse->successful()) {

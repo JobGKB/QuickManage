@@ -1,9 +1,7 @@
 @extends('layouts.GKB_AppGallery_layout')
 
 @section('content')
-
  
-  
     <div class="container">
       <div class="row">
         <div class="offset-lg-2 col-lg-8">
@@ -24,9 +22,7 @@
                   </div>
 
                 </div>
-
-                
-
+ 
                 <div class="row">
                   <div class="offset-lg-1 col-lg-10 text-center">
                    
@@ -47,12 +43,7 @@
             <!-- end header  -->
 
             <!-- body  -->
-          
-
-        
             
-
-
              <!--   apps -->
             <section class="body"  >
               <div class="container">
