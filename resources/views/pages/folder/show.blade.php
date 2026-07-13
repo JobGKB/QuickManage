@@ -104,7 +104,7 @@
 
             
                     @if ($custom_apps->isNotEmpty())  
-                        
+                    
                     
                     <p class="mt-5"><strong>Custom Apps:</strong></p>
 

@@ -100,6 +100,9 @@
                             <span class="spinner" aria-hidden="true"></span>
                           </div>
 
+                          <hr> 
+                          <p class="drop-hint">Deze app is nog in ontwikkeling. Mocht je problemen ondervinden, neem dan contact op met Job of Dirk-Jan.</p>
+
                       </div>
                     </div>
                   </div>
