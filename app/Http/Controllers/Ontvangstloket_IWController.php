@@ -13,7 +13,7 @@ class Ontvangstloket_IWController extends Controller
         // dd($apps);
         
         return view('ontvangstloket_iw.index',[
-          
+            
             
         ]);
     }

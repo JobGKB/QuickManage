@@ -1,14 +1,558 @@
-{ 
-    "text" : [{
-        "id": 1,
-        "content": "This is a test."
-    },
-    {
-        "id": 2,
-        "content": "This is another test."
-    },
-    {
-        "id": 3,
-        "content": "This is yet another test."
-    }]           
+{"profielen":
+    [
+        { 
+            "profielcode": "30_12_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {
+                "inpeildatum": "-" ,
+                "Bagger m3 / strekkende meter":"0.07"
+            }
+            ],
+            "punten":[
+                {"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.63},
+                {"puntnr":2,"afstand":0.17,"puntsoort":"baggervasteb","meting":-2.05},
+                {"puntnr":3,"afstand":0.49,"puntsoort":"baggervasteb","meting":-2.36},
+                {"puntnr":4,"afstand":0.9,"puntsoort":"baggervasteb","meting":-2.45},
+                {"puntnr":5,"afstand":1.39,"puntsoort":"baggervasteb","meting":-2.59},
+                {"puntnr":6,"afstand":1.9,"puntsoort":"baggervasteb","meting":-2.76},
+                {"puntnr":7,"afstand":2.44,"puntsoort":"vast","meting":-2.95},
+                {"puntnr":8,"afstand":2.44,"puntsoort":"bagger","meting":-2.88},
+                {"puntnr":9,"afstand":2.87,"puntsoort":"vast","meting":-2.95},
+                {"puntnr":10,"afstand":2.87,"puntsoort":"bagger","meting":-2.88},
+                {"puntnr":11,"afstand":3.4,"puntsoort":"baggervasteb","meting":-2.74},
+                {"puntnr":12,"afstand":3.88,"puntsoort":"baggervasteb","meting":-2.59},
+                {"puntnr":13,"afstand":4.33,"puntsoort":"baggervasteb","meting":-2.46},
+                {"puntnr":14,"afstand":4.83,"puntsoort":"baggervasteb","meting":-2.33},
+                {"puntnr":15,"afstand":5.44,"puntsoort":"baggervasteb","meting":-2.24},
+                {"puntnr":16,"afstand":5.98,"puntsoort":"baggervasteb","meting":-2.05},
+                {"puntnr":17,"afstand":8.08,"puntsoort":"insteek","meting":-1.24}
+            ]
+            },
+            
+            { 
+            "profielcode": "29_15_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-","Bagger m3 / strekkende meter":"2.17"}
+            ],
+            "punten":[
+                {"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":0.19},
+                {"puntnr":2,"afstand":3.94,"puntsoort":"baggervasteb","meting":-1.82},
+                {"puntnr":3,"afstand":4.43,"puntsoort":"baggervasteb","meting":-2.47},
+                {"puntnr":4,"afstand":4.87,"puntsoort":"vast","meting":-2.65},
+                {"puntnr":5,"afstand":4.87,"puntsoort":"bagger","meting":-2.58},
+                {"puntnr":6,"afstand":5.41,"puntsoort":"vast","meting":-2.83},
+                {"puntnr":7,"afstand":5.41,"puntsoort":"bagger","meting":-2.67},
+                {"puntnr":8,"afstand":5.98,"puntsoort":"vast","meting":-3.12},
+                {"puntnr":9,"afstand":5.98,"puntsoort":"bagger","meting":-2.76},
+                {"puntnr":10,"afstand":6.39,"puntsoort":"vast","meting":-3.36},
+                {"puntnr":11,"afstand":6.39,"puntsoort":"bagger","meting":-2.83},
+                {"puntnr":12,"afstand":6.97,"puntsoort":"vast","meting":-3.42},
+                {"puntnr":13,"afstand":6.97,"puntsoort":"bagger","meting":-2.85},
+                {"puntnr":14,"afstand":7.93,"puntsoort":"vast","meting":-3.48},
+                {"puntnr":15,"afstand":7.93,"puntsoort":"bagger","meting":-2.85},
+                {"puntnr":16,"afstand":9.01,"puntsoort":"vast","meting":-3.26},
+                {"puntnr":17,"afstand":9.01,"puntsoort":"bagger","meting":-2.85},
+                {"puntnr":18,"afstand":9.49,"puntsoort":"vast","meting":-3.25},
+                {"puntnr":19,"afstand":9.49,"puntsoort":"bagger","meting":-2.84},
+                {"puntnr":20,"afstand":9.92,"puntsoort":"vast","meting":-2.8},
+                {"puntnr":21,"afstand":9.92,"puntsoort":"bagger","meting":-2.75},
+                {"puntnr":22,"afstand":10.41,"puntsoort":"baggervasteb","meting":-2.72},
+                {"puntnr":23,"afstand":10.82,"puntsoort":"baggervasteb","meting":-2.04},
+                {"puntnr":24,"afstand":11.47,"puntsoort":"baggervasteb","meting":-1.84},
+                {"puntnr":25,"afstand":16.73,"puntsoort":"insteek","meting":-1.44}
+            ]
+            },
+            
+            
+            
+            
+            { 
+            "profielcode": "29_10_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.39"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.42},{"puntnr":2,"afstand":1.89,"puntsoort":"baggervasteb","meting":-1.78},{"puntnr":3,"afstand":2.32,"puntsoort":"baggervasteb","meting":-1.9},{"puntnr":4,"afstand":2.85,"puntsoort":"baggervasteb","meting":-2.08},{"puntnr":5,"afstand":3.37,"puntsoort":"baggervasteb","meting":-2.18},{"puntnr":6,"afstand":4.02,"puntsoort":"vast","meting":-2.29},{"puntnr":7,"afstand":4.02,"puntsoort":"bagger","meting":-2.23},{"puntnr":8,"afstand":4.47,"puntsoort":"vast","meting":-2.48},{"puntnr":9,"afstand":4.47,"puntsoort":"bagger","meting":-2.29},{"puntnr":10,"afstand":5,"puntsoort":"vast","meting":-2.46},{"puntnr":11,"afstand":5,"puntsoort":"bagger","meting":-2.3},{"puntnr":12,"afstand":5.45,"puntsoort":"vast","meting":-2.45},{"puntnr":13,"afstand":5.45,"puntsoort":"bagger","meting":-2.28},{"puntnr":14,"afstand":6.05,"puntsoort":"vast","meting":-2.37},{"puntnr":15,"afstand":6.05,"puntsoort":"bagger","meting":-2.2},{"puntnr":16,"afstand":6.55,"puntsoort":"baggervasteb","meting":-2.19},{"puntnr":17,"afstand":7.06,"puntsoort":"baggervasteb","meting":-1.96},{"puntnr":18,"afstand":7.66,"puntsoort":"baggervasteb","meting":-1.81},{"puntnr":19,"afstand":8.36,"puntsoort":"baggervasteb","meting":-1.73},{"puntnr":20,"afstand":9,"puntsoort":"insteek","meting":-1.56}]
+            },{ 
+            "profielcode": "29_4_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"1.21"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.47},{"puntnr":2,"afstand":1.71,"puntsoort":"baggervasteb","meting":-1.79},{"puntnr":3,"afstand":2.21,"puntsoort":"baggervasteb","meting":-1.83},{"puntnr":4,"afstand":2.67,"puntsoort":"vast","meting":-2.12},{"puntnr":5,"afstand":2.67,"puntsoort":"bagger","meting":-2.06},{"puntnr":6,"afstand":3.24,"puntsoort":"vast","meting":-2.35},{"puntnr":7,"afstand":3.24,"puntsoort":"bagger","meting":-2.19},{"puntnr":8,"afstand":3.67,"puntsoort":"vast","meting":-2.46},{"puntnr":9,"afstand":3.67,"puntsoort":"bagger","meting":-2.29},{"puntnr":10,"afstand":4.27,"puntsoort":"vast","meting":-2.57},{"puntnr":11,"afstand":4.27,"puntsoort":"bagger","meting":-2.33},{"puntnr":12,"afstand":4.75,"puntsoort":"vast","meting":-2.59},{"puntnr":13,"afstand":4.75,"puntsoort":"bagger","meting":-2.36},{"puntnr":14,"afstand":5.75,"puntsoort":"vast","meting":-2.62},{"puntnr":15,"afstand":5.75,"puntsoort":"bagger","meting":-2.39},{"puntnr":16,"afstand":6.75,"puntsoort":"vast","meting":-2.63},{"puntnr":17,"afstand":6.75,"puntsoort":"bagger","meting":-2.38},{"puntnr":18,"afstand":7.68,"puntsoort":"vast","meting":-2.41},{"puntnr":19,"afstand":7.68,"puntsoort":"bagger","meting":-2.31},{"puntnr":20,"afstand":8.23,"puntsoort":"vast","meting":-2.31},{"puntnr":21,"afstand":8.23,"puntsoort":"bagger","meting":-2.21},{"puntnr":22,"afstand":8.8,"puntsoort":"vast","meting":-2.2},{"puntnr":23,"afstand":8.8,"puntsoort":"bagger","meting":-2.14},{"puntnr":24,"afstand":9.24,"puntsoort":"vast","meting":-2.1},{"puntnr":25,"afstand":9.24,"puntsoort":"bagger","meting":-2.05},{"puntnr":26,"afstand":9.77,"puntsoort":"vast","meting":-2.05},{"puntnr":27,"afstand":9.77,"puntsoort":"bagger","meting":-1.98},{"puntnr":28,"afstand":10.22,"puntsoort":"vast","meting":-1.91},{"puntnr":29,"afstand":10.22,"puntsoort":"bagger","meting":-1.87},{"puntnr":30,"afstand":10.77,"puntsoort":"baggervasteb","meting":-1.84},{"puntnr":31,"afstand":11.38,"puntsoort":"baggervasteb","meting":-1.79},{"puntnr":32,"afstand":14.19,"puntsoort":"insteek","meting":-1.37}]
+            },{ 
+            "profielcode": "29_16_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"1.39"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.13},{"puntnr":2,"afstand":2.31,"puntsoort":"baggervasteb","meting":-1.86},{"puntnr":3,"afstand":2.66,"puntsoort":"baggervasteb","meting":-2.39},{"puntnr":4,"afstand":3.5,"puntsoort":"baggervasteb","meting":-2.61},{"puntnr":5,"afstand":3.94,"puntsoort":"vast","meting":-2.83},{"puntnr":6,"afstand":3.94,"puntsoort":"bagger","meting":-2.69},{"puntnr":7,"afstand":4.39,"puntsoort":"vast","meting":-3.12},{"puntnr":8,"afstand":4.39,"puntsoort":"bagger","meting":-2.58},{"puntnr":9,"afstand":4.77,"puntsoort":"vast","meting":-3.25},{"puntnr":10,"afstand":4.77,"puntsoort":"bagger","meting":-2.78},{"puntnr":11,"afstand":5.3,"puntsoort":"vast","meting":-3.4},{"puntnr":12,"afstand":5.3,"puntsoort":"bagger","meting":-2.82},{"puntnr":13,"afstand":5.78,"puntsoort":"vast","meting":-3.37},{"puntnr":14,"afstand":5.78,"puntsoort":"bagger","meting":-2.7},{"puntnr":15,"afstand":6.19,"puntsoort":"vast","meting":-3.04},{"puntnr":16,"afstand":6.19,"puntsoort":"bagger","meting":-2.78},{"puntnr":17,"afstand":6.65,"puntsoort":"vast","meting":-2.94},{"puntnr":18,"afstand":6.65,"puntsoort":"bagger","meting":-2.73},{"puntnr":19,"afstand":7.25,"puntsoort":"vast","meting":-2.84},{"puntnr":20,"afstand":7.25,"puntsoort":"bagger","meting":-2.71},{"puntnr":21,"afstand":7.77,"puntsoort":"baggervasteb","meting":-2.57},{"puntnr":22,"afstand":8.56,"puntsoort":"baggervasteb","meting":-2.45},{"puntnr":23,"afstand":9.24,"puntsoort":"baggervasteb","meting":-1.84},{"puntnr":24,"afstand":9.59,"puntsoort":"baggervasteb","meting":-1.83},{"puntnr":25,"afstand":12.77,"puntsoort":"insteek","meting":-1.11}]
+            },{ 
+            "profielcode": "30_3_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.15"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.02},{"puntnr":2,"afstand":1.58,"puntsoort":"baggervasteb","meting":-2.17},{"puntnr":3,"afstand":2.14,"puntsoort":"baggervasteb","meting":-2.44},{"puntnr":4,"afstand":2.58,"puntsoort":"vast","meting":-2.76},{"puntnr":5,"afstand":2.58,"puntsoort":"bagger","meting":-2.71},{"puntnr":6,"afstand":3.3,"puntsoort":"vast","meting":-2.89},{"puntnr":7,"afstand":3.3,"puntsoort":"bagger","meting":-2.69},{"puntnr":8,"afstand":3.83,"puntsoort":"baggervasteb","meting":-2.65},{"puntnr":9,"afstand":4.29,"puntsoort":"baggervasteb","meting":-2.42},{"puntnr":10,"afstand":4.63,"puntsoort":"baggervasteb","meting":-2.19},{"puntnr":11,"afstand":6.73,"puntsoort":"insteek","meting":-0.95}]
+            },{ 
+            "profielcode": "29_9_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.16"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1},{"puntnr":2,"afstand":3.1,"puntsoort":"baggervasteb","meting":-1.82},{"puntnr":3,"afstand":3.42,"puntsoort":"baggervasteb","meting":-1.92},{"puntnr":4,"afstand":4.08,"puntsoort":"vast","meting":-2.08},{"puntnr":5,"afstand":4.08,"puntsoort":"bagger","meting":-1.99},{"puntnr":6,"afstand":4.59,"puntsoort":"vast","meting":-2.19},{"puntnr":7,"afstand":4.59,"puntsoort":"bagger","meting":-2.15},{"puntnr":8,"afstand":5.07,"puntsoort":"vast","meting":-2.18},{"puntnr":9,"afstand":5.07,"puntsoort":"bagger","meting":-2.09},{"puntnr":10,"afstand":5.59,"puntsoort":"vast","meting":-2.13},{"puntnr":11,"afstand":5.59,"puntsoort":"bagger","meting":-2.06},{"puntnr":12,"afstand":5.99,"puntsoort":"vast","meting":-2.01},{"puntnr":13,"afstand":5.99,"puntsoort":"bagger","meting":-1.98},{"puntnr":14,"afstand":6.37,"puntsoort":"baggervasteb","meting":-1.81},{"puntnr":15,"afstand":6.56,"puntsoort":"baggervasteb","meting":-1.76},{"puntnr":16,"afstand":7.59,"puntsoort":"insteek","meting":-1.57}]
+            },{ 
+            "profielcode": "30_11_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.62"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.16},{"puntnr":2,"afstand":0.93,"puntsoort":"baggervasteb","meting":-2.12},{"puntnr":3,"afstand":1.41,"puntsoort":"baggervasteb","meting":-2.36},{"puntnr":4,"afstand":1.9,"puntsoort":"baggervasteb","meting":-2.44},{"puntnr":5,"afstand":2.36,"puntsoort":"vast","meting":-2.73},{"puntnr":6,"afstand":2.36,"puntsoort":"bagger","meting":-2.52},{"puntnr":7,"afstand":2.85,"puntsoort":"vast","meting":-2.86},{"puntnr":8,"afstand":2.85,"puntsoort":"bagger","meting":-2.6},{"puntnr":9,"afstand":3.39,"puntsoort":"vast","meting":-3.02},{"puntnr":10,"afstand":3.39,"puntsoort":"bagger","meting":-2.62},{"puntnr":11,"afstand":3.84,"puntsoort":"vast","meting":-2.94},{"puntnr":12,"afstand":3.84,"puntsoort":"bagger","meting":-2.64},{"puntnr":13,"afstand":4.38,"puntsoort":"vast","meting":-2.67},{"puntnr":14,"afstand":4.38,"puntsoort":"bagger","meting":-2.59},{"puntnr":15,"afstand":4.76,"puntsoort":"baggervasteb","meting":-2.55},{"puntnr":16,"afstand":5.3,"puntsoort":"baggervasteb","meting":-2.22},{"puntnr":17,"afstand":5.61,"puntsoort":"baggervasteb","meting":-2.08},{"puntnr":18,"afstand":7.3,"puntsoort":"insteek","meting":-1.15}]
+            },{ 
+            "profielcode": "29_1_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.31"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":0.35},{"puntnr":2,"afstand":3.62,"puntsoort":"baggervasteb","meting":-1.85},{"puntnr":3,"afstand":4.13,"puntsoort":"vast","meting":-2.22},{"puntnr":4,"afstand":4.13,"puntsoort":"bagger","meting":-2.03},{"puntnr":5,"afstand":4.54,"puntsoort":"vast","meting":-2.35},{"puntnr":6,"afstand":4.54,"puntsoort":"bagger","meting":-2.09},{"puntnr":7,"afstand":5.16,"puntsoort":"vast","meting":-2.23},{"puntnr":8,"afstand":5.16,"puntsoort":"bagger","meting":-2.05},{"puntnr":9,"afstand":5.52,"puntsoort":"baggervasteb","meting":-1.8},{"puntnr":10,"afstand":9.31,"puntsoort":"insteek","meting":0.3}]
+            },{ 
+            "profielcode": "29_11_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.07"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.04},{"puntnr":2,"afstand":2.39,"puntsoort":"baggervasteb","meting":-1.77},{"puntnr":3,"afstand":2.93,"puntsoort":"baggervasteb","meting":-2.03},{"puntnr":4,"afstand":3.52,"puntsoort":"baggervasteb","meting":-2.12},{"puntnr":5,"afstand":4.01,"puntsoort":"vast","meting":-2.18},{"puntnr":6,"afstand":4.01,"puntsoort":"bagger","meting":-2.01},{"puntnr":7,"afstand":4.34,"puntsoort":"baggervasteb","meting":-2.13},{"puntnr":8,"afstand":4.92,"puntsoort":"baggervasteb","meting":-2.02},{"puntnr":9,"afstand":5.46,"puntsoort":"baggervasteb","meting":-1.77},{"puntnr":10,"afstand":6.07,"puntsoort":"insteek","meting":-1.49}]
+            },{ 
+            "profielcode": "29_13_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"1.73"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":0.45},{"puntnr":2,"afstand":3.86,"puntsoort":"baggervasteb","meting":-1.73},{"puntnr":3,"afstand":4.19,"puntsoort":"baggervasteb","meting":-1.92},{"puntnr":4,"afstand":4.73,"puntsoort":"baggervasteb","meting":-2.15},{"puntnr":5,"afstand":5.14,"puntsoort":"vast","meting":-2.62},{"puntnr":6,"afstand":5.14,"puntsoort":"bagger","meting":-2.33},{"puntnr":7,"afstand":5.76,"puntsoort":"vast","meting":-3.03},{"puntnr":8,"afstand":5.76,"puntsoort":"bagger","meting":-2.59},{"puntnr":9,"afstand":6.4,"puntsoort":"vast","meting":-3.32},{"puntnr":10,"afstand":6.4,"puntsoort":"bagger","meting":-2.71},{"puntnr":11,"afstand":6.92,"puntsoort":"vast","meting":-3.25},{"puntnr":12,"afstand":6.92,"puntsoort":"bagger","meting":-2.72},{"puntnr":13,"afstand":7.7,"puntsoort":"vast","meting":-3.23},{"puntnr":14,"afstand":7.7,"puntsoort":"bagger","meting":-2.72},{"puntnr":15,"afstand":8.31,"puntsoort":"vast","meting":-3.01},{"puntnr":16,"afstand":8.31,"puntsoort":"bagger","meting":-2.59},{"puntnr":17,"afstand":8.88,"puntsoort":"baggervasteb","meting":-2.11},{"puntnr":18,"afstand":9.65,"puntsoort":"baggervasteb","meting":-1.74},{"puntnr":19,"afstand":12.08,"puntsoort":"insteek","meting":-1.36}]
+            },{ 
+            "profielcode": "30_4_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.02"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.22},{"puntnr":2,"afstand":1.1,"puntsoort":"baggervasteb","meting":-2.08},{"puntnr":3,"afstand":1.27,"puntsoort":"baggervasteb","meting":-2.09},{"puntnr":4,"afstand":1.41,"puntsoort":"vast","meting":-2.29},{"puntnr":5,"afstand":1.41,"puntsoort":"bagger","meting":-2.14},{"puntnr":6,"afstand":1.52,"puntsoort":"baggervasteb","meting":-2.19},{"puntnr":7,"afstand":3.28,"puntsoort":"insteek","meting":-0.83}]
+            },{ 
+            "profielcode": "30_2_C", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.05"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.27},{"puntnr":2,"afstand":0.82,"puntsoort":"baggervasteb","meting":-1.86},{"puntnr":3,"afstand":1.35,"puntsoort":"baggervasteb","meting":-2.18},{"puntnr":4,"afstand":1.7,"puntsoort":"vast","meting":-2.39},{"puntnr":5,"afstand":1.7,"puntsoort":"bagger","meting":-2.32},{"puntnr":6,"afstand":2.22,"puntsoort":"vast","meting":-2.45},{"puntnr":7,"afstand":2.22,"puntsoort":"bagger","meting":-2.4},{"puntnr":8,"afstand":2.61,"puntsoort":"baggervasteb","meting":-2.24},{"puntnr":9,"afstand":3.16,"puntsoort":"baggervasteb","meting":-1.9},{"puntnr":10,"afstand":3.53,"puntsoort":"insteek","meting":-1.35}]
+            },{ 
+            "profielcode": "30_5_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.26"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.22},{"puntnr":2,"afstand":1.75,"puntsoort":"baggervasteb","meting":-1.83},{"puntnr":3,"afstand":2.02,"puntsoort":"vast","meting":-2.18},{"puntnr":4,"afstand":2.02,"puntsoort":"bagger","meting":-2.05},{"puntnr":5,"afstand":2.45,"puntsoort":"vast","meting":-2.45},{"puntnr":6,"afstand":2.45,"puntsoort":"bagger","meting":-2.11},{"puntnr":7,"afstand":2.84,"puntsoort":"vast","meting":-2.41},{"puntnr":8,"afstand":2.84,"puntsoort":"bagger","meting":-2.23},{"puntnr":9,"afstand":3.26,"puntsoort":"baggervasteb","meting":-2.01},{"puntnr":10,"afstand":3.75,"puntsoort":"baggervasteb","meting":-1.82}]
+            },{ 
+            "profielcode": "29_3_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.39"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.06},{"puntnr":2,"afstand":1.73,"puntsoort":"baggervasteb","meting":-2},{"puntnr":3,"afstand":2.18,"puntsoort":"vast","meting":-2.27},{"puntnr":4,"afstand":2.18,"puntsoort":"bagger","meting":-2.11},{"puntnr":5,"afstand":2.7,"puntsoort":"vast","meting":-2.51},{"puntnr":6,"afstand":2.7,"puntsoort":"bagger","meting":-2.25},{"puntnr":7,"afstand":3.25,"puntsoort":"vast","meting":-2.51},{"puntnr":8,"afstand":3.25,"puntsoort":"bagger","meting":-2.22},{"puntnr":9,"afstand":3.69,"puntsoort":"vast","meting":-2.15},{"puntnr":10,"afstand":3.69,"puntsoort":"bagger","meting":-2.08},{"puntnr":11,"afstand":4.08,"puntsoort":"baggervasteb","meting":-1.83},{"puntnr":12,"afstand":5.93,"puntsoort":"insteek","meting":-1.13}]
+            },{ 
+            "profielcode": "30_4_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.23"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.27},{"puntnr":2,"afstand":1,"puntsoort":"baggervasteb","meting":-1.85},{"puntnr":3,"afstand":1.39,"puntsoort":"vast","meting":-2.38},{"puntnr":4,"afstand":1.39,"puntsoort":"bagger","meting":-2.13},{"puntnr":5,"afstand":1.84,"puntsoort":"vast","meting":-2.38},{"puntnr":6,"afstand":1.84,"puntsoort":"bagger","meting":-2.11},{"puntnr":7,"afstand":2.24,"puntsoort":"vast","meting":-2.06},{"puntnr":8,"afstand":2.24,"puntsoort":"bagger","meting":-2.02},{"puntnr":9,"afstand":2.27,"puntsoort":"baggervasteb","meting":-1.85}]
+            },{ 
+            "profielcode": "29_8_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"1.71"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.23},{"puntnr":2,"afstand":4.04,"puntsoort":"baggervasteb","meting":-1.77},{"puntnr":3,"afstand":4.52,"puntsoort":"baggervasteb","meting":-2.08},{"puntnr":4,"afstand":5.13,"puntsoort":"vast","meting":-2.33},{"puntnr":5,"afstand":5.13,"puntsoort":"bagger","meting":-2.22},{"puntnr":6,"afstand":5.65,"puntsoort":"vast","meting":-2.5},{"puntnr":7,"afstand":5.65,"puntsoort":"bagger","meting":-2.35},{"puntnr":8,"afstand":6.1,"puntsoort":"vast","meting":-2.68},{"puntnr":9,"afstand":6.1,"puntsoort":"bagger","meting":-2.4},{"puntnr":10,"afstand":6.61,"puntsoort":"vast","meting":-2.85},{"puntnr":11,"afstand":6.61,"puntsoort":"bagger","meting":-2.44},{"puntnr":12,"afstand":7.07,"puntsoort":"vast","meting":-2.91},{"puntnr":13,"afstand":7.07,"puntsoort":"bagger","meting":-2.48},{"puntnr":14,"afstand":8.04,"puntsoort":"vast","meting":-2.88},{"puntnr":15,"afstand":8.04,"puntsoort":"bagger","meting":-2.46},{"puntnr":16,"afstand":9.05,"puntsoort":"vast","meting":-2.8},{"puntnr":17,"afstand":9.05,"puntsoort":"bagger","meting":-2.49},{"puntnr":18,"afstand":9.97,"puntsoort":"vast","meting":-2.52},{"puntnr":19,"afstand":9.97,"puntsoort":"bagger","meting":-2.34},{"puntnr":20,"afstand":10.49,"puntsoort":"vast","meting":-2.4},{"puntnr":21,"afstand":10.49,"puntsoort":"bagger","meting":-2.29},{"puntnr":22,"afstand":10.99,"puntsoort":"vast","meting":-2.17},{"puntnr":23,"afstand":10.99,"puntsoort":"bagger","meting":-2.09},{"puntnr":24,"afstand":11.37,"puntsoort":"baggervasteb","meting":-2.01},{"puntnr":25,"afstand":11.77,"puntsoort":"baggervasteb","meting":-1.79},{"puntnr":26,"afstand":12.14,"puntsoort":"baggervasteb","meting":-1.79},{"puntnr":27,"afstand":12.72,"puntsoort":"baggervasteb","meting":-1.8},{"puntnr":28,"afstand":14.53,"puntsoort":"insteek","meting":-1.52}]
+            },{ 
+            "profielcode": "29_12_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.13"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":0.53},{"puntnr":2,"afstand":4.04,"puntsoort":"baggervasteb","meting":-1.78},{"puntnr":3,"afstand":4.61,"puntsoort":"baggervasteb","meting":-2.11},{"puntnr":4,"afstand":5.12,"puntsoort":"vast","meting":-2.21},{"puntnr":5,"afstand":5.12,"puntsoort":"bagger","meting":-1.99},{"puntnr":6,"afstand":5.49,"puntsoort":"vast","meting":-2.01},{"puntnr":7,"afstand":5.49,"puntsoort":"bagger","meting":-1.93},{"puntnr":8,"afstand":6.02,"puntsoort":"baggervasteb","meting":-1.76},{"puntnr":9,"afstand":6.93,"puntsoort":"insteek","meting":-1.39}]
+            },{ 
+            "profielcode": "30_6_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.22"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.38},{"puntnr":2,"afstand":0.95,"puntsoort":"baggervasteb","meting":-1.83},{"puntnr":3,"afstand":1.38,"puntsoort":"vast","meting":-2.09},{"puntnr":4,"afstand":1.38,"puntsoort":"bagger","meting":-1.99},{"puntnr":5,"afstand":2.01,"puntsoort":"vast","meting":-2.37},{"puntnr":6,"afstand":2.01,"puntsoort":"bagger","meting":-2.1},{"puntnr":7,"afstand":2.37,"puntsoort":"vast","meting":-2.05},{"puntnr":8,"afstand":2.37,"puntsoort":"bagger","meting":-1.98},{"puntnr":9,"afstand":2.89,"puntsoort":"baggervasteb","meting":-1.83},{"puntnr":10,"afstand":3.41,"puntsoort":"insteek","meting":-1.58}]
+            },{ 
+            "profielcode": "30_6_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.09"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.34},{"puntnr":2,"afstand":0.77,"puntsoort":"baggervasteb","meting":-2.07},{"puntnr":3,"afstand":1.21,"puntsoort":"vast","meting":-2.33},{"puntnr":4,"afstand":1.21,"puntsoort":"bagger","meting":-2.13},{"puntnr":5,"afstand":1.64,"puntsoort":"baggervasteb","meting":-2.1},{"puntnr":6,"afstand":3.32,"puntsoort":"insteek","meting":-0.8}]
+            },{ 
+            "profielcode": "29_2_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.77"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.2},{"puntnr":2,"afstand":3.16,"puntsoort":"baggervasteb","meting":-1.73},{"puntnr":3,"afstand":3.64,"puntsoort":"baggervasteb","meting":-1.88},{"puntnr":4,"afstand":4.06,"puntsoort":"vast","meting":-1.92},{"puntnr":5,"afstand":4.06,"puntsoort":"bagger","meting":-1.88},{"puntnr":6,"afstand":4.65,"puntsoort":"vast","meting":-2.07},{"puntnr":7,"afstand":4.65,"puntsoort":"bagger","meting":-1.96},{"puntnr":8,"afstand":5.08,"puntsoort":"vast","meting":-2.26},{"puntnr":9,"afstand":5.08,"puntsoort":"bagger","meting":-2.09},{"puntnr":10,"afstand":5.58,"puntsoort":"vast","meting":-2.29},{"puntnr":11,"afstand":5.58,"puntsoort":"bagger","meting":-2.17},{"puntnr":12,"afstand":6.11,"puntsoort":"vast","meting":-2.48},{"puntnr":13,"afstand":6.11,"puntsoort":"bagger","meting":-2.27},{"puntnr":14,"afstand":6.55,"puntsoort":"vast","meting":-2.49},{"puntnr":15,"afstand":6.55,"puntsoort":"bagger","meting":-2.3},{"puntnr":16,"afstand":7.07,"puntsoort":"vast","meting":-2.45},{"puntnr":17,"afstand":7.07,"puntsoort":"bagger","meting":-2.29},{"puntnr":18,"afstand":7.63,"puntsoort":"vast","meting":-2.37},{"puntnr":19,"afstand":7.63,"puntsoort":"bagger","meting":-2.26},{"puntnr":20,"afstand":8.12,"puntsoort":"vast","meting":-2.45},{"puntnr":21,"afstand":8.12,"puntsoort":"bagger","meting":-2.23},{"puntnr":22,"afstand":8.61,"puntsoort":"vast","meting":-2.36},{"puntnr":23,"afstand":8.61,"puntsoort":"bagger","meting":-2.22},{"puntnr":24,"afstand":9.01,"puntsoort":"vast","meting":-2.15},{"puntnr":25,"afstand":9.01,"puntsoort":"bagger","meting":-2.06},{"puntnr":26,"afstand":9.54,"puntsoort":"baggervasteb","meting":-1.96},{"puntnr":27,"afstand":10.13,"puntsoort":"baggervasteb","meting":-2.02},{"puntnr":28,"afstand":10.95,"puntsoort":"baggervasteb","meting":-1.96},{"puntnr":29,"afstand":11.59,"puntsoort":"baggervasteb","meting":-1.75},{"puntnr":30,"afstand":12.37,"puntsoort":"baggervasteb","meting":-1.76},{"puntnr":31,"afstand":13.2,"puntsoort":"baggervasteb","meting":-1.87},{"puntnr":32,"afstand":13.63,"puntsoort":"baggervasteb","meting":-1.99},{"puntnr":33,"afstand":14.24,"puntsoort":"baggervasteb","meting":-1.74},{"puntnr":34,"afstand":15.37,"puntsoort":"insteek","meting":-1.49}]
+            },{ 
+            "profielcode": "30_9_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.15"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.23},{"puntnr":2,"afstand":1.22,"puntsoort":"baggervasteb","meting":-2.09},{"puntnr":3,"afstand":1.99,"puntsoort":"vast","meting":-2.44},{"puntnr":4,"afstand":1.99,"puntsoort":"bagger","meting":-2.22},{"puntnr":5,"afstand":2.44,"puntsoort":"vast","meting":-2.32},{"puntnr":6,"afstand":2.44,"puntsoort":"bagger","meting":-2.26},{"puntnr":7,"afstand":2.61,"puntsoort":"baggervasteb","meting":-2.1},{"puntnr":8,"afstand":3.73,"puntsoort":"insteek","meting":-1.04}]
+            },{ 
+            "profielcode": "29_7_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.73"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.12},{"puntnr":2,"afstand":3.72,"puntsoort":"baggervasteb","meting":-1.79},{"puntnr":3,"afstand":4.24,"puntsoort":"baggervasteb","meting":-1.84},{"puntnr":4,"afstand":4.71,"puntsoort":"baggervasteb","meting":-2.07},{"puntnr":5,"afstand":5.8,"puntsoort":"vast","meting":-2.42},{"puntnr":6,"afstand":5.8,"puntsoort":"bagger","meting":-2.33},{"puntnr":7,"afstand":6.27,"puntsoort":"vast","meting":-2.73},{"puntnr":8,"afstand":6.27,"puntsoort":"bagger","meting":-2.46},{"puntnr":9,"afstand":6.79,"puntsoort":"vast","meting":-2.84},{"puntnr":10,"afstand":6.79,"puntsoort":"bagger","meting":-2.5},{"puntnr":11,"afstand":7.43,"puntsoort":"vast","meting":-2.77},{"puntnr":12,"afstand":7.43,"puntsoort":"bagger","meting":-2.43},{"puntnr":13,"afstand":7.92,"puntsoort":"vast","meting":-2.56},{"puntnr":14,"afstand":7.92,"puntsoort":"bagger","meting":-2.31},{"puntnr":15,"afstand":8.49,"puntsoort":"baggervasteb","meting":-1.92},{"puntnr":16,"afstand":9.37,"puntsoort":"baggervasteb","meting":-1.79},{"puntnr":17,"afstand":10.02,"puntsoort":"baggervasteb","meting":-1.8},{"puntnr":18,"afstand":10.73,"puntsoort":"baggervasteb","meting":-1.81},{"puntnr":19,"afstand":11.65,"puntsoort":"baggervasteb","meting":-1.77},{"puntnr":20,"afstand":13.14,"puntsoort":"insteek","meting":-1.63}]
+            },{ 
+            "profielcode": "29_5_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.3"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.11},{"puntnr":2,"afstand":2.79,"puntsoort":"baggervasteb","meting":-1.73},{"puntnr":3,"afstand":3.27,"puntsoort":"baggervasteb","meting":-1.81},{"puntnr":4,"afstand":4.02,"puntsoort":"baggervasteb","meting":-1.97},{"puntnr":5,"afstand":4.71,"puntsoort":"vast","meting":-2.29},{"puntnr":6,"afstand":4.71,"puntsoort":"bagger","meting":-2.21},{"puntnr":7,"afstand":5.22,"puntsoort":"vast","meting":-2.44},{"puntnr":8,"afstand":5.22,"puntsoort":"bagger","meting":-2.21},{"puntnr":9,"afstand":5.7,"puntsoort":"vast","meting":-2.39},{"puntnr":10,"afstand":5.7,"puntsoort":"bagger","meting":-2.18},{"puntnr":11,"afstand":6.2,"puntsoort":"vast","meting":-2.17},{"puntnr":12,"afstand":6.2,"puntsoort":"bagger","meting":-2.11},{"puntnr":13,"afstand":6.89,"puntsoort":"baggervasteb","meting":-1.87},{"puntnr":14,"afstand":7.17,"puntsoort":"baggervasteb","meting":-1.77},{"puntnr":15,"afstand":11.77,"puntsoort":"insteek","meting":-0.84}]
+            },{ 
+            "profielcode": "30_5_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.07"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.19},{"puntnr":2,"afstand":1.07,"puntsoort":"baggervasteb","meting":-2.14},{"puntnr":3,"afstand":1.61,"puntsoort":"vast","meting":-2.4},{"puntnr":4,"afstand":1.61,"puntsoort":"bagger","meting":-2.27},{"puntnr":5,"afstand":2.19,"puntsoort":"baggervasteb","meting":-2.1},{"puntnr":6,"afstand":3.66,"puntsoort":"insteek","meting":-0.83}]
+            },{ 
+            "profielcode": "30_2_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.16"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.17},{"puntnr":2,"afstand":2.96,"puntsoort":"baggervasteb","meting":-2.09},{"puntnr":3,"afstand":3.14,"puntsoort":"vast","meting":-2.5},{"puntnr":4,"afstand":3.14,"puntsoort":"bagger","meting":-2.32},{"puntnr":5,"afstand":3.62,"puntsoort":"vast","meting":-2.67},{"puntnr":6,"afstand":3.62,"puntsoort":"bagger","meting":-2.47},{"puntnr":7,"afstand":4.16,"puntsoort":"baggervasteb","meting":-2.63},{"puntnr":8,"afstand":4.6,"puntsoort":"baggervasteb","meting":-2.44},{"puntnr":9,"afstand":5.08,"puntsoort":"baggervasteb","meting":-2.12},{"puntnr":10,"afstand":7.17,"puntsoort":"insteek","meting":-0.99}]
+            },{ 
+            "profielcode": "30_7_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.39"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.43},{"puntnr":2,"afstand":1.49,"puntsoort":"baggervasteb","meting":-1.81},{"puntnr":3,"afstand":1.87,"puntsoort":"vast","meting":-2.18},{"puntnr":4,"afstand":1.87,"puntsoort":"bagger","meting":-2.06},{"puntnr":5,"afstand":2.47,"puntsoort":"vast","meting":-2.44},{"puntnr":6,"afstand":2.47,"puntsoort":"bagger","meting":-2.1},{"puntnr":7,"afstand":3.05,"puntsoort":"vast","meting":-2.36},{"puntnr":8,"afstand":3.05,"puntsoort":"bagger","meting":-2.02},{"puntnr":9,"afstand":3.23,"puntsoort":"baggervasteb","meting":-1.91}]
+            },{ 
+            "profielcode": "30_10_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.24"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.24},{"puntnr":2,"afstand":1.08,"puntsoort":"baggervasteb","meting":-2.09},{"puntnr":3,"afstand":1.54,"puntsoort":"vast","meting":-2.55},{"puntnr":4,"afstand":1.54,"puntsoort":"bagger","meting":-2.38},{"puntnr":5,"afstand":2.07,"puntsoort":"vast","meting":-2.67},{"puntnr":6,"afstand":2.07,"puntsoort":"bagger","meting":-2.38},{"puntnr":7,"afstand":2.62,"puntsoort":"baggervasteb","meting":-2.25},{"puntnr":8,"afstand":2.95,"puntsoort":"baggervasteb","meting":-2.1},{"puntnr":9,"afstand":3.96,"puntsoort":"insteek","meting":-1.15}]
+            },{ 
+            "profielcode": "30_1_C", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.19"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.24},{"puntnr":2,"afstand":1.08,"puntsoort":"baggervasteb","meting":-1.9},{"puntnr":3,"afstand":1.55,"puntsoort":"vast","meting":-2.3},{"puntnr":4,"afstand":1.55,"puntsoort":"bagger","meting":-2.24},{"puntnr":5,"afstand":2.03,"puntsoort":"vast","meting":-2.48},{"puntnr":6,"afstand":2.03,"puntsoort":"bagger","meting":-2.35},{"puntnr":7,"afstand":2.51,"puntsoort":"vast","meting":-2.64},{"puntnr":8,"afstand":2.51,"puntsoort":"bagger","meting":-2.46},{"puntnr":9,"afstand":3.11,"puntsoort":"baggervasteb","meting":-2.35},{"puntnr":10,"afstand":3.53,"puntsoort":"baggervasteb","meting":-1.96},{"puntnr":11,"afstand":3.78,"puntsoort":"baggervasteb","meting":-1.83},{"puntnr":12,"afstand":4.5,"puntsoort":"insteek","meting":-1.37}]
+            },{ 
+            "profielcode": "30_3_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.2"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.24},{"puntnr":2,"afstand":0.8,"puntsoort":"baggervasteb","meting":-1.83},{"puntnr":3,"afstand":1.19,"puntsoort":"vast","meting":-2.17},{"puntnr":4,"afstand":1.19,"puntsoort":"bagger","meting":-1.97},{"puntnr":5,"afstand":1.65,"puntsoort":"vast","meting":-2.36},{"puntnr":6,"afstand":1.65,"puntsoort":"bagger","meting":-2.09},{"puntnr":7,"afstand":2.02,"puntsoort":"baggervasteb","meting":-1.86},{"puntnr":8,"afstand":2.24,"puntsoort":"insteek","meting":-1.26}]
+            },{ 
+            "profielcode": "30_8_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.13"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.26},{"puntnr":2,"afstand":1.13,"puntsoort":"baggervasteb","meting":-2.09},{"puntnr":3,"afstand":1.68,"puntsoort":"baggervasteb","meting":-2.45},{"puntnr":4,"afstand":2.08,"puntsoort":"vast","meting":-2.57},{"puntnr":5,"afstand":2.08,"puntsoort":"bagger","meting":-2.38},{"puntnr":6,"afstand":2.38,"puntsoort":"vast","meting":-2.49},{"puntnr":7,"afstand":2.38,"puntsoort":"bagger","meting":-2.32},{"puntnr":8,"afstand":2.85,"puntsoort":"baggervasteb","meting":-2.06},{"puntnr":9,"afstand":3.77,"puntsoort":"insteek","meting":-1.09}]
+            },{ 
+            "profielcode": "30_1_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.14"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.21},{"puntnr":2,"afstand":1.27,"puntsoort":"baggervasteb","meting":-2.13},{"puntnr":3,"afstand":1.73,"puntsoort":"baggervasteb","meting":-2.24},{"puntnr":4,"afstand":2.09,"puntsoort":"vast","meting":-2.44},{"puntnr":5,"afstand":2.09,"puntsoort":"bagger","meting":-2.29},{"puntnr":6,"afstand":2.55,"puntsoort":"vast","meting":-2.55},{"puntnr":7,"afstand":2.55,"puntsoort":"bagger","meting":-2.42},{"puntnr":8,"afstand":3.34,"puntsoort":"baggervasteb","meting":-2.38},{"puntnr":9,"afstand":3.74,"puntsoort":"baggervasteb","meting":-2.16},{"puntnr":10,"afstand":5.76,"puntsoort":"insteek","meting":-0.87}]
+            },{ 
+            "profielcode": "30_1_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.14"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":0.2},{"puntnr":2,"afstand":2.79,"puntsoort":"baggervasteb","meting":-1.86},{"puntnr":3,"afstand":3.3,"puntsoort":"vast","meting":-2.1},{"puntnr":4,"afstand":3.3,"puntsoort":"bagger","meting":-1.96},{"puntnr":5,"afstand":3.76,"puntsoort":"vast","meting":-2.14},{"puntnr":6,"afstand":3.76,"puntsoort":"bagger","meting":-1.96},{"puntnr":7,"afstand":4.13,"puntsoort":"baggervasteb","meting":-1.82},{"puntnr":8,"afstand":7.03,"puntsoort":"insteek","meting":0.19}]
+            },{ 
+            "profielcode": "29_6_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"1.26"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-0.82},{"puntnr":2,"afstand":3.39,"puntsoort":"baggervasteb","meting":-1.75},{"puntnr":3,"afstand":3.64,"puntsoort":"baggervasteb","meting":-1.82},{"puntnr":4,"afstand":4.1,"puntsoort":"vast","meting":-2.04},{"puntnr":5,"afstand":4.1,"puntsoort":"bagger","meting":-2.01},{"puntnr":6,"afstand":4.5,"puntsoort":"vast","meting":-2.23},{"puntnr":7,"afstand":4.5,"puntsoort":"bagger","meting":-2.19},{"puntnr":8,"afstand":5.07,"puntsoort":"vast","meting":-2.38},{"puntnr":9,"afstand":5.07,"puntsoort":"bagger","meting":-2.25},{"puntnr":10,"afstand":5.52,"puntsoort":"vast","meting":-2.57},{"puntnr":11,"afstand":5.52,"puntsoort":"bagger","meting":-2.3},{"puntnr":12,"afstand":6.02,"puntsoort":"vast","meting":-2.63},{"puntnr":13,"afstand":6.02,"puntsoort":"bagger","meting":-2.28},{"puntnr":14,"afstand":6.53,"puntsoort":"vast","meting":-2.62},{"puntnr":15,"afstand":6.53,"puntsoort":"bagger","meting":-2.31},{"puntnr":16,"afstand":7.01,"puntsoort":"vast","meting":-2.65},{"puntnr":17,"afstand":7.01,"puntsoort":"bagger","meting":-2.23},{"puntnr":18,"afstand":8.02,"puntsoort":"vast","meting":-2.33},{"puntnr":19,"afstand":8.02,"puntsoort":"bagger","meting":-2.21},{"puntnr":20,"afstand":8.54,"puntsoort":"vast","meting":-2.36},{"puntnr":21,"afstand":8.54,"puntsoort":"bagger","meting":-2.1},{"puntnr":22,"afstand":9.08,"puntsoort":"vast","meting":-2.19},{"puntnr":23,"afstand":9.08,"puntsoort":"bagger","meting":-2.07},{"puntnr":24,"afstand":9.59,"puntsoort":"vast","meting":-2.13},{"puntnr":25,"afstand":9.59,"puntsoort":"bagger","meting":-2.01},{"puntnr":26,"afstand":10.06,"puntsoort":"vast","meting":-1.99},{"puntnr":27,"afstand":10.06,"puntsoort":"bagger","meting":-1.92},{"puntnr":28,"afstand":10.6,"puntsoort":"baggervasteb","meting":-1.84},{"puntnr":29,"afstand":11.19,"puntsoort":"baggervasteb","meting":-1.74},{"puntnr":30,"afstand":14.21,"puntsoort":"insteek","meting":-1.1}]
+            },{ 
+            "profielcode": "29_14_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.18"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.15},{"puntnr":2,"afstand":1.15,"puntsoort":"baggervasteb","meting":-1.87},{"puntnr":3,"afstand":1.55,"puntsoort":"vast","meting":-2.37},{"puntnr":4,"afstand":1.55,"puntsoort":"bagger","meting":-2.24},{"puntnr":5,"afstand":2.01,"puntsoort":"vast","meting":-2.4},{"puntnr":6,"afstand":2.01,"puntsoort":"bagger","meting":-2.22},{"puntnr":7,"afstand":2.4,"puntsoort":"vast","meting":-2.28},{"puntnr":8,"afstand":2.4,"puntsoort":"bagger","meting":-2.15},{"puntnr":9,"afstand":2.72,"puntsoort":"baggervasteb","meting":-1.86},{"puntnr":10,"afstand":4.61,"puntsoort":"insteek","meting":-1.16}]
+            },
+            { 
+            "profielcode": "30_2_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.31"}
+            ],
+            "punten":[
+            {"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.56},
+            {"puntnr":2,"afstand":1.32,"puntsoort":"baggervasteb","meting":-1.81},
+            {"puntnr":3,"afstand":1.81,"puntsoort":"vast","meting":-2.24},
+            {"puntnr":4,"afstand":1.81,"puntsoort":"bagger","meting":-2.08},
+            {"puntnr":5,"afstand":2.26,"puntsoort":"vast","meting":-2.43},
+            {"puntnr":6,"afstand":2.26,"puntsoort":"bagger","meting":-2.21},
+            {"puntnr":7,"afstand":2.8,"puntsoort":"vast","meting":-2.44},
+            {"puntnr":8,"afstand":2.8,"puntsoort":"bagger","meting":-2.21},
+            {"puntnr":9,"afstand":3.14,"puntsoort":"vast","meting":-2.04},
+            {"puntnr":10,"afstand":3.14,"puntsoort":"bagger","meting":-1.92},
+            {"puntnr":11,"afstand":3.28,"puntsoort":"baggervasteb","meting":-1.77},
+            {"puntnr":12,"afstand":4.32,"puntsoort":"insteek","meting":-1.4}
+        ]
+            },
+            
+            
+            
+            { 
+            "profielcode": "30_7_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {"inpeildatum": "-" ,"Bagger m3 / strekkende meter":"0.1"}
+            ],
+            "punten":[{"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.37},{"puntnr":2,"afstand":0.86,"puntsoort":"baggervasteb","meting":-2.12},{"puntnr":3,"afstand":1.53,"puntsoort":"vast","meting":-2.4},{"puntnr":4,"afstand":1.53,"puntsoort":"bagger","meting":-2.21},{"puntnr":5,"afstand":1.96,"puntsoort":"baggervasteb","meting":-2.13},{"puntnr":6,"afstand":2.69,"puntsoort":"insteek","meting":-1.23}]
+            }
+]
 }

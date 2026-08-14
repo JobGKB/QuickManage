@@ -41,6 +41,8 @@
                             </a> 
                     
                         @endif  
+
+                        
                         {{-- @if (Route::has('password.request'))
                         
                             <a class=" " href="{{ route('register') }}">
@@ -48,7 +50,8 @@
                             </a>
                     
                         @endif   --}}
-                           <br/> <a href="/testAI" class="ai-btn">Test AI met AGOL</a> 
+                           {{-- <br/> <a href="/testAI" class="ai-btn">Test AI met AGOL</a>  --}}
+                           <br/> <a href="/gisportaal" class="ai-btn">GIS Portaal</a> 
                     </div>
                
                 </div>    

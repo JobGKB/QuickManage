@@ -12,7 +12,12 @@ use App\Http\Controllers\Auth\LogoutAGOLController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/ping', fn() => 'pong');
+// Simple health-check endpoint for FME HTTPCaller: GET /ping -> "pong"
+Route::get('/ping', fn() => response('pong', 200)
+    ->header('Content-Type', 'text/plain'));
+
+Route::get('/profielplaatje', [App\Http\Controllers\ProfielplaatjeController::class, 'index']);                             
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -110,11 +115,21 @@ Route::get('/arcgis/loginAGOL', function () {
 })->name('arcgis.loginAGOL');
 // AI routes (require auth + rate limiting)
 Route::middleware(['auth', 'arcgis.required'])->group(function () {
+
     Route::get('/testAI', [App\Http\Controllers\AIController::class, 'index'])->name('testAI');
     Route::post('/logoutAGOL', [LogoutAGOLController::class, 'logout'])->name('logoutAGOL');
+
+    Route::get('/gisportaal', [App\Http\Controllers\GISPortaalController::class, 'index'])->name('gisportaal');
+    Route::get('/gisportaal/groups/{groupId}/maps', [App\Http\Controllers\GISPortaalController::class, 'groupMaps'])->name('gisportaal.groupMaps');
+
+    Route::post('/gisportaal/assistant', [App\Http\Controllers\GISAssistentController::class, 'chat'])
+        ->middleware('throttle:10,1')
+        ->name('gisportaal.assistant');
+
 });
 
-Route::get('/oauth-callback', [App\Http\Controllers\AIController::class, 'callback']);
+// Route::get('/oauth-callback', [App\Http\Controllers\AIController::class, 'callback']);
+Route::get('/oauth-callback', [App\Http\Controllers\GISPortaalController::class, 'callback']);
 
 
 Route::middleware(['auth', 'throttle:10,1'])->group(function () {

@@ -1,7 +1,89 @@
-{
-    "id":"",
-    "attributes":{
-        "aannemer":"",
-        "aanvullen_straten":"",
-        "beheergroep":"","beheerobject":"","beluchting":"Nee","bereikbaarheid":"","bestekpost_nb":"","bestekspost":"","bijzonderheden":"","boombeeld":"","boomverwijderen":"Nee","bp_watergeven":"","bronbestand":"","contractjaar":"","creationdate":"20250923071626.551000","creator":"gisadmin_GKB","datumgereed":"","drainage":"Nee","editdate":"20251209141313.162000","editor":"bomen_GKB","eenheid":"m3","gebreken":"","geom":"{\"type\":\"Point\",\"coordinates\":[97029.0685225,417553.5817635]}","gietrand":"15 cm onder mv","globalid":"{A37514DA-B512-4213-9D12-8D82B7F9AF9E}","hoeveelheid":"1","hoogteklasse":"","iedererondewatergeven":"Ja","infiltratie":"Nee","inzaaien":"Ja","isbereikbaar":"Goed","locatie":"","maatregel":"","objectid":"11373","opdrachtgever":"","opmerking":"Grond doormengen","plantplaatsverbetering":"Ja, bomengrond","projectcode":"HOEW2503-010","snoeimaatregel":"","sortiment":"Acer pseudoplatanus 'Negenia'","sortiment_nl":"","stamdiameter":"","standplaats":"Gazon","statusplantplaatsverbetering":"Gereed","statusrevisie":"Opdracht","statusuitvoering":"Gereed","stobbeuitgevoerdwerk":"","stobfrezen":"Nee","straat":"Leeuwerikstraat (SEN)","uitvoeringbovengrondsverwijderd":"","uitvoeringfrezen":"","watergehad":"Nee","watergeven":"Nee","weekgereed":"","wegtype":"VP","wijk":"","woonplaats":"Strijen"}
+{"profielen":
+    [
+        { 
+            "profielcode": "30_12_B", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {
+                "inpeildatum": "-" ,
+                "Bagger m3 / strekkende meter":"0.07",
+                "Profiel lengte":"x",
+                "Bagger m3":"x"
+
+
+            }
+            ],
+            "punten":[
+                {"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.63},
+                {"puntnr":2,"afstand":0.17,"puntsoort":"baggervasteb","meting":-2.05},
+                {"puntnr":3,"afstand":0.49,"puntsoort":"baggervasteb","meting":-2.36},
+                {"puntnr":4,"afstand":0.9,"puntsoort":"baggervasteb","meting":-2.45},
+                {"puntnr":5,"afstand":1.39,"puntsoort":"baggervasteb","meting":-2.59},
+                {"puntnr":6,"afstand":1.9,"puntsoort":"baggervasteb","meting":-2.76},
+                {"puntnr":7,"afstand":2.44,"puntsoort":"vast","meting":-2.95},
+                {"puntnr":8,"afstand":2.44,"puntsoort":"bagger","meting":-2.88},
+                {"puntnr":9,"afstand":2.87,"puntsoort":"vast","meting":-2.95},
+                {"puntnr":10,"afstand":2.87,"puntsoort":"bagger","meting":-2.88},
+                {"puntnr":11,"afstand":3.4,"puntsoort":"baggervasteb","meting":-2.74},
+                {"puntnr":12,"afstand":3.88,"puntsoort":"baggervasteb","meting":-2.59},
+                {"puntnr":13,"afstand":4.33,"puntsoort":"baggervasteb","meting":-2.46},
+                {"puntnr":14,"afstand":4.83,"puntsoort":"baggervasteb","meting":-2.33},
+                {"puntnr":15,"afstand":5.44,"puntsoort":"baggervasteb","meting":-2.24},
+                {"puntnr":16,"afstand":5.98,"puntsoort":"baggervasteb","meting":-2.05},
+                {"puntnr":17,"afstand":8.08,"puntsoort":"insteek","meting":-1.24}
+            ]
+            },
+            
+        { 
+            "profielcode": "29_15_A", 
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht", 
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
+            "baggercode": "-", 
+            "legger": "-1.75", 
+            "polderpeil": "-1.1", 
+            "waterpeil": "-1.0",
+            "dynamic_fields":[
+             {
+                "inpeildatum": "-",
+                "Bagger m3 / strekkende meter":"2.17",
+                "Profiel lengte":"x",
+                "Bagger m3":"x"
+            }
+            ],
+            "punten":[
+                {"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":0.19},
+                {"puntnr":2,"afstand":3.94,"puntsoort":"baggervasteb","meting":-1.82},
+                {"puntnr":3,"afstand":4.43,"puntsoort":"baggervasteb","meting":-2.47},
+                {"puntnr":4,"afstand":4.87,"puntsoort":"vast","meting":-2.65},
+                {"puntnr":5,"afstand":4.87,"puntsoort":"bagger","meting":-2.58},
+                {"puntnr":6,"afstand":5.41,"puntsoort":"vast","meting":-2.83},
+                {"puntnr":7,"afstand":5.41,"puntsoort":"bagger","meting":-2.67},
+                {"puntnr":8,"afstand":5.98,"puntsoort":"vast","meting":-3.12},
+                {"puntnr":9,"afstand":5.98,"puntsoort":"bagger","meting":-2.76},
+                {"puntnr":10,"afstand":6.39,"puntsoort":"vast","meting":-3.36},
+                {"puntnr":11,"afstand":6.39,"puntsoort":"bagger","meting":-2.83},
+                {"puntnr":12,"afstand":6.97,"puntsoort":"vast","meting":-3.42},
+                {"puntnr":13,"afstand":6.97,"puntsoort":"bagger","meting":-2.85},
+                {"puntnr":14,"afstand":7.93,"puntsoort":"vast","meting":-3.48},
+                {"puntnr":15,"afstand":7.93,"puntsoort":"bagger","meting":-2.85},
+                {"puntnr":16,"afstand":9.01,"puntsoort":"vast","meting":-3.26},
+                {"puntnr":17,"afstand":9.01,"puntsoort":"bagger","meting":-2.85},
+                {"puntnr":18,"afstand":9.49,"puntsoort":"vast","meting":-3.25},
+                {"puntnr":19,"afstand":9.49,"puntsoort":"bagger","meting":-2.84},
+                {"puntnr":20,"afstand":9.92,"puntsoort":"vast","meting":-2.8},
+                {"puntnr":21,"afstand":9.92,"puntsoort":"bagger","meting":-2.75},
+                {"puntnr":22,"afstand":10.41,"puntsoort":"baggervasteb","meting":-2.72},
+                {"puntnr":23,"afstand":10.82,"puntsoort":"baggervasteb","meting":-2.04},
+                {"puntnr":24,"afstand":11.47,"puntsoort":"baggervasteb","meting":-1.84},
+                {"puntnr":25,"afstand":16.73,"puntsoort":"insteek","meting":-1.44}
+            ]
+        }
+    ]
 }

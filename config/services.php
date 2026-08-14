@@ -47,4 +47,15 @@ return [
         'token'   => env('FME_SERVER_TOKEN'),
     ],
 
+    // Claude (Anthropic) — GIS Assistent
+    'claude' => [
+        'key'   => env('ANTHROPIC_API_KEY'),
+        'model' => env('ANTHROPIC_MODEL', 'claude-sonnet-4-6'),
+    ],
+
+    // FME MCP server exposed to Claude via the Anthropic MCP connector
+    'fme_mcp' => [
+        'url' => env('FME_MCP_URL', 'https://fme.gkbgroep.nl/fmemcp/OpenDataInfo/mcp'),
+    ],
+
 ];

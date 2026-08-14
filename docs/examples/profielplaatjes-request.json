@@ -1,0 +1,44 @@
+{
+    "profielen": [
+        {
+            "nummer": "0003",
+            "datum": "03-04-2025",
+            "project": "WSHD23012 - Baggeren",
+            "opdrachtgever": "WSHD",
+            "baggervak": "132",
+            "watergang": "T33097",
+            "uitpeildatum": "",
+            "legger": -2.03,
+            "polderpeil": -1.9,
+            "waterpeil": -1.85,
+            "punten": [
+                { "puntnr": 1, "afstand": 0.00, "puntsoort": "insteek", "meting": -1.12 },
+                { "puntnr": 2, "afstand": 1.67, "puntsoort": "bagger_en_vastebodem", "meting": -2.35 },
+                { "puntnr": 3, "afstand": 2.88, "puntsoort": "vaste bodem", "meting": -2.74 },
+                { "puntnr": 4, "afstand": 3.84, "puntsoort": "vaste bodem", "meting": -2.38 },
+                { "puntnr": 5, "afstand": 4.06, "puntsoort": "bagger_en_vastebodem", "meting": -2.02 },
+                { "puntnr": 6, "afstand": 4.57, "puntsoort": "insteek", "meting": -1.29 }
+            ]
+        },
+        {
+            "nummer": "0007",
+            "datum": "03-04-2025",
+            "project": "WSHD23012 - Baggeren",
+            "opdrachtgever": "WSHD",
+            "baggervak": "132",
+            "watergang": "T33098",
+            "uitpeildatum": "",
+            "legger": -2.15,
+            "polderpeil": -1.95,
+            "waterpeil": -1.88,
+            "punten": [
+                { "puntnr": 1, "afstand": 0.00, "puntsoort": "insteek", "meting": -1.05 },
+                { "puntnr": 2, "afstand": 1.20, "puntsoort": "bagger_en_vastebodem", "meting": -2.10 },
+                { "puntnr": 3, "afstand": 2.35, "puntsoort": "vaste bodem", "meting": -2.62 },
+                { "puntnr": 4, "afstand": 3.10, "puntsoort": "vaste bodem", "meting": -2.88 },
+                { "puntnr": 5, "afstand": 4.15, "puntsoort": "bagger_en_vastebodem", "meting": -2.25 },
+                { "puntnr": 6, "afstand": 5.02, "puntsoort": "insteek", "meting": -1.18 }
+            ]
+        }
+    ]
+}
