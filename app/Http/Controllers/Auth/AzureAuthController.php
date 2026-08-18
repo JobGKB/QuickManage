@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
+ 
 
 class AzureAuthController extends Controller
 {
@@ -31,8 +32,10 @@ class AzureAuthController extends Controller
     {
         try {
             $azureUser = Socialite::driver('azure')->user();
+            // dd($azureUser);
         } catch (\Throwable $e) {
             report($e);
+            // dd($e);
             if (config('app.debug')) {
                 dd([
                     'exception'      => get_class($e),
