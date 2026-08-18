@@ -21,9 +21,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (str_starts_with((string) config('app.url'), 'https://')) {
-        URL::forceScheme('https');
-    }
+        // if (str_starts_with((string) config('app.url'), 'https://')) {
+        // URL::forceScheme('https');
+        // }
         // Register the Microsoft Entra ID (Azure) driver for Socialite
         // .
         Event::listen(SocialiteWasCalled::class, [
