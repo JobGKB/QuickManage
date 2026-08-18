@@ -33,6 +33,17 @@ class AzureAuthController extends Controller
             $azureUser = Socialite::driver('azure')->user();
         } catch (\Throwable $e) {
             report($e);
+            if (config('app.debug')) {
+                dd([
+                    'exception'      => get_class($e),
+                    'message'        => $e->getMessage(),
+                    'session_state'  => session('state'),      // what Socialite stored
+                    'request_state'  => request('state'),      // what Microsoft sent back
+                    'session_id'     => session()->getId(),
+                    'is_secure'      => request()->isSecure(), // should be true behind HTTPS proxy
+                    'scheme'         => request()->getScheme(),
+                ]);
+            }
             return redirect('/')->with('error', 'Aanmelden bij Microsoft is mislukt, probeer het opnieuw.');
         }
 
