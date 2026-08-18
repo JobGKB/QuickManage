@@ -81,7 +81,7 @@ Route::middleware(['auth'])->group(function () {
 });
 // Public routes
 
-Route::middleware('track.visit')->group(function () {
+Route::middleware(['track.visit', 'azure.required'])->group(function () {
     Route::get('/visit-heartbeat', fn() => response()->noContent());
 
     Route::get('/app-gallery/overzicht', [App\Http\Controllers\AppGalleryController::class, 'GKB_AppGallery_Container']);
@@ -100,6 +100,11 @@ Route::post('/api/quickdataviewer/convert-gdb', [App\Http\Controllers\QuickDataV
 Route::post('/api/quickdataviewer/convert-dwg', [App\Http\Controllers\QuickDataViewerController::class, 'convertDwg']);
 
 
+
+// Azure (Microsoft Entra ID) SSO routes
+Route::get('/auth/azure/redirect', [App\Http\Controllers\Auth\AzureAuthController::class, 'redirect'])->name('azure.login');
+Route::get('/auth/azure/callback', [App\Http\Controllers\Auth\AzureAuthController::class, 'callback'])->name('azure.callback');
+Route::post('/auth/azure/logout', [App\Http\Controllers\Auth\AzureAuthController::class, 'logout'])->name('azure.logout');
 
 // ArcGIS OAuth routes
 Route::get('/arcgis/loginAGOL', function () {

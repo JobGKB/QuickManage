@@ -62,9 +62,9 @@
                 <div class="row">
                   <div class="offset-lg-1 col-lg-10 text-center">
                     <br/> 
-                      <h3>Ontvangstloket</h3>
+                      <h3>{{ $data['title'] }}</h3>
                     <br/>
-                      <p  id='screen1Descr'>Importeer hier je bestand</p>
+                      <p  id='screen1Descr'>{{ $data['description'] }}</p>
                       <p id="screen2Descr"></p>
                   </div>
                 </div>
@@ -85,22 +85,53 @@
                       <div id='screen1'>
 
                         <div class="input-wrap">
-                          <label for="inputSelectionLeverancier" id="LabelLeverancier">Leveranciers*</label>
-                          <select id="inputSelectionLeverancier" name="leveranciers" class="input-form">
-                            <option value="">-- Selecteer een leverancier --</option>
-                            <option value="Slufter">Slufter</option>
-                             
-                          </select>
+
+                          @foreach($data["fields"] as $field)
+                            @if($field["name"] == 'supplier')
+                            <label for="inputSelectionLeverancier" id="LabelLeverancier">{{ $field["label"] }}*</label>
+                            <select id="inputSelectionLeverancier" name="{{ $field['name'] }}" class="input-form">
+
+                              <option value="">-- Selecteer een leverancier --</option>
+                              @foreach($data["lists"] as $list)
+                                @if($list["name"] == "supplier")
+                                  @foreach($list["values"] as $value)
+                                    <option value="{{ $value['value'] }}">{{ $value['name'] }}</option>
+                                  @endforeach
+                                @endif
+                              @endforeach
+                            </select>
+                            @endif
+                          @endforeach
+
                         </div>
 
-                        <div class="input-wrap">
-                          <label for="excelFile_req" id="fileLabel">Excel-bestand (.xlsx)*</label>
-                          <label id="excelFile_label" for="excelFile_req" class="btn btn-upload mb-3 file-btn text-center w-100">Selecteer hier uw bestand</label>
-                          <input type="file" id="excelFile_req" name="excelFile requiredInputFile"
-                                 accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                                 class="position-absolute invisible"
-                                 onchange="document.getElementById('excelFile_label').textContent = this.files[0] ? this.files[0].name : 'Selecteer hier uw bestand';">
-                        </div>
+                          <div class="input-wrap">
+                            @foreach($data["fields"] as $field)
+                              @if($field["name"] == 'sourceFile')
+                                <label for="excelFile_req" id="fileLabel">{{ $field["label"] }}*</label>
+                                <label id="excelFile_label" for="excelFile_req" class="btn btn-upload mb-3 file-btn text-center w-100">Selecteer hier uw bestand</label>
+                                <input type="file" id="excelFile_req" name="excelFile requiredInputFile"
+                                      accept=".csv,.xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                      class="position-absolute invisible"
+                                      onchange="document.getElementById('excelFile_label').textContent = this.files[0] ? this.files[0].name : 'Selecteer hier uw bestand'; document.getElementById('sourceFileName').value = this.files[0] ? this.files[0].name : '';">
+                              @endif
+                            @endforeach
+
+                          </div>
+                          
+
+
+                          <div class="input-wrap">
+
+                            @foreach($data["fields"] as $field)
+                              @if($field["name"] == 'sourceFileName')
+                                <label for="sourceFileName" id="fileNameLabel">{{ $field["label"] }}*</label>
+                                <input type="text" id="sourceFileName" name="{{ $field['name'] }}" class="input-form" value="" >
+                              @endif
+                            @endforeach
+
+                          </div>
+
                       </div>
                       
 
@@ -110,9 +141,11 @@
                           <img src="{{ asset('storage/loading.png') }}" />
                         </div>
                       </div>
+
                       <div class="message2">
                         <span id="mess2"></span>
                       </div>
+
                       <div class="message3">
                         <span id="errorMessage"></span>
                       </div>
@@ -120,7 +153,6 @@
                       <div class="input-wrap-sumbit">
                         <input class="input-form submit" type="submit" id="myForm" name="submit" value="Start conversie" onclick="handleFormSubmit(event)">
                       </div> <br/>
-
 
 
                       <div id="screen2">
@@ -143,7 +175,7 @@
                       </div>
 
                       <div id="screen3" style="display: none;">
-                        <p id="createdJSON"> </p>
+                        <p id="createdJSON">  </p>
                         <p id="screen3Descr">Bestand succesvol verwerkt! Je kunt het resultaat hieronder bekijken:</p>
                         <a href="#" id="downloadCsv">Download hier je csv</a>
                       </div>   
@@ -188,6 +220,7 @@
  
   <script src="/js/visitor-heartbeat.js"></script>
     
+  
 
 </footer>
 

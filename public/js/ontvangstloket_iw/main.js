@@ -3,6 +3,7 @@ console.log("Script loaded ontvangstloket");
 const inputSelectionLeverancier = document.getElementById("inputSelectionLeverancier");
 const inputSelectionFile = document.getElementById("excelFile_req");
 
+
 // Holds the latest response payload so other handlers (e.g. Verzenden) can use it
 let currentResponseData = null;
 
@@ -14,6 +15,7 @@ function handleFormSubmit(event) {
     const selectedFile = inputSelectionFile.files[0];
     const inputFile = inputSelectionFile.files;
     const selectedFileName = inputSelectionFile.files[0] ? inputSelectionFile.files[0].name : "No file selected";
+    const inputFileName = document.getElementById("sourceFileName");
     let isValid = true
    
     if(selectedLeverancier) {
@@ -33,12 +35,25 @@ function handleFormSubmit(event) {
 
     isValid = false;
     } 
+
+    if(inputFileName.value.length > 0){
+        console.log(inputFileName);
+    document.getElementById('sourceFileName').classList.remove('outline_red2');
+    document.getElementById('fileNameLabel').classList.remove('c_red');
+
+    }else{
+    document.getElementById('sourceFileName').classList.add('outline_red2');
+    document.getElementById('fileNameLabel').classList.add('c_red');
+
+    isValid = false;
+    } 
  
     if(isValid){
     
     const sendData = {
         supplier: selectedLeverancier,
-        sourceFile: selectedFileName
+        sourceFile: selectedFileName,
+        inputFileName: inputFileName.value
     };
 
     console.log("Verzonden Input:", sendData);
@@ -70,92 +85,7 @@ function handleFormSubmit(event) {
         
 
         const responseData = {
-                    "fieldDefinitions": {
-                        "schemaVersion": "1.0",
-                        "sessionId": "f9a2c8b4-1a23-4d77-9b6e-3e0a1c2c9d11",
-                        "supplier": "Slufter",
-                        "sourceFile": "Rapport090901.xlsx",
-                        "title": "Aanvullende gegevens afvalstroomnummers",
-                        "description": "Op basis van de leverancier en de inhoud van het bestand zijn onderstaande gegevens nodig.",
-                        "submitTarget": {
-                            "repository": "Administratie",
-                            "workspace": "Ontvangstloket.fmw",
-                            "service": "fmedatastreaming"
-                        },
-                        "groups": [{
-                                "id": "08508RX24212",
-                                "label": "ASN 08508RX24212 Baggerwerk P1 DO7 bc157 Beverwaard\nVracht(en): 1 st - gewicht: 9.65 ton",
-                                "order": 10
-                            }, {
-                                "id": "08508RX26010",
-                                "label": "ASN 08508RX26010 Baggerwerk P1 DO11 Gem Dordrecht\nVracht(en): 72 st - gewicht: 1908.250 ton",
-                                "order": 20
-                            }, {
-                                "id": "08508RX26012",
-                                "label": "ASN 08508RX26012 Baggerwerk P1 DO11 WSHD Dordrecht\nVracht(en): 59 st - gewicht: 1531.350 ton",
-                                "order": 30
-                            }
-                        ],
-                        "fields": [{
-                                "name": "projectcode",
-                                "label": "Projectcode (algemeen)",
-                                "type": "select",
-                                "group": "08508RX24212",
-                                "order": 10,
-                                "required": true,
-                                "placeholder": "-selecteer projectcode-",
-                                "hint": "Projectcode GKB",
-                                "list": "url:<GET API FME FLOW retruns value-label pairs for each project>",
-                                "default": "",
-                            }, {
-                                "name": "projectcode",
-                                "label": "Projectcode (algemeen)",
-                                "type": "select",
-                                "group": "08508RX26010",
-                                "order": 10,
-                                "required": true,
-                                "placeholder": "-selecteer projectcode-",
-                                "hint": "Projectcode GKB",
-                                "list": "url:<GET API FME FLOW retruns value-label pairs for each project>",
-                                "default": ""
-                            }, {
-                                "name": "projectcode",
-                                "label": "Projectcode (algemeen)",
-                                "type": "select",
-                                "group": "08508RX26012",
-                                "order": 10,
-                                "required": true,
-                                "placeholder": "-selecteer projectcode-",
-                                "hint": "Projectcode GKB",
-                                "list": "url:<GET API FME FLOW retruns value-label pairs for each project>",
-                                "default": ""
-                            }, {
-                                "name": "tarief",
-                                "label": "Storttarief (€/ton)",
-                                "type": "number",
-                                "group": "08508RX24212",
-                                "order": 20,
-                                "required": true,
-                                "default": ""
-                            }, {
-                                "name": "tarief",
-                                "label": "Storttarief (€/ton)",
-                                "type": "number",
-                                "group": "08508RX26010",
-                                "order": 20,
-                                "required": true,
-                                "default": ""
-                            }, {
-                                "name": "tarief",
-                                "label": "Storttarief (€/ton)",
-                                "type": "number",
-                                "group": "08508RX26012",
-                                "order": 20,
-                                "required": true,
-                                "default": ""
-                            }
-                        ]
-                    }
+                    
                 }
 
 
@@ -173,12 +103,7 @@ function handleFormSubmit(event) {
             const tableBody = document.getElementById('responseTableBody');
             tableBody.innerHTML = '';
 
-            const projectcodeSelectHTML =
-                '<select class="input-form">' +
-                    '<option value="">- Selecteer een projectcode -</option>' +
-                    '<option value="ROIB24504">ROIB24504</option>' +
-                    '<option value="WSHD2503">WSHD2503</option>' +
-                '</select>';
+             
 
             const tariefInputHTML = '<input type="number" class="input-form" value="0">';
 

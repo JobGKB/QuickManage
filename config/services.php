@@ -41,6 +41,16 @@ return [
     'redirect_uri'  => env('ARCGIS_REDIRECT_URI'),
 ],
 
+    // Microsoft Entra ID (Azure AD) SSO
+    'azure' => [
+        'client_id'     => env('AZURE_CLIENT_ID'),
+        'client_secret' => env('AZURE_CLIENT_SECRET'),
+        'redirect'      => env('AZURE_REDIRECT_URI'),
+        'tenant'        => env('AZURE_TENANT_ID'),
+        // Only accounts with an e-mail in this domain are allowed access.
+        'allowed_domain' => env('AZURE_ALLOWED_DOMAIN', 'gkbgroep.nl'),
+    ],
+
     'fme' => [
         'url'     => env('FME_SERVER_URL'),      // GDB workspace URL
         'dwg_url' => env('FME_DWG_SERVER_URL'),  // DWG workspace URL

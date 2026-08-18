@@ -1,5 +1,6 @@
 <?php
 use App\Http\Middleware\RequireArcgisLogin;
+use App\Http\Middleware\RequireAzureLogin;
 use App\Http\Middleware\SetVisitorIdCookie;
 use App\Http\Middleware\TrackPageVisit;
 use Illuminate\Foundation\Application;
@@ -20,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
     
         $middleware->alias([
             'arcgis.required' => RequireArcgisLogin::class,
+            'azure.required' => RequireAzureLogin::class,
             'track.visit' => TrackPageVisit::class,
         ]);
     })

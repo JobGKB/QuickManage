@@ -1,0 +1,67 @@
+{
+    "sessionId": "",
+    "supplier": "GKB Realisatie bv",
+    "sourceFileName": "Ontvangstloket",
+    "title": "Ontvangstloket",
+    "description": "Aanmaken van leverancier specifieke ontvangsten CSV t.b.v. import in IW.",
+    "submitTarget": {
+        "repository": "Administratie",
+        "workspace": "Ontvangstloket.fmw",
+        "service": "fmedatastreaming"
+    },
+    "groups": [
+        {
+            "id": "1",
+            "label": "Kies de juiste leverancier en selecteer een bestand. Voor toelichting klik op <>."
+        }
+    ],
+    "fields": [
+        {
+            "name": "supplier",
+            "label": "Leverancier",
+            "type": "select",
+            "group": "1",
+            "required": true,
+            "placeholder": "-selecteer leverancier-",
+            "hint": "Naam leverancier",
+            "default": ""
+        },
+        {
+            "name": "sourceFile",
+            "label": "Bronbestand van leverancier",
+            "type": "select_file",
+            "group": "1",
+            "required": true,
+            "placeholder": "-selecteer bestand-",
+            "hint": "Bronbestand van leverancier",
+            "default": ""
+        },
+        {
+            "name": "sourceFileName",
+            "label": "Nieuwe naam voor bronbestand",
+            "type": "text",
+            "group": "1",
+            "required": true,
+            "placeholder": "",
+            "hint": "Een enentuele nieuwe (meer logische) naam voor bronbestand op server",
+            "default": "<naam van geselecteerd bronbestand>"
+        }
+    ],
+    "lists": [
+        {
+            "name": "supplier",
+            "values": [
+                {
+                    "value": "Slufter",
+					"name": "Slufter (Port of Rotterdam)",
+                    "sourceFileFilter": "*.xlsx"
+                },
+                {
+                    "value": "Grondbank_GMG",
+					"name": "Grondbank GMG",
+                    "sourceFileFilter": "*.csv;*.xlsx"
+                }
+            ]
+        }
+    ]
+}
