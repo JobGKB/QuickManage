@@ -12,6 +12,7 @@
             <section class="header">
               <div class="container">
                 <div class="row header-logo align-items-center">
+
                    <div class="col-md-4 fl-l">
                      
                     <a href="/app-gallery/overzicht" class="overzicht_link fl-l"> <img src="{{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps</a>
@@ -21,8 +22,9 @@
                   <div class="col-md-4 text-center">
                     <img src="{{ asset('storage/template_images/' . $data->template->header_logo) }}" class="logo" />
                   </div>
+
                 </div>
-                
+                  
                 <div class="row">
                   <div class="offset-lg-1 col-lg-10 text-center">
                     <br/> 
@@ -104,7 +106,9 @@
     </div>
 
       <script>
-        window.templateChoice = @json($data);
+        @php($templateChoice = $data->only(['name', 'description', 'service', 'template']))
+        window.templateChoice = @json($templateChoice);
+        window.appHash = @json($data->hash_id);
       </script>
       
   <script type="text/javascript" src="{{ URL::asset ('js/HTMLPage/displayHTMLpage.js') }}"></script>

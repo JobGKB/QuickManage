@@ -2,6 +2,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/style.scss', 'public/css')
+   .sass('resources/sass/docs.scss', 'public/css')
     .sass('resources/sass/app_gallery.scss', 'public/css')
     .sass('resources/sass/GKB_Realisatie_Style.scss', 'public/css')
    .sass('resources/sass/custom_apps/testAI.scss', 'public/css')

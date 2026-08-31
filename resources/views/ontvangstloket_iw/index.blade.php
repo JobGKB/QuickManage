@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>window.appSettings = @json($data);</script>
     <script type="text/javascript" src="{{ URL::asset ('js/ontvangstloket_iw/main.js') }}" defer></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -42,7 +43,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="offset-lg-2 col-lg-8">
+        <div class="offset-lg-1 col-lg-10">
           <div class="content-wrapper"> 
             <!-- header -->
             <section class="header">
@@ -116,11 +117,8 @@
                                       onchange="document.getElementById('excelFile_label').textContent = this.files[0] ? this.files[0].name : 'Selecteer hier uw bestand'; document.getElementById('sourceFileName').value = this.files[0] ? this.files[0].name : '';">
                               @endif
                             @endforeach
-
                           </div>
-                          
-
-
+                           
                           <div class="input-wrap">
 
                             @foreach($data["fields"] as $field)
@@ -132,10 +130,50 @@
 
                           </div>
 
+                           <div class="mess1">
+                            <span id="mess1">Bezig met laden...</span>
+                            <div id="loading" class="loading">
+                              <img src="{{ asset('storage/loading.png') }}" />
+                            </div>
+                          </div>
+
+                          <div class="message2">
+                            <span id="mess2"></span>
+                          </div>
+
+                          <div class="message3">
+                            <span id="errorMessage"></span>
+                          </div>
+
                       </div>
                       
 
-                      <div class="mess1">
+                     
+
+                      <div class="input-wrap-sumbit">
+                        <input class="input-form submit" type="submit" id="myForm" name="submit" value="Start conversie" onclick="handleFormSubmit(event)">
+                      </div> <br/>
+
+
+                      <div id="screen2">
+                        <table id="responseTable" class="table table-bordered ">
+                          <thead class="thead">
+                            <tr>
+                              <th class="th">Id</th>
+                              <th class="th">Info</th>
+                              <th class="th">Projectcode</th>
+                              <th class="th">Tarief</th>
+                            </tr>
+                          </thead>
+
+                          <tbody id="responseTableBody">
+                          </tbody>
+                        </table>
+                        <div class="input-wrap-sumbit" >
+                          <input class="input-form submit" type="submit"  name="submit" value="Verzenden" onclick="sendResASInput(event)"  >
+                        </div> <br/>
+
+                         <div class="mess1">
                         <span id="mess1">Bezig met laden...</span>
                         <div id="loading" class="loading">
                           <img src="{{ asset('storage/loading.png') }}" />
@@ -150,34 +188,28 @@
                         <span id="errorMessage"></span>
                       </div>
 
-                      <div class="input-wrap-sumbit">
-                        <input class="input-form submit" type="submit" id="myForm" name="submit" value="Start conversie" onclick="handleFormSubmit(event)">
-                      </div> <br/>
-
-
-                      <div id="screen2">
-                        <table id="responseTable" class="table table-bordered">
-                          <thead>
-                            <tr>
-                              <th>Id</th>
-                              <th>Label</th>
-                              <th>Projectcode</th>
-                              <th>Tarief</th>
-                            </tr>
-                          </thead>
-
-                          <tbody id="responseTableBody">
-                          </tbody>
-                        </table>
-                        <div class="input-wrap-sumbit" >
-                          <input class="input-form submit" type="submit"  name="submit" value="Verzenden" onclick="sendResASInput(event)"  >
-                        </div> <br/>
                       </div>
 
                       <div id="screen3" style="display: none;">
                         <p id="createdJSON">  </p>
                         <p id="screen3Descr">Bestand succesvol verwerkt! Je kunt het resultaat hieronder bekijken:</p>
-                        <a href="#" id="downloadCsv">Download hier je csv</a>
+                        <a href="#" id="downloadCsv">Download  csv</a>
+
+
+                         <div class="mess1">
+                        <span id="mess1">Bezig met laden...</span>
+                        <div id="loading" class="loading">
+                          <img src="{{ asset('storage/loading.png') }}" />
+                        </div>
+                      </div>
+
+                      <div class="message2">
+                        <span id="mess2"></span>
+                      </div>
+
+                      <div class="message3">
+                        <span id="errorMessage"></span>
+                      </div>
                       </div>   
 
                       {{-- iframe for datastreaming --}}

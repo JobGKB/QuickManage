@@ -1,0 +1,42 @@
+{     
+    "sessionId": "7e6a1253-1245-4234-bee0-38bac0a7324f",
+         "supplier": "Slufter",
+              "sourceFileName": "Rapport090901.xlsx",
+                   "values": [    
+                                { 
+                                "group": "08508RX24212",
+                                "name": "werkorder", 
+                                "value": "ROIB2601-005" 
+                                },
+
+                                { 
+                                    "group": "08508RX24212",
+                                    "name": "tarief",
+                                    "value": "9.50"
+                                },   
+
+                                { 
+                                    "group": "08508RX26010", 
+                                    "name": "werkorder", 
+                                    "value": "ROIB2601-005" 
+                                }, 
+
+                                { 
+                                    "group": "08508RX26010", 
+                                    "name": "tarief",
+                                    "value": "15.00" 
+                                },  
+
+                                { 
+                                    "group": "8508RX26012", 
+                                    "name": "werkorder", 
+                                    "value": "ROIB2601-005" 
+                                },    
+                                
+                                { 
+                                    "group": "8508RX26012", 
+                                    "name": "tarief",
+                                    "value": "14.75" 
+                                }     
+                            ] 
+} 

@@ -52,9 +52,10 @@ return [
     ],
 
     'fme' => [
-        'url'     => env('FME_SERVER_URL'),      // GDB workspace URL
-        'dwg_url' => env('FME_DWG_SERVER_URL'),  // DWG workspace URL
-        'token'   => env('FME_SERVER_TOKEN'),
+        'url'      => env('FME_SERVER_URL'),      // GDB workspace URL
+        'dwg_url'  => env('FME_DWG_SERVER_URL'),  // DWG workspace URL
+        'token'    => env('FME_SERVER_TOKEN'),
+        'base_url' => env('FME_BASE_URL', 'https://fme.gkbgroep.nl'), // FME Cloud host for per-app proxy
     ],
 
     // Claude (Anthropic) — GIS Assistent

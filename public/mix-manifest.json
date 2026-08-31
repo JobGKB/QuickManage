@@ -1,12 +1,13 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/style.css": "/css/style.css",
-    "/css/errors_style.css": "/css/errors_style.css",
     "/css/testAI.css": "/css/testAI.css",
     "/css/GKB_Realisatie_Style.css": "/css/GKB_Realisatie_Style.css",
     "/css/app_gallery.css": "/css/app_gallery.css",
+    "/css/docs.css": "/css/docs.css",
     "/css/gisportaal.css": "/css/gisportaal.css",
     "/css/ontvangstloket_iw.css": "/css/ontvangstloket_iw.css",
     "/css/PBA_FMUTA6.css": "/css/PBA_FMUTA6.css",
-    "/css/dataviewer.css": "/css/dataviewer.css"
+    "/css/dataviewer.css": "/css/dataviewer.css",
+    "/css/errors_style.css": "/css/errors_style.css"
 }

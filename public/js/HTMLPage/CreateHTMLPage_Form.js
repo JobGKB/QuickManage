@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function() {
     // ophalen repositories  
     try {
-        const response = await fetch("https://fme-gkb.fmecloud.com/fmeapiv4/repositories", {
+        const response = await fetch("https://fme.gkbgroep.nl/fmeapiv4/repositories", {
           method: "GET",
           headers: {
             "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",  // replace 'x' with your real token
@@ -45,11 +45,11 @@ repoSelect.addEventListener("change", async function () {
       console.log("Selected repository:", selectedRepo);
 
       // Clear and disable subsequent selects
-      workspaceSelect.innerHTML = '<option value="0">Selecteer een Workspace:</option>';
-      workspaceSelect.disabled = true;
-      //2. haal de workspaces op van de geselecteerde repo
-      try {
-        const workspaceResponse = await fetch(`https://fme-gkb.fmecloud.com/fmeapiv4/repositories/${encodeURIComponent(selectedRepo)}/items`, {
+      workspaceSelect.innerHTML = '<option value="0">Selecteer een Workspace:</option>';                                                              
+      workspaceSelect.disabled = true;                                                                                                                
+      //2. haal de workspaces op van de geselecteerde repo                                                                                            
+      try {                                                                                                                                           
+        const workspaceResponse = await fetch(`https://fme.gkbgroep.nl/fmeapiv4/repositories/${encodeURIComponent(selectedRepo)}/items`, {       
           method: "GET",
           headers: {
             "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",  // Replace with real token
@@ -83,9 +83,7 @@ repoSelect.addEventListener("change", async function () {
       }
   }
 );
-    //
-
-    // als de waarde van workspaceSelect veranderd ( dus er wordt workspace geselecteed ) 
+  // als de waarde van workspaceSelect veranderd ( dus er wordt workspace geselecteed ) 
 workspaceSelect.addEventListener("change", async function () {
   const selectedRepo = repoSelect.value;
   const selectedWorkspace = this.value;
@@ -106,7 +104,7 @@ workspaceSelect.addEventListener("change", async function () {
 
   // ophalen services
   try {
-    const serviceResponse = await fetch(`https://fme-gkb.fmecloud.com/fmeapiv4/workspaces/${encodeURIComponent(selectedRepo)}/${encodeURIComponent(selectedWorkspace)}/services`, {
+    const serviceResponse = await fetch(`https://fme.gkbgroep.nl/fmeapiv4/workspaces/${encodeURIComponent(selectedRepo)}/${encodeURIComponent(selectedWorkspace)}/services`, {
       method: "GET",
       headers: {
         "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",  
@@ -151,7 +149,7 @@ parameterContainer.innerHTML = ""; // Clear previous
 
 try {
   const paramResponse = await fetch(
-    `https://fme-gkb.fmecloud.com/fmeapiv4/workspaces/${encodeURIComponent(selectedRepo)}/${encodeURIComponent(selectedWorkspace)}/parameters`,
+    `https://fme.gkbgroep.nl/fmeapiv4/workspaces/${encodeURIComponent(selectedRepo)}/${encodeURIComponent(selectedWorkspace)}/parameters`,
     {
       method: "GET",
       headers: {

@@ -12,8 +12,8 @@ class Ontvangstloket_IWController extends Controller
 
         // dd($data);
 
-        return view('ontvangstloket_iw.index', [
-            'data' => $data,
-        ]);
+        return view('ontvangstloket_iw.index', [    
+            'data' => $data,                        
+        ]);                                         
     }
 }

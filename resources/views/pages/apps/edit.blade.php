@@ -29,11 +29,9 @@
                          <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
 
-                                
                                 <li class="breadcrumb-item"><a href="/manage/folders">Mappen</a></li>
                                 <li class="breadcrumb-item"><a href="/manage/folders/{{ session('folder_url') }}/view">{{ session('folder_name') }} </a></li>
                                 <li class="breadcrumb-item active" aria-current="page">{{ $app->name }} bewerken</li>
-
 
                             </ol>
                         </nav>
@@ -96,6 +94,11 @@
                                 @endif
                             </select><br/><br/>
 
+                            <p class="c-bold">Workspace token:<br/><br/></p>
+                            <input type="text" name='wsp_token' value="{{ $token }}" required><br/><br/>
+                         
+
+
                             <p class="c-bold">Template:</p> 
                                     
                             <input type="text" name='template' value='{{ $app->template->name ?? 'geen' }}' disabled ><br/><br/>
@@ -123,23 +126,16 @@
         const serviceSelect = document.getElementById("serviceSelect");
         if (!serviceSelect) return;
 
-        const repo = serviceSelect.dataset.repo;
-        const workspace = serviceSelect.dataset.workspace;
         const current = serviceSelect.dataset.current;
-
-        if (!repo || !workspace) return;
+        const appHash = "{{ $app->hash_id }}";
 
         try {
-            const response = await fetch(
-                `https://fme-gkb.fmecloud.com/fmerest/v3/repositories/${encodeURIComponent(repo)}/items/${encodeURIComponent(workspace)}/services`,
-                {
-                    method: "GET",
-                    headers: {
-                        "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",
-                        "Accept": "application/json"
-                    }
+            const response = await fetch(`/manage/apps/${appHash}/fme/services`, {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json"
                 }
-            );
+            });
 
             if (!response.ok) throw new Error("Failed to fetch services");
 

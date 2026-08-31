@@ -9,6 +9,10 @@ class App extends Model
 {
     // use HasFactory;
     protected $table = 'apps';
+
+    // Never expose the (encrypted) workspace token when the model is serialized to JSON.
+    protected $hidden = ['wsp_token'];
+
      public function template()
     {
         return $this->belongsTo(Template::class, 'template_id', 'id');

@@ -16,7 +16,7 @@ use App\Http\Controllers\Auth\LogoutAGOLController;
 Route::get('/ping', fn() => response('pong', 200)
     ->header('Content-Type', 'text/plain'));
 
-Route::get('/profielplaatje', [App\Http\Controllers\ProfielplaatjeController::class, 'index']);                             
+Route::get('/docs', [App\Http\Controllers\DOCSController::class, 'index']);
 
 
 Route::get('/', function () {
@@ -37,6 +37,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/manage/apps/edit/{unique}', [App\Http\Controllers\AppsController::class, 'edit']);                                             
     Route::patch('/manage/apps/update/{unique}', [App\Http\Controllers\AppsController::class, 'update']);                                       
     Route::delete('/manage/apps/delete/{unique}', [App\Http\Controllers\AppsController::class, 'destroy']);                                     
+
+    // FME service lookup for the app edit form (token stays server-side)
+    Route::get('/manage/apps/{unique}/fme/services', [App\Http\Controllers\FmeProxyController::class, 'services']);
+                                     
 
     // Manage Custom App routes                                                                                                 
     // Route::get('/manage/custom-apps/create', [App\Http\Controllers\CustomAppsController::class, 'create']);                  
@@ -89,6 +93,11 @@ Route::middleware(['track.visit', 'azure.required'])->group(function () {
     Route::get('/app-gallery/{cat_uniqid}', [App\Http\Controllers\AppGalleryController::class, 'GKB_AppGallery_CatContainer']);
 
     Route::get('/apps/view/{unique}', [App\Http\Controllers\AppsController::class, 'show']);
+
+    // Server-side FME proxy (keeps the per-app workspace token off the client)
+    Route::get('/apps/{unique}/fme/parameters', [App\Http\Controllers\FmeProxyController::class, 'parameters']);
+    Route::post('/apps/{unique}/fme/upload', [App\Http\Controllers\FmeProxyController::class, 'upload']);
+    Route::post('/apps/{unique}/fme/run', [App\Http\Controllers\FmeProxyController::class, 'run']);
 
     Route::get('/manage/quickdataviewer', [App\Http\Controllers\QuickDataViewerController::class, 'index']);
 

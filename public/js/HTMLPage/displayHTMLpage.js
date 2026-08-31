@@ -1,9 +1,32 @@
 const data = window.templateChoice;
-    console.log(data)
-    const repo = data['repository'];
-    const workspaceName = data['workspace'];
-    const serviceName = data['service'];
-    console.log(serviceName)
+const appHash = window.appHash;
+
+const serviceName = data['service'];
+const csrfToken = document.querySelector('input[name="_token"]')?.value
+    || document.querySelector('meta[name="csrf-token"]')?.content
+    || '';
+
+// Show red error text inside the form's error div and hide the loading state.
+function showFormError(message) {
+    document.getElementById("loading")?.style && (document.getElementById("loading").style.display = 'none');
+    document.getElementById("mess1")?.style && (document.getElementById("mess1").style.display = 'none');
+    const el = document.getElementById("errorMessage");
+    if (el) {
+        el.style.display = "block";
+        el.style.color = "red";
+        el.textContent = message;
+    }
+}
+
+// Read a { "message": "..." } body from a failed proxy response, if present.
+async function extractErrorMessage(response, fallback) {
+    try {
+        const body = await response.clone().json();
+        if (body && body.message) return body.message;
+    } catch (e) { /* not JSON */ }
+    return fallback;
+}   
+    
     
     if (data?.template?.name === "Default FME Workflow") {
         console.log('Default FME Workflow');
@@ -11,17 +34,19 @@ const data = window.templateChoice;
                     
             // laden parameter html elementen naar html elementen voor form
             try {
-                const repo = data.repository;
-                const workspaceName = data.workspace;
-                const response = await fetch(`https://fme-gkb.fmecloud.com/fmeapiv4/workspaces/${repo}/${workspaceName}`, {
+                const response = await fetch(`/apps/${appHash}/fme/parameters`, {
                     method: "GET",
                     headers: {
-                        "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",
                         "Accept": "application/json"
                     }
                 });
 
                 if (!response.ok) {
+                    const message = await extractErrorMessage(
+                        response,
+                        `Kan de app niet laden (status ${response.status}).`
+                    );
+                    showFormError(message);
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                         
@@ -272,6 +297,9 @@ const data = window.templateChoice;
             
             catch (err) {
                 console.error("Fetch failed:", err);
+                if (document.getElementById("errorMessage")?.style.display !== "block") {
+                    showFormError("Er is een fout opgetreden bij het laden van de app.");
+                }
             }
              
     // next funtion
@@ -386,14 +414,12 @@ const data = window.templateChoice;
                     // here make post requests to fme server to upload the file, then after success response run function StartWorkspace that sends an post request to the api to run the workspace. POST with the input values and file names.
                         // upload files to /FME_SHAREDRESOURCE_TEMP/filesys
                         console.log('Ditis de formdata:',formData)
-                         fetch('https://fme-gkb.fmecloud.com/fmeapiv4/resources/connections/FME_SHAREDRESOURCE_TEMP/upload?path&overwrite=true ', {
+                         fetch(`/apps/${appHash}/fme/upload`, {
                                 method: 'POST',
                                 headers: {
-                                    "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",
-                                    "Accept":"application/json",
+                                    "Accept": "application/json",
+                                    "X-CSRF-TOKEN": csrfToken,
                                 },
-                                processData: false,
-                                contentType: false,
                                 body: formData
                             })
                             .then(response => {
@@ -430,8 +456,6 @@ const data = window.templateChoice;
 
                 function StartWorkspace(publishedParameters) {
                     // run workspace with the publishedParameters
-                    const repo = window.templateChoice.repository;
-                    const workspaceName = window.templateChoice.workspace;
                     const serviceName = window.templateChoice.service;
 
                     // Convert array of {name, value} to object {name: value}
@@ -443,22 +467,17 @@ const data = window.templateChoice;
                     });
                     
                     if (serviceName === 'fmedatastreaming') {
-                        // Construct params string from publishedParameters
-                        let paramsString = '';
-                        publishedParameters.forEach(p => {
-                            paramsString += '&' + p.name + '=' + encodeURIComponent(p.value);
-                        });
-                        
-                        // Use workspace and repo as project and file variables
-                        const projectName = repo;
-                        const fmwFile = workspaceName;
-                        
-                        const url = "https://fme-gkb.fmecloud.com/fmedatastreaming/" + projectName + "/" + fmwFile + "?" + paramsString + "&opt_responseformat=json&token=653d48815e91626f06f6ed871b3810605193ac02";
-                        
-                        console.log(url);
-                        
+                        // Run via the server-side proxy; the token stays on the server.
                         // Write html response in iframe or download file based on content-type
-                        fetch(url)
+                        fetch(`/apps/${appHash}/fme/run`, {
+                            method: 'POST',
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": csrfToken,
+                                "Accept": "*/*",
+                            },
+                            body: JSON.stringify({ parameters: paramsObject })
+                        })
                             .then(r => {
                                 if (r.status !== 200) {
                                     console.error("Request failed with status: " + r.status);
@@ -511,7 +530,7 @@ const data = window.templateChoice;
                                         };
                                         const ct = (contentType.split(';')[0] || '').trim().toLowerCase();
                                         const ext = extMap[ct] || 'dat';
-                                        const base = (workspaceName || 'download').replace(/\.[^.]+$/, '');
+                                        const base = (data.name || 'download').replace(/\.[^.]+$/, '');
                                         filename = `${base}.${ext}`;
                                         console.warn('No content-disposition filename available (likely CORS: server must send "Access-Control-Expose-Headers: Content-Disposition"). Falling back to:', filename);
                                     }
@@ -538,17 +557,15 @@ const data = window.templateChoice;
                             });
                     } else if (serviceName === 'fmejobsubmitter') {
                         console.log(paramsObject)
-                        fetch(`https://fme-gkb.fmecloud.com/fmeapiv4/jobs/sync`, {
+                        fetch(`/apps/${appHash}/fme/run`, {
                             method: 'POST',
                             headers: {
-                                "Authorization":"fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",
-                                "Content-Type":"application/json",
-                                "Accept":"application/json",
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": csrfToken,
+                                "Accept": "application/json",
                             },
                             body: JSON.stringify({
-                                repository: repo,
-                                workspace: workspaceName,
-                                publishedParameters: paramsObject,
+                                parameters: paramsObject,
                             })
                         })
                         .then(res => {

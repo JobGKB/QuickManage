@@ -86,6 +86,9 @@
                                 <option value="0">Selecteer een Service:</option>
                             </select><br/><br/>
 
+                            <p class="c-bold">Workspace token:<br/><br/>
+                            <input type="text" name='wsp_token' placeholder="Workspace token..." required><br/><br/>
+
                             <p class="c-bold">Template:</p> 
                                 
                             @foreach($templates as $data)

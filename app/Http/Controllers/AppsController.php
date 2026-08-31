@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
- 
+ use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Hashids\Hashids;
 
 class AppsController extends Controller
@@ -73,6 +74,7 @@ class AppsController extends Controller
         $app->service = $request['service'];
         $app->folder_id = session('folder_id');
         $app->cat_id = $request['category'];
+        $app->wsp_token = Crypt::encryptString($request['wsp_token']);
         $app->hash_id = $uniqid;
        
         if ($request->hasFile('app_thumbnail')) {
@@ -95,20 +97,11 @@ class AppsController extends Controller
         ->where('hash_id', $unique)
         ->first();
 
-         
-        // dd($c); 
-
         session(['app_id' => $data->id]);
-         
-        // dd($DBparameters);
-         
-        // dd($data);   
 
         //redirect
         return view('html_templates.GKB_Realisatie_Style', [
                  'data'=> $data,
-                 
-                //  'DBparameters'=> $DBparameters
         ]);
     }
 
@@ -118,7 +111,15 @@ class AppsController extends Controller
         ->where('hash_id', $uniqid)
         ->first();
         $categories = AppCategorie::get();
-     
+        $token = '';
+        if (!empty($app->wsp_token)) {
+            try {
+                $token = Crypt::decryptString($app->wsp_token);
+            } catch (DecryptException $e) {
+                $token = '';
+            }
+        }
+        
 
 
         // dd($app);
@@ -126,6 +127,7 @@ class AppsController extends Controller
         //redirect
         return view('pages.apps.edit', [
             'app' => $app,       
+            'token' => $token,
             'categories' => $categories,
         ]);
     }
@@ -139,6 +141,7 @@ class AppsController extends Controller
         $app->description = $req->input('description');
         $app->cat_id = $req->input('category');
         $app->service = $req->input('service');
+        $app->wsp_token = Crypt::encryptString($req->input('wsp_token'));
                 
 
         if ($req->hasFile('app_thumbnail')) {

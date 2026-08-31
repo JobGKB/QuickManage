@@ -83,7 +83,7 @@ body {
 /* end home screen */
 /* content */
 .body {
-  padding: 30px;
+  padding: 0px 30px 0px 30px;
 }
 .body a.link_app {
   color: #000 !important;
@@ -142,12 +142,14 @@ body {
 /* form */
 .form {
   background-color: #fff;
-  padding: 0px 30px 30px 30px;
-  margin-top: 30px;
+  margin-top: 5px;
   width: 100%;
 }
 .form #screen2 {
   display: none;
+}
+.form #screen2 #responseTableBody td {
+  border: 1px solid #b8b8b8;
 }
 .form #screen2 #responseTableBody select {
   width: 100%;
@@ -162,6 +164,63 @@ body {
   border-radius: 3px;
   outline: none;
   padding: 5px;
+}
+.form #screen2 #responseTableBody .werkorder-search {
+  position: relative;
+}
+.form #screen2 #responseTableBody .werkorder-input {
+  width: 100%;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  outline: none;
+  padding: 5px;
+}
+.form #screen2 #responseTableBody .werkorder-list {
+  display: none;
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  top: 100%;
+  max-height: 240px;
+  overflow-y: auto;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+.form #screen2 #responseTableBody .werkorder-item {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #eeeeee;
+}
+.form #screen2 #responseTableBody .werkorder-item:last-child {
+  border-bottom: none;
+}
+.form #screen2 #responseTableBody .werkorder-item:hover {
+  background-color: #eef6e9;
+}
+.form #screen2 #responseTableBody .werkorder-item-value {
+  font-weight: 600;
+}
+.form #screen2 #responseTableBody .werkorder-item-label {
+  font-size: 0.85em;
+  color: #555555;
+}
+.form #screen2 .thead {
+  background-color: #509429;
+  color: #ffffff;
+}
+.form #screen2 .tdId {
+  font-weight: 600;
+}
+.form #screen2 th {
+  border: 1px solid #b8b8b8;
 }
 
 .input-wrap {
