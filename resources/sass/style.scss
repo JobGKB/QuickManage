@@ -1073,7 +1073,7 @@ width: 40%;
     }
 
     form {
-        input[type="text"]{
+        input[type="text"], input[type="password"]{
             margin-top:5px;
             outline: none;   
             padding:10px;

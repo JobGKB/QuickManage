@@ -52,7 +52,7 @@ async function extractErrorMessage(response, fallback) {
                         
                 const workspaceData = await response.json();
                 console.log( 'Full response of the request: ');
-                console.log( workspaceData);
+                console.log( response);
                 
                 const parameters = workspaceData.parameters;
                 const container = document.getElementById('GKB_Form_Template');
@@ -458,6 +458,7 @@ async function extractErrorMessage(response, fallback) {
                     // run workspace with the publishedParameters
                     const serviceName = window.templateChoice.service;
 
+                    console.log(serviceName)
                     // Convert array of {name, value} to object {name: value}
                     
                     const paramsObject = {};
@@ -469,6 +470,7 @@ async function extractErrorMessage(response, fallback) {
                     if (serviceName === 'fmedatastreaming') {
                         // Run via the server-side proxy; the token stays on the server.
                         // Write html response in iframe or download file based on content-type
+                        console.log(paramsObject);
                         fetch(`/apps/${appHash}/fme/run`, {
                             method: 'POST',
                             headers: {
@@ -588,7 +590,53 @@ async function extractErrorMessage(response, fallback) {
                             document.getElementById('errorMessage').innerHTML = 'Error... conversie kan niet gestart worden.<br/><div class="bold"> Neem contact op met Dirk-Jan of Job</div>';
                         });
                     } else if (serviceName === 'fmedatadownload') {
-                        console.log('datadownload');
+                        // Run via the server-side proxy; FME returns a JSON envelope
+                        // containing a temporary result URL that we auto-download.
+                        fetch(`/apps/${appHash}/fme/run`, {
+                            method: 'POST',
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": csrfToken,
+                                "Accept": "application/json",
+                            },
+                            body: JSON.stringify({ parameters: paramsObject })
+                        })
+                        .then(res => {
+                            if (!res.ok) throw new Error(`Workspace start failed: ${res.status}`);
+                            return res.json();
+                        })
+                        .then(data => {
+                            const sr = data.serviceResponse || data;
+                            const status = (sr.statusInfo && sr.statusInfo.status) || '';
+                            const success = String(status).toLowerCase() === 'success';
+                            const engine = (sr.fmeTransformationResult && sr.fmeTransformationResult.fmeEngineResponse) || {};
+                            const url = sr.url || engine.downloadUrl || data.downloadUrl || data.url || '';
+
+                            if (!success || !url) {
+                                throw new Error('Geen download-URL in de response.');
+                            }
+
+                            // Auto-click a hidden link to trigger the browser download.
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = '';
+                            a.rel = 'noopener';
+                            document.body.appendChild(a);
+                            a.click();
+                            a.remove();
+
+                            document.getElementById("mess1").style.display = 'none';
+                            document.getElementById("loading").style.display = 'none';
+                            document.getElementById("mess2").style.display = 'block';
+                            document.getElementById("mess2").innerHTML = 'De conversie is klaar!';
+                        })
+                        .catch(err => {
+                            console.error("Request failed with status: " + err);
+                            document.getElementById("loading").style.display = 'none';
+                            document.getElementById("mess1").style.display = 'none';
+                            document.getElementById("errorMessage").style.display = "block";
+                            document.getElementById('errorMessage').innerHTML = 'Error... conversie kan niet gestart worden.<br/><div class="bold"> Neem contact op met Dirk-Jan of Job</div>';
+                        });
                     }
                 }
 

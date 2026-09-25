@@ -7,6 +7,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
@@ -148,14 +149,16 @@ class FmeProxyController extends Controller
     {
         [$app, $token] = $this->resolve($unique);
 
+        // dd($app);
+
         $parameters = $request->input('parameters', []);
         if (!is_array($parameters)) {
             $parameters = [];
         }
-
         return match ($app->service) {
             'fmedatastreaming' => $this->runDataStreaming($app, $token, $parameters),
             'fmejobsubmitter'  => $this->runJobSubmitter($app, $token, $parameters),
+            'fmedatadownload'  => $this->runDataDownload($app, $token, $parameters),
             default            => response()->json(
                 ['message' => 'Niet-ondersteunde service: ' . $app->service],
                 422
@@ -183,6 +186,43 @@ class FmeProxyController extends Controller
     }
 
     /**
+     * fmedatadownload: runs the workspace and returns FME's JSON envelope. The
+     * envelope contains a temporary `serviceResponse.url` pointing at the result
+     * file, which the client uses to auto-download. That result URL is publicly
+     * reachable for a limited time, so the token stays server-side here.
+     */
+    private function runDataDownload(App $app, string $token, array $parameters)
+    {
+        // The datadownload servlet authenticates via the `token` request param,
+        // not the REST `Authorization: fmetoken` header, so send it in the body.
+        $parameters['opt_responseformat'] = 'json';
+        $parameters['token'] = $token;
+
+        $url = sprintf(
+            '%s/fmedatadownload/%s/%s',
+            $this->baseUrl(),
+            rawurlencode($app->repository),
+            rawurlencode($this->workspaceName($app))
+        );
+
+        $response = Http::asForm()->withHeaders([
+            'Accept' => 'application/json',
+        ])->post($url, $parameters);
+
+        if (!$response->successful()) {
+            Log::warning('FME datadownload failed', [
+                'url'        => $url,
+                'status'     => $response->status(),
+                'parameters' => array_keys($parameters),
+                'body'       => $response->body(),
+            ]);
+        }
+
+        return response($response->body(), $response->status())
+            ->header('Content-Type', $response->header('Content-Type') ?: 'application/json');
+    }
+
+    /**
      * fmedatastreaming: streams the response (HTML for iframe or a file download)
      * straight back to the client without buffering the whole payload in memory.
      */
@@ -198,6 +238,8 @@ class FmeProxyController extends Controller
             rawurlencode($app->repository),
             rawurlencode($this->workspaceName($app))
         );
+
+        // dd($url);
 
         $upstream = Http::withOptions(['stream' => true])->get($url, $query);
 

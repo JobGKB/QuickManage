@@ -951,7 +951,7 @@ body {
 .body-container .create-form option, .body-container .edit-form option {
   background-color: #fff;
 }
-.body-container form input[type=text] {
+.body-container form input[type=text], .body-container form input[type=password] {
   margin-top: 5px;
   outline: none;
   padding: 10px;
@@ -959,14 +959,14 @@ body {
   border: 1px solid #eee;
   border-radius: 5px;
 }
-.body-container form input[type=text]:focus {
+.body-container form input[type=text]:focus, .body-container form input[type=password]:focus {
   border-color: #439034;
   box-shadow: 0 0 0 2px rgba(67, 144, 52, 0.1);
 }
-.body-container form input[type=text]::-moz-placeholder {
+.body-container form input[type=text]::-moz-placeholder, .body-container form input[type=password]::-moz-placeholder {
   color: #999;
 }
-.body-container form input[type=text]::placeholder {
+.body-container form input[type=text]::placeholder, .body-container form input[type=password]::placeholder {
   color: #999;
 }
 .body-container form textarea {

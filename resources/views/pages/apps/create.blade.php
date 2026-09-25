@@ -87,7 +87,7 @@
                             </select><br/><br/>
 
                             <p class="c-bold">Workspace token:<br/><br/>
-                            <input type="text" name='wsp_token' placeholder="Workspace token..." required><br/><br/>
+                            <input type="password" name='wsp_token' placeholder="Workspace token..." required><br/><br/>
 
                             <p class="c-bold">Template:</p> 
                                 

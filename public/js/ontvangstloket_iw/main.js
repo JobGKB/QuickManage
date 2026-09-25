@@ -81,8 +81,8 @@ const FME_TEMP_CONNECTION = "FME_SHAREDRESOURCE_TEMP";
 function getSubmitTarget() {
     const target = (window.appSettings && window.appSettings.submitTarget) || {};
     return {
-        repository: target.repository ,
-        workspace: target.workspace ,
+        repository: target.repository,
+        workspace: target.workspace,
         service: target.service 
     };
 }

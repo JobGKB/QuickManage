@@ -81,12 +81,12 @@
 
                     <form class="form" method="GET" enctype="multipart/form-data">
                       @csrf
-
+                      
                       {{-- Hier komt het formulier --}}
                       <div id='screen1'>
-
+                        
                         <div class="input-wrap">
-
+                          
                           @foreach($data["fields"] as $field)
                             @if($field["name"] == 'supplier')
                             <label for="inputSelectionLeverancier" id="LabelLeverancier">{{ $field["label"] }}*</label>
