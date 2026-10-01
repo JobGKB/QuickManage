@@ -5,91 +5,109 @@
  * window.GISPortaalConfig (set inline in the Blade view) for the
  * ArcGIS client id.
  */
-require([
-    "esri/WebMap",
-    "esri/Map",
-    "esri/views/MapView",
-    "esri/identity/OAuthInfo",
-    "esri/identity/IdentityManager",
-    "esri/widgets/LayerList",
-    "esri/widgets/Expand",
-    "esri/widgets/Legend"
-], function (WebMap, Map, MapView, OAuthInfo, esriId, LayerList, Expand, Legend) {
+$arcgis.import([
+    "@arcgis/core/config.js",
+    "@arcgis/core/WebMap.js",
+    "@arcgis/core/Map.js",
+    "@arcgis/core/core/reactiveUtils.js",
+    "@arcgis/core/identity/OAuthInfo.js",
+    "@arcgis/core/identity/IdentityManager.js"
+]).then(function ([esriConfig, WebMap, EsriMap, reactiveUtils, OAuthInfo, esriId]) {
 
     const config = window.GISPortaalConfig || {};
+    const portalUrl = (config.portalUrl || "https://www.arcgis.com").replace(/\/+$/, "");
+
+    esriConfig.portalUrl = portalUrl;
 
     const info = new OAuthInfo({
         appId: config.arcgisClientId,
+        portalUrl: portalUrl,
         popup: false
     });
 
     esriId.registerOAuthInfos([info]);
 
+    // Reuse the token from the server-side login; hosted services report www.arcgis.com as owning system.
+    if (config.arcgisToken) {
+        new Set([portalUrl, "https://www.arcgis.com"]).forEach(function (server) {
+            esriId.registerToken({
+                server: server + "/sharing/rest",
+                token: config.arcgisToken,
+                userId: config.arcgisUsername,
+                expires: config.arcgisTokenExpires,
+                ssl: true
+            });
+        });
+    }
+
     const DEFAULT_CENTER = [4.3813, 52.0000]; // Netherlands
     // Use scale instead of zoom: zoom levels are relative to the
     // basemap's tile scheme (a Dutch RD basemap's level 10 is far more
     // zoomed in than Web Mercator's level 10). Scale is absolute.
-    const DEFAULT_SCALE = 180000; // ~whole Netherlands in view
+    const DEFAULT_SCALE = 160000; // ~whole Netherlands in view
 
-    let view = null;
+    const mapEl = document.getElementById("main-map");
+    const layerList = document.getElementById("layerList");
+    const assistantExpand = document.getElementById("assistantExpand");
 
-    // Create a fresh MapView for the given map. Passing center/scale in
-    // the constructor overrides any viewpoint saved in the WebMap and
-    // discards previous navigation state completely.
-    function createView(map) {
+    // The assistant requires a WebMap with a portal item and reads it on init, so recreate it per map.
+    async function mountAssistant(webMap) {
+        const old = assistantExpand.querySelector("arcgis-assistant");
+        if (old) old.remove();
+        assistantExpand.style.display = "none";
 
-        view = new MapView({
-            container: document.querySelector(".defaultMap"),
-            map: map,
-            center: DEFAULT_CENTER,
-            scale: DEFAULT_SCALE
-        });
+        if (!(await hasEmbeddings(webMap.portalItem)) || mapEl.map !== webMap) {
+            return;
+        }
 
-        view.when(function () {
-            // Use LayerListViewModel for full state control
-            const layerList = new LayerList({
-                view: view,
-                visibleElements: {
-                    collapseButton: false,
-                    heading: false,
-                    statusIndicators: true,
-                    filter: false
-                },
-                collapsed: false,
-                // Attach a Legend panel to each list item
-                listItemCreatedFunction: function (event) {
-                    const item = event.item;
-                    item.panel = {
-                        content: new Legend({
-                            view: view,
-                            layerInfos: [{
-                                layer: item.layer
-                            }]
-                        }),
-                        className: "esri-icon-legend",
-                        open: false
-                    };
-                }
-            });
+        const assistant = document.createElement("arcgis-assistant");
+        assistant.referenceElement = mapEl;
+        assistant.heading = "My Assistant";
+        assistant.description = "Explore and navigate this map using natural language";
+        assistant.append(
+            document.createElement("arcgis-assistant-navigation-agent"),
+            document.createElement("arcgis-assistant-data-exploration-agent")
+        );
 
-            // Wrap in Expand so it renders as a toggle button in the map
-            const expand = new Expand({
-                view: view,
-                content: layerList,
-                expandIcon: "layers",
-                collapseIcon: "layers",
-                expanded: false
-            });
-
-            view.ui.add(expand, "bottom-right");
-        });
-
-        window.arcgisView = view;
-        return view;
+        assistantExpand.appendChild(assistant);
+        assistantExpand.style.display = "";
     }
 
+    // Embeddings are generated in AGOL: item Settings > "Manage AI vector embeddings".
+    async function hasEmbeddings(portalItem) {
+        try {
+            const { resources } = await portalItem.fetchResources({ num: 100 });
+            const found = resources.some(r => (r.resource.path || "").endsWith("embeddings-v01.json"));
+            if (!found) {
+                console.info(`AI-assistent uitgeschakeld: web map ${portalItem.id} heeft geen embeddings.`);
+            }
+            return found;
+        } catch (e) {
+            console.warn("Kon resources van web map niet ophalen:", e);
+            return false;
+        }
+    }
+
+    // Attach a Legend panel to each list item
+    layerList.listItemCreatedFunction = function (event) {
+        const item = event.item;
+        const legend = document.createElement("arcgis-legend");
+        legend.view = mapEl.view;
+        legend.layerInfos = [{ layer: item.layer }];
+        item.panel = {
+            content: legend,
+            icon: "legend",
+            open: false
+        };
+    };
+
     // Default map shown before any Web Map is selected
-    createView(new Map({ basemap: "topo" }));
+    mapEl.map = new EsriMap({ basemap: "topo" });
+    mapEl.center = DEFAULT_CENTER;
+    mapEl.scale = DEFAULT_SCALE;
+    mapEl.viewOnReady().then(function () {
+        window.arcgisView = mapEl.view;
+    });
 
     /**
      * Compute the union extent of all feature layers, hide layers first,
@@ -105,6 +123,8 @@ require([
         try {
 
             await webMap.loadAll();
+            // The view re-initialises after a map swap; wait so spatialReference matches the new map.
+            await reactiveUtils.whenOnce(() => v.ready);
             const featureLayers = webMap.allLayers
                 .filter(l => l.type === "feature")
                 .toArray();
@@ -136,7 +156,6 @@ require([
             });
 
             // 3. Navigate to the bounding box (or default if no features).
-            await v.when();
             if (union) {
                 const MIN_SIZE = 500;
                 if (union.width < MIN_SIZE || union.height < MIN_SIZE) {
@@ -172,9 +191,9 @@ require([
 
     /**
      * Load a saved AGOL Web Map (with all its layers, styles and
-     * definition expressions) into a fresh MapView.
+     * definition expressions) into the map component.
      */
-    window.loadWebMap = function (itemId, title) {
+    window.loadWebMap = async function (itemId, title) {
         const label = document.getElementById('mapLabel');
         if (label) {
             label.textContent = title || '';
@@ -185,10 +204,12 @@ require([
             portalItem: { id: itemId }
         });
 
-        const v = createView(webMap);
+        await mapEl.viewOnReady();
+        mapEl.map = webMap;
 
         webMap.when(function () {
-            zoomToFeatures(webMap, v);
+            if (mapEl.map === webMap) mountAssistant(webMap);
+            zoomToFeatures(webMap, mapEl.view);
         });
     };
 

@@ -1,81 +1,129 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Map each menu link (by its href) to the content section it should show.
-    const sections = {
-        '/docs': 'content-introduction',
-        '#profielplaatjes': 'content-profielplaatjes',
-        '#test': 'content-test',
-    };
+    const defaultSection = 'introductie';
+    const sections = Array.from(document.querySelectorAll('.doc-section'));
+    const menuLinks = Array.from(document.querySelectorAll('.menu a[href^="#"]'));
 
-    const contentIds = Object.values(sections);
+    function sectionKey(section) {
+        return section.id.replace(/^content-/, '');
+    }
 
-    function showContent(targetId) {
-        contentIds.forEach(function (id) {
-            const el = document.getElementById(id);
-            if (el) {
-                el.style.display = id === targetId ? 'block' : 'none';
-            }
+    function showSection(key) {
+        if (!document.getElementById('content-' + key)) {
+            key = defaultSection;
+        }
+
+        sections.forEach(function (section) {
+            section.style.display = sectionKey(section) === key ? 'block' : 'none';
+        });
+
+        menuLinks.forEach(function (link) {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + key);
         });
     }
 
-    document.querySelectorAll('.menu a').forEach(function (link) {
-        const href = link.getAttribute('href');
-        const targetId = sections[href];
-        if (!targetId) return;
+    // All in-page links (menu + links inside the content) switch sections via the hash.
+    document.addEventListener('click', function (event) {
+        const link = event.target.closest('a[href^="#"]');
+        if (!link) return;
 
-        link.addEventListener('click', function (event) {
-            event.preventDefault();
-            showContent(targetId);
+        const key = link.getAttribute('href').substring(1);
+        if (!document.getElementById('content-' + key)) return;
+
+        event.preventDefault();
+        history.pushState(null, '', '#' + key);
+        showSection(key);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('popstate', function () {
+        showSection(location.hash.substring(1));
+    });
+
+    showSection(location.hash.substring(1));
+
+    // Copy buttons: copy the text of the element referenced by data-copy-target.
+    function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            return navigator.clipboard.writeText(text);
+        }
+
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        return Promise.resolve();
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(function (button) {
+        button.addEventListener('click', function () {
+            const target = document.getElementById(button.dataset.copyTarget);
+            if (!target) return;
+
+            copyText(target.textContent.trim()).then(function () {
+                button.classList.replace('fa-copy', 'fa-check');
+                setTimeout(function () {
+                    button.classList.replace('fa-check', 'fa-copy');
+                }, 1500);
+            });
         });
     });
 
-    // Show the introduction section by default.
-    showContent('content-introduction');
+    // Toggles: open/close the code block referenced by data-toggle-target.
+    document.querySelectorAll('.toggle').forEach(function (toggle) {
+        const target = document.getElementById(toggle.dataset.toggleTarget);
+        const icon = toggle.querySelector('.toggle-icon');
+        if (!target) return;
 
-    // Copy the API URL to the clipboard when the copy icon is clicked.
-    const copyApiLink = document.getElementById('copy_apiLink');
-    const apiUrl = document.getElementById('api_url');
-    if (copyApiLink && apiUrl) {
-        copyApiLink.addEventListener('click', function () {
-            const url = apiUrl.textContent.trim();
-
-            function showCopied() {
-                copyApiLink.classList.remove('fa-copy');
-                copyApiLink.classList.add('fa-check');
-                setTimeout(function () {
-                    copyApiLink.classList.remove('fa-check');
-                    copyApiLink.classList.add('fa-copy');
-                }, 1500);
+        toggle.addEventListener('click', function () {
+            const isOpen = target.classList.toggle('collapsed') === false;
+            if (icon) {
+                icon.classList.toggle('fa-arrow-right', !isOpen);
+                icon.classList.toggle('fa-arrow-down', isOpen);
             }
+        });
+    });
 
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(url).then(showCopied);
-            } else {
-                const temp = document.createElement('textarea');
-                temp.value = url;
-                document.body.appendChild(temp);
-                temp.select();
-                document.execCommand('copy');
-                document.body.removeChild(temp);
-                showCopied();
-            }
+    // Search: filter menu items on the text of their section; Enter opens the first match.
+    const search = document.getElementById('doc_search');
+    const noResults = document.getElementById('no_results');
+
+    function matchingLinks(query) {
+        return menuLinks.filter(function (link) {
+            const section = document.getElementById('content-' + link.getAttribute('href').substring(1));
+            const text = (link.textContent + ' ' + (section ? section.textContent : '')).toLowerCase();
+            return text.includes(query);
         });
     }
 
-    // Toggle the JSON example code block open/closed.
-    const jsonToggle = document.getElementById('json_toggle');
-    const jsonPre = document.getElementById('json_pre');
-    const jsonToggleIcon = document.getElementById('json_toggle_icon');
-    if (jsonToggle && jsonPre) {
-        // Start collapsed.
-        jsonPre.style.display = 'none';
+    if (search) {
+        search.addEventListener('input', function () {
+            const query = search.value.trim().toLowerCase();
+            const matches = matchingLinks(query);
 
-        jsonToggle.addEventListener('click', function () {
-            const isHidden = jsonPre.style.display === 'none';
-            jsonPre.style.display = isHidden ? 'block' : 'none';
+            menuLinks.forEach(function (link) {
+                link.parentElement.style.display = matches.includes(link) ? '' : 'none';
+            });
 
-            if (jsonToggleIcon) {
-                jsonToggleIcon.classList.toggle('fa-arrow-right', !isHidden);
-                jsonToggleIcon.classList.toggle('fa-arrow-down', isHidden);
+            document.querySelectorAll('.menu-group').forEach(function (group) {
+                const hasVisible = Array.from(group.querySelectorAll('a')).some(function (link) {
+                    return matches.includes(link);
+                });
+                group.style.display = hasVisible ? '' : 'none';
+            });
+
+            if (noResults) {
+                noResults.style.display = matches.length ? 'none' : 'block';
+            }
+        });
+
+        search.addEventListener('keydown', function (event) {
+            if (event.key !== 'Enter') return;
+
+            const first = matchingLinks(search.value.trim().toLowerCase())[0];
+            if (first) {
+                first.click();
             }
         });
     }

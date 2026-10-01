@@ -19,6 +19,7 @@
 
                 "punten":
                 [
+                    
                     {"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.63},
                     {"puntnr":2,"afstand":0.17,"puntsoort":"baggervasteb","meting":-2.05},
                     {"puntnr":3,"afstand":0.49,"puntsoort":"baggervasteb","meting":-2.36},

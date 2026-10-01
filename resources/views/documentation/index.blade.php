@@ -4,187 +4,333 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css" integrity="sha512-yDUXOUWwbHH4ggxueDnC5vJv4tmfySpVdIcN1LksGZi8W8EVZv4uKGrQc0pVf66zS7LDhFJM7Zdeow1sw1/8Jw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css" integrity="sha512-WidMaWaNmZqjk3gDE6KBFCoDpBz9stTsTZZTeocfq/eDNkLfpakEd7qR0bPejvy/x0iT0dvzIq4IirnBtVer5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/svg-with-js.min.css" integrity="sha512-FTnGkh+EGoZdexd/sIZYeqkXFlcV3VSscCTBwzwXv1IEN5W7/zRLf6aUBVf2Ahdgx3h/h22HNzaoeBnYT6vDlA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css" integrity="sha512-9YHSK59/rjvhtDcY/b+4rdnl0V4LPDWdkKceBl8ZLF5TB6745ml1AfluEU6dFWqwDw9lPvnauxFgpKvJqp7jiQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('storage/fav-cm.png') }}">
 
-    <title>{{ config('app.name', 'QuickManage') }}</title>
+    <title>Documentatie - {{ config('app.name', 'QuickManage') }}</title>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/docs.css') }}" >
-    <!-- Scripts -->
-    <script src="https://js.arcgis.com/4.28/"></script>
+    <link rel="stylesheet" href="{{ asset('css/docs.css') }}">
 </head>
-<body >
-     
-     <section class="header">                   
-         <div class="container border-left">                
-            <div class="row">   
- 
-                    <div class="col-lg-12 ">
-                        <div class="header-wrapper"> 
-                            <img src="{{ asset('storage/logo-cm.png') }}" alt="QuickManage Logo" class="img">
-                            <input type="text" class="searchbar" placeholder="Search...">
-                        </div>
-                    </div>
- 
-            </div>
-         </div>
-     </section>
+<body>
 
-     <section class="content">
+    <section class="header">
         <div class="container border-left">
-            <div class="row ">
-                
-                    <div class="col-lg-3">
-                        <div class="menu"> 
-                            <ul>
-
-                                <li>
-                                    <a href="/docs">Introduction</a>
-                                </li>
-    
-                                <li>
-                                    <a href="#profielplaatjes">Profielplaatjes</a>
-                                </li>
-
-                            </ul>
-                        </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="header-wrapper">
+                        <img src="{{ asset('storage/logo-cm.png') }}" alt="QuickManage Logo" class="img">
+                        <input type="text" class="searchbar" id="doc_search" placeholder="Zoeken...">
                     </div>
-                    <div class="col-lg-9">
-                        <div class="content-introduction" id="content-introduction">                                                                                  
-                            <h1>Introduction</h1>                                                                                           
-                            <p>Welcome to the QuickManage documentation.</p>                                                                
-                                                                                                                                            
-                            <p>Here you can find detailed information about QuickManage features and usage.</p>                             
-                            <p>Feel free to explore the different sections to learn more about how to make the most out of QuickManage.</p> 
-                            <p>If you have any questions or need assistance, don't hesitate to reach out to our support team.</p>           
-                                                                                                                                            
-                        </div>
-
-                        <div class="content-profielplaatjes" id="content-profielplaatjes">  
-                            <h3>Automatisch genereren van profielplaatjes</h3>
-                            <p>
-                                <strong>POST</strong> <span id="api_url"><strong> https://gisdev.gkbgroep.nl/api/profielplaatjes/generate </strong></span> 
-                                <i class="fa-solid fa-copy" id="copy_apiLink" role="button" title="Copy" style="cursor: pointer;"></i>           
-                                
-                            </p>
-                            <p>Er kunnen max 250 profielen worden gegenereerd per request. Afhankelijk van de serverbelasting kan dit enige tijd duren.</p>   
-                            <p>De request body moet een JSON object bevatten met daarin een array van profielen. Elk profiel moet de volgende velden bevatten, de waardes hiervan mogen ook leeg zijn meer dan wel als empty string (bijv:"-"):</p>
-                            <ul>
-                                <li><strong>profielcode</strong>: De code van het profiel (string)</li>
-                                <li><strong>project</strong>: De code van het project (string)</li>
-                                <li><strong>opdrachtgever</strong>: De naam van de opdrachtgever (string)</li>
-                                <li><strong>omschrijving</strong>: Een korte omschrijving van het profiel (string)</li>
-                                <li><strong>baggercode</strong>: De baggercode (string)</li>
-                                <li><strong>legger</strong>: De legger (string)</li>
-                                <li><strong>polderpeil</strong>: Het polderpeil (string)</li>
-                                <li><strong>waterpeil</strong>: Het waterpeil (string)</li>
-                                <li><strong>dynamic_fields</strong>: Een array van max 2 dynamische velden, hierbij mag je zelf de naam en waarde van elk veld bepalen.</li>
-                                <li><strong>punten</strong>: Een array van punten, elk punt moet een object bevatten met de volgende velden:
-                                    <ul>
-                                        <li><strong>puntnr</strong>: Het puntnummer (integer)</li>
-                                        <li><strong>afstand</strong>: De afstand tot het vorige punt (float)</li>
-                                        <li><strong>puntsoort</strong>: De soort van het punt (string)</li>
-                                        <li><strong>meting</strong>: De meting op dat punt (float)</li>
-                                    </ul>
-                                </li>
-                            </ul>
-
-                                <p id="json_toggle" role="button" style="cursor: pointer;">Voorbeeld request body (JSON):  <i class="fa-solid fa-arrow-right" id="json_toggle_icon"> </i></p>
-
-                            <div class="code-block">
-                                <pre id="json_pre">
-                                    <code class="language-json" id="json_code">
-Method: POST
-Full URL: https://gisdev.gkbgroep.nl/api/profielplaatjes/generate
-Version: HTTP/2 (if possible)
-Content-Type: JSON (application/json)
-
-    {
-        "profielen":
-        [
-            { 
-                "profielcode": "30_12_B", 
-                "project": "BARE2621",
-                "opdrachtgever": "Gemeente Barendrecht", 
-                "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
-                "baggercode": "-", 
-                "legger": "-", 
-                "polderpeil": "-", 
-                "waterpeil": "-",
-                "dynamic_fields":[
-                    {
-                        "inpeildatum": "-" ,
-                        "Bagger m3 / strekkende meter":"0.07"
-                    }
-                ],
-                "punten":
-                [
-                    {"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.63},
-                    {"puntnr":2,"afstand":0.17,"puntsoort":"baggervasteb","meting":-2.05},
-                    {"puntnr":3,"afstand":0.49,"puntsoort":"baggervasteb","meting":-2.36},
-                    {"puntnr":4,"afstand":0.9,"puntsoort":"baggervasteb","meting":-2.45},
-                    {"puntnr":5,"afstand":1.39,"puntsoort":"baggervasteb","meting":-2.59},
-                    {"puntnr":6,"afstand":1.9,"puntsoort":"baggervasteb","meting":-2.76},
-                    {"puntnr":7,"afstand":2.44,"puntsoort":"vast","meting":-2.95},
-                    {"puntnr":8,"afstand":2.44,"puntsoort":"bagger","meting":-2.88},
-                    {"puntnr":9,"afstand":2.87,"puntsoort":"vast","meting":-2.95},
-                    {"puntnr":10,"afstand":2.87,"puntsoort":"bagger","meting":-2.88},
-                    {"puntnr":11,"afstand":3.4,"puntsoort":"baggervasteb","meting":-2.74},
-                    {"puntnr":12,"afstand":3.88,"puntsoort":"baggervasteb","meting":-2.59},
-                    {"puntnr":13,"afstand":4.33,"puntsoort":"baggervasteb","meting":-2.46},
-                    {"puntnr":14,"afstand":4.83,"puntsoort":"baggervasteb","meting":-2.33},
-                    {"puntnr":15,"afstand":5.44,"puntsoort":"baggervasteb","meting":-2.24},
-                    {"puntnr":16,"afstand":5.98,"puntsoort":"baggervasteb","meting":-2.05},
-                    {"puntnr":17,"afstand":8.08,"puntsoort":"insteek","meting":-1.24}
-                ]
-            }
-        ]
-    }
-                                    </code>
-                                </pre>
-                              
-                            </div>
-
-                           <p>   Voorbeeld response code 200 (JSON): <i class="fa-solid fa-arrow-right" id="json_toggle_icon"> </i></p>
-                        </div>
-
-                        
-
-                    </div>
-                 
+                </div>
             </div>
         </div>
-     </section>
+    </section>
 
-     <section class="footer">
-         <div class="container border-left">
+    <section class="content">
+        <div class="container border-left">
             <div class="row">
- 
-                    <div class="col-lg-12 text-center">
-                        <div class="footer-wrapper">  
-                            <p>&copy; 2024 QuickManage. All rights reserved.</p>
-                        </div> 
+
+                <div class="col-lg-3">
+                    <div class="menu">
+                        <ul>
+                            <li><a href="#introductie">Introductie</a></li>
+                            <li><a href="#aan-de-slag">Aan de slag</a></li>
+                            <li class="menu-group">
+                                <span class="menu-title">Profielplaatjes</span>
+                                <ul>
+                                    <li><a href="#profielplaatjes">Genereren</a></li>
+                                    <li><a href="#profielplaatjes-download">Downloaden</a></li>
+                                    <li><a href="#foutmeldingen">Foutmeldingen</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p class="no-results" id="no_results">Geen resultaten gevonden.</p>
                     </div>
- 
+                </div>
+
+                <div class="col-lg-9">
+
+                    {{-- Introductie --}}
+                    <div class="doc-section" id="content-introductie">
+                        <h1>Introductie</h1>
+                        <p>Welkom bij de documentatie van QuickManage.</p>
+                        <p>Op deze pagina vind je uitleg over de functionaliteiten en API's die QuickManage aanbiedt. Gebruik het menu aan de linkerkant om door de verschillende onderdelen te navigeren, of gebruik de zoekbalk bovenin om snel een onderwerp te vinden.</p>
+                        <p>Heb je vragen of loop je ergens tegenaan? Neem dan contact op met de GIS-afdeling van GKB Groep.</p>
+
+                        <h4>Onderdelen</h4>
+                        <ul>
+                            <li><a href="#aan-de-slag">Aan de slag</a>: algemene informatie over het aanroepen van de API.</li>
+                            <li><a href="#profielplaatjes">Profielplaatjes genereren</a>: automatisch PDF-profielplaatjes laten maken op basis van meetgegevens.</li>
+                            <li><a href="#profielplaatjes-download">Profielplaatjes downloaden</a>: het ophalen van de gegenereerde profielplaatjes als zip-bestand.</li>
+                            <li><a href="#foutmeldingen">Foutmeldingen</a>: overzicht van mogelijke foutcodes en hoe je deze oplost.</li>
+                        </ul>
+                    </div>
+
+                    {{-- Aan de slag --}}
+                    <div class="doc-section" id="content-aan-de-slag">
+                        <h3>Aan de slag</h3>
+                        <p>De QuickManage API is een REST API die met JSON werkt. Alle endpoints zijn bereikbaar onder de volgende basis-URL:</p>
+                        <p>
+                            <strong id="base_url">https://gisdev.gkbgroep.nl/api</strong>
+                            <i class="fa-solid fa-copy copy-btn" data-copy-target="base_url" role="button" title="Kopiëren"></i>
+                        </p>
+
+                        <h5>Headers</h5>
+                        <p>Stuur bij elk request de volgende headers mee:</p>
+                        <table class="doc-table">
+                            <thead>
+                                <tr><th>Header</th><th>Waarde</th><th>Omschrijving</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>Content-Type</code></td><td><code>application/json</code></td><td>De request body wordt als JSON verstuurd.</td></tr>
+                                <tr><td><code>Accept</code></td><td><code>application/json</code></td><td>Zorgt ervoor dat foutmeldingen ook als JSON worden teruggegeven in plaats van een redirect.</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h5>Tips</h5>
+                        <ul>
+                            <li>Gebruik bij voorkeur HTTP/2 wanneer je client dit ondersteunt.</li>
+                            <li>Het genereren van grote aantallen profielplaatjes kan enige tijd duren. Stel de timeout van je client daarom ruim in (bijvoorbeeld 5 minuten).</li>
+                            <li>Splits grote hoeveelheden profielen op in meerdere requests (chunking) van maximaal 250 profielen per request.</li>
+                        </ul>
+                    </div>
+
+                    {{-- Profielplaatjes genereren --}}
+                    <div class="doc-section" id="content-profielplaatjes">
+                        <h3>Automatisch genereren van profielplaatjes</h3>
+                        <p class="endpoint">
+                            <span class="method method-post">POST</span>
+                            <strong id="api_url_generate">https://gisdev.gkbgroep.nl/api/profielplaatjes/generate</strong>
+                            <i class="fa-solid fa-copy copy-btn" data-copy-target="api_url_generate" role="button" title="Kopiëren"></i>
+                        </p>
+                        <p>Met dit endpoint worden op basis van meetgegevens automatisch profielplaatjes (PDF) gegenereerd. Per profiel wordt één PDF aangemaakt; alle PDF's worden gebundeld in één zip-bestand. Als antwoord ontvang je een downloadlink naar dit zip-bestand.</p>
+                        <p>Er kunnen maximaal <strong>250 profielen</strong> per request worden gegenereerd. Afhankelijk van de serverbelasting kan dit enige tijd duren.</p>
+
+                        <h5>Request body</h5>
+                        <p>De request body moet een JSON-object bevatten met de sleutel <code>profielen</code>, met daarin een array van profielen. Elk profiel bevat de onderstaande velden. Optionele velden mogen leeg zijn of gevuld met een placeholder (bijv. <code>"-"</code>).</p>
+                        <table class="doc-table">
+                            <thead>
+                                <tr><th>Veld</th><th>Type</th><th>Verplicht</th><th>Omschrijving</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>profielcode</code></td><td>string</td><td>Ja</td><td>De code van het profiel (max. 50 tekens). Wordt ook gebruikt als bestandsnaam van de PDF.</td></tr>
+                                <tr><td><code>project</code></td><td>string</td><td>Nee</td><td>De code van het project (max. 255 tekens).</td></tr>
+                                <tr><td><code>opdrachtgever</code></td><td>string</td><td>Nee</td><td>De naam van de opdrachtgever (max. 255 tekens).</td></tr>
+                                <tr><td><code>omschrijving</code></td><td>string</td><td>Nee</td><td>Een korte omschrijving van het profiel (max. 255 tekens).</td></tr>
+                                <tr><td><code>baggercode</code></td><td>string</td><td>Nee</td><td>De baggercode (max. 100 tekens).</td></tr>
+                                <tr><td><code>legger</code></td><td>string</td><td>Nee</td><td>De legger (max. 100 tekens).</td></tr>
+                                <tr><td><code>polderpeil</code></td><td>string</td><td>Nee</td><td>Het polderpeil (max. 100 tekens).</td></tr>
+                                <tr><td><code>waterpeil</code></td><td>string</td><td>Nee</td><td>Het waterpeil (max. 100 tekens).</td></tr>
+                                <tr><td><code>dynamic_fields</code></td><td>array</td><td>Ja</td><td>Een array met daarin een object van maximaal 2 dynamische velden. De naam en waarde van elk veld bepaal je zelf; deze worden op het profielplaatje getoond.</td></tr>
+                                <tr><td><code>punten</code></td><td>array</td><td>Ja</td><td>Een array van meetpunten (minimaal 1). Zie de tabel hieronder.</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h5>Punten</h5>
+                        <p>Elk punt in de array <code>punten</code> is een object met de volgende velden:</p>
+                        <table class="doc-table">
+                            <thead>
+                                <tr><th>Veld</th><th>Type</th><th>Omschrijving</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>puntnr</code></td><td>integer</td><td>Het volgnummer van het punt.</td></tr>
+                                <tr><td><code>afstand</code></td><td>float</td><td>De afstand in meters vanaf het beginpunt van het profiel.</td></tr>
+                                <tr><td><code>puntsoort</code></td><td>string</td><td>De soort van het punt. Zie de puntsoorten hieronder.</td></tr>
+                                <tr><td><code>meting</code></td><td>float</td><td>De gemeten hoogte op dat punt (t.o.v. NAP).</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h5>Puntsoorten</h5>
+                        <table class="doc-table">
+                            <thead>
+                                <tr><th>Puntsoort</th><th>Betekenis</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>insteek</code></td><td>Insteek van de watergang (begin- of eindpunt van het profiel).</td></tr>
+                                <tr><td><code>vast</code></td><td>Vaste bodem; onderdeel van de bodemdiepte (rode lijn).</td></tr>
+                                <tr><td><code>bagger</code></td><td>Bovenkant baggerlaag; onderdeel van de baggerhoogte (groene lijn).</td></tr>
+                                <tr><td><code>baggervasteb</code></td><td>Punt waar bagger en vaste bodem samenvallen (rand van het baggervak).</td></tr>
+                            </tbody>
+                        </table>
+
+                        <p class="toggle" data-toggle-target="request_json" role="button">
+                            Voorbeeld request body (JSON) <i class="fa-solid fa-arrow-right toggle-icon"></i>
+                        </p>
+                        <div class="code-block collapsed" id="request_json">
+                            <i class="fa-solid fa-copy copy-btn" data-copy-target="request_json_code" role="button" title="Kopiëren"></i>
+<pre><code class="language-json" id="request_json_code">{
+    "profielen": [
+        {
+            "profielcode": "30_12_B",
+            "project": "BARE2621",
+            "opdrachtgever": "Gemeente Barendrecht",
+            "omschrijving": "Baggeren Begraafplaats Ouden Dyck",
+            "baggercode": "-",
+            "legger": "-",
+            "polderpeil": "-",
+            "waterpeil": "-",
+            "dynamic_fields": [
+                {
+                    "inpeildatum": "-",
+                    "Bagger m3 / strekkende meter": "0.07"
+                }
+            ],
+            "punten": [
+                {"puntnr": 1, "afstand": 0, "puntsoort": "insteek", "meting": -1.63},
+                {"puntnr": 2, "afstand": 0.17, "puntsoort": "baggervasteb", "meting": -2.05},
+                {"puntnr": 3, "afstand": 0.49, "puntsoort": "baggervasteb", "meting": -2.36},
+                {"puntnr": 4, "afstand": 0.9, "puntsoort": "baggervasteb", "meting": -2.45},
+                {"puntnr": 5, "afstand": 1.39, "puntsoort": "baggervasteb", "meting": -2.59},
+                {"puntnr": 6, "afstand": 1.9, "puntsoort": "baggervasteb", "meting": -2.76},
+                {"puntnr": 7, "afstand": 2.44, "puntsoort": "vast", "meting": -2.95},
+                {"puntnr": 8, "afstand": 2.44, "puntsoort": "bagger", "meting": -2.88},
+                {"puntnr": 9, "afstand": 2.87, "puntsoort": "vast", "meting": -2.95},
+                {"puntnr": 10, "afstand": 2.87, "puntsoort": "bagger", "meting": -2.88},
+                {"puntnr": 11, "afstand": 3.4, "puntsoort": "baggervasteb", "meting": -2.74},
+                {"puntnr": 12, "afstand": 3.88, "puntsoort": "baggervasteb", "meting": -2.59},
+                {"puntnr": 13, "afstand": 4.33, "puntsoort": "baggervasteb", "meting": -2.46},
+                {"puntnr": 14, "afstand": 4.83, "puntsoort": "baggervasteb", "meting": -2.33},
+                {"puntnr": 15, "afstand": 5.44, "puntsoort": "baggervasteb", "meting": -2.24},
+                {"puntnr": 16, "afstand": 5.98, "puntsoort": "baggervasteb", "meting": -2.05},
+                {"puntnr": 17, "afstand": 8.08, "puntsoort": "insteek", "meting": -1.24}
+            ]
+        }
+    ]
+}</code></pre>
+                        </div>
+
+                        <h5>Response</h5>
+                        <p>Bij succes ontvang je statuscode <strong>200</strong> met daarin de downloadlink naar het zip-bestand. Gebruik <code>download_url</code> om de profielplaatjes op te halen (zie <a href="#profielplaatjes-download">Downloaden</a>).</p>
+                        <table class="doc-table">
+                            <thead>
+                                <tr><th>Veld</th><th>Type</th><th>Omschrijving</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>status</code></td><td>string</td><td>Altijd <code>success</code> bij een geslaagd request.</td></tr>
+                                <tr><td><code>message</code></td><td>string</td><td>Leesbare melding met het aantal gegenereerde profielplaatjes.</td></tr>
+                                <tr><td><code>count</code></td><td>integer</td><td>Aantal gegenereerde profielplaatjes.</td></tr>
+                                <tr><td><code>zipfile</code></td><td>string</td><td>Bestandsnaam van het zip-bestand.</td></tr>
+                                <tr><td><code>download_url</code></td><td>string</td><td>Volledige URL waarmee het zip-bestand gedownload kan worden.</td></tr>
+                                <tr><td><code>generated_at</code></td><td>string</td><td>Tijdstip van genereren (ISO 8601).</td></tr>
+                            </tbody>
+                        </table>
+
+                        <p class="toggle" data-toggle-target="response_json" role="button">
+                            Voorbeeld response code 200 (JSON) <i class="fa-solid fa-arrow-right toggle-icon"></i>
+                        </p>
+                        <div class="code-block collapsed" id="response_json">
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "1 profielplaatje(s) gegenereerd.",
+    "count": 1,
+    "zipfile": "profielplaatjes_20261001_101500_AbC123.zip",
+    "download_url": "https://gisdev.gkbgroep.nl/api/profielplaatjes/download/profielplaatjes_20261001_101500_AbC123.zip",
+    "generated_at": "2026-10-01T10:15:00+02:00"
+}</code></pre>
+                        </div>
+                    </div>
+
+                    {{-- Profielplaatjes downloaden --}}
+                    <div class="doc-section" id="content-profielplaatjes-download">
+                        <h3>Downloaden van profielplaatjes</h3>
+                        <p class="endpoint">
+                            <span class="method method-get">GET</span>
+                            <strong id="api_url_download">https://gisdev.gkbgroep.nl/api/profielplaatjes/download/{bestandsnaam}</strong>
+                            <i class="fa-solid fa-copy copy-btn" data-copy-target="api_url_download" role="button" title="Kopiëren"></i>
+                        </p>
+                        <p>Met dit endpoint download je een eerder gegenereerd zip-bestand met profielplaatjes. In de praktijk gebruik je hiervoor direct de <code>download_url</code> uit de response van het <a href="#profielplaatjes">genereren</a>-endpoint.</p>
+
+                        <h5>Parameters</h5>
+                        <table class="doc-table">
+                            <thead>
+                                <tr><th>Parameter</th><th>Type</th><th>Omschrijving</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>bestandsnaam</code></td><td>string</td><td>De waarde van <code>zipfile</code> uit de generate-response. Alleen letters, cijfers, punten, underscores en streepjes zijn toegestaan.</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h5>Response</h5>
+                        <ul>
+                            <li><strong>200</strong>: het zip-bestand (<code>application/zip</code>). Elk profiel zit hierin als losse PDF met de naam <code>profiel-{profielcode}.pdf</code>.</li>
+                            <li><strong>404</strong>: het bestand bestaat niet (meer).</li>
+                        </ul>
+
+                        <p class="toggle" data-toggle-target="download_404_json" role="button">
+                            Voorbeeld response code 404 (JSON) <i class="fa-solid fa-arrow-right toggle-icon"></i>
+                        </p>
+                        <div class="code-block collapsed" id="download_404_json">
+<pre><code class="language-json">{
+    "status": "error",
+    "message": "Bestand niet gevonden."
+}</code></pre>
+                        </div>
+                    </div>
+
+                    {{-- Foutmeldingen --}}
+                    <div class="doc-section" id="content-foutmeldingen">
+                        <h3>Foutmeldingen</h3>
+                        <p>Wanneer een request niet slaagt, geeft de API een foutcode terug met een JSON-body waarin de oorzaak staat beschreven.</p>
+                        <table class="doc-table">
+                            <thead>
+                                <tr><th>Code</th><th>Betekenis</th><th>Oplossing</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>404</strong></td><td>Het opgevraagde bestand bestaat niet.</td><td>Controleer de bestandsnaam of genereer de profielplaatjes opnieuw.</td></tr>
+                                <tr><td><strong>422</strong></td><td>De request body is ongeldig (validatiefout).</td><td>Controleer de velden in <code>errors</code>; bijvoorbeeld een ontbrekende <code>profielcode</code> of meer dan 250 profielen.</td></tr>
+                                <tr><td><strong>500</strong></td><td>Er is iets misgegaan op de server tijdens het genereren.</td><td>Probeer het later opnieuw. Blijft het probleem bestaan, neem dan contact op met de GIS-afdeling.</td></tr>
+                            </tbody>
+                        </table>
+
+                        <p class="toggle" data-toggle-target="error_422_json" role="button">
+                            Voorbeeld response code 422 (JSON) <i class="fa-solid fa-arrow-right toggle-icon"></i>
+                        </p>
+                        <div class="code-block collapsed" id="error_422_json">
+<pre><code class="language-json">{
+    "message": "Maximaal 250 profielen per aanvraag. Splits de aanvraag op in kleinere delen (chunking).",
+    "errors": {
+        "profielen": [
+            "Maximaal 250 profielen per aanvraag. Splits de aanvraag op in kleinere delen (chunking)."
+        ]
+    }
+}</code></pre>
+                        </div>
+
+                        <p class="toggle" data-toggle-target="error_500_json" role="button">
+                            Voorbeeld response code 500 (JSON) <i class="fa-solid fa-arrow-right toggle-icon"></i>
+                        </p>
+                        <div class="code-block collapsed" id="error_500_json">
+<pre><code class="language-json">{
+    "status": "error",
+    "message": "Genereren van de profielplaatjes is mislukt."
+}</code></pre>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
-         </div>
-     </section>
+        </div>
+    </section>
+
+    <section class="footer">
+        <div class="container border-left">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="footer-wrapper">
+                        <p>&copy; {{ date('Y') }} QuickManage. Alle rechten voorbehouden.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script src="{{ asset('js/documentation/main.js') }}"></script>
 </body>
- 
 </html>

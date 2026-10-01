@@ -2,6 +2,16 @@ body {
   background-color: #2c2c2c;
   color: #ffffff;
 }
+body a {
+  color: #6ab04c;
+  text-decoration: none;
+}
+body a:hover {
+  text-decoration: underline;
+}
+body code {
+  color: #e8b86d;
+}
 body .header .border-left {
   border-left: 1px solid #444444;
 }
@@ -30,6 +40,8 @@ body .content .border-left {
 }
 body .content .menu {
   padding: 80px 0;
+  position: sticky;
+  top: 0;
 }
 body .content .menu ul {
   list-style: none;
@@ -40,42 +52,117 @@ body .content .menu ul li {
 }
 body .content .menu ul li a {
   color: #ffffff;
-  text-decoration: none;
 }
-body .content .menu ul li a:hover {
-  text-decoration: underline;
+body .content .menu ul li a.active {
+  color: #6ab04c;
+  font-weight: bold;
 }
-body .content .content-introduction, body .content .content-profielplaatjes, body .content .content-test {
+body .content .menu ul ul {
+  padding-left: 15px;
+  margin-top: 10px;
+}
+body .content .menu .menu-title {
+  color: #b5b5b5;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+body .content .menu .no-results {
+  display: none;
+  padding-left: 50px;
+  color: #b5b5b5;
+}
+body .content .doc-section {
+  display: none;
   padding: 80px 0;
 }
-body .content .content-profielplaatjes .code-block {
+body .content .doc-section h4, body .content .doc-section h5 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+body .content .doc-section ul {
+  list-style: none;
+  padding-left: 50px;
+}
+body .content .doc-section ul li {
+  margin-bottom: 10px;
+}
+body .content .doc-section .endpoint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+body .content .doc-section .method {
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+body .content .doc-section .method.method-post {
+  background-color: #2e8b2e;
+}
+body .content .doc-section .method.method-get {
+  background-color: #1e6fb8;
+}
+body .content .doc-section .copy-btn {
+  cursor: pointer;
+  color: #b5b5b5;
+}
+body .content .doc-section .copy-btn:hover {
+  color: #ffffff;
+}
+body .content .doc-section .toggle {
+  cursor: pointer;
+  margin-top: 20px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+body .content .doc-section .toggle:hover {
+  text-decoration: underline;
+}
+body .content .doc-section .doc-table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+body .content .doc-section .doc-table th, body .content .doc-section .doc-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #444444;
+  vertical-align: top;
+}
+body .content .doc-section .doc-table th {
+  color: #b5b5b5;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+body .content .doc-section .code-block {
+  position: relative;
   background-color: #1a1a1a;
   padding: 20px;
   border-radius: 5px;
-  margin-top: 20px;
   margin-bottom: 20px;
-  overflow-y: scroll;
+  overflow: auto;
   max-height: 600px;
 }
-body .content .content-profielplaatjes .code-block pre {
+body .content .doc-section .code-block.collapsed {
+  display: none;
+}
+body .content .doc-section .code-block .copy-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+body .content .doc-section .code-block pre {
   margin: 0;
   font-family: "Courier New", Courier, monospace;
   font-size: 14px;
   color: #ffffff;
 }
-body .content .content-profielplaatjes ul {
-  list-style: none;
-  padding-left: 50px;
-}
-body .content .content-profielplaatjes ul li {
-  margin-bottom: 10px;
-}
-body .content .content-profielplaatjes ul li a {
+body .content .doc-section .code-block pre code {
   color: #ffffff;
-  text-decoration: none;
-}
-body .content .content-profielplaatjes ul li a:hover {
-  text-decoration: underline;
 }
 body .footer .border-left {
   border-left: 1px solid #444444;

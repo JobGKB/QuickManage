@@ -47,7 +47,14 @@
             </div>
         </div>
   
-        <div class="defaultMap"></div>
+        {{-- The assistant only works with an <arcgis-map>, so this is the main map --}}
+        <arcgis-map id="main-map" class="defaultMap">
+            {{-- arcgis-assistant is added by map.js once a web map is loaded --}}
+            <arcgis-expand id="assistantExpand" slot="top-left" expand-icon="speech-bubble" mode="floating" style="display:none"></arcgis-expand>
+            <arcgis-expand slot="bottom-right" expand-icon="layers" collapse-icon="layers">
+                <arcgis-layer-list id="layerList"></arcgis-layer-list>
+            </arcgis-expand>
+        </arcgis-map>
      
         <div class="GISAssistent">
 
@@ -94,17 +101,21 @@
     // Pass server-side values to the external GIS Portaal scripts.
     window.GISPortaalConfig = {
         arcgisClientId: "{{ config('services.arcgis.client_id') }}",
+        portalUrl: @json(rtrim(config('services.arcgis.portal'), '/')),
+        arcgisToken: @json(session('arcgis.access_token')),
+        arcgisUsername: @json(session('arcgis.username')),
+        arcgisTokenExpires: @json(session('arcgis.expires_at') ? session('arcgis.expires_at') * 1000 : null),
         groupMapsBaseUrl: "{{ url('/gisportaal/groups') }}",
         assistantUrl: "{{ route('gisportaal.assistant') }}",
         csrfToken: "{{ csrf_token() }}"
     };
 </script>
 
-<script src="{{ asset('js/gisportaal/map.js') }}"></script>
+{{-- type="module" so it runs after the SDK module has defined $arcgis --}}
+<script type="module" src="{{ asset('js/gisportaal/map.js') }}"></script>
 <script src="{{ asset('js/gisportaal/panel.js') }}"></script>
 <script src="{{ asset('js/gisportaal/index.js') }}"></script>
 <script src="{{ asset('js/gisportaal/assistant.js') }}"></script>
-
 
 
 @endsection

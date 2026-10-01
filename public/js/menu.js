@@ -45,6 +45,7 @@ function closeMenu() {
 document.addEventListener('click', function(event) {
     var modal = document.getElementById('userInfoModal');
     var toggleBtn = document.querySelector('.user-image');
+    if (!modal || !toggleBtn) return;
     if (modal.style.display === "block" && 
         !modal.contains(event.target) && 
         !toggleBtn.contains(event.target)) {
