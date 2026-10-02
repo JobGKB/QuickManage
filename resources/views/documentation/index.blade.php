@@ -120,13 +120,13 @@
                             </thead>
                             <tbody>
                                 <tr><td><code>profielcode</code></td><td>string</td><td>Ja</td><td>De code van het profiel (max. 50 tekens). Wordt ook gebruikt als bestandsnaam van de PDF.</td></tr>
-                                <tr><td><code>project</code></td><td>string</td><td>Nee</td><td>De code van het project (max. 255 tekens).</td></tr>
-                                <tr><td><code>opdrachtgever</code></td><td>string</td><td>Nee</td><td>De naam van de opdrachtgever (max. 255 tekens).</td></tr>
-                                <tr><td><code>omschrijving</code></td><td>string</td><td>Nee</td><td>Een korte omschrijving van het profiel (max. 255 tekens).</td></tr>
-                                <tr><td><code>baggercode</code></td><td>string</td><td>Nee</td><td>De baggercode (max. 100 tekens).</td></tr>
-                                <tr><td><code>legger</code></td><td>string</td><td>Nee</td><td>De legger (max. 100 tekens).</td></tr>
-                                <tr><td><code>polderpeil</code></td><td>string</td><td>Nee</td><td>Het polderpeil (max. 100 tekens).</td></tr>
-                                <tr><td><code>waterpeil</code></td><td>string</td><td>Nee</td><td>Het waterpeil (max. 100 tekens).</td></tr>
+                                <tr><td><code>project</code></td><td>string</td><td>Ja</td><td>De code van het project (max. 255 tekens).</td></tr>
+                                <tr><td><code>opdrachtgever</code></td><td>string</td><td>Ja</td><td>De naam van de opdrachtgever (max. 255 tekens).</td></tr>
+                                <tr><td><code>omschrijving</code></td><td>string</td><td>Ja</td><td>Een korte omschrijving van het profiel (max. 255 tekens).</td></tr>
+                                <tr><td><code>baggercode</code></td><td>string</td><td>Ja</td><td>De baggercode (max. 100 tekens).</td></tr>
+                                <tr><td><code>legger</code></td><td>string</td><td>Ja</td><td>De legger (max. 100 tekens).</td></tr>
+                                <tr><td><code>polderpeil</code></td><td>string</td><td>Ja</td><td>Het polderpeil (max. 100 tekens).</td></tr>
+                                <tr><td><code>waterpeil</code></td><td>string</td><td>Ja</td><td>Het waterpeil (max. 100 tekens).</td></tr>
                                 <tr><td><code>dynamic_fields</code></td><td>array</td><td>Ja</td><td>Een array met daarin een object van maximaal 2 dynamische velden. De naam en waarde van elk veld bepaal je zelf; deze worden op het profielplaatje getoond.</td></tr>
                                 <tr><td><code>punten</code></td><td>array</td><td>Ja</td><td>Een array van meetpunten (minimaal 1). Zie de tabel hieronder.</td></tr>
                             </tbody>

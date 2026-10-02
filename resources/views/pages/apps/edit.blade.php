@@ -95,7 +95,7 @@
                             </select><br/><br/>
 
                             <p class="c-bold">Workspace token:<br/><br/></p>
-                            <input type="text" name='wsp_token' value="{{ $token }}" required><br/><br/>
+                            <input type="password" name='wsp_token' value="{{ $token }}" required><br/><br/>
                          
 
 

@@ -23,7 +23,7 @@
                  
                     <div><label for="password" > {{ __('Wachtwoord') }}</label></div>  
                     <div><input id="password" type="password" class=" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"></div>
-
+                        
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -52,6 +52,7 @@
                         @endif   --}}
                            {{-- <br/> <a href="/testAI" class="ai-btn">Test AI met AGOL</a>  --}}
                            <br/> <a href="/gisportaal" class="ai-btn">GIS Portaal</a> 
+                           <br/> <a href="/docs" class="ai-btn">Documentatie</a> 
                     </div>
                
                 </div>    
