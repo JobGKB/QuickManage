@@ -102,8 +102,8 @@ GET /manage/accounts   → AccountController@index
 GET /manage/settings   → SettingsController@index
 ```
 
-### Claude artifact apps (see [modules/artifact-apps.md](modules/artifact-apps.md))
-Generated per app in `config/artifact_apps.php` (`<slug>` = `eisenhower`, `leeghwater`), all → `ArtifactAppController`. Storage is a local JSON file, not MySQL.
+## `azure.required` group: Claude artifact apps (see [modules/artifact-apps.md](modules/artifact-apps.md))
+Generated per app in `config/artifact_apps.php` (`<slug>` = `eisenhower`, `leeghwater`), all → `ArtifactAppController`, middleware `azure.required` (QuickManage login **or** Microsoft SSO). Storage is a local JSON file, not MySQL.
 ```
 GET  /<slug>                  → show        (name: <slug>)
 GET  /<slug>/api/snapshot     → snapshot

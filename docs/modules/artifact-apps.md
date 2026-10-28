@@ -1,6 +1,8 @@
 # Artifact apps (Claude artifacts)
 
-Self-contained HTML apps that were built as Claude artifacts, hosted inside QuickManage behind `auth`. **They do not use MySQL**: every app has its own local JSON file as database.
+Self-contained HTML apps that were built as Claude artifacts, hosted inside QuickManage. **They do not use MySQL**: every app has its own local JSON file as database.
+
+**Access** (`azure.required` middleware): QuickManage users (normal login) **and** Microsoft SSO users with an e-mail in `AZURE_ALLOWED_DOMAIN` (gkbgroep.nl). A visitor who isn't signed in is sent to the Microsoft login and comes back to the app afterwards. API calls without a session get `401` (the app then shows "sessie verlopen, herlaad de pagina").
 
 | App | URL | Source | Original artifact |
 |---|---|---|---|
@@ -57,8 +59,8 @@ Initial contents (28-10-2026):
 | `doc.set` / `doc.update` / `doc.delete` | `POST /<slug>/api/write` `{op, path, data}`. `update` merges top-level keys and fails with `not_found` if the document is missing. |
 | `assets.upload(blob, {type})` | `POST /<slug>/api/assets` (jpg/png/webp/gif/pdf, max `max_asset_kb`); served at `GET /<slug>/_blob/<id>`. The page's hard-coded `'/_blob/'` is rewritten to `'/<slug>/_blob/'` when served. |
 | `downloads.save({filename, data})` | Normal browser download |
-| `user.me()` / `user.profiles(ids)` | Logged-in QuickManage user, id `qm-<uniqid>`. Names are looked up read-only in `users`; Claude-era ids (`u_…`) have no name. |
-| `user.can()` / `user.canEdit()` | Always `true`: every logged-in user can view and edit. |
+| `user.me()` / `user.profiles(ids)` | QuickManage user: id `qm-<uniqid>`, name looked up read-only in `users`. SSO user: id `sso-<Microsoft object id>`; the name is remembered in `storage/app/private/artifact-apps/_sso-users/database.json` (written only when it changes). Claude-era ids (`u_…`) have no name. |
+| `user.can()` / `user.canEdit()` | Always `true`: everyone with access can view and edit. |
 | `sample` (Claude AI) | Not available outside Claude: `use('sample')` returns `null`, and the apps hide "Analyse laten maken" / "Claude laten meekijken". Existing analyses are still shown. |
 
 The writer is single-user friendly. Several users editing the same document at the same moment get last-write-wins, the same as in Claude.
@@ -69,7 +71,7 @@ The writer is single-user friendly. Several users editing the same document at t
 php artisan serve
 ```
 
-Log in and open http://127.0.0.1:8000/eisenhower or http://127.0.0.1:8000/leeghwater (also in the side menu). No migrations or imports are needed. If `database.json` doesn't exist yet, the app starts empty and the file is created on the first change.
+Log in (QuickManage account or Microsoft SSO) and open http://127.0.0.1:8000/eisenhower or http://127.0.0.1:8000/leeghwater. QuickManage users also find them in the side menu. For SSO users, add them to the App Gallery as a Custom App (URL `/leeghwater`). No migrations or imports are needed. If `database.json` doesn't exist yet, the app starts empty and the file is created on the first change.
 
 ## Adding another artifact app
 

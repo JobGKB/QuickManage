@@ -82,8 +82,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/manage/accounts', [App\Http\Controllers\AccountController::class, 'index']);
     Route::get('/manage/settings', [App\Http\Controllers\SettingsController::class, 'index']);
 
-    // Claude artifact apps (config/artifact_apps.php), e.g. /eisenhower and /leeghwater.
-    // Data is stored in local JSON files, not in MySQL: see docs/modules/artifact-apps.md
+});
+
+// Claude artifact apps (config/artifact_apps.php), e.g. /eisenhower and /leeghwater.
+// Open to QuickManage users (normal login) and to Microsoft SSO users (azure.required allows both).
+// Data is stored in local JSON files, not in MySQL: see docs/modules/artifact-apps.md
+Route::middleware(['azure.required'])->group(function () {
     foreach (array_keys(config('artifact_apps.apps', [])) as $artifactApp) {
         Route::prefix($artifactApp)->controller(App\Http\Controllers\ArtifactAppController::class)->group(function () use ($artifactApp) {
             Route::get('/', 'show')->name($artifactApp)->defaults('app', $artifactApp);
@@ -95,8 +99,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/_blob/{asset}', 'asset')->where('asset', '[a-f0-9]{32}')->defaults('app', $artifactApp);
         });
     }
-
 });
+
 // Public routes
 
 Route::middleware(['track.visit', 'azure.required'])->group(function () {

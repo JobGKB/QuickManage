@@ -23,6 +23,8 @@ class ArtifactAppController extends Controller
 {
     private const USER_PREFIX = 'qm-';
 
+    private const SSO_PREFIX = 'sso-';
+
     private const ASSET_TYPES = [
         'image/jpeg' => 'jpg',
         'image/png' => 'png',
@@ -46,7 +48,7 @@ class ArtifactAppController extends Controller
                 'api' => url($slug . '/api'),
                 'pollInterval' => (int) config('artifact_apps.poll_interval_ms', 15000),
                 'capabilities' => array_values($cfg['capabilities'] ?? []),
-                'user' => $this->profile(Auth::user()),
+                'user' => $this->currentProfile($request),
             ],
         ]);
     }
@@ -148,14 +150,17 @@ class ArtifactAppController extends Controller
     }
 
     /**
-     * POST api/profiles {"ids": ["qm-<uniqid>", ...]} -> {"qm-<uniqid>": {id, name, avatarUrl}}
+     * POST api/profiles {"ids": ["qm-<uniqid>", "sso-<azure id>", ...]} -> {"<id>": {id, name, avatarUrl}}
      */
     public function profiles(Request $request): JsonResponse
     {
         $uniqids = [];
+        $ssoIds = [];
         foreach ($this->strings($request->input('ids')) as $id) {
             if (str_starts_with($id, self::USER_PREFIX)) {
                 $uniqids[] = substr($id, strlen(self::USER_PREFIX));
+            } elseif (str_starts_with($id, self::SSO_PREFIX)) {
+                $ssoIds[] = substr($id, strlen(self::SSO_PREFIX));
             }
         }
 
@@ -164,6 +169,14 @@ class ArtifactAppController extends Controller
             foreach (User::query()->whereIn('uniqid', $uniqids)->get() as $user) {
                 $profile = $this->profile($user);
                 $result->{$profile['id']} = $profile;
+            }
+        }
+        if ($ssoIds) {
+            [, $known] = $this->ssoUsers()->read();
+            foreach ($ssoIds as $ssoId) {
+                if ($u = $known->{"users/{$ssoId}"} ?? null) {
+                    $result->{self::SSO_PREFIX . $ssoId} = ['id' => self::SSO_PREFIX . $ssoId, 'name' => $u->name ?? '', 'avatarUrl' => ''];
+                }
             }
         }
 
@@ -253,6 +266,39 @@ class ArtifactAppController extends Controller
             'name' => $user->name,
             'avatarUrl' => $user->image ? asset('storage/profile_images/' . $user->image) : '',
         ];
+    }
+
+    /**
+     * The visitor is either a QuickManage user (normal login) or a Microsoft SSO
+     * user (session "azure.user", see RequireAzureLogin). SSO users are not in the
+     * users table; their name is remembered in a JSON file so profiles() can show it.
+     */
+    private function currentProfile(Request $request): array
+    {
+        if ($user = Auth::user()) {
+            return $this->profile($user);
+        }
+
+        $azure = (array) $request->session()->get('azure.user', []);
+        $key = (string) (($azure['id'] ?? '') ?: ($azure['email'] ?? ''));
+        $name = (string) (($azure['name'] ?? '') ?: ($azure['email'] ?? ''));
+        if ($key === '' || ! JsonDocumentStore::splitPath("users/{$key}")) {
+            return ['id' => 'sso-onbekend', 'name' => $name, 'avatarUrl' => ''];
+        }
+
+        $store = $this->ssoUsers();
+        [, $known] = $store->read();
+        $current = $known->{"users/{$key}"} ?? null;
+        if (($current->name ?? null) !== $name || ($current->email ?? null) !== ($azure['email'] ?? null)) {
+            $store->write('set', "users/{$key}", (object) ['name' => $name, 'email' => $azure['email'] ?? null]);
+        }
+
+        return ['id' => self::SSO_PREFIX . $key, 'name' => $name, 'avatarUrl' => ''];
+    }
+
+    private function ssoUsers(): JsonDocumentStore
+    {
+        return new JsonDocumentStore('sso-users', $this->appDir('_sso-users'));
     }
 
     private function strings(mixed $value): array

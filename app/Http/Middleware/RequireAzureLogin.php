@@ -25,7 +25,12 @@ class RequireAzureLogin
         $user = $request->session()->get('azure.user');
 
         // Not logged in yet: send them to Microsoft, remembering the target URL.
+        // API calls (fetch/XHR) can't follow that redirect, so they get a 401 instead.
         if (! $user || empty($user['email'])) {
+            if ($request->expectsJson()) {
+                return response()->json(['code' => 'unauthenticated', 'message' => 'Niet (meer) aangemeld, herlaad de pagina.'], 401);
+            }
+
             return redirect()->route('azure.login', ['redirect' => $request->fullUrl()]);
         }
 
