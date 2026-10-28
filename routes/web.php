@@ -82,6 +82,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/manage/accounts', [App\Http\Controllers\AccountController::class, 'index']);
     Route::get('/manage/settings', [App\Http\Controllers\SettingsController::class, 'index']);
 
+    // Claude artifact apps (config/artifact_apps.php), e.g. /eisenhower and /leeghwater.
+    // Data is stored in local JSON files, not in MySQL: see docs/modules/artifact-apps.md
+    foreach (array_keys(config('artifact_apps.apps', [])) as $artifactApp) {
+        Route::prefix($artifactApp)->controller(App\Http\Controllers\ArtifactAppController::class)->group(function () use ($artifactApp) {
+            Route::get('/', 'show')->name($artifactApp)->defaults('app', $artifactApp);
+            Route::get('/api/snapshot', 'snapshot')->defaults('app', $artifactApp);
+            Route::get('/api/query', 'query')->defaults('app', $artifactApp);
+            Route::post('/api/write', 'write')->defaults('app', $artifactApp);
+            Route::post('/api/profiles', 'profiles')->defaults('app', $artifactApp);
+            Route::post('/api/assets', 'uploadAsset')->defaults('app', $artifactApp);
+            Route::get('/_blob/{asset}', 'asset')->where('asset', '[a-f0-9]{32}')->defaults('app', $artifactApp);
+        });
+    }
+
 });
 // Public routes
 

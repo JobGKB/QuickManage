@@ -55,6 +55,7 @@
                     <li class="userName"> {{ Auth::user()->name }} </li>
                     <li class="userProfile"><a href="/manage/profile/{{Auth::user()->uniqid}}/edit"> Profiel bewerken </a></li>
                     <li class="settings"><a href="/manage/settings"> Instellingen </a></li>
+                    <li class="settings"><a href="/docs" target="_blank"> Documentation </a></li>
                     <li class="logOut"><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();"> Uitloggen </a></li>
 
                 </ul>
@@ -75,6 +76,8 @@
                     <li><a href="/manage/profile/{{Auth::user()->uniqid}}/edit" id="profile"> <i class="fa-solid fa-user"></i></a></li>
                     <li><a href="/manage/app-gallery" id="app-gallery""> <i class="fa-solid fa-table-cells"></i></a></li>
                     <li><a href="/manage/folders" id="folders" class="apps"> <i class="fa-solid fa-file"></i></a></li>
+                    <li><a href="{{ route('eisenhower') }}" title="Eisenhower"> <i class="fa-solid fa-table-cells-large"></i></a></li>
+                    <li><a href="{{ route('leeghwater') }}" title="Leeghwater"> <i class="fa-solid fa-water"></i></a></li>
                     <li><a href="/manage/templates" id="templates"> <i class="fa-solid fa-pencil"></i></a></li>
                     <li><a href="/manage/accounts" id="accounts"> <i class="fa-solid fa-users"></i></a></li>
                     <li><a href="/manage/settings" id="settings"> <i class="fa-sharp fa-solid fa-gear"></i></a></li>

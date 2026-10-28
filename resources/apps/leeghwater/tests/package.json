@@ -1,0 +1,3 @@
+{ "name": "leeghwater-tests", "private": true, "type": "module",
+  "dependencies": { "playwright": "*" },
+  "scripts": { "test": "node regressie-planning.mjs && node kliktest.mjs && node draaien-hoofdfases.mjs && node slepen-planning.mjs" } }

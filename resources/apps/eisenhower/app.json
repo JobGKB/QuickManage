@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "id": "eisenhower",
+  "naam": "Eisenhower",
+  "ondertitel": "projectenplanning per ploeg",
+  "afdeling": "Planning",
+  "omschrijving": "Projectenplanning per ploeg, met de buitenplanning als basis en de stand van de voorbereiding per project.",
+  "link": "https://claude.ai/artifact/AGZqLMpeZHTJK2DoYpnGfc",
+  "status": "in gebruik",
+  "versie": "v1",
+  "bijgewerkt": "2026-10-13",
+  "icoon": "matrix",
+  "map": "Eisenhower"
+}

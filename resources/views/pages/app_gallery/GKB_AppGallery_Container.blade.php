@@ -42,11 +42,11 @@
               <!-- body  -->
               <div class="home_screen" id="home_screen">
                 <div class="container">
-                  <div class="row justify-content-center align-items-center">
+                  <div class="row justify-content-center align-items-center p-3">
                     
 
                       @foreach ($app_categories as $data)
-                      <div class="col-lg-3 text-center"> 
+                      <div class="col-lg-4 text-center"> 
                         <div class="col_cat">
                           <a href="/app-gallery/{{ $data->uniqid }}">{{ $data->category_name }}</a> 
                         </div>
