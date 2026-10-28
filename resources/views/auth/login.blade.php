@@ -51,7 +51,7 @@
                     
                         @endif   --}}
                            {{-- <br/> <a href="/testAI" class="ai-btn">Test AI met AGOL</a>  --}}
-                           <br/> <a href="/gisportaal" class="ai-btn">GIS Portaal</a> 
+                           <br/> <a href="/app-gallery/overzicht" class="ai-btn">App Gallery</a> 
                            <br/> <a href="/docs" class="ai-btn">Documentatie</a> 
                     </div>
                

@@ -50,6 +50,8 @@ return [
             'capabilities' => ['db', 'user', 'downloads', 'assets'],
         ],
 
+        
+
     ],
 
 ];
