@@ -37,16 +37,9 @@
                                 <div class="live_number" id="live-visitor-count"> 0 </div>
                                 <i class="fa-solid fa-user c_red"> </i>
                             </div>
+                            <p class="mt-3 mb-0"><a href="/manage/analytics">Meer Analytics</a></p>
                     </div> 
-
-
-                    <div class="active_apps">
-                        <h4> Live app(s) die worden gebruikt  </h4>
-                        
-                        <span>Geen actieve apps gevonden.</span>
-                    </div>
-
-
+ 
                 </div>
             </div>    
 

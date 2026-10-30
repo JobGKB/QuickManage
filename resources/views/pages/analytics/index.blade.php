@@ -39,7 +39,7 @@
                             <div class="col-lg-3">
                                 <div class="an-sub-container">
 
-                                    <p>Live gebruikers</p>
+                                    <p>Live Users</p>
 
                                     <div class="live_icon_wrapper">
                                         <div class="live_icon"> </div>  
@@ -56,7 +56,7 @@
                                     <p>Apps</p>
 
                                     <div class="an-sub-container-data">
-                                        <div>12</div>
+                                        <div>{{ $all_Apps }}</div>
                                     </div>
 
 
@@ -68,7 +68,7 @@
                                     <p>Categorieën</p>
 
                                     <div class="an-sub-container-data">
-                                        <div>6</div>
+                                        <div>{{ $totaal_Categories }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                                     <p>Templates</p>
 
                                     <div class="an-sub-container-data">
-                                        <div>8</div>
+                                        <div>{{ $totaal_Templates }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -88,10 +88,11 @@
                             <div class="col-lg-6">
                                 <div class="an-live-app-container">
                                     <h5>Live apps</h5>
+
                                     <div class="an-sub-live-app-container" id="live-apps">
-                                        <p class="an-live-app-empty">Geen apps in gebruik</p>
-                                       
+                                        <p class="an-live-app-empty">Momenteel geen apps in gebruik...</p> 
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -147,7 +148,7 @@
             if (!apps.length) {
                 var empty = document.createElement('p');
                 empty.className = 'an-live-app-empty';
-                empty.textContent = 'Geen apps in gebruik';
+                empty.textContent = 'Momenteel geen apps in gebruik...';
                 appsEl.appendChild(empty);
                 return;
             }

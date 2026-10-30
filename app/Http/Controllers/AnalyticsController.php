@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\App;
+use App\Models\CustomApp;
+use App\Models\AppCategorie;
+use App\Models\Template;
 use App\Models\userAnalytics;
 
 class AnalyticsController extends Controller
@@ -12,10 +15,30 @@ class AnalyticsController extends Controller
 
      public function index(Request $request)
     {
-        $ip = $request->ip();
+      
+        $apps = App::all();
+        $customApps = CustomApp::all();
+        $categories = AppCategorie::all();
+        $totaal_Apps = $apps->count();
+        $totaal_CustomApps = $customApps->count();
+        $all_Apps = $totaal_Apps + $totaal_CustomApps;
+        $totaal_Categories = $categories->count();
+        $totaal_Templates = Template::all()->count();
+
 
         // dd($request);
-        return view('pages.analytics.index', ['ip' => $ip,  ]);
+        return view('pages.analytics.index', [
+        
+            'apps' => $apps,
+            'totaal_Apps' => $totaal_Apps,
+            'totaal_CustomApps' => $totaal_CustomApps,
+            'all_Apps' => $all_Apps,
+            'totaal_Categories' => $totaal_Categories,
+            'categories' => $categories,
+            'customApps' => $customApps,
+            'totaal_Templates' => $totaal_Templates
+
+            ]);
     }
 
 
