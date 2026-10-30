@@ -49,9 +49,7 @@ return [
             'layout' => 'kop-stijl-pagina-scripts',
             'capabilities' => ['db', 'user', 'downloads', 'assets'],
         ],
-
-        
-
+ 
     ],
 
 ];

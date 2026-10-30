@@ -79,6 +79,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/manage/template/store', [App\Http\Controllers\TemplatesController::class, 'store']);
 
     // Manage Account, Settings, QuickDataViewer routes
+    Route::get('/manage/analytics', [App\Http\Controllers\AnalyticsController::class, 'index']);
+    Route::get('/manage/analytics/live-visitors', [App\Http\Controllers\AnalyticsController::class, 'liveVisitors']);
+    Route::get('/manage/analytics/live-apps', [App\Http\Controllers\AnalyticsController::class, 'liveApps']);
     Route::get('/manage/accounts', [App\Http\Controllers\AccountController::class, 'index']);
     Route::get('/manage/settings', [App\Http\Controllers\SettingsController::class, 'index']);
 
@@ -125,9 +128,7 @@ Route::middleware(['track.visit', 'azure.required'])->group(function () {
 
 Route::post('/api/quickdataviewer/convert-gdb', [App\Http\Controllers\QuickDataViewerController::class, 'convertGdb']);
 Route::post('/api/quickdataviewer/convert-dwg', [App\Http\Controllers\QuickDataViewerController::class, 'convertDwg']);
-
-
-
+ 
 // Azure (Microsoft Entra ID) SSO routes
 Route::get('/auth/azure/redirect', [App\Http\Controllers\Auth\AzureAuthController::class, 'redirect'])->name('azure.login');
 Route::get('/auth/azure/callback', [App\Http\Controllers\Auth\AzureAuthController::class, 'callback'])->name('azure.callback');
@@ -162,8 +163,7 @@ Route::middleware(['auth', 'arcgis.required'])->group(function () {
 
 // Route::get('/oauth-callback', [App\Http\Controllers\AIController::class, 'callback']);
 Route::get('/oauth-callback', [App\Http\Controllers\GISPortaalController::class, 'callback']);
-
-
+ 
 Route::middleware(['auth', 'throttle:10,1'])->group(function () {
     Route::post('/ai/nl2where', [App\Http\Controllers\AIController::class, 'nl2where'])->name('ai.nl2where');
     Route::get('/ai/nl2where-stream', [App\Http\Controllers\AIController::class, 'nl2whereStream']);

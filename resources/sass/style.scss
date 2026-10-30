@@ -1360,6 +1360,172 @@ width: 40%;
                 }
             }
         }
+
+        .analytics-container {
+            
+            padding: 20px;
+       
+            border-radius: 5px;
+            .an-sub-container {
+                background-color: #fff;
+                color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+             
+                text-align: center;
+                margin-bottom: 10px;
+                background-color: #439034;
+                
+                
+                p {
+                    font-size: 14px;
+                }
+
+                    .live_icon_wrapper {
+
+                    min-height: 70px;
+                    font-size: 18px;
+                    width: 100% ;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 10px;
+                    border-radius: 5px;
+                   
+
+                    i{
+                        color: #fff;
+                    }
+                    
+                    
+                    .live_number{
+                    
+                    color:#fff !important;
+                    font-weight: 600;
+                    margin-right: 4px;
+                    }
+
+                    .live_icon {
+                        position: relative;
+                        
+                        left: -10px; 
+                        
+                        
+                        width: 14px;
+                        height: 14px;
+                        }
+
+                        .live_icon::before {
+                        content: "";
+                        position: absolute;
+                        display: block;
+                        width: 250%;
+                        height: 250%;
+                        box-sizing: border-box;
+                        margin-left: -75%;
+                        margin-top: -75%;
+                        border-radius: 45px;
+                        background-color: #fff;
+                        animation: live-pulse 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+                        }
+
+                        .live_icon::after {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        display: block;
+                        background-color: #fff;
+                        border-radius: 50px;
+                        animation: live-dot 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.4s infinite;
+                        }
+
+                        @keyframes live-pulse {
+                            0% {
+                                transform: scale(0.33);
+                                opacity: 1;
+                            }
+                            80%,
+                            100% {
+                                opacity: 0;
+                            }
+                        }
+
+                        @keyframes live-dot {
+                            0% { transform: scale(0.8); }
+                            50% { transform: scale(1); }
+                            100% { transform: scale(0.8); }
+                        }
+                    }
+
+
+                    .an-sub-container-data{
+                        min-height: 70px;
+                        font-size: 24px;
+                        font-weight: 600;
+                        width: 100% ;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 10px;
+                        border-radius: 5px;
+                    }
+
+            }
+
+            
+            
+            .an-live-app-container {
+                
+                margin-top: 40px;
+                min-height: 470px;
+                font-size: 24px;
+                font-weight: 600;
+                width: 100%;
+                display: flex;
+                padding: 10px;
+                border-radius: 5px;
+                border: 2px solid #439034;
+                flex-direction: column;
+
+                .an-sub-live-app-container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    margin-top: 10px;
+                    font-size: 16px;
+                    font-weight: 400;
+
+                    .an-live-app-empty {
+                        margin: 0;
+                        color: #6c757d;
+                    }
+
+                    .an-live-app-item {
+                        padding: 8px 12px;
+                        border-radius: 5px;
+                        background-color: #ebebeb;
+                    }
+
+                    .an-live-app-header {
+                        display: flex;
+                        justify-content: space-between;
+                        gap: 10px;
+                        font-weight: 600;
+                    }
+
+                    .an-live-app-count {
+                        color: #439034;
+                    }
+
+                    .an-live-app-visitors {
+                        font-size: 14px;
+                        color: #555;
+                    }
+                }
+
+            }
+ 
+        }
    
 
 }
