@@ -4,7 +4,7 @@
 import { RD_EXTENT } from '../config/projections.js';
 import { createBasemapLayer } from '../config/basemap.js';
 import { getFeatureStyle } from './styles.js';
-import { updateLastExtent } from './state.js';
+import { updateLastExtent, setLoadedSourceType } from './state.js';
 import { dataLayers } from './state.js';
 
 export let map = null;
@@ -110,6 +110,7 @@ export const clearAllDataLayers = () => {
   });
   Object.keys(dataLayers).forEach(key => delete dataLayers[key]);
   updateLastExtent(null);
+  setLoadedSourceType(null);
 };
 
 /**

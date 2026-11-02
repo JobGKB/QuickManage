@@ -17,7 +17,26 @@ export const dataLayers = {};
 // Track the name of the currently uploaded file
 export let uploadedFileName = '';
 
-export const setUploadedFileName = (name) => { uploadedFileName = name; };
+// All files whose layers are currently on the map (multiple when shapefile ZIPs are stacked)
+export let uploadedFileNames = [];
+
+// Source type of the data currently on the map ('shapefile' or null).
+// Only shapefile ZIPs are stacked on top of each other; other formats replace everything.
+export let loadedSourceType = null;
+
+export const setLoadedSourceType = (type) => { loadedSourceType = type; };
+
+export const setUploadedFileName = (name) => {
+  uploadedFileName = name;
+  uploadedFileNames = [name];
+};
+
+// Register an additional file; uploadedFileName (used for the export filename) combines all of them
+export const addUploadedFileName = (name) => {
+  uploadedFileNames.push(name);
+  const combined = uploadedFileNames.map(n => n.replace(/\.[^.]+$/, '')).join('_').slice(0, 100);
+  uploadedFileName = `${combined}.zip`;
+};
 
 // Update state properties
 export const updateLastExtent = (extent) => {
@@ -36,6 +55,8 @@ export const resetAllState = () => {
   lastDataExtent = null;
   selectedFeature = null;
   uploadedFileName = '';
+  uploadedFileNames = [];
+  loadedSourceType = null;
   Object.keys(layerVisibility).forEach(key => delete layerVisibility[key]);
   Object.keys(dataLayers).forEach(key => delete dataLayers[key]);
 };

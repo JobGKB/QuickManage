@@ -120,14 +120,14 @@ Route::middleware(['track.visit', 'azure.required'])->group(function () {
     Route::post('/apps/{unique}/fme/upload', [App\Http\Controllers\FmeProxyController::class, 'upload']);
     Route::post('/apps/{unique}/fme/run', [App\Http\Controllers\FmeProxyController::class, 'run']);
 
-    Route::get('/manage/quickdataviewer', [App\Http\Controllers\QuickDataViewerController::class, 'index']);
+    Route::get('/manage/quickdataviewer', [App\Http\Controllers\QuickDataViewerController::class, 'index']); 
+    Route::post('/api/quickdataviewer/convert-gdb', [App\Http\Controllers\QuickDataViewerController::class, 'convertGdb']);
+    Route::post('/api/quickdataviewer/convert-dwg', [App\Http\Controllers\QuickDataViewerController::class, 'convertDwg']);
 
     Route::get('/PBA-FMUTA6-VerwerkWeekIndexatie', [App\Http\Controllers\PBA_IWController::class, 'index']);
     Route::get('/Ontvangstloket-IW', [App\Http\Controllers\Ontvangstloket_IWController::class, 'index']);
 });
 
-Route::post('/api/quickdataviewer/convert-gdb', [App\Http\Controllers\QuickDataViewerController::class, 'convertGdb']);
-Route::post('/api/quickdataviewer/convert-dwg', [App\Http\Controllers\QuickDataViewerController::class, 'convertDwg']);
  
 // Azure (Microsoft Entra ID) SSO routes
 Route::get('/auth/azure/redirect', [App\Http\Controllers\Auth\AzureAuthController::class, 'redirect'])->name('azure.login');

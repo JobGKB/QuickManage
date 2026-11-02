@@ -20,6 +20,7 @@ class QuickDataViewerController extends Controller
   */
  public function convertGdb(Request $request)
     {
+       
         set_time_limit(600);
         ini_set('memory_limit', '512M');
 
@@ -41,11 +42,12 @@ class QuickDataViewerController extends Controller
             return response()->json(['message' => 'FME Server is niet geconfigureerd.'], 500);
         }
 
+         
         try {
             $fileName = $file->getClientOriginalName();
 
             // STEP 1: Upload the file to FME Server temp resources (v4 API)
-            $uploadUrl = 'https://fme-gkb.fmecloud.com/fmeapiv4/resources/connections/FME_SHAREDRESOURCE_TEMP/upload?path&overwrite=true';
+            $uploadUrl = 'https://fme.gkbgroep.nl/fmeapiv4/resources/connections/FME_SHAREDRESOURCE_TEMP/upload?path&overwrite=true';
 
             $uploadPath = $file->getRealPath() ?: $file->getPathname();
             if (!$uploadPath || !is_readable($uploadPath)) {
@@ -60,7 +62,7 @@ class QuickDataViewerController extends Controller
                 ])
                 ->attach('files', fopen($uploadPath, 'r'), $fileName)
                 ->post($uploadUrl);
-
+            // dd($uploadResponse);
             if (!$uploadResponse->successful()) {
                 return response()->json([
                     'message' => 'FME upload fout: ' . $uploadResponse->status() . ' - ' . $uploadResponse->body(),
@@ -157,7 +159,7 @@ class QuickDataViewerController extends Controller
             $fileName = $file->getClientOriginalName();
 
             // STEP 1: Upload the DWG file to FME Server temp resources (v4 API)
-            $uploadUrl = 'https://fme-gkb.fmecloud.com/fmeapiv4/resources/connections/FME_SHAREDRESOURCE_TEMP/upload?path&overwrite=true';
+            $uploadUrl = 'https://fme.gkbgroep.nl/fmeapiv4/resources/connections/FME_SHAREDRESOURCE_TEMP/upload?path&overwrite=true';
 
             $uploadPath = $file->getRealPath() ?: $file->getPathname();
             if (!$uploadPath || !is_readable($uploadPath)) {

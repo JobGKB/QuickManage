@@ -16,7 +16,7 @@ import { loadGpkgBuffer } from './services/gpkgLoader.js';
 import { initAddressSearch } from './search/addressSearch.js';
 import { initAttributeTable, refreshAttributeTable } from './ui/attributeTable.js';
 import { toggleBasemap } from './config/basemap.js';
-import { setUploadedFileName } from './core/state.js';
+import { setUploadedFileName, addUploadedFileName, uploadedFileNames } from './core/state.js';
 
 // Inspect ZIP contents to determine if it contains a File Geodatabase (.gdb folder)
 async function detectGdbZip(file) {
@@ -79,58 +79,88 @@ async function initializeApp() {
 
     console.log("✓ Drop zone elements found");
 
-    const handleFile = async (file) => {
-      clearError();
+    // Load one file onto the map. Returns true when it was stacked on existing shapefile layers.
+    // With shapefileOnly (multi-file upload) only shapefile ZIPs are accepted.
+    const loadFile = async (file, { shapefileOnly = false } = {}) => {
       const name = file.name.toLowerCase();
-      
+
+      if (shapefileOnly && !name.endsWith(".zip")) {
+        throw new Error("alleen shapefiles (.zip) kunnen meerdere tegelijk worden geladen.");
+      }
       // Validate file is a ZIP, DWG or GPKG file
       if (!name.endsWith(".zip") && !name.endsWith(".dwg") && !name.endsWith(".gpkg")) { 
-        showError("Upload een .zip bestand (shapefile of geodatabase), een .dwg bestand of een .gpkg bestand."); 
-        return; 
+        throw new Error("Upload een .zip bestand (shapefile of geodatabase), een .dwg bestand of een .gpkg bestand."); 
       }
-      
-      try {
-        setLoading(true);
 
-        if (name.endsWith(".gpkg")) {
-          // GeoPackage flow: parse locally in browser → render on map
-          const gpkgBuffer = await file.arrayBuffer();
-          await loadGpkgBuffer(gpkgBuffer, closePopup, setLoading);
-        } else if (name.endsWith(".dwg")) {
-          // DWG flow: upload to FME Server → receive GPKG → render on map
-          const gpkgBuffer = await convertDwgToGpkg(file, setLoading);
+      let appended = false;
+      if (name.endsWith(".gpkg")) {
+        // GeoPackage flow: parse locally in browser → render on map
+        const gpkgBuffer = await file.arrayBuffer();
+        await loadGpkgBuffer(gpkgBuffer, closePopup, setLoading);
+      } else if (name.endsWith(".dwg")) {
+        // DWG flow: upload to FME Server → receive GPKG → render on map
+        const gpkgBuffer = await convertDwgToGpkg(file, setLoading);
+        await loadGpkgBuffer(gpkgBuffer, closePopup, setLoading);
+      } else {
+        // Detect file type: check if ZIP contains a .gdb folder
+        const isGdb = await detectGdbZip(file);
+
+        if (isGdb) {
+          if (shapefileOnly) {
+            throw new Error("een geodatabase (.zip) kan niet samen met andere bestanden worden geladen.");
+          }
+          // GDB flow: upload to FME Server → receive GPKG → render on map
+          const gpkgBuffer = await convertGdbToGpkg(file, setLoading);
           await loadGpkgBuffer(gpkgBuffer, closePopup, setLoading);
         } else {
-          // Detect file type: check if ZIP contains a .gdb folder
-          const isGdb = await detectGdbZip(file);
-
-          if (isGdb) {
-            // GDB flow: upload to FME Server → receive GPKG → render on map
-            const gpkgBuffer = await convertGdbToGpkg(file, setLoading);
-            await loadGpkgBuffer(gpkgBuffer, closePopup, setLoading);
-          } else {
-            // Shapefile flow: parse locally in browser
-            await loadShapefileZip(file, closePopup, setLoading);
-          }
+          // Shapefile flow: parse locally in browser (stacks on top of previously loaded shapefiles)
+          ({ appended } = await loadShapefileZip(file, closePopup, setLoading));
         }
-
-        setLoading(false);
-        // Update back button display with loaded filename
-        setUploadedFileName(file.name);
-        updateBackDropZoneDisplay(file.name);
-        const fileNameEl = document.getElementById('fileName');
-        if (fileNameEl) fileNameEl.textContent = "Bestand: "+ file.name;
-        switchToMapScreen(() => initializeBackDropZone(handleFile));
-        // If the attribute table is open, refresh it to reflect the newly loaded layers
-        refreshAttributeTable();
-      } catch (err) {
-        console.error("❌ File processing error:", err);
-        setLoading(false);
-        showError(err?.message || String(err));
       }
+
+      // Update loaded filename(s) in header and back button display
+      if (appended) addUploadedFileName(file.name);
+      else setUploadedFileName(file.name);
+      const fileLabel = uploadedFileNames.join(', ');
+      updateBackDropZoneDisplay(fileLabel);
+      const fileNameEl = document.getElementById('fileName');
+      if (fileNameEl) fileNameEl.textContent = "Bestand: " + fileLabel;
+      return appended;
     };
 
-    setupDropZone(dropZone, fileInput, handleFile);
+    // Handle one or more uploaded files; multiple shapefile ZIPs are loaded one after another
+    const handleFiles = async (fileList) => {
+      const files = Array.from(fileList || []);
+      if (!files.length) return;
+      clearError();
+
+      const multiple = files.length > 1;
+      const errors = [];
+      let loadedAny = false;
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        try {
+          setLoading(true, multiple ? `Bestand ${i + 1} van ${files.length} laden: ${file.name}…` : undefined);
+          await loadFile(file, { shapefileOnly: multiple });
+          loadedAny = true;
+        } catch (err) {
+          console.error(`❌ File processing error (${file.name}):`, err);
+          const msg = err?.message || String(err);
+          errors.push(multiple ? `${file.name}: ${msg}` : msg);
+        }
+      }
+
+      setLoading(false);
+      if (loadedAny) {
+        switchToMapScreen(() => initializeBackDropZone(handleFiles));
+        // If the attribute table is open, refresh it to reflect the newly loaded layers
+        refreshAttributeTable();
+      }
+      if (errors.length) showError(errors.join(" • "));
+    };
+
+    setupDropZone(dropZone, fileInput, handleFiles);
     console.log("✓ Main drop zone initialized");
     console.log("🎉 QuickDataViewer ready!");
     

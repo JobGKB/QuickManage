@@ -72,7 +72,7 @@
 
                           <div id="drop-zone" class="drop-zone mb-4" role="button" tabindex="0" aria-label="Bestand kiezen of slepen">
 
-                            <input type="file" id="file-input" accept=".zip,.dwg,.gpkg" hidden />
+                            <input type="file" id="file-input" accept=".zip,.dwg,.gpkg" multiple hidden />
 
                             <div class="drop-icon">
                               <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -155,7 +155,7 @@
                 <ul id="address-search-results" class="address-search-results"></ul>
               </div>
 
-              <a href="https://gis.gkbgroep.nl/Apps/GKB-App-Gallery/index.html" class="overzicht_link_viewer fl-l"> <img src="{{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps </a>
+              <a href="http://gisdev.gkbgroep.nl/app-gallery/overzicht" class="overzicht_link_viewer fl-l"> <img src="{{ asset('storage/conversie_logo.png') }}" class="conversie_logo"> Apps </a>
             </div>
 
           </div>
@@ -168,7 +168,7 @@
               <div class="home-btn mb-3">
 
                 
-                <a href="https://gis.gkbgroep.nl/Apps/GKB-App-Gallery/index.html"  class="logo-cm"> <img src="{{ asset('storage/logo-GKB-GIS-Viewer.png') }}"  ></a>
+                <a href="http://gisdev.gkbgroep.nl/app-gallery/overzicht"  class="logo-cm"> <img src="{{ asset('storage/logo-GKB-GIS-Viewer.png') }}"  ></a>
 
 
               </div>
@@ -183,7 +183,7 @@
 
               <button id="back-button"   style="width: 100%; pointer-events: none; border: none; background: none; color: inherit;"></button>
 
-              <input type="file" id="back-file-input" accept=".zip,.dwg,.gpkg" hidden />
+              <input type="file" id="back-file-input" accept=".zip,.dwg,.gpkg" multiple hidden />
               
               <!-- Upload prompt (shown when no file loaded) -->
               <div id="back-zone-upload-prompt" class="back-zone-content">
@@ -195,9 +195,9 @@
 
               <!-- Loaded file display (hidden by default) -->
               <div id="back-zone-file-display" class="back-zone-content" style="display: none;">
-                <p class="loaded-file-label">📁 Geladen bestand:</p>
+                <p class="loaded-file-label">📁 Geladen bestand(en):</p>
                 <p id="back-zone-file-name" class="loaded-file-name"></p>
-                <p class="back-zone-reload-hint">Klik of sleep voor nieuw bestand</p>
+                <p class="back-zone-reload-hint">Klik of sleep voor nieuw bestand (shapefile .zip wordt toegevoegd)</p>
               </div>
 
               <!-- Loading indicator (always accessible, independent of upload/loaded state) -->

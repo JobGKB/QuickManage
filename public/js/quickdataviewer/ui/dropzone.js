@@ -44,23 +44,25 @@ export const setupDropZone = (zone, input, handler) => {
     zone.classList.remove("drag-over");
   });
   
-  // Drop: process dropped file(s)
+  // Drop: process all dropped files
   zone.addEventListener("drop", (e) => { 
     e.preventDefault(); 
     e.stopPropagation();
     console.log("Drop event, files count:", e.dataTransfer.files.length);
     zone.classList.remove("drag-over"); 
-    if (e.dataTransfer.files[0]) {
-      console.log("Processing dropped file:", e.dataTransfer.files[0].name);
-      handler(e.dataTransfer.files[0]); 
+    const files = Array.from(e.dataTransfer.files || []);
+    if (files.length) {
+      console.log("Processing dropped file(s):", files.map(f => f.name).join(", "));
+      handler(files); 
     }
   });
   
-  // File input change: process selected file from picker
+  // File input change: process all selected files from picker
   input.addEventListener("change", () => { 
-    if (input.files[0]) {
-      console.log("Processing selected file:", input.files[0].name);
-      handler(input.files[0]); 
+    const files = Array.from(input.files || []);
+    if (files.length) {
+      console.log("Processing selected file(s):", files.map(f => f.name).join(", "));
+      handler(files); 
       input.value = ""; 
     } 
   });

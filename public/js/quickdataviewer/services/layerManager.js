@@ -83,12 +83,15 @@ export const setLayerRendering = (name, rendering) => {
  * Show the layer panel with spinner placeholders for layers that are loading.
  * @param {string[]} names - Layer names to show as "loading"
  */
-export const showLoadingLayers = (names) => {
+export const showLoadingLayers = (names, { append = false } = {}) => {
   // Any popover opened against previous rows references stale layers/anchors.
   closeFeatureSearch();
   const div = document.getElementById("layerNames");
   const titleDiv = document.getElementById("layerNamesTitle");
-  if (!names?.length) { div.style.display = "none"; if (titleDiv) titleDiv.style.display = "none"; return; }
+  if (!names?.length) {
+    if (!append) { div.style.display = "none"; if (titleDiv) titleDiv.style.display = "none"; }
+    return;
+  }
 
   // Show title above the container
   if (titleDiv) {
@@ -107,7 +110,8 @@ export const showLoadingLayers = (names) => {
     const safe = escapeHtml(name);
     return `<div id="layer-row-${safe}" class="layer-row"><span class="layer-spinner"></span><label class="layer-label" style="opacity:0.6;">⏳ <strong>${safe}</strong> laden…</label></div>`;
   }).join("");
-  div.innerHTML = rows;
+  if (append) div.insertAdjacentHTML('beforeend', rows);
+  else div.innerHTML = rows;
   div.style.display = "block";
 
   // Hide zoom button while loading
@@ -153,13 +157,48 @@ export const markLayerLoaded = (name, featureCount) => {
     }
   }
 
-  // Attach visibility toggle
+  // Attach visibility toggle (read the name from the element so renamed layers keep working)
   const cb = row.querySelector('input[type="checkbox"]');
   cb?.addEventListener('change', (e) => {
-    layerVisibility[name] = e.target.checked;
-    const layer = dataLayers[name];
+    const layerName = e.target.dataset.layer;
+    layerVisibility[layerName] = e.target.checked;
+    const layer = dataLayers[layerName];
     if (layer) layer.setVisible(e.target.checked);
   });
+};
+
+// Names of all rows currently shown in the layer panel (including empty layers not in dataLayers)
+export const getLayerRowNames = () => {
+  const div = document.getElementById('layerNames');
+  if (!div) return [];
+  return Array.from(div.querySelectorAll('.layer-row'))
+    .map(row => row.id.replace(/^layer-row-/, ''));
+};
+
+/**
+ * Rename an already loaded data layer: registry key (order preserved), visibility state,
+ * layer/feature `_layerName` (used by table, export and popup) and its row in the layer panel.
+ */
+export const renameLayer = (oldName, newName) => {
+  const layer = dataLayers[oldName];
+  if (!layer || oldName === newName) return;
+
+  const entries = Object.entries(dataLayers);
+  entries.forEach(([key]) => delete dataLayers[key]);
+  entries.forEach(([key, value]) => { dataLayers[key === oldName ? newName : key] = value; });
+
+  delete layerVisibility[oldName];
+  layerVisibility[newName] = layer.getVisible();
+
+  layer.set('_layerName', newName);
+  const features = layer.get('_featureSource')?.getFeatures() || [];
+  features.forEach(f => f.set('_layerName', newName, true));
+
+  const row = document.getElementById(`layer-row-${oldName}`);
+  if (row) {
+    row.id = `layer-row-${newName}`;
+    markLayerLoaded(newName, features.length);
+  }
 };
 
 // Legacy: Display all layers at once (used if no progressive loading needed)
