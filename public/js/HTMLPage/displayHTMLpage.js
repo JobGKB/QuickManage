@@ -61,8 +61,10 @@ async function extractErrorMessage(response, fallback) {
                 parameters.forEach(param => {
                      
                     if (param.required !== false) {
+                        console.log(param);
                         req ='*';
                     } else if (param.required === false) {
+                        // console.log(param);
                         req =' ';  
                     }
 

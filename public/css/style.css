@@ -216,10 +216,41 @@ body {
 .menu-top .row {
   align-items: center;
 }
+.menu-top .menu_app_info {
+  display: flex;
+  align-items: flex-end;
+  justify-content: end;
+}
+.menu-top .menu_app_info .menu_app_info_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu-top .menu_app_info .menu_app_info_btn a {
+  background-color: transparent;
+  width: 40px;
+  height: 40px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 5px;
+  border: 2px solid #fff;
+  color: #fff !important;
+  transition: 0.5s;
+}
+.menu-top .menu_app_info .menu_app_info_btn a:hover {
+  color: #fff !important;
+  border: 2px solid rgba(52, 116, 39, 0.7333333333);
+  background-color: rgba(52, 116, 39, 0.7333333333) !important;
+  opacity: 0.7;
+}
 .menu-top .menu_user_info {
   display: flex;
   align-items: flex-end;
   justify-content: end;
+  margin-left: 10px;
 }
 .menu-top .menu_user_info .menu_user_info_btn {
   display: flex;
@@ -244,7 +275,7 @@ body {
   color: #fff !important;
   font-weight: 600;
   width: 100% !important;
-  background-color: #439034 !important;
+  background-color: transparent !important;
   padding: 10px;
   text-align: center;
   border: 2px solid #fff;
@@ -254,6 +285,7 @@ body {
 .menu-top .menu_user_info .menu_user_info_btn button.user-image i:hover {
   color: #fff !important;
   background-color: rgba(52, 116, 39, 0.7333333333) !important;
+  opacity: 0.7;
 }
 
 .user_info_modal {

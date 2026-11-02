@@ -65,7 +65,8 @@
                   <div class="row">
                       <div class="offset-lg-1 col-lg-10 text-center" >
                         <hr  >
-                        <p class="pb-3 pt-2" ><a href="mailto:gisadmin@gkbgroep.nl" class="emailgis">gisadmin@gkbgroep.nl</a></p>
+                        <p class="pb-3 pt-2" style="font-size: 14px;"> Mocht je problemen ondervinden, neem dan contact op met<br/> <a href="mailto:job@gkbgroep.nl" class="emailgis">job@gkbgroep.nl</a> of <a href="mailto:dirkjan@gkbgroep.nl" class="emailgis"> dirkjan@gkbgroep.nl </a></p>
+                       
                       </div>
                   </div>
                 </div>

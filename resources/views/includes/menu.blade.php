@@ -29,7 +29,17 @@
                     <div class="col-lg-10">
                          
                     </div>
-                    <div class="col-lg-1">
+ 
+                    <div class="col-lg-1 d-flex  justify-content-center align-items-center">
+                        <div class="menu_app_info">
+                            <div class="menu_app_info_btn">
+ 
+                                
+                                    <a href="/app-gallery/overzicht" target="_blank"><i class="fa-solid fa-eye"></i></a>
+                      
+   
+                            </div>    
+                        </div>
                         <div class="menu_user_info">
                             <div class="menu_user_info_btn">
  
@@ -40,13 +50,18 @@
                             </div>    
                         </div>
                     </div>
-                    <div class="col-lg-1">
 
-                    </div>
+
+                
+                   
+
+                     
                    
                 </div>
             </div>
         </div>
+
+        
 
         <div class="user_info_modal " id="userInfoModal">
             <div class="user_info_modal_content">
