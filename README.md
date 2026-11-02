@@ -116,6 +116,7 @@ See [docs/integrations.md](docs/integrations.md) for details.
 
 ## Documentation index
 
+- **[docs/DEVELOPER_HANDOVER.md](docs/DEVELOPER_HANDOVER.md) — start here when taking over the project** (up-to-date overview of all modules, auth, config, deployment and known issues)
 - [docs/architecture.md](docs/architecture.md) — request lifecycle, layering, session state, exception handling
 - [docs/routes.md](docs/routes.md) — full route table by middleware group
 - [docs/data-model.md](docs/data-model.md) — models, fields, relationships, migration gaps

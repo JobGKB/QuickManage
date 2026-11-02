@@ -52,17 +52,17 @@
                   @foreach ($category_apps as  $data)    
                    
                     <div class="col-lg-3 text-center  mt-4">
-                      <a href="/apps/view/{{ $data->hash_id }}" class="link_app">
+                      <a href="/apps/view/{{ $data->hash_id }}" class="link_app" title="{{ $data->name }}">
                         <div class="app_wrapper"> 
                           <div class="app_logo">
                             @if ($data->app_thumbnail)
-                            <img src="{{ asset('storage/app_thumbnails/' . $data->app_thumbnail) }}" id="app_logo">
+                            <img src="{{ asset('storage/app_thumbnails/' . $data->app_thumbnail) }}" id="app_logo" alt="{{ $data->name }}">
                               @else
-                              <img src="{{ asset('storage/gkb-groen.png') }}" id="app_logo">
+                              <img src="{{ asset('storage/gkb-groen.png') }}" id="app_logo" alt="{{ $data->name }}">
                             @endif
                           </div>
                           <div class="app_name pt-3">
-                            <p class="bold"> {{ $data->name }} </p>
+                            <p class="bold"> {{ \Illuminate\Support\Str::limit($data->name, 37, '...') }}  </p>
                           </div>
                         </div>
                       </a>
@@ -73,17 +73,17 @@
                   @foreach ($category_custom_apps as  $data)    
                    
                     <div class="col-lg-3 text-center  mt-4">
-                      <a href="{{ $data->custom_app_url }}" class="link_app" target="_blank">
+                      <a href="{{ $data->custom_app_url }}" class="link_app" target="_blank" title="{{ $data->name }}">
                         <div class="app_wrapper"> 
                           <div class="app_logo">
                             @if ($data->custom_app_thumbnail)
-                            <img src="{{ asset('storage/custom_app_thumbnails/' . $data->custom_app_thumbnail) }}" id="app_logo">
+                            <img src="{{ asset('storage/custom_app_thumbnails/' . $data->custom_app_thumbnail) }}" id="app_logo" alt="{{ $data->name }}">
                               @else
-                              <img src="{{ asset('storage/gkb-groen.png') }}" id="app_logo">
+                              <img src="{{ asset('storage/gkb-groen.png') }}" id="app_logo" alt="{{ $data->name }}">
                             @endif
                           </div>
                           <div class="app_name pt-3">
-                            <p class="bold"> {{ $data->name }} </p>
+                            <p class="bold"> {{ \Illuminate\Support\Str::limit($data->name, 37, '...') }} </p>
                           </div>
                         </div>
                       </a>
