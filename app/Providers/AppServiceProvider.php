@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use SocialiteProviders\Manager\SocialiteWasCalled;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+         
         // if (str_starts_with((string) config('app.url'), 'https://')) {
         // URL::forceScheme('https');
         // }
@@ -30,5 +33,7 @@ class AppServiceProvider extends ServiceProvider
             \SocialiteProviders\Azure\AzureExtendSocialite::class,
             'handle',
         ]);
+
+        
     }
 }

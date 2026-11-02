@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 </head>
 <body>
-    <h1>Hello ya boi!</h1>
+    <h1>Hello  </h1>
     <p>You are receiving this email because we received a password reset request for your account.</p>
     
     <a href="{{ $url }}" style="background-color: #3490dc; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
