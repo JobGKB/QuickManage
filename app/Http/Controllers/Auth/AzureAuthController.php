@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
  
@@ -35,31 +36,26 @@ class AzureAuthController extends Controller
             // dd($azureUser);
         } catch (\Throwable $e) {
             report($e);
-            // dd($e);
-            if (config('app.debug')) {
-                dd([
-                    'exception'      => get_class($e),
-                    'message'        => $e->getMessage(),
-                    'session_state'  => session('state'),      // what Socialite stored
-                    'request_state'  => request('state'),      // what Microsoft sent back
-                    'session_id'     => session()->getId(),
-                    'is_secure'      => request()->isSecure(), // should be true behind HTTPS proxy
-                    'scheme'         => request()->getScheme(),
-                ]);
-            }
+            Log::warning('Azure SSO callback failed', [
+                'exception'     => get_class($e),
+                'message'       => $e->getMessage(),
+                'state_matches' => session('state') !== null && session('state') === request('state'),
+                'is_secure'     => request()->isSecure(), // should be true behind HTTPS proxy
+                'scheme'        => request()->getScheme(),
+            ]);
             return redirect('/')->with('error', 'Aanmelden bij Microsoft is mislukt, probeer het opnieuw.');
         }
 
         $email = strtolower(trim($azureUser->getEmail() ?? ''));
-        $allowedDomain = strtolower(config('services.azure.allowed_domain'));
+        $allowedDomains = config('services.azure.allowed_domains', []);
 
-        // Only allow accounts whose e-mail ends with the configured domain.
-        if ($email === '' || ! Str::endsWith($email, '@' . $allowedDomain)) {
+        // Only allow accounts whose e-mail ends with one of the configured domains.
+        if ($email === '' || ! Str::endsWith($email, array_map(fn ($d) => '@' . $d, $allowedDomains))) {
             $request->session()->forget('azure.user');
 
             return response()->view('errors.azure-forbidden', [
-                'email'         => $email,
-                'allowedDomain' => $allowedDomain,
+                'email'          => $email,
+                'allowedDomains' => $allowedDomains,
             ], 403);
         }
 

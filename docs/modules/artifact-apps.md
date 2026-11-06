@@ -2,7 +2,7 @@
 
 Self-contained HTML apps that were built as Claude artifacts, hosted inside QuickManage. **They do not use MySQL**: every app has its own local JSON file as database.
 
-**Access** (`azure.required` middleware): QuickManage users (normal login) **and** Microsoft SSO users with an e-mail in `AZURE_ALLOWED_DOMAIN` (gkbgroep.nl). A visitor who isn't signed in is sent to the Microsoft login and comes back to the app afterwards. API calls without a session get `401` (the app then shows "sessie verlopen, herlaad de pagina").
+**Access** (`azure.required` middleware): QuickManage users (normal login) **and** Microsoft SSO users with an e-mail in `AZURE_ALLOWED_DOMAIN` (gkbgroep.nl, boonstoppelgroen.nl). A visitor who isn't signed in is sent to the Microsoft login and comes back to the app afterwards. API calls without a session get `401` (the app then shows "sessie verlopen, herlaad de pagina").
 
 | App | URL | Source | Original artifact |
 |---|---|---|---|

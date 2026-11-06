@@ -40,6 +40,12 @@ Route::middleware(['auth'])->group(function () {
 
     // FME service lookup for the app edit form (token stays server-side)
     Route::get('/manage/apps/{unique}/fme/services', [App\Http\Controllers\FmeProxyController::class, 'services']);
+
+    // FME browser for the app create form (shared FME_SERVER_TOKEN stays server-side)
+    Route::get('/manage/fme/repositories', [App\Http\Controllers\FmeProxyController::class, 'repositories']);
+    Route::get('/manage/fme/repositories/{repository}/items', [App\Http\Controllers\FmeProxyController::class, 'repositoryItems']);
+    Route::get('/manage/fme/workspaces/{repository}/{workspace}/services', [App\Http\Controllers\FmeProxyController::class, 'workspaceServices']);
+    Route::get('/manage/fme/workspaces/{repository}/{workspace}/parameters', [App\Http\Controllers\FmeProxyController::class, 'workspaceParameters']);
                                      
 
     // Manage Custom App routes                                                                                                 
@@ -84,6 +90,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/manage/analytics/live-apps', [App\Http\Controllers\AnalyticsController::class, 'liveApps']);
     Route::get('/manage/accounts', [App\Http\Controllers\AccountController::class, 'index']);
     Route::get('/manage/settings', [App\Http\Controllers\SettingsController::class, 'index']);
+    Route::patch('/manage/settings/update', [App\Http\Controllers\SettingsController::class, 'update']);
 
 });
 
@@ -126,6 +133,18 @@ Route::middleware(['track.visit', 'azure.required'])->group(function () {
 
     Route::get('/PBA-FMUTA6-VerwerkWeekIndexatie', [App\Http\Controllers\PBA_IWController::class, 'index']);
     Route::get('/Ontvangstloket-IW', [App\Http\Controllers\Ontvangstloket_IWController::class, 'index']);
+});
+
+// Server-side FME proxies for the PBA and Ontvangstloket pages (FME tokens stay off the client).
+// Same access as the pages above, but without track.visit so API calls don't count as page visits.
+Route::middleware(['azure.required'])->group(function () {
+    Route::get('/PBA-FMUTA6-VerwerkWeekIndexatie/api/indexaties', [App\Http\Controllers\PBA_IWController::class, 'indexaties']);
+    Route::post('/PBA-FMUTA6-VerwerkWeekIndexatie/api/indexaties', [App\Http\Controllers\PBA_IWController::class, 'saveIndexaties']);
+    Route::get('/PBA-FMUTA6-VerwerkWeekIndexatie/api/download', [App\Http\Controllers\PBA_IWController::class, 'download']);
+
+    Route::post('/Ontvangstloket-IW/api/upload', [App\Http\Controllers\Ontvangstloket_IWController::class, 'upload']);
+    Route::post('/Ontvangstloket-IW/api/run', [App\Http\Controllers\Ontvangstloket_IWController::class, 'run']);
+    Route::post('/Ontvangstloket-IW/api/submit', [App\Http\Controllers\Ontvangstloket_IWController::class, 'submit']);
 });
 
  

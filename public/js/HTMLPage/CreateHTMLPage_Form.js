@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", async function() {
-    // ophalen repositories  
+    // ophalen repositories (via the server-side FME proxy; the FME token never reaches the browser)
     try {
-        const response = await fetch("https://fme.gkbgroep.nl/fmeapiv4/repositories", {
+        const response = await fetch("/manage/fme/repositories", {
           method: "GET",
           headers: {
-            "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",  // replace 'x' with your real token
             "Accept": "application/json"
           }
         });
@@ -49,10 +48,9 @@ repoSelect.addEventListener("change", async function () {
       workspaceSelect.disabled = true;                                                                                                                
       //2. haal de workspaces op van de geselecteerde repo                                                                                            
       try {                                                                                                                                           
-        const workspaceResponse = await fetch(`https://fme.gkbgroep.nl/fmeapiv4/repositories/${encodeURIComponent(selectedRepo)}/items`, {       
+        const workspaceResponse = await fetch(`/manage/fme/repositories/${encodeURIComponent(selectedRepo)}/items`, {       
           method: "GET",
           headers: {
-            "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",  // Replace with real token
             "Accept": "application/json"
           }
         });
@@ -104,10 +102,9 @@ workspaceSelect.addEventListener("change", async function () {
 
   // ophalen services
   try {
-    const serviceResponse = await fetch(`https://fme.gkbgroep.nl/fmeapiv4/workspaces/${encodeURIComponent(selectedRepo)}/${encodeURIComponent(selectedWorkspace)}/services`, {
+    const serviceResponse = await fetch(`/manage/fme/workspaces/${encodeURIComponent(selectedRepo)}/${encodeURIComponent(selectedWorkspace)}/services`, {
       method: "GET",
       headers: {
-        "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",  
         "Accept": "application/json"
       }
     });
@@ -149,11 +146,10 @@ parameterContainer.innerHTML = ""; // Clear previous
 
 try {
   const paramResponse = await fetch(
-    `https://fme.gkbgroep.nl/fmeapiv4/workspaces/${encodeURIComponent(selectedRepo)}/${encodeURIComponent(selectedWorkspace)}/parameters`,
+    `/manage/fme/workspaces/${encodeURIComponent(selectedRepo)}/${encodeURIComponent(selectedWorkspace)}/parameters`,
     {
       method: "GET",
       headers: {
-        "Authorization": "fmetoken token=653d48815e91626f06f6ed871b3810605193ac02",  // Replace with your token
         "Accept": "application/json"
       }
     }

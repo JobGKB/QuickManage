@@ -36,7 +36,7 @@ class ProfileController extends Controller
         if ($request->filled('email')) { $data->email = $request['email']; }
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = $uniqid . '.' . $file->getClientOriginalExtension();
+            $filename = $uniqid . '.' . $file->extension();
             $file->storeAs('profile_images', $filename, 'public');
             $data->image = $filename;
         }

@@ -80,7 +80,7 @@
                       <div class="d-flex justify-content-between   mt-3 action-wrapper">
                          
                           <div><button class="btn_add " data-bs-toggle="modal" data-bs-target="#addIndexation"><i class="fa-solid fa-plus"></i> Indexatie Week</button>
-                          <a href="https://fme-gkb.fmecloud.com/fmedatastreaming/Administratie/PBA_FMUTA6_DonwloadIndexatieBestand.fmw?DestDataset_FILECOPY=c%3A%5Ctemp&token=5867261962a1a4543639d8f384bb173ac9efa0ed" class="text-decoration-none download-excel  "><i class="fa-solid fa-download"></i> Excel</a>  <br/>
+                          <a href="{{ url('/PBA-FMUTA6-VerwerkWeekIndexatie/api/download') }}" class="text-decoration-none download-excel  "><i class="fa-solid fa-download"></i> Excel</a>  <br/>
                           </div>
                           <div><button id="toggle-edit" class="btn_edit" onclick="toggleEdit()"><i class="fa-solid fa-pen-to-square"></i> Indexatie</button></div>
 

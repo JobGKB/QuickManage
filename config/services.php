@@ -47,8 +47,11 @@ return [
         'client_secret' => env('AZURE_CLIENT_SECRET'),
         'redirect'      => env('AZURE_REDIRECT_URI'),
         'tenant'        => env('AZURE_TENANT_ID'),
-        // Only accounts with an e-mail in this domain are allowed access.
-        'allowed_domain' => env('AZURE_ALLOWED_DOMAIN', 'gkbgroep.nl'),
+        // Only accounts with an e-mail in one of these domains are allowed access (comma-separated in .env).
+        'allowed_domains' => array_values(array_filter(array_map(
+            fn ($domain) => strtolower(trim($domain)),
+            explode(',', (string) env('AZURE_ALLOWED_DOMAIN', 'gkbgroep.nl'))
+        ))),
     ],
 
     'fme' => [
@@ -57,6 +60,12 @@ return [
         'token'    => env('FME_SERVER_TOKEN'),
         'base_url' => env('FME_BASE_URL', 'https://fme.gkbgroep.nl'), // FME Cloud host for per-app proxy
         // fme-gkb.fmecloud.com
+
+        // PBA FMUTA6 indexatie API (separate FME Cloud host + token), proxied by PBA_IWController
+        'pba_indexatie_url' => env('FME_PBA_INDEXATIE_URL', 'https://fme-gkb.fmecloud.com/api/IndexatieGrondbank/indexaties'),
+        'pba_token'         => env('FME_PBA_TOKEN'),
+        'pba_download_url'   => env('FME_PBA_DOWNLOAD_URL', 'https://fme-gkb.fmecloud.com/fmedatastreaming/Administratie/PBA_FMUTA6_DonwloadIndexatieBestand.fmw'),
+        'pba_download_token' => env('FME_PBA_DOWNLOAD_TOKEN'),
     ],
 
     // Claude (Anthropic) — GIS Assistent

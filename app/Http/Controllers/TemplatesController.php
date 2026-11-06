@@ -31,7 +31,7 @@ class TemplatesController extends Controller
 
         $request->validate([
             'name' => 'required|unique:templates,name',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,gif,webp|max:2048',
         ]);
 
         $uniqid = Str::uuid();
@@ -41,7 +41,7 @@ class TemplatesController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = 'template_' . $uniqid . '_dummy.' . $file->getClientOriginalExtension();
+            $filename = 'template_' . $uniqid . '_dummy.' . $file->extension();
             $file->storeAs('template_images', $filename, 'public');
             $template->dummy_image = $filename;
             
@@ -81,19 +81,19 @@ class TemplatesController extends Controller
 
         if ($request->hasFile('image_thumbnail')) {
             $file = $request->file('image_thumbnail');
-            $filename = 'template_' . $data->id . '_dummy.' . $file->getClientOriginalExtension();
+            $filename = 'template_' . $data->id . '_dummy.' . $file->extension();
             $file->storeAs('template_images', $filename, 'public');
             $data->dummy_image = $filename;
         }
         if ($request->hasFile('header_logo')) {
             $file = $request->file('header_logo');
-            $filename = 'template_' . $data->id . '_header.' . $file->getClientOriginalExtension();
+            $filename = 'template_' . $data->id . '_header.' . $file->extension();
             $file->storeAs('template_images', $filename, 'public');
             $data->header_logo = $filename;
         }
         if ($request->hasFile('footer_image')) {
             $file = $request->file('footer_image');
-            $filename = 'template_' . $data->id . '_footer.' . $file->getClientOriginalExtension();
+            $filename = 'template_' . $data->id . '_footer.' . $file->extension();
             $file->storeAs('template_images', $filename, 'public');
             $data->footer_image = $filename;
         }

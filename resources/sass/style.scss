@@ -1106,6 +1106,7 @@ width: 40%;
         option {
             background-color: #fff;
         }
+        
             
             
  
@@ -1511,8 +1512,6 @@ width: 40%;
 
             }
 
-            
-            
             .an-live-app-container {
                 
                 margin-top: 40px;
@@ -1565,7 +1564,6 @@ width: 40%;
             }
  
         }
-   
 
 }
 
@@ -1864,25 +1862,11 @@ width: 40%;
      color:#347427;   
     }
 } 
- 
-//keyframes
-
-// @mixin keyframes($param_field) {
-//     @keyframes #{$param_field}{
-//         0%   {left:0px; top:0px;}
-//         100% {left:20px; top:0px;}
-
-//       }
-//     }
   
-//media query's
-
 @media (max-width: 1440px) {
     .menu {
         display: none;
-        .menu-wrapper{
-           
-        }
+ 
     }
     .ham_menu{
         display: block ;

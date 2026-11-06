@@ -34,15 +34,15 @@ class RequireAzureLogin
             return redirect()->route('azure.login', ['redirect' => $request->fullUrl()]);
         }
 
-        $allowedDomain = strtolower(config('services.azure.allowed_domain'));
+        $allowedDomains = config('services.azure.allowed_domains', []);
 
         // Logged in but with a non-allowed account: deny access.
-        if (! Str::endsWith(strtolower($user['email']), '@' . $allowedDomain)) {
+        if (! Str::endsWith(strtolower($user['email']), array_map(fn ($d) => '@' . $d, $allowedDomains))) {
             $request->session()->forget('azure.user');
 
             return response()->view('errors.azure-forbidden', [
-                'email'         => $user['email'],
-                'allowedDomain' => $allowedDomain,
+                'email'          => $user['email'],
+                'allowedDomains' => $allowedDomains,
             ], 403);
         }
 

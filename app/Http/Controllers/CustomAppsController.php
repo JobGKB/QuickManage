@@ -28,7 +28,7 @@ class CustomAppsController extends Controller
             'url' => 'required|url',
             'description' => 'nullable|string',
             'category' => 'nullable|integer',
-            'app_thumbnail' => 'nullable|image|max:2048',
+            'app_thumbnail' => 'nullable|image|mimes:jpeg,png,gif,webp|max:2048',
         ]);
         
         // Generate unique hash_id
@@ -47,7 +47,7 @@ class CustomAppsController extends Controller
          
         if ($request->hasFile('app_thumbnail')) {
             $file = $request->file('app_thumbnail');
-            $filename = $uniqid . '.' . $file->getClientOriginalExtension();
+            $filename = $uniqid . '.' . $file->extension();
             $file->storeAs('custom_app_thumbnails', $filename, 'public');
             $app->custom_app_thumbnail = $filename;
         }
@@ -86,6 +86,10 @@ class CustomAppsController extends Controller
 
     public function update(Request $req, $uniqid) 
     {
+        $req->validate([
+            'app_thumbnail' => 'nullable|image|mimes:jpeg,png,gif,webp|max:2048',
+        ]);
+
         // dd($req->input());
         $custom_app = CustomApp::where('uniqid', $uniqid)->firstOrFail();
         $custom_app->name = $req->input('name');
@@ -96,7 +100,7 @@ class CustomAppsController extends Controller
  
         if ($req->hasFile('app_thumbnail')) {
             $file = $req->file('app_thumbnail');
-            $filename = $uniqid . '.' . $file->getClientOriginalExtension();
+            $filename = $uniqid . '.' . $file->extension();
             $file->storeAs('custom_app_thumbnails', $filename, 'public');
             $custom_app->custom_app_thumbnail = $filename;
         }

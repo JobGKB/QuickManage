@@ -39,7 +39,7 @@ Empty body. Columns used by controllers/views: `name`, `background_color`, `dumm
 
 ## Column cheat sheet
 
-Inferred from controllers / views (migrations for these tables are **not** in the repo — see below).
+Inferred from controllers / views. The exact column definitions are in the migrations listed below.
 
 | Table | Key columns |
 |---|---|
@@ -58,19 +58,16 @@ Present in [database/migrations/](../database/migrations/):
 - `0001_01_01_000000_create_users_table.php` — `users`, `password_reset_tokens`, `sessions` (stock Laravel)
 - `0001_01_01_000001_create_cache_table.php` — `cache`, `cache_locks`
 - `0001_01_01_000002_create_jobs_table.php` — `jobs`, `job_batches`, `failed_jobs`
+- `2025_01_01_000000_add_uniqid_and_image_to_users_table.php` — `users.uniqid`, `users.image`
+- `2025_01_01_000001` … `000007` — `app_galleries`, `app_categories`, `folders`, `templates`, `apps`, `custom_apps`, `user_analytics`
+- `2026_06_10_000000_add_indexes_to_user_analytics_table.php` — unique `visitor_id`, index `last_seen_at`, widens `page_url`
 
-**Missing migrations** (tables used by code but not created by any committed migration):
+The `2025_01_01_*` migrations were reverse-engineered from the existing database (signed `INT` ids and the original
+foreign-key names) and verified to produce an identical schema. Each is guarded with `Schema::hasTable` /
+`Schema::hasColumn`, so on databases created before these migrations existed, `php artisan migrate` only records them.
 
-- `apps`
-- `custom_apps`
-- `app_categories`
-- `app_galleries`
-- `folders`
-- `templates`
-- `workspaceparameters` (legacy)
-- Extra columns on `users`: `uniqid`, `image` — neither is in the committed `create_users_table` migration, though both are written to at registration/profile edit.
-
-A clean clone + `php artisan migrate` **will not** produce a working schema for these features. See [known-issues.md](known-issues.md).
+A clean clone + `php artisan migrate` on an empty MySQL database produces the full schema (without data).
+Remaining schema quirks are listed in [known-issues.md](known-issues.md#schema-quirks).
 
 ## Seeders & factories
 

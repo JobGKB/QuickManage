@@ -12,7 +12,7 @@ class AppGalleryController extends Controller
 {
 
     //GKB_AppGallery_Container is de public page van de app gallery, deze is te bereiken zonder in te loggen. 
-    // Hier kunnen gebruikers een overzicht krijgen van de apps die er zijn en kunnen ze doorklikken naar de categorieën.
+    // Hier kunnen gebruikers een overzicht krijgen van de apps die er zijn en kunnen ze doorklikken naar de categorieën. 
     public function GKB_AppGallery_Container() 
     {   
 
@@ -20,9 +20,12 @@ class AppGalleryController extends Controller
         // dd($app_gallery_items);
         $app_categories = AppCategorie::all();
 
+        $footer_text = AppGallery::where("name", "App Gallery")->first()->footer_text ?? '';
+        
         return view('pages.app_gallery.GKB_AppGallery_Container', [
             'app_categories' => $app_categories,
-            'app_gallery_items' => $app_gallery_items
+            'app_gallery_items' => $app_gallery_items,
+            'footer_text' => $footer_text
 
         ]);
     }
@@ -37,23 +40,20 @@ class AppGalleryController extends Controller
          
         $category_custom_apps = CustomApp::where('cat_id', $category_items->id)->get();
 
+        $footer_text = AppGallery::where("name", "App Gallery")->first()->footer_text ?? '';
+
 
         // dd($category_apps);
 
         return view('pages.app_gallery.app_category.GKB_AppGallery_CatContainer', [
             'category_items' => $category_items,
             'category_apps' => $category_apps,
-            'category_custom_apps' => $category_custom_apps
+            'category_custom_apps' => $category_custom_apps,
+            'footer_text' => $footer_text,
 
         ]);
     }
-
-
-
-
-
-
-
+ 
      public function index() 
     {   
         $app_categories = AppCategorie::all();
@@ -106,9 +106,7 @@ class AppGalleryController extends Controller
         $apps_w_cat_id = App::where('cat_id', $app_category->id)->get();
         $custom_apps_w_cat_id = CustomApp::where('cat_id', $app_category->id)->get();
     
-        // dd($apps_w_cat_id);
-
-     
+ 
 
         return view('pages.app_gallery.app_category.show_cat', [
             'app_category' => $app_category,

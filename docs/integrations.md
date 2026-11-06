@@ -49,7 +49,7 @@ sequenceDiagram
 - **Auth header**: `Authorization: fmetoken token=<FME_SERVER_TOKEN>`.
 - **Env**: `FME_SERVER_URL`, `FME_DWG_SERVER_URL`, `FME_SERVER_TOKEN`.
 - **Limits**: upload ≤ 500 MB, HTTP timeout 300 s, `withoutVerifying()` (TLS off).
-- ⚠️ See [known-issues.md](known-issues.md) — [public/js/displayHTMLpage.js](../public/js/displayHTMLpage.js) and [public/js/testAI.js](../public/js/testAI.js) currently contain a **hard-coded** `fmetoken` in client-side JS. The server-side proxy in QuickDataViewer does **not** share this problem.
+- ✅ No FME token is shipped in client-side JS anymore; all FME calls go through server-side proxies (see [known-issues.md](known-issues.md#fme-tokens-in-client-js-fixed--rotate-the-old-tokens)).
 
 ### GDB conversion sequence
 

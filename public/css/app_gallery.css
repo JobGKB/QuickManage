@@ -132,6 +132,13 @@ body {
   height: 12px;
   opacity: 90%;
 }
+.footer a {
+  color: #000000 !important;
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
 
 /* end footer */
 @media screen and (max-width: 992px) {

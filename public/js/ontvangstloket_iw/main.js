@@ -72,19 +72,13 @@ function handleFormSubmit(event) {
 }
 
 
-// FME Flow config. NOTE: token is exposed in client JS (see docs/known-issues.md);
-// prefer a server-side proxy long term.
-const FME_BASE_URL = "https://fme.gkbgroep.nl";
-const FME_TOKEN = "653d48815e91626f06f6ed871b3810605193ac02";
-const FME_TEMP_CONNECTION = "FME_SHAREDRESOURCE_TEMP";
+// FME calls go through the server-side proxy in Ontvangstloket_IWController,
+// so the FME token never reaches the browser.
+const ONTVANGSTLOKET_API = "/Ontvangstloket-IW/api";
 
-function getSubmitTarget() {
-    const target = (window.appSettings && window.appSettings.submitTarget) || {};
-    return {
-        repository: target.repository,
-        workspace: target.workspace,
-        service: target.service 
-    };
+function csrfToken() {
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    return meta ? meta.content : "";
 }
 
 async function uploadAndConvert(file, sendData) {
@@ -113,18 +107,16 @@ async function uploadAndConvert(file, sendData) {
     }
 }
 
-// STEP 1: POST the file to the FME TEMP folder using FME Flow REST API V4
+// STEP 1: upload the file to the FME TEMP folder (via the server-side proxy)
 async function uploadFileToFME(file) {
-    const uploadUrl = `${FME_BASE_URL}/fmeapiv4/resources/connections/${FME_TEMP_CONNECTION}/upload?path&overwrite=true`;
-
     const formData = new FormData();
-    formData.append("files", file, file.name);
+    formData.append("file", file, file.name);
 
-    const response = await fetch(uploadUrl, {
+    const response = await fetch(`${ONTVANGSTLOKET_API}/upload`, {
         method: "POST",
         headers: {
-            "Authorization": "fmetoken token=" + FME_TOKEN,
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "X-CSRF-TOKEN": csrfToken()
         },
         body: formData
     });
@@ -138,37 +130,22 @@ async function uploadFileToFME(file) {
     return result;
 }
 
-// STEP 2: run the workspace via fmedatastreaming with INIT_JSON + SOURCE_FILE
+// STEP 2: run the workspace via fmedatastreaming with INIT_JSON (the server adds SOURCE_FILE + token)
 async function streamWorkspace(sendData) {
-    const { repository, workspace } = getSubmitTarget();
-
     // FME workspace expects INIT_JSON (JSON string) and SOURCE_FILE (temp path)
     const initJson = JSON.stringify({
         supplier: sendData.supplier,
         sourceFileName: sendData.inputFileName
     });
 
-    // Params go in the POST body so URLSearchParams percent-encodes {, }, (, ),
-    // quotes and spaces (raw braces/parens in the URL trigger a Tomcat 400).
-    const params = new URLSearchParams({
-        INIT_JSON: JSON.stringify(initJson),
-        SOURCE_FILE: `$(${FME_TEMP_CONNECTION})/${sendData.sourceFile}`,
-        opt_responseformat: "json",
-        token: FME_TOKEN
-    });
-
-    console.log("Datastreaming params:", params.toString());
-
-    const url = `${FME_BASE_URL}/fmedatastreaming/${repository}/${workspace}`;
-    console.log("Datastreaming URL:", url);
-
-    const response = await fetch(url, {
+    const response = await fetch(`${ONTVANGSTLOKET_API}/run`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/json"
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "X-CSRF-TOKEN": csrfToken()
         },
-        body: params.toString()
+        body: JSON.stringify({ init_json: JSON.stringify(initJson) })
     });
     if (!response.ok) {
         throw new Error(`Datastreaming van workspace mislukt. Status: ${response.status}`);
@@ -260,35 +237,21 @@ function setupWerkorderSearch(container, values) {
 }
 
 // Data-stream the filled-in INIT_JSON payload to the second FME workspace.
-// repository/workspace/service come from submitTarget in the first FME response.
+// The server uses the submitTarget FME returned in step 2 (stored in the session).
 async function submitToWorkspace(target, payload) {
     const t = target || {};
-    const repository = t.repository;
-    const workspace = t.workspace;
-    const service = t.service || 'fmedatadownload';
-    if (!repository || !workspace) {
+    if (!t.repository || !t.workspace) {
         throw new Error('submitTarget ontbreekt in de response.');
     }
 
-    // INIT_JSON is a text published parameter. Double-encode so URLSearchParams
-    // percent-encodes the braces/quotes (raw braces trigger a Tomcat 400).
-    const params = new URLSearchParams({
-        INIT_JSON: JSON.stringify(payload),
-        opt_responseformat: 'json',
-        token: FME_TOKEN
-    });
-
-    const url = `${FME_BASE_URL}/fmedatadownload/${repository}/${workspace}`;
-    console.log('Submit URL:', url);
-    console.log('Submit params:', params.toString());
-
-    const response = await fetch(url, {
+    const response = await fetch(`${ONTVANGSTLOKET_API}/submit`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': csrfToken()
         },
-        body: params.toString()
+        body: JSON.stringify({ init_json: JSON.stringify(payload) })
     });
     if (!response.ok) {
         throw new Error(`Verzenden naar workspace mislukt. Status: ${response.status}`);

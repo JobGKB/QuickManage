@@ -12,7 +12,9 @@
     @else
         Dit account mag deze pagina niet gebruiken.<br><br>
     @endif
-    Alleen accounts met een <strong>@{{ $allowedDomain ?? 'gkbgroep.nl' }}</strong> e-mailadres hebben toegang.
+    Alleen accounts met een
+    <strong>{!! collect($allowedDomains ?? ['gkbgroep.nl'])->map(fn ($d) => '@' . e($d))->join('</strong>, <strong>', '</strong> of <strong>') !!}</strong>
+    e-mailadres hebben toegang.
 @endsection
 
 @section('button')

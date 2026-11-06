@@ -1,5 +1,5 @@
-// https://fme-gkb.fmecloud.com/fmerest/v3/repositories/Projecten/items/PBA_IW_Conversie.fmwAdministratie/PBA_FMUTA6_MaakIndexatieJSON.fmw 653d48815e91626f06f6ed871b3810605193ac02
-// /https://fme-gkb.fmecloud.com/fmedatastreaming/Administratie/PBA_FMUTA6_MaakIndexatieJSON.fmw
+// FME calls go through the server-side proxy in PBA_IWController (FME_PBA_TOKEN stays off the client).
+const INDEXATIE_API_URL = "/PBA-FMUTA6-VerwerkWeekIndexatie/api/indexaties";
 
  
 let tableData = [];
@@ -7,13 +7,13 @@ let editMode = false;
 const headers = ["Naam", "Jaar", "Week", "Indexatie"];
 
 async function getData() {
-  const url = "https://fme-gkb.fmecloud.com/api/IndexatieGrondbank/indexaties?DEBUG=NO";
+  const url = INDEXATIE_API_URL;
   document.getElementById("indexatie-table").innerHTML = "<p>Data wordt opgehaald...</p>";
   try {
     const res = await fetch(url, {
       method: "GET",
       headers: {
-        Authorization: "fmetoken token=c8fe3945982941066a1c4964d8a2ca5759e86c2b"
+        Accept: "application/json"
       }
       
     });
@@ -189,14 +189,15 @@ async function saveData() {
   const json = getOutputJSON();
   console.log("Output JSON:", json);
 
-  const url = "https://fme-gkb.fmecloud.com/api/IndexatieGrondbank/indexaties?DEBUG=NO";
+  const url = INDEXATIE_API_URL;
   document.getElementById("indexatie-table").innerHTML = "<p>Data wordt verzonden...</p>";
   try {
     const res = await fetch(url, {
       method: "POST",
       headers: {
-        Authorization: "fmetoken token=c8fe3945982941066a1c4964d8a2ca5759e86c2b",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
       },
       body: JSON.stringify( {json})
     });

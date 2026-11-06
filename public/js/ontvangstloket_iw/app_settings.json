@@ -60,6 +60,11 @@
                     "value": "Grondbank_GMG",
 					"name": "Grondbank GMG",
                     "sourceFileFilter": "*.csv;*.xlsx"
+                },
+                {
+                    "value": "Slufter-LZP",
+					"name": "Slufter-LZP (Port of Rotterdam)",
+                    "sourceFileFilter": "*.xlsx"
                 }
             ]
         }

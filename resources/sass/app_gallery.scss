@@ -163,6 +163,13 @@ body {
     height: 12px;
     opacity: 90%;
   }
+  a {
+            color: #000000 !important;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
 }
 /* end footer */
 

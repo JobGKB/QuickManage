@@ -123,5 +123,5 @@ See [docs/integrations.md](docs/integrations.md) for details.
 - [docs/frontend.md](docs/frontend.md) — build pipeline, SCSS→CSS mapping, layouts, view structure
 - [docs/integrations.md](docs/integrations.md) — ArcGIS, Ollama, FME Flow, Mail
 - [docs/conventions.md](docs/conventions.md) — code patterns in use across the app
-- [docs/known-issues.md](docs/known-issues.md) — security flags, dead code, missing migrations
+- [docs/known-issues.md](docs/known-issues.md) — security flags, dead code, schema quirks
 - `docs/modules/` — per-feature reference

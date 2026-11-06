@@ -30,7 +30,7 @@ The public `show` page renders [resources/views/html_templates/GKB_Realisatie_St
 3. Dynamically builds HTML form inputs matching those parameters.
 4. Submits to the FME `service` endpoint.
 
-See [../known-issues.md#hard-coded-fme-bearer-token-in-client-js](../known-issues.md#hard-coded-fme-bearer-token-in-client-js) — this JS currently embeds the FME token in plaintext.
+FME calls go through server-side proxies; no FME token is embedded in this JS. See [../known-issues.md](../known-issues.md#fme-tokens-in-client-js-fixed--rotate-the-old-tokens).
 
 ## Gotchas
 

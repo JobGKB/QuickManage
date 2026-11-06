@@ -63,4 +63,4 @@ arcgis.username
 
 [public/js/testAI.js](../../public/js/testAI.js) opens `new EventSource('/ai/nl2where-stream?question=...&where=...')`, appends incoming text into `#aiAnswer`, hides the loader on the first non-empty token, and closes the stream on the `done` event.
 
-⚠️ The same file contains a hard-coded `fmetoken token=…` literal used elsewhere. See [../known-issues.md#hard-coded-fme-bearer-token-in-client-js](../known-issues.md#hard-coded-fme-bearer-token-in-client-js).
+No FME token is embedded in this file (verified: no `fmetoken token=…` literal in `public/js`).

@@ -98,12 +98,11 @@ npm run dev                   # compile SCSS/JS (or: npm run watch)
 php artisan serve             # http://127.0.0.1:8000
 ```
 
-> ⚠️ **The database cannot be built from migrations alone.** The committed migrations only create the
-> stock Laravel tables (`users`, `sessions`, `cache`, `jobs`, …) and add indexes to `user_analytics`.
-> The feature tables (`apps`, `custom_apps`, `app_categories`, `app_galleries`, `folders`, `templates`,
-> `user_analytics`) and extra `users` columns (`uniqid`, `image`) **have no create-migration**.
-> Get a schema dump (or full copy) of the existing database from the server, import it, and only then
-> run `php artisan migrate`. Committing proper migrations is the #1 tech-debt item — see §15.
+> ℹ️ **The schema is built from migrations.** `php artisan migrate` on an empty MySQL database creates all
+> tables used by the code. The `2025_01_01_*` migrations were reverse-engineered from the existing database
+> and are guarded (`Schema::hasTable` / `hasColumn`), so on databases that already have these tables they
+> are only recorded in `migrations` and change nothing. Application *data* (apps, categories, templates, …)
+> is not seeded — copy it from the server if you need it.
 >
 > Note also that [2026_06_10_000000_add_indexes_to_user_analytics_table.php](../database/migrations/2026_06_10_000000_add_indexes_to_user_analytics_table.php)
 > uses MySQL-only `ALTER TABLE … MODIFY` syntax, so SQLite is not an option.
@@ -150,7 +149,7 @@ bootstrap/app.php            Routing, middleware aliases, global exception handl
 config/
   services.php               All integration settings (ArcGIS, Azure, FME, Claude, FME MCP)
   artifact_apps.php          Registry of hosted Claude artifact apps
-database/migrations/         Stock tables + user_analytics indexes ONLY (see §3)
+database/migrations/         Full schema (stock tables + guarded feature-table migrations, see §3)
 docs/                        This documentation
 public/
   js/<feature>/              Hand-written, non-bundled JS per feature (loaded directly by Blade)
@@ -224,7 +223,7 @@ QuickManage has **three independent login mechanisms**. Understanding which one 
 | # | Mechanism | Who | Stored where | Guard | Logout |
 |---|---|---|---|---|---|
 | 1 | **QuickManage login** (`laravel/ui`, e-mail + password) | Admins / developers | Laravel `auth` session, `users` table | `auth` | `POST /logout` |
-| 2 | **Microsoft Entra ID SSO** (Socialite `azure` driver) | All GKB employees with an `@gkbgroep.nl` address (`AZURE_ALLOWED_DOMAIN`) | Session key `azure.user` = `{id, name, email}` — **no DB user is created** | `azure.required` | `POST /auth/azure/logout` |
+| 2 | **Microsoft Entra ID SSO** (Socialite `azure` driver) | All employees with an `@gkbgroep.nl` or `@boonstoppelgroen.nl` address (`AZURE_ALLOWED_DOMAIN`, comma-separated) | Session key `azure.user` = `{id, name, email}` — **no DB user is created** | `azure.required` | `POST /auth/azure/logout` |
 | 3 | **ArcGIS Online OAuth2** (authorization code) | Users of GIS Portaal / testAI | Session keys `arcgis.access_token`, `arcgis.expires_in`, `arcgis.expires_at`, `arcgis.username` | `arcgis.required` (in combination with `auth`) | `POST /logoutAGOL` |
 
 ### SSO flow (mechanism 2)
@@ -238,8 +237,9 @@ QuickManage has **three independent login mechanisms**. Understanding which one 
 5. A wrong domain gets [errors/azure-forbidden.blade.php](../resources/views/errors/azure-forbidden.blade.php) (403).
 
 The Socialite Azure driver is registered in [AppServiceProvider](../app/Providers/AppServiceProvider.php) via the `SocialiteWasCalled` event.
-When `APP_DEBUG=true` a failed callback **`dd()`s** state/session diagnostics (useful for "invalid state" problems
-behind an HTTPS proxy — check `TrustProxies` / `SESSION_DOMAIN` / `APP_URL`).
+A failed callback is logged (`Log::warning('Azure SSO callback failed', …)` with exception, whether the OAuth `state`
+matched, `is_secure` and scheme) — useful for "invalid state" problems behind an HTTPS proxy; check `TrustProxies` /
+`SESSION_DOMAIN` / `APP_URL`.
 
 ### ArcGIS flow (mechanism 3)
 
@@ -329,11 +329,16 @@ Each module: what it does → main files → gotchas. Detailed docs are linked w
   results in `folder_id = null`.
 - **Creating an FME app** ([pages/apps/create.blade.php](../resources/views/pages/apps/create.blade.php) +
   [public/js/HTMLPage/CreateHTMLPage_Form.js](../public/js/HTMLPage/CreateHTMLPage_Form.js)): the admin picks
-  repository → workspace → service from FME Flow, a template, a category, and enters the **per-app FME
+  repository → workspace → service from FME Flow (looked up through the server-side proxy
+  `GET /manage/fme/repositories…` / `/manage/fme/workspaces/…`, using `FME_SERVER_TOKEN`), a template, a category, and enters the **per-app FME
   workspace token** (`wsp_token`), which is stored **encrypted** (`Crypt::encryptString`, depends on `APP_KEY`).
 - **Editing**: the services dropdown is fetched through `GET /manage/apps/{unique}/fme/services` (server-side proxy).
 - **Thumbnails** are stored on the `public` disk (`storage/app/public/app_thumbnails/`, `custom_app_thumbnails/`)
-  and the **file name** is saved in the DB.
+  and the **file name** is saved in the DB. Uploads must pass `image|mimes:jpeg,png,gif,webp|max:2048`, and the stored
+  extension comes from the file content (`$file->extension()`), never from the client file name.
+- **Descriptions** may contain simple formatting. Views render them with `App\Support\SafeHtml::basic()`, which escapes
+  everything and only re-enables attribute-less `<strong> <b> <em> <i> <u> <p> <ul> <ol> <li> <br>` plus
+  `<a href="...">` (only `http(s)://`, `mailto:`, `/...` or `#...` URLs; external links open in a new tab).
 - Custom-app creation happens in a modal on the folder page via AJAX
   ([public/js/custom_app/create.js](../public/js/custom_app/create.js)); the standalone create route is commented out.
 
@@ -403,11 +408,15 @@ Stand-alone business tools (own layouts and CSS in `resources/sass/custom_apps/`
 - **Ontvangstloket IW** (`/Ontvangstloket-IW`): creates supplier-specific "ontvangsten" CSVs for import into IW.
   The form is driven by [public/js/ontvangstloket_iw/app_settings.json](../public/js/ontvangstloket_iw/app_settings.json)
   (fields, groups, FME submit target `Administratie/Ontvangstloket.fmw`, `fmedatastreaming`);
-  [main.js](../public/js/ontvangstloket_iw/main.js) calls FME Flow **directly from the browser**.
+  [main.js](../public/js/ontvangstloket_iw/main.js) calls the server-side proxy in
+  [Ontvangstloket_IWController](../app/Http/Controllers/Ontvangstloket_IWController.php)
+  (`POST /Ontvangstloket-IW/api/upload|run|submit`, `FME_SERVER_TOKEN`). The FME targets come from `app_settings.json`
+  (run) and from FME's `submitTarget` response kept in the session (submit) — never from the browser.
 - **PBA FMUTA6** (`/PBA-FMUTA6-VerwerkWeekIndexatie`): manage/process weekly indexation rates;
-  [public/js/PBA_FMUTA6/main.js](../public/js/PBA_FMUTA6/main.js) calls an FME Flow API on `fme-gkb.fmecloud.com` **directly from the browser**.
+  [public/js/PBA_FMUTA6/main.js](../public/js/PBA_FMUTA6/main.js) calls `GET|POST /PBA-FMUTA6-VerwerkWeekIndexatie/api/indexaties`,
+  proxied by [PBA_IWController](../app/Http/Controllers/PBA_IWController.php) to the FME Cloud API on `fme-gkb.fmecloud.com` (`FME_PBA_TOKEN`).
 
-Both still embed an FME token in client JS — see §15.
+The proxy API routes use `azure.required` but not `track.visit`, so they don't count as page visits.
 
 ### 8.9 Artifact apps (Eisenhower, Leeghwater)
 *Docs: [modules/artifact-apps.md](modules/artifact-apps.md) — read this before touching them.*
@@ -500,10 +509,13 @@ Besides the standard Laravel keys (`APP_*`, `DB_*`, `SESSION_*`, `CACHE_STORE`, 
 |---|---|---|
 | `APP_KEY` | `app.key` | **Also decrypts `apps.wsp_token`** — never rotate without re-encrypting tokens |
 | `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_TENANT_ID`, `AZURE_REDIRECT_URI` | `services.azure.*` | SSO |
-| `AZURE_ALLOWED_DOMAIN` | `services.azure.allowed_domain` (default `gkbgroep.nl`) | SSO domain check |
+| `AZURE_ALLOWED_DOMAIN` | `services.azure.allowed_domains` (comma-separated list, default `gkbgroep.nl`) | SSO domain check |
 | `ARCGIS_PORTAL`, `ARCGIS_CLIENT_ID`, `ARCGIS_CLIENT_SECRET`, `ARCGIS_REDIRECT_URI` | `services.arcgis.*` | GIS Portaal, testAI |
 | `FME_BASE_URL` | `services.fme.base_url` (default `https://fme.gkbgroep.nl`) | FmeProxyController |
-| `FME_SERVER_URL`, `FME_DWG_SERVER_URL`, `FME_SERVER_TOKEN` | `services.fme.*` | QuickDataViewer conversions |
+| `FME_SERVER_URL`, `FME_DWG_SERVER_URL`, `FME_SERVER_TOKEN` | `services.fme.*` | QuickDataViewer conversions; `FME_SERVER_TOKEN` also for the app-create FME browser and Ontvangstloket proxy |
+| `FME_BASE_URL` | `services.fme.base_url` | FME Flow host for the proxies (default `https://fme.gkbgroep.nl`) |
+| `FME_PBA_TOKEN`, `FME_PBA_INDEXATIE_URL` | `services.fme.pba_token`, `services.fme.pba_indexatie_url` | PBA indexatie proxy (FME Cloud) |
+| `FME_PBA_DOWNLOAD_TOKEN`, `FME_PBA_DOWNLOAD_URL` | `services.fme.pba_download_token`, `services.fme.pba_download_url` | PBA Excel export proxy (FME Cloud datastreaming) |
 | `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL` | `services.claude.*` | GIS Assistent |
 | `FME_MCP_URL` | `services.fme_mcp.url` | GIS Assistent |
 | `ARTIFACT_APPS_STORAGE` | `artifact_apps.storage_path` | Artifact apps data folder |
@@ -519,8 +531,8 @@ ArcGIS / FME / Anthropic / artifact keys listed above; use this table as the ref
 
 | System | Purpose | Auth | Code |
 |---|---|---|---|
-| **FME Flow** (`fme.gkbgroep.nl`, v4 REST + datastreaming/datadownload) | Run app workspaces, file conversions | `fmetoken` per app (encrypted in DB) or `FME_SERVER_TOKEN` | FmeProxyController, QuickDataViewerController, (client JS for PBA / Ontvangstloket / app create) |
-| **FME Cloud** (`fme-gkb.fmecloud.com`) | PBA indexatie API | token in client JS | public/js/PBA_FMUTA6/main.js |
+| **FME Flow** (`fme.gkbgroep.nl`, v4 REST + datastreaming/datadownload) | Run app workspaces, file conversions | `fmetoken` per app (encrypted in DB) or `FME_SERVER_TOKEN` | FmeProxyController, QuickDataViewerController, Ontvangstloket_IWController |
+| **FME Cloud** (`fme-gkb.fmecloud.com`) | PBA indexatie API | `FME_PBA_TOKEN` (server-side) | PBA_IWController |
 | **Microsoft Entra ID** | SSO for end users | OAuth2/OIDC (Socialite) | AzureAuthController |
 | **ArcGIS Online** (`gkb.maps.arcgis.com`) | Groups, web maps, feature layers | OAuth2 user token | GISPortaalController, AIController |
 | **Anthropic Claude** + **FME MCP server** | GIS Assistent | API key | GISAssistentController |
@@ -596,13 +608,13 @@ php artisan config:cache; php artisan route:cache; php artisan view:cache
 
 Checklist:
 
-- `APP_ENV=production`, `APP_DEBUG=false` (otherwise TLS verification is off and the Azure callback may `dd()` debug data).
+- `APP_ENV=production`, `APP_DEBUG=false` (otherwise TLS verification is off for ArcGIS/Anthropic calls).
 - Same `APP_KEY` as before (it decrypts the FME workspace tokens).
 - Writable: `storage/` and `bootstrap/cache/`. Persist/back up `storage/app/public` and `storage/app/private/artifact-apps`.
 - Behind a reverse proxy/HTTPS: configure trusted proxies and a correct `APP_URL`, otherwise Socialite `InvalidStateException`
   and wrong redirect URIs occur.
 - Redirect URIs registered in Entra ID and ArcGIS must exactly match `AZURE_REDIRECT_URI` / `ARCGIS_REDIRECT_URI`.
-- PHP limits: QDV and FME uploads allow 500 MB → set `upload_max_filesize`, `post_max_size`, and web-server body limits accordingly;
+- PHP limits: QDV, FME and Ontvangstloket uploads go through PHP and allow 500 MB → set `upload_max_filesize`, `post_max_size`, and web-server body limits accordingly;
   conversions can take up to 5–10 minutes (`set_time_limit(600)`), so check FastCGI/proxy timeouts.
 - `queue:work` is not needed (no queued jobs are dispatched), and there is no scheduler.
 - After changing `.env` with cached config: `php artisan config:clear` (or re-cache).
@@ -615,23 +627,22 @@ Ordered by priority. See also [known-issues.md](known-issues.md).
 
 ### 🔴 Security
 
-1. **Hard-coded FME tokens in browser JavaScript** — anyone who opens these pages can read them:
-   - [public/js/HTMLPage/CreateHTMLPage_Form.js](../public/js/HTMLPage/CreateHTMLPage_Form.js) (back office app creation)
-   - [public/js/PBA_FMUTA6/main.js](../public/js/PBA_FMUTA6/main.js)
-   - [public/js/ontvangstloket_iw/main.js](../public/js/ontvangstloket_iw/main.js) (`FME_TOKEN`)
-
-   **Fix**: move these calls to server-side proxy endpoints (pattern: `FmeProxyController`), then **revoke and rotate** the
-   exposed tokens in FME Flow. They are also in git history.
+1. **Rotate the FME tokens that used to be in browser JavaScript.** The calls now go through server-side proxies
+   (`FmeProxyController` browse endpoints, `Ontvangstloket_IWController`, `PBA_IWController`) and no token is in
+   `public/js` anymore, but the old values are still in **git history**. Revoke them in FME Flow / FME Cloud, create new
+   ones, and put them in `FME_SERVER_TOKEN`, `FME_PBA_TOKEN` and `FME_PBA_DOWNLOAD_TOKEN` (local `.env` and server `.env`).
 2. **Profielplaatjes API is unauthenticated** — anyone can trigger CPU-heavy PDF generation and download generated ZIPs
    (names are guessable-ish: timestamp + 6 random chars). Add an API token/shared secret or IP allow-list and a rate limit.
-3. **No authorisation within the back office** — every QuickManage user can edit/delete everything (no Gates/Policies, no roles).
-4. **TLS verification disabled outside production** (`verify => app()->isProduction()`), and `dd()` of OAuth state in the
-   Azure callback when `APP_DEBUG=true`.
+3. **No authorisation within the back office** — every QuickManage user can edit/delete everything (no Gates/Policies,
+   no roles). Accepted: only admins have a QuickManage login.
+4. **TLS verification disabled outside production** (`verify => app()->isProduction()`).
 
 ### 🟠 Reliability / maintainability
 
-5. **Missing migrations** for all feature tables and `user_analytics` (see §3). Generate from the production schema
-   (e.g. `php artisan schema:dump` on a copy) and commit.
+5. **Schema quirks carried over into the baseline migrations**: `custom_apps.updated_at` and
+   `user_analytics.updated_at` are `VARCHAR(100)` instead of `TIMESTAMP`, and `apps.hash_id` is `TEXT` without an index.
+   Fix with a follow-up migration. The unused tables `analytic_reports` and `workspaces_apps` exist in the
+   database but have no migration and no code referencing them — drop them or add migrations if they are needed.
 6. **No automated tests** beyond Laravel's examples.
 7. **Generated ZIPs are never cleaned up** (`storage/app/profielplaatjes/`). Add a scheduled clean-up.
 8. **Artifact-app data lives only in JSON files** — include them in backups; concurrent edits are last-write-wins.
@@ -666,7 +677,7 @@ The other files in `docs/` were written earlier. The following points in them **
 | `routes/api.php` is unused | Used for the Profielplaatjes API |
 | `/apps/view/{unique}` and the gallery are public | Behind `azure.required` (SSO or QuickManage login) |
 | OAuth callback → `AIController@callback`, redirects to `/testAI` | `GISPortaalController@callback`, redirects to `/gisportaal` |
-| `displayHTMLpage.js` contains an FME token; path `public/js/displayHTMLpage.js` | Uses the server-side FME proxy; file is in `public/js/HTMLPage/`. Tokens remain in `CreateHTMLPage_Form.js`, PBA and Ontvangstloket JS |
+| `displayHTMLpage.js` contains an FME token; path `public/js/displayHTMLpage.js` | Uses the server-side FME proxy; file is in `public/js/HTMLPage/`. No FME tokens remain in `public/js` |
 | Registration is available | `register => false` |
 | QDV uses `withoutVerifying()` | No longer; errors are logged with the token redacted |
 | Only `arcgis.required` middleware alias | Also `azure.required`, `track.visit`, and `SetVisitorIdCookie` on the web group |
@@ -679,7 +690,7 @@ Make sure the new developer receives (through a secure channel) or is granted:
 
 - [ ] Access to the GitHub repository `JobGorsel2/QuickManage`
 - [ ] `.env` for local development and the server `.env` (incl. the **production `APP_KEY`**)
-- [ ] A database dump / schema of the production DB (needed because migrations are incomplete)
+- [ ] A database dump of the production DB if real data is needed (the schema itself comes from migrations)
 - [ ] Server access (SSH/RDP), web-server config, PHP config, and the deploy procedure for `gisdev.gkbgroep.nl` / production
 - [ ] FME Flow admin access (`fme.gkbgroep.nl`, `fme-gkb.fmecloud.com`) — repositories `Administratie`, `Projecten`, …, and the tokens in use
 - [ ] Microsoft Entra ID app registration (client id/secret, redirect URIs) — owner rights in Azure

@@ -30,7 +30,7 @@
                           <h2>{{ $app_gallery_items->name }}</h2>
                             
                             <br/> 
-                          <p>{!! $app_gallery_items->description !!}</p>
+                          <p>{!! \App\Support\SafeHtml::basic($app_gallery_items->description) !!}</p>
                           
                       </div>
                     </div>
@@ -65,7 +65,7 @@
                   <div class="row">
                       <div class="offset-lg-1 col-lg-10 text-center" >
                         <hr  >
-                        <p class="pb-3 pt-2" style="font-size: 14px;"> Mocht je problemen ondervinden, neem dan contact op met<br/> <a href="mailto:job@gkbgroep.nl" class="emailgis">job@gkbgroep.nl</a> of <a href="mailto:dirkjan@gkbgroep.nl" class="emailgis"> dirkjan@gkbgroep.nl </a></p>
+                        <p class="pb-3 pt-2" style="font-size: 14px;"> {!! \App\Support\SafeHtml::basic($footer_text) !!} </p>
                        
                       </div>
                   </div>

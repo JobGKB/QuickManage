@@ -55,6 +55,7 @@ class AppsController extends Controller
             'repo' => 'required',
             'workspace' => 'required',
             'service' => 'required',
+            'app_thumbnail' => 'nullable|image|mimes:jpeg,png,gif,webp|max:2048',
         ]);
 
         $allData = $request->all();
@@ -79,7 +80,7 @@ class AppsController extends Controller
        
         if ($request->hasFile('app_thumbnail')) {
             $file = $request->file('app_thumbnail');
-            $filename = $uniqid . '.' . $file->getClientOriginalExtension();
+            $filename = $uniqid . '.' . $file->extension();
             $file->storeAs('app_thumbnails', $filename, 'public');
             $app->app_thumbnail = $filename;
         }
@@ -95,9 +96,11 @@ class AppsController extends Controller
     {
         $data = App::with('template')
         ->where('hash_id', $unique)
-        ->first();
+        ->firstOrFail();
 
         session(['app_id' => $data->id]);
+        
+        
 
         //redirect
         return view('html_templates.GKB_Realisatie_Style', [
@@ -109,7 +112,7 @@ class AppsController extends Controller
     {
         $app = App::with('template','folder','app_category')
         ->where('hash_id', $uniqid)
-        ->first();
+        ->firstOrFail();
         $categories = AppCategorie::get();
         $token = '';
         if (!empty($app->wsp_token)) {
@@ -134,6 +137,10 @@ class AppsController extends Controller
 
     public function update(Request $req, $uniqid) 
     {
+        $req->validate([
+            'app_thumbnail' => 'nullable|image|mimes:jpeg,png,gif,webp|max:2048',
+        ]);
+
         // dd($req->input());
         $app = App::where('hash_id', $uniqid)->firstOrFail();
         $app->name = $req->input('name');
@@ -146,7 +153,7 @@ class AppsController extends Controller
 
         if ($req->hasFile('app_thumbnail')) {
             $file = $req->file('app_thumbnail');
-            $filename = $uniqid . '.' . $file->getClientOriginalExtension();
+            $filename = $uniqid . '.' . $file->extension();
             $file->storeAs('app_thumbnails', $filename, 'public');
             $app->app_thumbnail = $filename;
         }

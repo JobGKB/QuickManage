@@ -109,6 +109,52 @@ class FmeProxyController extends Controller
     }
 
     /**
+     * Back-office FME browser for the "create app" form (repository -> workspace -> service/parameters).
+     * Uses the shared FME_SERVER_TOKEN, which never reaches the browser. Read-only GET calls.
+     */
+    public function repositories()
+    {
+        return $this->forwardShared('/fmeapiv4/repositories');
+    }
+
+    public function repositoryItems(string $repository)
+    {
+        return $this->forwardShared(sprintf('/fmeapiv4/repositories/%s/items', rawurlencode($repository)));
+    }
+
+    public function workspaceServices(string $repository, string $workspace)
+    {
+        return $this->forwardShared(sprintf(
+            '/fmeapiv4/workspaces/%s/%s/services',
+            rawurlencode($repository),
+            rawurlencode($workspace)
+        ));
+    }
+
+    public function workspaceParameters(string $repository, string $workspace)
+    {
+        return $this->forwardShared(sprintf(
+            '/fmeapiv4/workspaces/%s/%s/parameters',
+            rawurlencode($repository),
+            rawurlencode($workspace)
+        ));
+    }
+
+    private function forwardShared(string $path)
+    {
+        $token = (string) config('services.fme.token');
+        abort_if($token === '', 500, 'FME_SERVER_TOKEN is niet geconfigureerd.');
+
+        $response = Http::withHeaders([
+            'Authorization' => 'fmetoken token=' . $token,
+            'Accept'        => 'application/json',
+        ])->get($this->baseUrl() . $path);
+
+        return response($response->body(), $response->status())
+            ->header('Content-Type', $response->header('Content-Type') ?: 'application/json');
+    }
+
+    /**
      * Upload user files to the FME temp shared resource.
      */
     public function upload(string $unique, Request $request)

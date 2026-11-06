@@ -41,4 +41,4 @@ Use this from the AI module; use the stock `POST /logout` for full app logout.
 
 ## User identifier
 
-`User` has a `uniqid` column written on registration. It is used by [ProfileController](../../app/Http/Controllers/ProfileController.php) for inline ownership checks (`Auth::user()->uniqid !== $uniqid → 403`). ⚠️ This column is **not** present in the committed migration — see [../known-issues.md#missing-migrations](../known-issues.md#missing-migrations).
+`User` has a `uniqid` column written on registration. It is used by [ProfileController](../../app/Http/Controllers/ProfileController.php) for inline ownership checks (`Auth::user()->uniqid !== $uniqid → 403`). The column is added by `2025_01_01_000000_add_uniqid_and_image_to_users_table.php`.

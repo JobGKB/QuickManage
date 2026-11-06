@@ -49,7 +49,7 @@
                                 <div class="template-box">
                                      
                                     <img src="{{ asset('storage/template_images/' . $data->dummy_image) }}"> 
-                                    <p>{!! $data->name !!}</p>
+                                    <p>{{ $data->name }}</p>
                                     
                                 </div>
                             </a>

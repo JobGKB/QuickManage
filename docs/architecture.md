@@ -44,7 +44,7 @@ Two competing public-identifier fields exist (do not unify blindly):
 | `app_categories` | `uniqid` (random 12 chars) |
 | `folders` | `uniqid` (UUID) |
 | `templates` | primary key `id` (no public UUID) |
-| `users` | `uniqid` (UUID; not in any committed migration — see [data-model.md](data-model.md)) |
+| `users` | `uniqid` (UUID) |
 
 Routes consistently bind `{unique}` to these columns, not to the primary key.
 

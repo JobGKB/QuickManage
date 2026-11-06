@@ -30,7 +30,7 @@
                     <br/> 
                       <h3>{{ $data->name }}</h3>
                     <br/>
-                      <p>{!! $data->description !!} </p>
+                      <p>{!! \App\Support\SafeHtml::basic($data->description) !!} </p>
                   </div>
                 </div>
               </div>
