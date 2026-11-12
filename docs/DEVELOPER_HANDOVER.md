@@ -293,6 +293,7 @@ Run `php artisan route:list --except-vendor` for the authoritative list. Summary
 | `/manage/quickdataviewer`, `POST /api/quickdataviewer/convert-gdb` · `convert-dwg` | [QuickDataViewerController](../app/Http/Controllers/QuickDataViewerController.php) |
 | `/PBA-FMUTA6-VerwerkWeekIndexatie` | [PBA_IWController](../app/Http/Controllers/PBA_IWController.php) |
 | `/Ontvangstloket-IW` | [Ontvangstloket_IWController](../app/Http/Controllers/Ontvangstloket_IWController.php) |
+| `/FmeRunDynamicURL?repo=…&workspace=…` | [FmeAppRunningCustomWorkspace](../app/Http/Controllers/FmeAppRunningCustomWorkspace.php) — runs any workspace from a URL |
 | `/visit-heartbeat` | Analytics heartbeat (204, the middleware does the work) |
 
 > The QuickDataViewer path starts with `/manage/` and its API with `/api/`, but both are **web** routes
@@ -415,6 +416,18 @@ Stand-alone business tools (own layouts and CSS in `resources/sass/custom_apps/`
 - **PBA FMUTA6** (`/PBA-FMUTA6-VerwerkWeekIndexatie`): manage/process weekly indexation rates;
   [public/js/PBA_FMUTA6/main.js](../public/js/PBA_FMUTA6/main.js) calls `GET|POST /PBA-FMUTA6-VerwerkWeekIndexatie/api/indexaties`,
   proxied by [PBA_IWController](../app/Http/Controllers/PBA_IWController.php) to the FME Cloud API on `fme-gkb.fmecloud.com` (`FME_PBA_TOKEN`).
+- **FME dynamic URL runner** (`/FmeRunDynamicURL?repo=…&workspace=…&formText=…&<published parameters>`): runs the
+  workspace named in the URL and passes every other query parameter on as a published parameter.
+  [runner.js](../public/js/fme_running_custom_workspace/runner.js) calls
+  [FmeAppRunningCustomWorkspace](../app/Http/Controllers/FmeAppRunningCustomWorkspace.php) (`FME_SERVER_TOKEN`):
+  - `GET /FmeRunDynamicURL/api/services` → the services the workspace is registered for and the one that will be used
+    (preference: `fmedatastreaming`, then `fmedatadownload`, then `fmejobsubmitter`).
+  - `POST /FmeRunDynamicURL/api/run` → branches on that service: `fmedatastreaming` is streamed back (HTML is shown in
+    a sandboxed iframe, anything else is saved as a file), `fmedatadownload` returns the temporary result URL,
+    `fmejobsubmitter` submits the job, waits for it and returns its status.
+
+  Unlike the other proxies the repository and workspace **do come from the browser**: any signed-in user can run any
+  workspace `FME_SERVER_TOKEN` has access to.
 
 The proxy API routes use `azure.required` but not `track.visit`, so they don't count as page visits.
 
@@ -531,7 +544,7 @@ ArcGIS / FME / Anthropic / artifact keys listed above; use this table as the ref
 
 | System | Purpose | Auth | Code |
 |---|---|---|---|
-| **FME Flow** (`fme.gkbgroep.nl`, v4 REST + datastreaming/datadownload) | Run app workspaces, file conversions | `fmetoken` per app (encrypted in DB) or `FME_SERVER_TOKEN` | FmeProxyController, QuickDataViewerController, Ontvangstloket_IWController |
+| **FME Flow** (`fme.gkbgroep.nl`, v4 REST + datastreaming/datadownload) | Run app workspaces, file conversions | `fmetoken` per app (encrypted in DB) or `FME_SERVER_TOKEN` | FmeProxyController, QuickDataViewerController, Ontvangstloket_IWController, FmeAppRunningCustomWorkspace |
 | **FME Cloud** (`fme-gkb.fmecloud.com`) | PBA indexatie API | `FME_PBA_TOKEN` (server-side) | PBA_IWController |
 | **Microsoft Entra ID** | SSO for end users | OAuth2/OIDC (Socialite) | AzureAuthController |
 | **ArcGIS Online** (`gkb.maps.arcgis.com`) | Groups, web maps, feature layers | OAuth2 user token | GISPortaalController, AIController |

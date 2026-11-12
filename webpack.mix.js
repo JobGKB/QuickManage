@@ -11,6 +11,7 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/custom_apps/PBA_FMUTA6.scss', 'public/css') 
    .sass('resources/sass/custom_apps/ontvangstloket_iw.scss', 'public/css')
    .sass('resources/sass/custom_apps/gisportaal.scss', 'public/css')
+   .sass('resources/sass/custom_apps/fme_running_custom_workspace.scss', 'public/css')
    .browserSync({
        proxy: 'http://127.0.0.1:8000', // your Laravel backend
        open: true,

@@ -9,6 +9,7 @@ All FME calls from the browser now go through server-side proxies, and no `fmeto
 
 - App create form → `GET /manage/fme/repositories…`, `/manage/fme/workspaces/…` ([FmeProxyController](../app/Http/Controllers/FmeProxyController.php), `FME_SERVER_TOKEN`)
 - Ontvangstloket → `POST /Ontvangstloket-IW/api/upload|run|submit` ([Ontvangstloket_IWController](../app/Http/Controllers/Ontvangstloket_IWController.php), `FME_SERVER_TOKEN`)
+- FME dynamic URL runner → `GET /FmeRunDynamicURL/api/services`, `POST /FmeRunDynamicURL/api/run` ([FmeAppRunningCustomWorkspace](../app/Http/Controllers/FmeAppRunningCustomWorkspace.php), `FME_SERVER_TOKEN`)
 - PBA indexaties → `GET|POST /PBA-FMUTA6-VerwerkWeekIndexatie/api/indexaties` ([PBA_IWController](../app/Http/Controllers/PBA_IWController.php), `FME_PBA_TOKEN`)
 - PBA Excel export → `GET /PBA-FMUTA6-VerwerkWeekIndexatie/api/download` ([PBA_IWController](../app/Http/Controllers/PBA_IWController.php), `FME_PBA_DOWNLOAD_TOKEN`; previously hardcoded in the Blade view)
 

@@ -332,5 +332,6 @@
     </section>
 
     <script src="{{ asset('js/documentation/main.js') }}"></script>
+    
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FmeAppRunningCustomWorkspace;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LogoutAGOLController;
 /*
@@ -133,9 +134,11 @@ Route::middleware(['track.visit', 'azure.required'])->group(function () {
 
     Route::get('/PBA-FMUTA6-VerwerkWeekIndexatie', [App\Http\Controllers\PBA_IWController::class, 'index']);
     Route::get('/Ontvangstloket-IW', [App\Http\Controllers\Ontvangstloket_IWController::class, 'index']);
+
+    Route::get('/FmeRunDynamicURL', [App\Http\Controllers\FmeAppRunningCustomWorkspace::class, 'index']);
 });
 
-// Server-side FME proxies for the PBA and Ontvangstloket pages (FME tokens stay off the client).
+// Server-side FME proxies for the PBA, Ontvangstloket and FmeRunDynamicURL pages (FME tokens stay off the client).
 // Same access as the pages above, but without track.visit so API calls don't count as page visits.
 Route::middleware(['azure.required'])->group(function () {
     Route::get('/PBA-FMUTA6-VerwerkWeekIndexatie/api/indexaties', [App\Http\Controllers\PBA_IWController::class, 'indexaties']);
@@ -145,6 +148,9 @@ Route::middleware(['azure.required'])->group(function () {
     Route::post('/Ontvangstloket-IW/api/upload', [App\Http\Controllers\Ontvangstloket_IWController::class, 'upload']);
     Route::post('/Ontvangstloket-IW/api/run', [App\Http\Controllers\Ontvangstloket_IWController::class, 'run']);
     Route::post('/Ontvangstloket-IW/api/submit', [App\Http\Controllers\Ontvangstloket_IWController::class, 'submit']);
+
+    Route::get('/FmeRunDynamicURL/api/services', [App\Http\Controllers\FmeAppRunningCustomWorkspace::class, 'services']);
+    Route::post('/FmeRunDynamicURL/api/run', [App\Http\Controllers\FmeAppRunningCustomWorkspace::class, 'run']);
 });
 
  

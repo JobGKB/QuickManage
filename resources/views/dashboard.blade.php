@@ -29,7 +29,7 @@
         <div class="row">
 
             <div class="offset-lg-2 col-lg-5 mt-5" >
-              <div class='dashboard-default-box'>
+                <div class='dashboard-default-box'>
                     <div class="dashboard-default-box-content">
                         <h4> Live App Gallery gebruikers </h4>
                             <div class="live_icon_wrapper">
@@ -39,7 +39,6 @@
                             </div>
                             <p class="mt-3 mb-0"><a href="/manage/analytics">Meer Analytics</a></p>
                     </div> 
- 
                 </div>
             </div>    
 
@@ -121,8 +120,7 @@
                         </div>
                     </div>
                 </div>
-
-        </div>
+            </div>
 
          
     </div>
@@ -154,6 +152,7 @@
         
     })();
     </script>
+    
 
 @endsection 
 
