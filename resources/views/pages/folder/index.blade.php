@@ -51,7 +51,7 @@
                     </div>
                      <div class="cat-wrapper">
                         @foreach($folder as $data)
-                            <div class="map"><a href="/manage/folders/{{$data->uniqid}}/view"><i class="fa-solid fa-folder"></i> {{$data->folder_name}}</a>   </div>
+                            <div class="map"><a href="/manage/folders/{{$data->uniqid}}/view"><i class="fa-solid fa-folder"></i> {{ $data->folder_name }}</a>   </div>
                         @endforeach
                      </div>
                 </div>

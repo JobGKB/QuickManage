@@ -59,6 +59,7 @@ return [
         'dwg_url'  => env('FME_DWG_SERVER_URL'),  // DWG workspace URL
         'token'    => env('FME_SERVER_TOKEN'),
         'base_url' => env('FME_BASE_URL', 'https://fme.gkbgroep.nl'), // FME Cloud host for per-app proxy
+        'run_timeout' => (int) env('FME_RUN_TIMEOUT', 180), // seconds to wait for a workspace run
         // fme-gkb.fmecloud.com
 
         // PBA FMUTA6 indexatie API (separate FME Cloud host + token), proxied by PBA_IWController

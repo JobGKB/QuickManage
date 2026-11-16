@@ -65,16 +65,21 @@ body {
     }
   }
 }
+
 .mess1 {
+
   padding-top: 100px; 
   padding-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
+
 .message2 {
   padding-bottom: 40px;
 }
+
 .result-frame {
   display: none;
   width: 100%;
@@ -83,17 +88,20 @@ body {
   
   border-radius: 5px;
 }
+
 .content-wrapper {
   margin-top: 80px;
   margin-bottom: 80px;
   background-color: #fff;
   border-radius: 15px;
 }
+
 .footer {
   margin-top: 60px;
   background-color: hsla(110, 47%, 38%, 0.1);
   padding: 20px;
 }
+
 .footer-img img {
   height: 14px;
   opacity: 90%;

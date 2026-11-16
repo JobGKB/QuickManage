@@ -25,6 +25,11 @@ class FmeProxyController extends Controller
         return rtrim((string) config('services.fme.base_url'), '/');
     }
 
+    private function runTimeout(): int
+    {
+        return max(30, (int) config('services.fme.run_timeout', 180));
+    }
+
     /**
      * FME workspace items are always `.fmw` files; ensure the extension is present.
      */
@@ -195,6 +200,10 @@ class FmeProxyController extends Controller
     {
         [$app, $token] = $this->resolve($unique);
 
+        // Workspaces can run for minutes; extend PHP's limit beyond the HTTP timeout
+        // so the upstream request fails cleanly instead of PHP being killed mid-call.
+        set_time_limit($this->runTimeout() + 30);
+
         // dd($app);
 
         $parameters = $request->input('parameters', []);
@@ -217,7 +226,7 @@ class FmeProxyController extends Controller
      */
     private function runJobSubmitter(App $app, string $token, array $parameters)
     {
-        $response = Http::withHeaders([
+        $response = Http::timeout($this->runTimeout())->withHeaders([
             'Authorization' => 'fmetoken token=' . $token,
             'Content-Type'  => 'application/json',
             'Accept'        => 'application/json',
@@ -251,7 +260,7 @@ class FmeProxyController extends Controller
             rawurlencode($this->workspaceName($app))
         );
 
-        $response = Http::asForm()->withHeaders([
+        $response = Http::asForm()->timeout($this->runTimeout())->withHeaders([
             'Accept' => 'application/json',
         ])->post($url, $parameters);
 
@@ -287,7 +296,7 @@ class FmeProxyController extends Controller
 
         // dd($url);
 
-        $upstream = Http::withOptions(['stream' => true])->get($url, $query);
+        $upstream = Http::timeout($this->runTimeout())->withOptions(['stream' => true])->get($url, $query);
 
         $psr = $upstream->toPsrResponse();
         $body = $psr->getBody();

@@ -265,6 +265,45 @@ async function extractErrorMessage(response, fallback) {
                         input.addEventListener('click', openPicker);
                         input.addEventListener('focus', openPicker);
 
+                    } else if (param.type === 'dropdown') {
+                        const isRequired = param.required !== false;
+                        const settings = param.choiceSettings || {};
+                        const choices = Array.isArray(settings.choices) ? [...settings.choices] : [];
+
+                        if (settings.sort === 'naturalSort') {
+                            choices.sort((a, b) => String(a.display ?? a.value).localeCompare(
+                                String(b.display ?? b.value), undefined, { numeric: true, sensitivity: 'base' }
+                            ));
+                        }
+
+                        input = document.createElement('select');
+                        input.name = param.name;
+                        input.id = param.name;
+                        input.className = 'input-form';
+                        if (isRequired) input.setAttribute('data-required', 'true');
+
+                        const defaultValue = param.defaultValue != null ? String(param.defaultValue) : '';
+                        const hasDefault = choices.some(c => String(c.value) === defaultValue);
+
+                        // Placeholder when nothing valid is preselected; optional dropdowns may stay empty.
+                        if (!hasDefault || !isRequired) {
+                            const placeholder = document.createElement('option');
+                            placeholder.value = '';
+                            placeholder.textContent = isRequired ? 'Kies een optie' : '';
+                            if (isRequired) placeholder.disabled = true;
+                            input.appendChild(placeholder);
+                        }
+
+                        choices.forEach(choice => {
+                            const option = document.createElement('option');
+                            option.value = choice.value;
+                            option.textContent = choice.display ?? choice.value;
+                            input.appendChild(option);
+                        });
+
+                        input.value = hasDefault ? defaultValue : '';
+                        input.addEventListener('change', () => input.classList.remove('outline_red2'));
+
                     }
                     
                     else {
@@ -312,7 +351,7 @@ async function extractErrorMessage(response, fallback) {
             event.preventDefault(); // Stop default form submission
 
             const formContainer = document.getElementById('GKB_Form_Template');
-            const inputs = formContainer.querySelectorAll('input');
+            const inputs = formContainer.querySelectorAll('input, select');
             let inputFiles = false;
             let isValid = true;
         
@@ -345,6 +384,15 @@ async function extractErrorMessage(response, fallback) {
                             }  else {
                                 document.getElementById(input.name).classList.remove('outline_red2'); 
                             }
+                        }
+
+                        if (input.tagName === 'SELECT') {
+                            if (!input.value) {
+                                input.classList.add('outline_red2');
+                                isValid = false;
+                                return;
+                            }
+                            input.classList.remove('outline_red2');
                         }
                         
                         if (input.type === 'checkbox') {
