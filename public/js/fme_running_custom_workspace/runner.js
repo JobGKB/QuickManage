@@ -182,9 +182,54 @@
             showError('Error... Workspace kan niet worden uitgevoerd!');
         }
     }
+ 
+    // Only these tokens (html elements) become markup; everything else stays literal text.
+    const FORM_TAGS = { b: 'strong', h1: 'h1', h2: 'h2', h3: 'h3' ,h4: 'h4'};
+    const FORM_COLORS = { rood: 'red', blauw: 'blue', groen: 'green', oranje: 'orange', zwart: 'black' };
+    const FORM_TOKEN = /\{(\/?)(br|b|h1|h2|h3|h4|c:([a-z]+))\}/g;
 
-    // Shown as plain text: formText comes from the URL and must not be able to inject markup.
-    el('mess').textContent = query.get('formText') || ' ';
+    function renderFormText(text) {
+        const root = document.createDocumentFragment();
+        const stack = [{ node: root, tag: null }];
+        const top = () => stack[stack.length - 1];
+        let last = 0;
+        let match;
+     
+
+
+        while ((match = FORM_TOKEN.exec(text)) !== null) {
+            
+            const [raw, closing, tag, color] = match;
+      
+            top().node.append(text.slice(last, match.index)); // append(string) = text node
+            last = FORM_TOKEN.lastIndex;
+
+            if (tag === 'br') {
+                if (!closing) top().node.append(document.createElement('br'));
+                continue;
+            }
+            if (closing) {
+                if (top().tag === tag) stack.pop();
+                else top().node.append(raw); // unmatched closing token: show it literally
+                continue;
+            }
+
+            let node;
+            if (color) {
+                if (!FORM_COLORS[color]) { top().node.append(raw); continue; }
+                node = document.createElement('span');
+                node.style.color = FORM_COLORS[color]; // value comes from the whitelist, never from the URL
+            } else {
+                node = document.createElement(FORM_TAGS[tag]);
+            }
+            top().node.append(node);
+            stack.push({ node, tag });
+        }
+        top().node.append(text.slice(last)); // unclosed tokens are closed automatically
+        return root;
+    }
+
+    el('mess').replaceChildren(renderFormText(query.get('formText') || ' '));
 
     run();
 })();

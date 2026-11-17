@@ -27,7 +27,7 @@
               <div class="container">
                 <div class="row">
                   <div class="col-lg-12 text-center" >
-                    <h4><div id="mess"></div></h4>
+                   <div id="mess"></div> 
                   </div>
                 </div>
                 <div class="row">

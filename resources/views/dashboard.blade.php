@@ -116,6 +116,18 @@
                                         </span>
                                     </span>
                                 </li>
+
+                                <li>
+                                    <span class="fme-param-name">Dropdown | Select</span>
+                                    <span class="fme-param-info" tabindex="0" aria-label="Voorbeeld Select">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                        <span class="fme-param-preview">
+                                            <img src="{{ asset('storage/IMG_Dropdown.png') }}" alt="Select">
+                                        </span>
+                                    </span>
+                                </li>
+
+
                             </ul>
                         </div>
                     </div>
