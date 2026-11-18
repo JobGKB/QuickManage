@@ -98,9 +98,12 @@ body {
             }
         }
 
+        .doc-section, .doc-empty {
+            padding: 80px 0;
+        }
+
         .doc-section {
             display: none;
-            padding: 80px 0;
 
             h4, h5 {
                 margin-top: 30px;
@@ -114,6 +117,25 @@ body {
                 li {
                     margin-bottom: 10px;
                 }
+            }
+
+            ol {
+                padding-left: 50px;
+
+                li {
+                    margin-bottom: 10px;
+                }
+            }
+
+            blockquote {
+                padding-left: 15px;
+                border-left: 3px solid $accent;
+                color: $text-muted;
+            }
+
+            hr {
+                border-color: $border;
+                opacity: 1;
             }
 
             .endpoint {
@@ -136,6 +158,18 @@ body {
                 &.method-get {
                     background-color: #1e6fb8;
                 }
+
+                &.method-put {
+                    background-color: #b8741e;
+                }
+
+                &.method-patch {
+                    background-color: #7a4fb8;
+                }
+
+                &.method-delete {
+                    background-color: #b82e2e;
+                }
             }
 
             .copy-btn {
@@ -147,17 +181,37 @@ body {
                 }
             }
 
-            .toggle {
-                cursor: pointer;
+            // Collapsible block (<details>), e.g. a long example request or response.
+            details {
                 margin-top: 20px;
-                user-select: none;
 
-                &:hover {
-                    text-decoration: underline;
+                summary {
+                    cursor: pointer;
+                    user-select: none;
+                    list-style: none;
+                    margin-bottom: 1rem;
+
+                    &::-webkit-details-marker {
+                        display: none;
+                    }
+
+                    &::after {
+                        font: var(--fa-font-solid);
+                        content: '\f061';
+                        margin-left: 6px;
+                    }
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                &[open] > summary::after {
+                    content: '\f063';
                 }
             }
 
-            .doc-table {
+            table {
                 width: 100%;
                 margin-bottom: 20px;
                 border-collapse: collapse;
@@ -176,6 +230,7 @@ body {
                 }
             }
 
+            // Wrapper that main.js puts around every <pre>.
             .code-block {
                 position: relative;
                 background-color: $bg-dark;
@@ -184,10 +239,6 @@ body {
                 margin-bottom: 20px;
                 overflow: auto;
                 max-height: 600px;
-
-                &.collapsed {
-                    display: none;
-                }
 
                 .copy-btn {
                     position: absolute;

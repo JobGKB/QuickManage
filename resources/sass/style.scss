@@ -1862,6 +1862,154 @@ width: 40%;
      color:#347427;   
     }
 } 
+
+// Documentation module (CMS): /manage/documentation
+.doc-manage {
+    .doc-subject {
+        margin-bottom: 40px;
+
+        .doc-subject-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+
+            .doc-subject-count {
+                margin-left: 8px;
+                font-size: 13px;
+                color: #777;
+            }
+        }
+
+        .doc-subject-actions {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            form {
+                margin: 0;
+            }
+
+            a, button {
+                border: none;
+                border-radius: 3px;
+                padding: 6px 12px;
+                color: #fff;
+                background-color: #439034;
+                text-decoration: none;
+                transition: 0.5s;
+
+                &:hover {
+                    background-color: #347427;
+                }
+            }
+
+            button.doc-delete {
+                background-color: #d30000;
+
+                &:hover {
+                    background-color: #b90606;
+                }
+            }
+        }
+    }
+
+    .doc-subject-empty {
+        color: #777;
+    }
+
+    .doc-form {
+        label {
+            display: block;
+        }
+
+        input[type="number"] {
+            margin-top: 5px;
+            outline: none;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #eee;
+            border-radius: 5px;
+
+            &:focus {
+                border-color: #439034;
+                box-shadow: 0 0 0 2px rgba(67, 144, 52, 0.1);
+            }
+        }
+
+        .doc-hint {
+            margin: 5px 0 0 0;
+            font-size: 13px;
+            color: #777;
+        }
+
+        .jodit-container {
+            margin-top: 5px;
+        }
+
+        // Editor content: roughly how the stored elements look in the documentation.
+        .jodit-wysiwyg {
+            code {
+                color: #a3540a;
+            }
+
+            pre {
+                padding: 15px;
+                border-radius: 5px;
+                background-color: #1a1a1a;
+                color: #fff;
+                white-space: pre-wrap;
+
+                code {
+                    color: inherit;
+                }
+            }
+
+            blockquote {
+                padding-left: 15px;
+                border-left: 3px solid #439034;
+                color: #555;
+            }
+
+            table {
+                width: 100%;
+
+                th {
+                    background-color: #f1f1f1;
+                    font-weight: 600;
+                    text-align: left;
+                }
+            }
+
+            .method {
+                padding: 2px 8px;
+                border-radius: 3px;
+                font-size: 0.8rem;
+                font-weight: bold;
+                color: #fff;
+                background-color: #555;
+
+                &.method-get { background-color: #1e6fb8; }
+                &.method-post { background-color: #2e8b2e; }
+                &.method-put { background-color: #b8741e; }
+                &.method-patch { background-color: #7a4fb8; }
+                &.method-delete { background-color: #b82e2e; }
+            }
+
+            details {
+                margin: 10px 0;
+                padding: 10px;
+                border: 1px dashed #bbb;
+                border-radius: 5px;
+
+                summary {
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}
   
 @media (max-width: 1440px) {
     .menu {

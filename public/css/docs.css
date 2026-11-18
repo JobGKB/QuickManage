@@ -72,9 +72,11 @@ body .content .menu .no-results {
   padding-left: 50px;
   color: #b5b5b5;
 }
+body .content .doc-section, body .content .doc-empty {
+  padding: 80px 0;
+}
 body .content .doc-section {
   display: none;
-  padding: 80px 0;
 }
 body .content .doc-section h4, body .content .doc-section h5 {
   margin-top: 30px;
@@ -86,6 +88,21 @@ body .content .doc-section ul {
 }
 body .content .doc-section ul li {
   margin-bottom: 10px;
+}
+body .content .doc-section ol {
+  padding-left: 50px;
+}
+body .content .doc-section ol li {
+  margin-bottom: 10px;
+}
+body .content .doc-section blockquote {
+  padding-left: 15px;
+  border-left: 3px solid #6ab04c;
+  color: #b5b5b5;
+}
+body .content .doc-section hr {
+  border-color: #444444;
+  opacity: 1;
 }
 body .content .doc-section .endpoint {
   display: flex;
@@ -105,6 +122,15 @@ body .content .doc-section .method.method-post {
 body .content .doc-section .method.method-get {
   background-color: #1e6fb8;
 }
+body .content .doc-section .method.method-put {
+  background-color: #b8741e;
+}
+body .content .doc-section .method.method-patch {
+  background-color: #7a4fb8;
+}
+body .content .doc-section .method.method-delete {
+  background-color: #b82e2e;
+}
 body .content .doc-section .copy-btn {
   cursor: pointer;
   color: #b5b5b5;
@@ -112,27 +138,42 @@ body .content .doc-section .copy-btn {
 body .content .doc-section .copy-btn:hover {
   color: #ffffff;
 }
-body .content .doc-section .toggle {
-  cursor: pointer;
+body .content .doc-section details {
   margin-top: 20px;
+}
+body .content .doc-section details summary {
+  cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+  list-style: none;
+  margin-bottom: 1rem;
 }
-body .content .doc-section .toggle:hover {
+body .content .doc-section details summary::-webkit-details-marker {
+  display: none;
+}
+body .content .doc-section details summary::after {
+  font: var(--fa-font-solid);
+  content: "\f061";
+  margin-left: 6px;
+}
+body .content .doc-section details summary:hover {
   text-decoration: underline;
 }
-body .content .doc-section .doc-table {
+body .content .doc-section details[open] > summary::after {
+  content: "\f063";
+}
+body .content .doc-section table {
   width: 100%;
   margin-bottom: 20px;
   border-collapse: collapse;
 }
-body .content .doc-section .doc-table th, body .content .doc-section .doc-table td {
+body .content .doc-section table th, body .content .doc-section table td {
   padding: 8px 12px;
   border-bottom: 1px solid #444444;
   vertical-align: top;
 }
-body .content .doc-section .doc-table th {
+body .content .doc-section table th {
   color: #b5b5b5;
   font-weight: normal;
   text-transform: uppercase;
@@ -146,9 +187,6 @@ body .content .doc-section .code-block {
   margin-bottom: 20px;
   overflow: auto;
   max-height: 600px;
-}
-body .content .doc-section .code-block.collapsed {
-  display: none;
 }
 body .content .doc-section .code-block .copy-btn {
   position: absolute;

@@ -96,6 +96,22 @@ POST   /manage/template/store
 ```
 (No delete route by design.)
 
+### Documentation (see [modules/documentation.md](modules/documentation.md))
+```
+GET    /docs                                             front page (QuickManage accounts only)
+GET    /manage/documentation                             CMS overview
+GET    /manage/documentation/subject/create
+POST   /manage/documentation/subject/store
+GET    /manage/documentation/subject/edit/{unique}
+PATCH  /manage/documentation/subject/update/{unique}
+DELETE /manage/documentation/subject/delete/{unique}     also deletes the subject's content
+GET    /manage/documentation/content/create/{unique}     {unique} = subject
+POST   /manage/documentation/content/store/{unique}      {unique} = subject
+GET    /manage/documentation/content/edit/{unique}
+PATCH  /manage/documentation/content/update/{unique}
+DELETE /manage/documentation/content/delete/{unique}
+```
+
 ### Misc
 ```
 GET /manage/accounts   → AccountController@index

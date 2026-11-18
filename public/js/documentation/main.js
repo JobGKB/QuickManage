@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const defaultSection = 'introductie';
     const sections = Array.from(document.querySelectorAll('.doc-section'));
     const menuLinks = Array.from(document.querySelectorAll('.menu a[href^="#"]'));
+    const defaultSection = sections.length ? sectionKey(sections[0]) : '';
 
     function sectionKey(section) {
         return section.id.replace(/^content-/, '');
@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     showSection(location.hash.substring(1));
 
-    // Copy buttons: copy the text of the element referenced by data-copy-target.
+    // Copy buttons are added here instead of being stored in the content, so the editor
+    // only has to produce plain markup (<pre>, <p class="endpoint">).
     function copyText(text) {
         if (navigator.clipboard && navigator.clipboard.writeText) {
             return navigator.clipboard.writeText(text);
@@ -56,33 +57,53 @@ document.addEventListener('DOMContentLoaded', function () {
         return Promise.resolve();
     }
 
-    document.querySelectorAll('.copy-btn').forEach(function (button) {
-        button.addEventListener('click', function () {
-            const target = document.getElementById(button.dataset.copyTarget);
-            if (!target) return;
+    function createCopyButton(target) {
+        const button = document.createElement('i');
+        button.className = 'fa-solid fa-copy copy-btn';
+        button.setAttribute('role', 'button');
+        button.setAttribute('title', 'Kopiëren');
 
-            copyText(target.textContent.trim()).then(function () {
+        button.addEventListener('click', function () {
+            // Line breaks written as <br> (the editor does this inside code blocks) count as newlines.
+            const clone = target.cloneNode(true);
+            clone.querySelectorAll('br').forEach(function (lineBreak) {
+                lineBreak.replaceWith('\n');
+            });
+
+            copyText(clone.textContent.trim()).then(function () {
                 button.classList.replace('fa-copy', 'fa-check');
                 setTimeout(function () {
                     button.classList.replace('fa-check', 'fa-copy');
                 }, 1500);
             });
         });
+
+        return button;
+    }
+
+    // Code blocks: wrap every <pre> in a styled block with a copy button.
+    document.querySelectorAll('.doc-section pre').forEach(function (pre) {
+        const block = document.createElement('div');
+        block.className = 'code-block';
+        pre.parentNode.insertBefore(block, pre);
+        block.appendChild(createCopyButton(pre));
+        block.appendChild(pre);
     });
 
-    // Toggles: open/close the code block referenced by data-toggle-target.
-    document.querySelectorAll('.toggle').forEach(function (toggle) {
-        const target = document.getElementById(toggle.dataset.toggleTarget);
-        const icon = toggle.querySelector('.toggle-icon');
-        if (!target) return;
+    // Endpoint lines: copy the URL (the bold or code part), not the method badge.
+    document.querySelectorAll('.doc-section .endpoint').forEach(function (endpoint) {
+        const target = endpoint.querySelector('strong, b, code');
+        if (target) {
+            endpoint.appendChild(createCopyButton(target));
+        }
+    });
 
-        toggle.addEventListener('click', function () {
-            const isOpen = target.classList.toggle('collapsed') === false;
-            if (icon) {
-                icon.classList.toggle('fa-arrow-right', !isOpen);
-                icon.classList.toggle('fa-arrow-down', isOpen);
-            }
-        });
+    // External links open in a new tab; in-page links (#section) are handled above.
+    document.querySelectorAll('.doc-section a[href]').forEach(function (link) {
+        if (/^https?:\/\//i.test(link.getAttribute('href'))) {
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+        }
     });
 
     // Search: filter menu items on the text of their section; Enter opens the first match.

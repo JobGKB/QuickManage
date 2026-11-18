@@ -27,6 +27,7 @@ Defined in [webpack.mix.js](../webpack.mix.js):
 | [resources/sass/testAI.scss](../resources/sass/testAI.scss) | [public/css/testAI.css](../public/css/testAI.css) |
 | [resources/sass/errors_style.scss](../resources/sass/errors_style.scss) | [public/css/errors_style.css](../public/css/errors_style.css) |
 | [resources/sass/dataviewer.scss](../resources/sass/dataviewer.scss) | [public/css/dataviewer.css](../public/css/dataviewer.css) |
+| [resources/sass/docs.scss](../resources/sass/docs.scss) | [public/css/docs.css](../public/css/docs.css) (documentation front page) |
 
 Partial: [_variables.scss](../resources/sass/_variables.scss).
 
@@ -48,6 +49,7 @@ Under [public/js/](../public/js/) — loaded directly by Blade views, not import
 | [testAI.js](../public/js/testAI.js) | SSE client for `/ai/nl2where-stream` |
 | [app_gallery/](../public/js/app_gallery/) | Gallery page logic + inline category editing |
 | [custom_app/](../public/js/custom_app/) | Custom-app create form (AJAX + FormData) |
+| [documentation/](../public/js/documentation/) | `main.js` for the `/docs` front page, `admin.js` for the CMS editor — see [modules/documentation.md](modules/documentation.md) |
 | [quickdataviewer/](../public/js/quickdataviewer/) | Modular OpenLayers viewer — see [modules/quickdataviewer.md](modules/quickdataviewer.md) |
 
 ## Views
@@ -62,6 +64,7 @@ Organised by feature under [resources/views/](../resources/views/):
 | [errors/](../resources/views/errors/) | 401/403/404/419/429/500/503/`db-connection` + `errors-layout` |
 | [pages/](../resources/views/pages/) | CRUD sets for `accounts`, `apps`, `app_gallery/` (+ nested `app_category/`), `custom_apps`, `folder`, `profile`, `settings`, `templates` |
 | [html_templates/](../resources/views/html_templates/) | `GKB_Realisatie_Style.blade.php` — template body used by the HTML page builder |
+| [documentation/](../resources/views/documentation/) | `/docs` front page (`index`) and the CMS views of the documentation module |
 | [quickdataviewer/](../resources/views/quickdataviewer/) | `index.blade.php` — OL map + drop zone shell |
 | [AI/](../resources/views/AI/) | `index.blade.php` — AI test UI |
 | [dashboard.blade.php](../resources/views/dashboard.blade.php) | Authenticated landing page |

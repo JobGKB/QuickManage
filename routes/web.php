@@ -17,8 +17,6 @@ use App\Http\Controllers\Auth\LogoutAGOLController;
 Route::get('/ping', fn() => response('pong', 200)
     ->header('Content-Type', 'text/plain'));
 
-Route::get('/docs', [App\Http\Controllers\DOCSController::class, 'index']);
-
 
 Route::get('/', function () {
     return view('auth.login');
@@ -92,6 +90,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/manage/accounts', [App\Http\Controllers\AccountController::class, 'index']);
     Route::get('/manage/settings', [App\Http\Controllers\SettingsController::class, 'index']);
     Route::patch('/manage/settings/update', [App\Http\Controllers\SettingsController::class, 'update']);
+
+    // Documentation: the /docs front page and its CMS. Inside the auth group on purpose:
+    // only QuickManage accounts get in, Microsoft SSO sessions and guests do not.
+    Route::get('/docs', [App\Http\Controllers\DOCSController::class, 'index']);
+    Route::get('/manage/documentation', [App\Http\Controllers\DOCSController::class, 'manage']);
+    Route::get('/manage/documentation/subject/create', [App\Http\Controllers\DOCSController::class, 'createSubject']);
+    Route::post('/manage/documentation/subject/store', [App\Http\Controllers\DOCSController::class, 'storeSubject']);
+    Route::get('/manage/documentation/subject/edit/{unique}', [App\Http\Controllers\DOCSController::class, 'editSubject'])->whereUuid('unique');
+    Route::patch('/manage/documentation/subject/update/{unique}', [App\Http\Controllers\DOCSController::class, 'updateSubject'])->whereUuid('unique');
+    Route::delete('/manage/documentation/subject/delete/{unique}', [App\Http\Controllers\DOCSController::class, 'destroySubject'])->whereUuid('unique');
+    // {unique} of create/store is the subject the content is added to.
+    Route::get('/manage/documentation/content/create/{unique}', [App\Http\Controllers\DOCSController::class, 'createContent'])->whereUuid('unique');
+    Route::post('/manage/documentation/content/store/{unique}', [App\Http\Controllers\DOCSController::class, 'storeContent'])->whereUuid('unique');
+    Route::get('/manage/documentation/content/edit/{unique}', [App\Http\Controllers\DOCSController::class, 'editContent'])->whereUuid('unique');
+    Route::patch('/manage/documentation/content/update/{unique}', [App\Http\Controllers\DOCSController::class, 'updateContent'])->whereUuid('unique');
+    Route::delete('/manage/documentation/content/delete/{unique}', [App\Http\Controllers\DOCSController::class, 'destroyContent'])->whereUuid('unique');
 
 });
 

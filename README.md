@@ -111,6 +111,7 @@ See [docs/integrations.md](docs/integrations.md) for details.
 | AI NL→WHERE (ArcGIS) | [AIController](app/Http/Controllers/AIController.php) | [public/js/testAI.js](public/js/testAI.js) | [modules/ai.md](docs/modules/ai.md) |
 | Claude artifact apps (Eisenhower, Leeghwater) | [ArtifactAppController](app/Http/Controllers/ArtifactAppController.php) | [resources/apps/](resources/apps/), [public/js/artifact-apps/claude-runtime.js](public/js/artifact-apps/claude-runtime.js) | [modules/artifact-apps.md](docs/modules/artifact-apps.md) |
 | Auth | [app/Http/Controllers/Auth/](app/Http/Controllers/Auth) | — | [modules/auth.md](docs/modules/auth.md) |
+| Documentation (`/docs` + CMS) | [DOCSController](app/Http/Controllers/DOCSController.php) | [public/js/documentation/](public/js/documentation/) | [modules/documentation.md](docs/modules/documentation.md) |
 
 ---
 

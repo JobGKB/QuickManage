@@ -1,6 +1,6 @@
 # Data model
 
-Models under [app/Models/](../app/Models/). Only `User` declares `$fillable`/`$casts`; other models rely on per-field assignment in controllers.
+Models under [app/Models/](../app/Models/). Only `User` and the documentation models (`DocSubject`, `DocSubjectContent`) declare `$fillable`; other models rely on per-field assignment in controllers.
 
 ## Models & relationships
 
@@ -34,6 +34,15 @@ No relationships declared; looked up by `uniqid`.
 ### [Template](../app/Models/Template.php) — table `templates`
 Empty body. Columns used by controllers/views: `name`, `background_color`, `dummy_image`, `header_logo`, `footer_image` (images base64).
 
+### [DocSubject](../app/Models/DocSubject.php) — table `doc_subjects`
+Subject in the documentation module (see [modules/documentation.md](modules/documentation.md)). `$fillable`: `name`, `sort_order`; `uniqid` is set on create.
+- `hasMany(DocSubjectContent::class, 'doc_subject_id')` → `contents()` (ordered by `sort_order`)
+
+### [DocSubjectContent](../app/Models/DocSubjectContent.php) — table `doc_subjects_content`
+Content item of a subject. `$fillable`: `doc_subject_id`, `title`, `slug`, `content`, `sort_order`; `uniqid` is set on create.
+- `belongsTo(DocSubject::class, 'doc_subject_id')` → `subject()`
+- `content` is passed through `App\Support\DocHtml::sanitize()` when set; `safe_content` is the value views print.
+
 ### [_WorkspaceParameter](../app/Models/_WorkspaceParameter.php) — table `workspaceparameters`
 ⚠️ Dormant / legacy. Class is `WorkspaceParameter`, filename prefixed with `_`. References the missing `Page` model. Not used by any active controller.
 
@@ -50,6 +59,8 @@ Inferred from controllers / views. The exact column definitions are in the migra
 | `folders` | `folder_name`, `uniqid` (UUID), timestamps |
 | `templates` | `name` (unique), `background_color` (hex), `dummy_image`, `header_logo`, `footer_image` (all base64), timestamps |
 | `users` | Laravel default + `uniqid`, `image` (base64) |
+| `doc_subjects` | `uniqid` (UUID), `name` (unique), `sort_order`, timestamps |
+| `doc_subjects_content` | `doc_subject_id` (FK, cascade), `uniqid` (UUID), `title`, `slug` (unique), `content` (sanitized HTML), `sort_order`, timestamps |
 | `workspaceparameters` | legacy, unused |
 
 ## Migrations status
@@ -61,6 +72,7 @@ Present in [database/migrations/](../database/migrations/):
 - `2025_01_01_000000_add_uniqid_and_image_to_users_table.php` — `users.uniqid`, `users.image`
 - `2025_01_01_000001` … `000007` — `app_galleries`, `app_categories`, `folders`, `templates`, `apps`, `custom_apps`, `user_analytics`
 - `2026_06_10_000000_add_indexes_to_user_analytics_table.php` — unique `visitor_id`, index `last_seen_at`, widens `page_url`
+- `2026_11_18_000000` … `000002` — `doc_subjects`, `doc_subjects_content`, and a one-time import of the documentation that was hardcoded in the `/docs` view
 
 The `2025_01_01_*` migrations were reverse-engineered from the existing database (signed `INT` ids and the original
 foreign-key names) and verified to produce an identical schema. Each is guarded with `Schema::hasTable` /
@@ -72,4 +84,5 @@ Remaining schema quirks are listed in [known-issues.md](known-issues.md#schema-q
 ## Seeders & factories
 
 - [database/seeders/DatabaseSeeder.php](../database/seeders/DatabaseSeeder.php) — Laravel default.
+- [database/seeders/DocumentationSeeder.php](../database/seeders/DocumentationSeeder.php) — initial documentation content; run by the `2026_11_18_000002` migration, skipped when documentation exists.
 - [database/factories/UserFactory.php](../database/factories/UserFactory.php) — Laravel default.

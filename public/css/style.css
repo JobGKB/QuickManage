@@ -1647,6 +1647,132 @@ body {
   color: #347427;
 }
 
+.doc-manage .doc-subject {
+  margin-bottom: 40px;
+}
+.doc-manage .doc-subject .doc-subject-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.doc-manage .doc-subject .doc-subject-header .doc-subject-count {
+  margin-left: 8px;
+  font-size: 13px;
+  color: #777;
+}
+.doc-manage .doc-subject .doc-subject-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.doc-manage .doc-subject .doc-subject-actions form {
+  margin: 0;
+}
+.doc-manage .doc-subject .doc-subject-actions a, .doc-manage .doc-subject .doc-subject-actions button {
+  border: none;
+  border-radius: 3px;
+  padding: 6px 12px;
+  color: #fff;
+  background-color: #439034;
+  text-decoration: none;
+  transition: 0.5s;
+}
+.doc-manage .doc-subject .doc-subject-actions a:hover, .doc-manage .doc-subject .doc-subject-actions button:hover {
+  background-color: #347427;
+}
+.doc-manage .doc-subject .doc-subject-actions button.doc-delete {
+  background-color: #d30000;
+}
+.doc-manage .doc-subject .doc-subject-actions button.doc-delete:hover {
+  background-color: #b90606;
+}
+.doc-manage .doc-subject-empty {
+  color: #777;
+}
+.doc-manage .doc-form label {
+  display: block;
+}
+.doc-manage .doc-form input[type=number] {
+  margin-top: 5px;
+  outline: none;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+.doc-manage .doc-form input[type=number]:focus {
+  border-color: #439034;
+  box-shadow: 0 0 0 2px rgba(67, 144, 52, 0.1);
+}
+.doc-manage .doc-form .doc-hint {
+  margin: 5px 0 0 0;
+  font-size: 13px;
+  color: #777;
+}
+.doc-manage .doc-form .jodit-container {
+  margin-top: 5px;
+}
+.doc-manage .doc-form .jodit-wysiwyg code {
+  color: #a3540a;
+}
+.doc-manage .doc-form .jodit-wysiwyg pre {
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #1a1a1a;
+  color: #fff;
+  white-space: pre-wrap;
+}
+.doc-manage .doc-form .jodit-wysiwyg pre code {
+  color: inherit;
+}
+.doc-manage .doc-form .jodit-wysiwyg blockquote {
+  padding-left: 15px;
+  border-left: 3px solid #439034;
+  color: #555;
+}
+.doc-manage .doc-form .jodit-wysiwyg table {
+  width: 100%;
+}
+.doc-manage .doc-form .jodit-wysiwyg table th {
+  background-color: #f1f1f1;
+  font-weight: 600;
+  text-align: left;
+}
+.doc-manage .doc-form .jodit-wysiwyg .method {
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #555;
+}
+.doc-manage .doc-form .jodit-wysiwyg .method.method-get {
+  background-color: #1e6fb8;
+}
+.doc-manage .doc-form .jodit-wysiwyg .method.method-post {
+  background-color: #2e8b2e;
+}
+.doc-manage .doc-form .jodit-wysiwyg .method.method-put {
+  background-color: #b8741e;
+}
+.doc-manage .doc-form .jodit-wysiwyg .method.method-patch {
+  background-color: #7a4fb8;
+}
+.doc-manage .doc-form .jodit-wysiwyg .method.method-delete {
+  background-color: #b82e2e;
+}
+.doc-manage .doc-form .jodit-wysiwyg details {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px dashed #bbb;
+  border-radius: 5px;
+}
+.doc-manage .doc-form .jodit-wysiwyg details summary {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
 @media (max-width: 1440px) {
   .menu {
     display: none;

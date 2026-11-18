@@ -13,6 +13,7 @@
                 <li><a href="/manage/folders" id="folders" class="apps""> <i class="fa-solid fa-file"></i> <span> Apps</span></a></li>
                 <li><a href="/manage/templates" id="templates"> <i class="fa-solid fa-pencil"></i> <span> Templates</span></a></li>
                 <li><a href="/manage/analytics" id="analytics"> <i class="fa-solid fa-chart-line"></i> <span> Analytics</span></a></li>
+                <li><a href="/manage/documentation" id="documentation"> <i class="fa-solid fa-book"></i> <span> Documentatie</span></a></li>
                 <li><a href="/manage/settings" id="settings"> <i class="fa-sharp fa-solid fa-gear"></i><span> Instellingen</span></a></li>
                 <li class="log-out-btn"><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa-solid fa-right-from-bracket c-white"></i> <span> Uitloggen </span></a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -93,6 +94,7 @@
                     <li><a href="/manage/folders" id="folders" class="apps"> <i class="fa-solid fa-file"></i></a></li>
                     <li><a href="/manage/templates" id="templates"> <i class="fa-solid fa-pencil"></i></a></li>
                     <li><a href="/manage/analytics" id="analytics"> <i class="fa-solid fa-chart-line"></i></a></li>
+                    <li><a href="/manage/documentation" id="documentation"> <i class="fa-solid fa-book"></i></a></li>
                 
                     <li><a href="/manage/settings" id="settings"> <i class="fa-sharp fa-solid fa-gear"></i></a></li>
                     <li><a class="log-out-btn" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa-solid fa-right-from-bracket c-white"></i></a>
@@ -118,6 +120,7 @@
                     var d = document.getElementById("templates").id;
                     var e = document.getElementById("analytics").id;
                     var f = document.getElementById("settings").id;
+                    var k = document.getElementById("documentation").id;
                     var g = document.getElementsByClassName("apps").folders.className;
                     // console.log(g)
                     if(a==dashboard){
@@ -150,6 +153,10 @@
                     }
                     if(f==firstPath){
                         var x = document.getElementById("settings");
+                        x.classList.add("selected");
+                    }
+                    if(k==firstPath){
+                        var x = document.getElementById("documentation");
                         x.classList.add("selected");
                     }
                     if(g==firstPath){
