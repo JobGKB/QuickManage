@@ -70,25 +70,40 @@ class TrackPageVisit
     }
 
     /**
-     * Log one analytic_reports row (views = 1) for a page view of an app.
+     * Log one analytic_reports row (views = 1) for a page view of an app or a tracked page.
      *
-     * Only apps/view/{unique} counts: analytic_reports.app_id references apps, and the heartbeat
-     * and FME proxy XHR calls in the same route group are not page views.
+     * apps/view/{unique} is stored by app_id. Pages that are not in the apps table
+     * (AnalyticReport::TRACKED_PAGES) are stored by their route path in `page`, with app_id NULL.
+     * The heartbeat and FME proxy XHR calls in the same route group are not page views.
      */
     private function recordAppView(Request $request): void
     {
-        if (!$request->isMethod('GET') || !$request->routeIs('apps.view')) {
+        if (!$request->isMethod('GET') || !$request->route()) {
             return;
         }
 
         try {
-            $appId = App::where('hash_id', $request->route('unique'))->value('id');
+            if ($request->routeIs('apps.view')) {
+                $appId = App::where('hash_id', $request->route('unique'))->value('id');
 
-            if ($appId !== null) {
+                if ($appId !== null) {
+                    AnalyticReport::create([
+                        'date'   => now()->toDateString(),
+                        'app_id' => $appId,
+                        'views'  => 1,
+                    ]);
+                }
+
+                return;
+            }
+
+            $page = $request->route()->uri();
+
+            if (array_key_exists($page, AnalyticReport::TRACKED_PAGES)) {
                 AnalyticReport::create([
-                    'date'   => now()->toDateString(),
-                    'app_id' => $appId,
-                    'views'  => 1,
+                    'date'  => now()->toDateString(),
+                    'page'  => $page,
+                    'views' => 1,
                 ]);
             }
         } catch (\Throwable $e) {

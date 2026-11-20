@@ -1337,8 +1337,10 @@ body {
   border-radius: 5px;
 }
 .body-container .analytics-container .an-live-app-container {
+  overflow-y: auto;
   margin-top: 40px;
   min-height: 470px;
+  max-height: 470px;
   font-size: 24px;
   font-weight: 600;
   width: 100%;

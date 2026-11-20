@@ -95,6 +95,26 @@
 
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="an-live-app-container">
+                                    <h5>Views per app deze week</h5>
+                                    <p class="an-live-app-visitors">{{ $weekStart->format('d-m-Y') }} t/m {{ $weekEnd->format('d-m-Y') }}</p>
+
+                                    <div class="an-sub-live-app-container">
+                                        @forelse ($weeklyAppViews as $report)
+                                            <div class="an-live-app-item">
+                                                <div class="an-live-app-header">
+                                                    <span class="an-live-app-name">{{ $report->label }}</span>
+                                                    <span class="an-live-app-count">{{ (int) $report->views }}</span>
+                                                </div>
+                                            </div>
+                                        @empty
+                                            <p class="an-live-app-empty">Deze week nog geen views...</p>
+                                        @endforelse
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

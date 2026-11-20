@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\App;
 use App\Models\CustomApp;
 use App\Models\AppCategorie;
 use App\Models\Template;
 use App\Models\userAnalytics;
+use App\Models\AnalyticReport;
 
 class AnalyticsController extends Controller
 {
@@ -26,6 +28,20 @@ class AnalyticsController extends Controller
         $totaal_Templates = Template::all()->count();
 
 
+        $weekStart = now()->startOfWeek(Carbon::MONDAY);
+        $weekEnd = now()->endOfWeek(Carbon::SUNDAY);
+
+        // Views per app / tracked page for the current week (Monday–Sunday), most viewed first.
+        $weeklyAppViews = AnalyticReport::with('app:id,name')
+            ->selectRaw('app_id, page, SUM(views) as views')
+            ->whereBetween('date', [$weekStart->toDateString(), $weekEnd->toDateString()])
+            ->where(fn ($query) => $query->whereNotNull('app_id')->orWhereNotNull('page'))
+            ->groupBy('app_id', 'page')
+            ->orderByDesc('views')
+            ->get();
+
+
+
         // dd($request);
         return view('pages.analytics.index', [
         
@@ -36,7 +52,10 @@ class AnalyticsController extends Controller
             'totaal_Categories' => $totaal_Categories,
             'categories' => $categories,
             'customApps' => $customApps,
-            'totaal_Templates' => $totaal_Templates
+            'totaal_Templates' => $totaal_Templates,
+            'weeklyAppViews' => $weeklyAppViews,
+            'weekStart' => $weekStart,
+            'weekEnd' => $weekEnd,
 
             ]);
     }

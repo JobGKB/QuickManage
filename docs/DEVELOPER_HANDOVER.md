@@ -199,7 +199,7 @@ Key points:
   | Alias / registration | Class | Purpose |
   |---|---|---|
   | appended to `web` group | [SetVisitorIdCookie](../app/Http/Middleware/SetVisitorIdCookie.php) | Sets a 1-year `visitor_id` UUID cookie for analytics |
-  | `track.visit` | [TrackPageVisit](../app/Http/Middleware/TrackPageVisit.php) | Upserts a `user_analytics` row (heartbeat); inserts an `analytic_reports` row (`views = 1`) per successful `/apps/view/{hash_id}` page view |
+  | `track.visit` | [TrackPageVisit](../app/Http/Middleware/TrackPageVisit.php) | Upserts a `user_analytics` row (heartbeat); inserts an `analytic_reports` row (`views = 1`) per successful `/apps/view/{hash_id}` or `AnalyticReport::TRACKED_PAGES` page view |
   | `azure.required` | [RequireAzureLogin](../app/Http/Middleware/RequireAzureLogin.php) | Passes if logged in to QuickManage **or** SSO session with allowed e-mail domain |
   | `arcgis.required` | [RequireArcgisLogin](../app/Http/Middleware/RequireArcgisLogin.php) | Requires a non-expired ArcGIS token in the session |
 
@@ -487,7 +487,7 @@ No authentication and no clean-up of old ZIPs (see §15). [ProfielplaatjeControl
 | `folders` | [Folder](../app/Models/Folder.php) | `uniqid` (UUID) | `folder_name` |
 | `templates` | [Template](../app/Models/Template.php) | `id` | `name (unique), background_color, dummy_image, header_logo, footer_image` |
 | `user_analytics` | [userAnalytics](../app/Models/userAnalytics.php) | — | `visitor_id (unique), visitorName, page_url, last_seen_at (indexed), active` |
-| `analytic_reports` | [AnalyticReport](../app/Models/AnalyticReport.php) | — | `date, app_id (FK → apps), views` — one row per app page view, written by `track.visit` |
+| `analytic_reports` | [AnalyticReport](../app/Models/AnalyticReport.php) | — | `date, app_id (FK → apps), page, views` — one row per page view, written by `track.visit`: `app_id` for `/apps/view/{hash_id}`, `page` (route path, `app_id` NULL) for `AnalyticReport::TRACKED_PAGES` |
 | `sessions`, `cache`, `jobs`, … | — | — | Laravel stock (database drivers) |
 
 Relations: `App → template(), folder(), app_category()`; `CustomApp → custom_app_category()`;
