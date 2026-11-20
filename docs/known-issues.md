@@ -43,7 +43,7 @@ All tables used by the code now have migrations (see [data-model.md](data-model.
 
 - `custom_apps.updated_at` and `user_analytics.updated_at` are `VARCHAR(100)` instead of `TIMESTAMP`.
 - `apps.hash_id` is `TEXT` without an index, although every app lookup filters on it.
-- `analytic_reports` and `workspaces_apps` exist in the database but have no migration and are not used by any code.
+- `workspaces_apps` exists in the database but has no migration and is not used by any code.
 - `workspaceparameters` (legacy `_WorkspaceParameter` model) does not exist in the database.
 
 ## Dead / legacy code

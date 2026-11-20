@@ -199,7 +199,7 @@ Key points:
   | Alias / registration | Class | Purpose |
   |---|---|---|
   | appended to `web` group | [SetVisitorIdCookie](../app/Http/Middleware/SetVisitorIdCookie.php) | Sets a 1-year `visitor_id` UUID cookie for analytics |
-  | `track.visit` | [TrackPageVisit](../app/Http/Middleware/TrackPageVisit.php) | Upserts a `user_analytics` row (heartbeat) |
+  | `track.visit` | [TrackPageVisit](../app/Http/Middleware/TrackPageVisit.php) | Upserts a `user_analytics` row (heartbeat); inserts an `analytic_reports` row (`views = 1`) per successful `/apps/view/{hash_id}` page view |
   | `azure.required` | [RequireAzureLogin](../app/Http/Middleware/RequireAzureLogin.php) | Passes if logged in to QuickManage **or** SSO session with allowed e-mail domain |
   | `arcgis.required` | [RequireArcgisLogin](../app/Http/Middleware/RequireArcgisLogin.php) | Requires a non-expired ArcGIS token in the session |
 
@@ -487,6 +487,7 @@ No authentication and no clean-up of old ZIPs (see §15). [ProfielplaatjeControl
 | `folders` | [Folder](../app/Models/Folder.php) | `uniqid` (UUID) | `folder_name` |
 | `templates` | [Template](../app/Models/Template.php) | `id` | `name (unique), background_color, dummy_image, header_logo, footer_image` |
 | `user_analytics` | [userAnalytics](../app/Models/userAnalytics.php) | — | `visitor_id (unique), visitorName, page_url, last_seen_at (indexed), active` |
+| `analytic_reports` | [AnalyticReport](../app/Models/AnalyticReport.php) | — | `date, app_id (FK → apps), views` — one row per app page view, written by `track.visit` |
 | `sessions`, `cache`, `jobs`, … | — | — | Laravel stock (database drivers) |
 
 Relations: `App → template(), folder(), app_category()`; `CustomApp → custom_app_category()`;
@@ -654,8 +655,8 @@ Ordered by priority. See also [known-issues.md](known-issues.md).
 
 5. **Schema quirks carried over into the baseline migrations**: `custom_apps.updated_at` and
    `user_analytics.updated_at` are `VARCHAR(100)` instead of `TIMESTAMP`, and `apps.hash_id` is `TEXT` without an index.
-   Fix with a follow-up migration. The unused tables `analytic_reports` and `workspaces_apps` exist in the
-   database but have no migration and no code referencing them — drop them or add migrations if they are needed.
+   Fix with a follow-up migration. The unused table `workspaces_apps` exists in the
+   database but has no migration and no code referencing it — drop it or add a migration if it is needed.
 6. **No automated tests** beyond Laravel's examples.
 7. **Generated ZIPs are never cleaned up** (`storage/app/profielplaatjes/`). Add a scheduled clean-up.
 8. **Artifact-app data lives only in JSON files** — include them in backups; concurrent edits are last-write-wins.

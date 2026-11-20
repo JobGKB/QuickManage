@@ -72,6 +72,7 @@ Present in [database/migrations/](../database/migrations/):
 - `2025_01_01_000000_add_uniqid_and_image_to_users_table.php` — `users.uniqid`, `users.image`
 - `2025_01_01_000001` … `000007` — `app_galleries`, `app_categories`, `folders`, `templates`, `apps`, `custom_apps`, `user_analytics`
 - `2026_06_10_000000_add_indexes_to_user_analytics_table.php` — unique `visitor_id`, index `last_seen_at`, widens `page_url`
+- `2026_11_20_000000_create_analytic_reports_table.php` — `analytic_reports` (`date`, `app_id` → `apps`, `views`); guarded, existing databases already have it
 - `2026_11_18_000000` … `000002` — `doc_subjects`, `doc_subjects_content`, and a one-time import of the documentation that was hardcoded in the `/docs` view
 
 The `2025_01_01_*` migrations were reverse-engineered from the existing database (signed `INT` ids and the original

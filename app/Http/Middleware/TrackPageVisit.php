@@ -2,6 +2,7 @@
 namespace App\Http\Middleware;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\AnalyticReport;
 use App\Models\userAnalytics;
 use Closure;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ use App\Models\App;
 class TrackPageVisit
 {
     /**
-     * Record a heartbeat for the current visitor on a tracked page.
+     * Record a heartbeat for the current visitor on a tracked page, and log app page views.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
@@ -58,7 +59,41 @@ class TrackPageVisit
             }
         }
 
-        return $next($request);
+        $response = $next($request);
+
+        // Only after a successful render, so login redirects and unknown apps (404) aren't counted.
+        if ($response->isSuccessful()) {
+            $this->recordAppView($request);
+        }
+
+        return $response;
+    }
+
+    /**
+     * Log one analytic_reports row (views = 1) for a page view of an app.
+     *
+     * Only apps/view/{unique} counts: analytic_reports.app_id references apps, and the heartbeat
+     * and FME proxy XHR calls in the same route group are not page views.
+     */
+    private function recordAppView(Request $request): void
+    {
+        if (!$request->isMethod('GET') || !$request->routeIs('apps.view')) {
+            return;
+        }
+
+        try {
+            $appId = App::where('hash_id', $request->route('unique'))->value('id');
+
+            if ($appId !== null) {
+                AnalyticReport::create([
+                    'date'   => now()->toDateString(),
+                    'app_id' => $appId,
+                    'views'  => 1,
+                ]);
+            }
+        } catch (\Throwable $e) {
+            Log::warning('TrackPageVisit app view failed: ' . $e->getMessage());
+        }
     }
 
     private function resolveVisitorName(Request $request): ?string

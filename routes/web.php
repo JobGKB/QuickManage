@@ -134,8 +134,9 @@ Route::middleware(['track.visit', 'azure.required'])->group(function () {
     Route::get('/app-gallery/overzicht', [App\Http\Controllers\AppGalleryController::class, 'GKB_AppGallery_Container']);
 
     Route::get('/app-gallery/{cat_uniqid}', [App\Http\Controllers\AppGalleryController::class, 'GKB_AppGallery_CatContainer']);
-
-    Route::get('/apps/view/{unique}', [App\Http\Controllers\AppsController::class, 'show']);
+    
+    // Named: TrackPageVisit logs an analytic_reports row for every successful view of this route.
+    Route::get('/apps/view/{unique}', [App\Http\Controllers\AppsController::class, 'show'])->name('apps.view');
 
     // Server-side FME proxy (keeps the per-app workspace token off the client)
     Route::get('/apps/{unique}/fme/parameters', [App\Http\Controllers\FmeProxyController::class, 'parameters']);
