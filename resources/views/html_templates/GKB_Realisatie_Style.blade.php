@@ -47,6 +47,12 @@
                       @csrf
                       @if($data->template->name == 'Default FME Workflow')
 
+                      {{-- Getoond tot de parameters van de workspace geladen zijn --}}
+                      <div id="formLoader" class="form-loader" role="status" aria-live="polite">
+                          <img src="{{ asset('storage/loading.png') }}" class="form-loader__icon" alt="" />
+                          <span>Formulier wordt geladen...</span>
+                      </div>
+
                       {{-- Hier komt het formulier --}}
                       <div id='GKB_Form_Template'></div>
 
@@ -63,7 +69,7 @@
                           <span id="errorMessage"></span>
                       </div>
 
-                      <div class="input-wrap-sumbit">
+                      <div class="input-wrap-sumbit" id="submitWrap" style="display: none;">
                            
                           <input class=" input-form submit" type="submit" id="myForm" name="submit" value="Start conversie"   onclick="handleFormSubmit(event)">  
                           

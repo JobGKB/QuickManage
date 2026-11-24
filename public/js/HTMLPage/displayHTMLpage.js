@@ -334,6 +334,9 @@ async function extractErrorMessage(response, fallback) {
                     container.appendChild(inputWrap);
                 });
 
+                const submitWrap = document.getElementById('submitWrap');
+                if (submitWrap) submitWrap.style.display = '';
+
             } 
             
             catch (err) {
@@ -341,6 +344,11 @@ async function extractErrorMessage(response, fallback) {
                 if (document.getElementById("errorMessage")?.style.display !== "block") {
                     showFormError("Er is een fout opgetreden bij het laden van de app.");
                 }
+            }
+
+            finally {
+                const formLoader = document.getElementById('formLoader');
+                if (formLoader) formLoader.style.display = 'none';
             }
              
     // next funtion
