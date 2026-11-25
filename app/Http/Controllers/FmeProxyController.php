@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\App;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\Response as ClientResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Server-side proxy for FME Cloud calls.
@@ -210,15 +211,67 @@ class FmeProxyController extends Controller
         if (!is_array($parameters)) {
             $parameters = [];
         }
-        return match ($app->service) {
-            'fmedatastreaming' => $this->runDataStreaming($app, $token, $parameters),
-            'fmejobsubmitter'  => $this->runJobSubmitter($app, $token, $parameters),
-            'fmedatadownload'  => $this->runDataDownload($app, $token, $parameters),
-            default            => response()->json(
-                ['message' => 'Niet-ondersteunde service: ' . $app->service],
-                422
-            ),
-        };
+
+        try {
+            return match ($app->service) {
+                'fmedatastreaming' => $this->runDataStreaming($app, $token, $parameters),
+                'fmejobsubmitter'  => $this->runJobSubmitter($app, $token, $parameters),
+                'fmedatadownload'  => $this->runDataDownload($app, $token, $parameters),
+                default            => response()->json(
+                    ['message' => 'Niet-ondersteunde service: ' . $app->service],
+                    422
+                ),
+            };
+        } catch (ConnectionException $e) {
+            // Timeout or FME unreachable: answer with a clear 504 instead of a generic 500.
+            Log::warning('FME run timed out or unreachable', [
+                'app'     => $app->hash_id,
+                'service' => $app->service,
+                'error'   => $e->getMessage(),
+            ]);
+
+            return response()->json([
+                'message' => sprintf(
+                    'FME gaf geen antwoord binnen %d seconden of is niet bereikbaar. Probeer het later opnieuw.',
+                    $this->runTimeout()
+                ),
+            ], 504);
+        }
+    }
+
+    /**
+     * Turn a failed FME response into a JSON { message } the client can show.
+     */
+    private function upstreamError(ClientResponse $response, App $app, string $url, string $token)
+    {
+        // FME error pages can echo the request (the token is a query/body parameter), so mask it.
+        $body = str_replace($token, '***', $response->body());
+        $json = json_decode($body, true);
+
+        $detail = is_array($json)
+            ? ($json['message'] ?? $json['serviceResponse']['statusInfo']['message'] ?? null)
+            : null;
+        if (!is_string($detail) || $detail === '') {
+            $detail = trim(preg_replace('/\s+/', ' ', strip_tags($body)));
+        }
+
+        Log::warning('FME run failed', [
+            'app'     => $app->hash_id,
+            'service' => $app->service,
+            'url'     => $url,
+            'status'  => $response->status(),
+            'body'    => mb_substr($body, 0, 2000),
+        ]);
+
+        $message = sprintf('FME gaf een fout (status %d)', $response->status());
+        if ($detail !== '') {
+            $message .= ': ' . mb_strimwidth($detail, 0, 300, '…');
+        }
+
+        return response()->json(
+            ['message' => $message],
+            $response->status() >= 400 ? $response->status() : 502
+        );
     }
 
     /**
@@ -226,15 +279,21 @@ class FmeProxyController extends Controller
      */
     private function runJobSubmitter(App $app, string $token, array $parameters)
     {
+        $url = $this->baseUrl() . '/fmeapiv4/jobs/sync';
+
         $response = Http::timeout($this->runTimeout())->withHeaders([
             'Authorization' => 'fmetoken token=' . $token,
             'Content-Type'  => 'application/json',
             'Accept'        => 'application/json',
-        ])->post($this->baseUrl() . '/fmeapiv4/jobs/sync', [
+        ])->post($url, [
             'repository'          => $app->repository,
             'workspace'           => $this->workspaceName($app),
             'publishedParameters' => (object) $parameters,
         ]);
+
+        if (!$response->successful()) {
+            return $this->upstreamError($response, $app, $url, $token);
+        }
 
         return response($response->body(), $response->status())
             ->header('Content-Type', $response->header('Content-Type') ?: 'application/json');
@@ -265,12 +324,7 @@ class FmeProxyController extends Controller
         ])->post($url, $parameters);
 
         if (!$response->successful()) {
-            Log::warning('FME datadownload failed', [
-                'url'        => $url,
-                'status'     => $response->status(),
-                'parameters' => array_keys($parameters),
-                'body'       => $response->body(),
-            ]);
+            return $this->upstreamError($response, $app, $url, $token);
         }
 
         return response($response->body(), $response->status())
@@ -281,7 +335,7 @@ class FmeProxyController extends Controller
      * fmedatastreaming: streams the response (HTML for iframe or a file download)
      * straight back to the client without buffering the whole payload in memory.
      */
-    private function runDataStreaming(App $app, string $token, array $parameters): StreamedResponse
+    private function runDataStreaming(App $app, string $token, array $parameters)
     {
         $query = $parameters;
         $query['opt_responseformat'] = 'json';
@@ -297,6 +351,11 @@ class FmeProxyController extends Controller
         // dd($url);
 
         $upstream = Http::timeout($this->runTimeout())->withOptions(['stream' => true])->get($url, $query);
+
+        // Errors are small: read them whole and answer with a JSON message instead of streaming them.
+        if (!$upstream->successful()) {
+            return $this->upstreamError($upstream, $app, $url, $token);
+        }
 
         $psr = $upstream->toPsrResponse();
         $body = $psr->getBody();

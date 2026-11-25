@@ -26,6 +26,26 @@ async function extractErrorMessage(response, fallback) {
     } catch (e) { /* not JSON */ }
     return fallback;
 }   
+
+const RUN_ERROR_FALLBACK = 'Error... conversie kan niet gestart worden.';
+
+// Show a failed workspace run: the reason (from the server) plus who to contact.
+function showRunError(message) {
+    showFormError(message || RUN_ERROR_FALLBACK);
+    const contact = document.createElement('div');
+    contact.className = 'bold';
+    contact.textContent = 'Neem contact op met Dirk-Jan of Job';
+    document.getElementById("errorMessage")?.append(document.createElement('br'), contact);
+}
+
+// Throw with the server's error message when the run failed.
+async function ensureRunOk(response) {
+    if (!response.ok) {
+        console.error("Request failed with status: " + response.status);
+        throw new Error(await extractErrorMessage(response, `${RUN_ERROR_FALLBACK} (status ${response.status})`));
+    }
+    return response;
+}
     
     
     if (data?.template?.name === "Default FME Workflow") {
@@ -538,18 +558,14 @@ async function extractErrorMessage(response, fallback) {
                             },
                             body: JSON.stringify({ parameters: paramsObject })
                         })
+                            .then(ensureRunOk)
                             .then(r => {
-                                if (r.status !== 200) {
-                                    console.error("Request failed with status: " + r.status);
-                                    document.getElementById("loading").style.display = 'none';
-                                    document.getElementById("mess1").style.display = 'none';
-                                    document.getElementById("errorMessage").style.display = "block";
-                                    document.getElementById('errorMessage').innerHTML = 'Error... conversie kan niet gestart worden.<br/><div class="bold"> Neem contact op met Dirk-Jan of Job</div>';
-                                    return;
-                                }
                                 const contentType = r.headers.get('content-type') || '';
                                 console.log(contentType);
-                                if (contentType ==='text/html' ) {
+                                // Laravel sends "text/html; charset=UTF-8", so compare the media type only.
+                                const mediaType = (contentType.split(';')[0] || '').trim().toLowerCase();
+                                const isAttachment = /^\s*attachment/i.test(r.headers.get('content-disposition') || '');
+                                if (mediaType === 'text/html' && !isAttachment) {
                                     return r.text().then(html => {
                                         const iframe = document.getElementById('fmeFrame');
                                         iframe.style.display = 'block';
@@ -585,11 +601,11 @@ async function extractErrorMessage(response, fallback) {
                                             'application/xml': 'xml',
                                             'text/xml': 'xml',
                                             'text/plain': 'txt',
+                                            'text/html': 'html',
                                             'application/vnd.ms-excel': 'xls',
                                             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
                                         };
-                                        const ct = (contentType.split(';')[0] || '').trim().toLowerCase();
-                                        const ext = extMap[ct] || 'dat';
+                                        const ext = extMap[mediaType] || 'dat';
                                         const base = (data.name || 'download').replace(/\.[^.]+$/, '');
                                         filename = `${base}.${ext}`;
                                         console.warn('No content-disposition filename available (likely CORS: server must send "Access-Control-Expose-Headers: Content-Disposition"). Falling back to:', filename);
@@ -609,11 +625,9 @@ async function extractErrorMessage(response, fallback) {
                                 }
                             })
                             .catch(err => {
-                                console.error("Request failed with status: " + err);
-                                document.getElementById("loading").style.display = 'none';
-                                document.getElementById("mess1").style.display = 'none';
-                                document.getElementById("errorMessage").style.display = "block";
-                                document.getElementById('errorMessage').innerHTML = 'Error... conversie kan niet gestart worden.<br/><div class="bold"> Neem contact op met Dirk-Jan of Job</div>';
+                                console.error(err);
+                                // TypeError = network failure ("Failed to fetch"); show the generic text then.
+                                showRunError(err instanceof TypeError ? '' : err.message);
                             });
                     } else if (serviceName === 'fmejobsubmitter') {
                         console.log(paramsObject)
@@ -628,10 +642,8 @@ async function extractErrorMessage(response, fallback) {
                                 parameters: paramsObject,
                             })
                         })
-                        .then(res => {
-                            if (!res.ok) throw new Error(`Workspace start failed: ${res.status}`);
-                            return res.json();
-                        })
+                        .then(ensureRunOk)
+                        .then(res => res.json())
                         .then(data => {
                             console.log(data)
 
@@ -641,11 +653,8 @@ async function extractErrorMessage(response, fallback) {
                             document.getElementById("mess2").innerHTML = 'De conversie is klaar!';
                         })
                         .catch(err => {
-                            console.error("Request failed with status: " + err);
-                            document.getElementById("loading").style.display = 'none';
-                            document.getElementById("mess1").style.display = 'none';
-                            document.getElementById("errorMessage").style.display = "block";
-                            document.getElementById('errorMessage').innerHTML = 'Error... conversie kan niet gestart worden.<br/><div class="bold"> Neem contact op met Dirk-Jan of Job</div>';
+                            console.error(err);
+                            showRunError(err instanceof TypeError ? '' : err.message);
                         });
                     } else if (serviceName === 'fmedatadownload') {
                         // Run via the server-side proxy; FME returns a JSON envelope
@@ -659,10 +668,8 @@ async function extractErrorMessage(response, fallback) {
                             },
                             body: JSON.stringify({ parameters: paramsObject })
                         })
-                        .then(res => {
-                            if (!res.ok) throw new Error(`Workspace start failed: ${res.status}`);
-                            return res.json();
-                        })
+                        .then(ensureRunOk)
+                        .then(res => res.json())
                         .then(data => {
                             const sr = data.serviceResponse || data;
                             const status = (sr.statusInfo && sr.statusInfo.status) || '';
@@ -689,11 +696,8 @@ async function extractErrorMessage(response, fallback) {
                             document.getElementById("mess2").innerHTML = 'De conversie is klaar!';
                         })
                         .catch(err => {
-                            console.error("Request failed with status: " + err);
-                            document.getElementById("loading").style.display = 'none';
-                            document.getElementById("mess1").style.display = 'none';
-                            document.getElementById("errorMessage").style.display = "block";
-                            document.getElementById('errorMessage').innerHTML = 'Error... conversie kan niet gestart worden.<br/><div class="bold"> Neem contact op met Dirk-Jan of Job</div>';
+                            console.error(err);
+                            showRunError(err instanceof TypeError ? '' : err.message);
                         });
                     }
                 }
