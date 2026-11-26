@@ -77,7 +77,7 @@
 
                       {{-- iframe for datastreaming --}}
                       <button onClick="window.location.reload();" id="refreshButton" style="display: none;">Nieuwe formulier</button>
-                      <iframe id="fmeFrame" style="width: 100%; height: 600px; border: 1px solid #ccc; display: none;"></iframe>
+                      <iframe id="fmeFrame" style="width: 100%; height: 600px; border: 1px solid #eee; border-radius: 5px; padding: 10px; margin-bottom: 20px; display: none;"></iframe>
 
                      @else
 
