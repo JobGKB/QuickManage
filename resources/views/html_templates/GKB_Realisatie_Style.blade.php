@@ -43,7 +43,7 @@
                 <div class="row">
                   <div class="col-lg-12 text-center">
 
-                    <form class="form" method="GET" >
+                    <form class="form" method="GET" id="form">
                       @csrf
                       @if($data->template->name == 'Default FME Workflow')
 
@@ -55,7 +55,7 @@
 
                       {{-- Hier komt het formulier --}}
                       <div id='GKB_Form_Template'></div>
-
+                      
                       <div class="mess1">
                       <span id="mess1">Bezig met laden...</span>
                           <div id="loading" class="loading">
@@ -76,6 +76,7 @@
                       </div> <br/>
 
                       {{-- iframe for datastreaming --}}
+                      <button onClick="window.location.reload();" id="refreshButton" style="display: none;">Nieuwe formulier</button>
                       <iframe id="fmeFrame" style="width: 100%; height: 600px; border: 1px solid #ccc; display: none;"></iframe>
 
                      @else

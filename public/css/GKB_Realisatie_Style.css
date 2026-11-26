@@ -113,6 +113,24 @@ input[type=file].input-form-checkbox {
   box-shadow: 0px 0px 3px 1px #326116;
 }
 
+#refreshButton {
+  background-color: #509429;
+  color: #fff;
+  border: 2px solid #509429;
+  border-radius: 3px;
+  padding: 10px 25px;
+  transition: 0.5s;
+  font-weight: 600;
+  margin-top: -80px;
+  margin-bottom: 20px;
+}
+
+#refreshButton:hover {
+  background-color: rgba(80, 148, 41, 0.8823529412) !important;
+  border: 2px solid #3e7a1b;
+  box-shadow: 0px 0px 3px 1px #326116;
+}
+
 .checkbox-wrapper {
   width: 100%;
   display: flex;

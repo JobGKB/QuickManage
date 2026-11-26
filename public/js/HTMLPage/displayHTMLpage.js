@@ -574,7 +574,12 @@ async function ensureRunOk(response) {
                                         doc.write(html);
                                         doc.close();
                                         document.getElementById("mess1").style.display = 'none';
+                                        document.getElementById("mess1").style.padding = '0';
+                                        document.getElementById("form").style.padding = '0';
                                         document.getElementById("loading").style.display = 'none';
+                                        document.getElementById("GKB_Form_Template").style.display = 'none';
+                                        document.getElementById("submitWrap").style.display = 'none';
+                                        document.getElementById("refreshButton").style.display = 'block';
                                     });
                                 } else {
                                     const disposition = r.headers.get('content-disposition') || '';
