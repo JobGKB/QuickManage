@@ -398,7 +398,7 @@ async function ensureRunOk(response) {
                             } else {
                                 const label = document.querySelector(`label[for="${input.name}_req"]`);
                                 if (label) label.classList.remove('outline_red2');
-                                formData.append('files', input.files[0], input.files[0].name);
+                                formData.append('files[]', input.files[0], input.files[0].name);
                                 inputFiles = true;
                             }
                         }
@@ -576,10 +576,11 @@ async function ensureRunOk(response) {
                                         document.getElementById("mess1").style.display = 'none';
                                         document.getElementById("mess1").style.padding = '0';
                                         document.getElementById("form").style.padding = '0';
+                                        document.getElementById("description").style.display = 'none';
                                         document.getElementById("loading").style.display = 'none';
                                         document.getElementById("GKB_Form_Template").style.display = 'none';
                                         document.getElementById("submitWrap").style.display = 'none';
-                                        document.getElementById("refreshButton").style.display = 'block';
+    
                                     });
                                 } else {
                                     const disposition = r.headers.get('content-disposition') || '';
@@ -596,26 +597,34 @@ async function ensureRunOk(response) {
                                     } else if (plainMatch) {
                                         filename = plainMatch[1].trim();
                                     }
-                                    // Fallback: build filename from workspace name + extension guessed from content-type
-                                    if (!filename) {
-                                        const extMap = {
-                                            'text/csv': 'csv',
-                                            'application/json': 'json',
-                                            'application/zip': 'zip',
-                                            'application/pdf': 'pdf',
-                                            'application/xml': 'xml',
-                                            'text/xml': 'xml',
-                                            'text/plain': 'txt',
-                                            'text/html': 'html',
-                                            'application/vnd.ms-excel': 'xls',
-                                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
-                                        };
-                                        const ext = extMap[mediaType] || 'dat';
-                                        const base = (data.name || 'download').replace(/\.[^.]+$/, '');
-                                        filename = `${base}.${ext}`;
-                                        console.warn('No content-disposition filename available (likely CORS: server must send "Access-Control-Expose-Headers: Content-Disposition"). Falling back to:', filename);
-                                    }
-                                    return r.blob().then(blob => {
+                                    const extMap = {
+                                        'text/csv': 'csv',
+                                        'application/json': 'json',
+                                        'application/zip': 'zip',
+                                        'application/x-zip': 'zip',
+                                        'application/x-zip-compressed': 'zip',
+                                        'application/zip-compressed': 'zip',
+                                        'application/pdf': 'pdf',
+                                        'application/xml': 'xml',
+                                        'text/xml': 'xml',
+                                        'text/plain': 'txt',
+                                        'text/html': 'html',
+                                        'application/vnd.ms-excel': 'xls',
+                                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
+                                    };
+                                    return r.blob().then(blob => blob.slice(0, 4).arrayBuffer().then(buf => {
+                                        // Fallback: build filename from workspace name + extension from content-type,
+                                        // or from the file signature when FME sends a generic type (e.g. application/octet-stream).
+                                        if (!filename) {
+                                            const sig = Array.from(new Uint8Array(buf)).map(b => String.fromCharCode(b)).join('');
+                                            const sniffed = sig.startsWith('PK') ? 'zip' : sig.startsWith('%PDF') ? 'pdf' : '';
+                                            const ext = extMap[mediaType] || sniffed || 'dat';
+                                            const base = (data.name || 'download').replace(/\.[^.]+$/, '');
+                                            filename = `${base}.${ext}`;
+                                            console.warn('No content-disposition filename from FME. Falling back to:', filename, '(content-type:', mediaType, ')');
+                                        }
+                                        return blob;
+                                    })).then(blob => {
                                         const blobUrl = URL.createObjectURL(blob);
                                         const a = document.createElement('a');
                                         a.href = blobUrl;

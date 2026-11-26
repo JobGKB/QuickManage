@@ -167,17 +167,21 @@ class FmeProxyController extends Controller
     {
         [, $token] = $this->resolve($unique);
 
-        $request->validate([
-            'files'   => 'required',
+        // Accept both `files` (single UploadedFile) and `files[]` (array) form keys.
+        $files = $request->file('files');
+        $files = is_array($files) ? $files : array_filter([$files]);
+
+        validator(['files' => $files], [
+            'files'   => 'required|array|min:1',
             'files.*' => 'file|max:512000', // 500 MB per file
-        ]);
+        ])->validate();
 
         $http = Http::withHeaders([
             'Authorization' => 'fmetoken token=' . $token,
             'Accept'        => 'application/json',
         ]);
 
-        foreach ($request->file('files', []) as $file) {
+        foreach ($files as $file) {
             $http = $http->attach(
                 'files',
                 file_get_contents($file->getRealPath()),

@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\App;
+use Illuminate\Http\Client\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
@@ -51,6 +53,19 @@ class FmeProxyRunTest extends TestCase
         $this->post('/apps/abc123/fme/run')
             ->assertStatus(500)
             ->assertExactJson(['message' => 'FME gaf een fout (status 500): Translation failed']);
+    }
+
+    public function test_single_file_upload_is_sent_as_multipart(): void
+    {
+        Http::fake(['fme.test/*' => Http::response('{}', 200, ['Content-Type' => 'application/json'])]);
+
+        $this->post('/apps/abc123/fme/upload', [
+            'files' => UploadedFile::fake()->create('data.xlsx', 10),
+        ])->assertOk();
+
+        Http::assertSent(fn (Request $request) => $request->isMultipart()
+            && $request[0]['name'] === 'files'
+            && $request[0]['filename'] === 'data.xlsx');
     }
 
     public function test_timeout_returns_504_with_message(): void

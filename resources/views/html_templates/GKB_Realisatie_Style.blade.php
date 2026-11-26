@@ -25,12 +25,12 @@
 
                 </div>
                   
-                <div class="row">
+                <div class="row"  >
                   <div class="offset-lg-1 col-lg-10 text-center">
                     <br/> 
                       <h3>{{ $data->name }}</h3>
                     <br/>
-                      <p>{!! \App\Support\SafeHtml::basic($data->description) !!} </p>
+                      <p id="description">{!! \App\Support\SafeHtml::basic($data->description) !!} </p>
                   </div>
                 </div>
               </div>
@@ -76,7 +76,7 @@
                       </div> <br/>
 
                       {{-- iframe for datastreaming --}}
-                      <button onClick="window.location.reload();" id="refreshButton" style="display: none;">Nieuwe formulier</button>
+                      
                       <iframe id="fmeFrame" style="width: 100%; height: 600px; border: 1px solid #eee; border-radius: 5px; padding: 10px; margin-bottom: 20px; display: none;"></iframe>
 
                      @else
