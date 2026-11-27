@@ -1,89 +1,2031 @@
-{"profielen":
-    [
-        { 
-            "profielcode": "30_12_B", 
-            "project": "BARE2621",
-            "opdrachtgever": "Gemeente Barendrecht", 
-            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
-            "baggercode": "-", 
-            "legger": "-1.75", 
-            "polderpeil": "-1.1", 
-            "waterpeil": "-1.0",
-            "dynamic_fields":[
-             {
-                "inpeildatum": "-" ,
-                "Bagger m3 / strekkende meter":"0.07",
-                "Profiel lengte":"x",
-                "Bagger m3":"x"
-
-
-            }
-            ],
-            "punten":[
-                {"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":-1.63},
-                {"puntnr":2,"afstand":0.17,"puntsoort":"baggervasteb","meting":-2.05},
-                {"puntnr":3,"afstand":0.49,"puntsoort":"baggervasteb","meting":-2.36},
-                {"puntnr":4,"afstand":0.9,"puntsoort":"baggervasteb","meting":-2.45},
-                {"puntnr":5,"afstand":1.39,"puntsoort":"baggervasteb","meting":-2.59},
-                {"puntnr":6,"afstand":1.9,"puntsoort":"baggervasteb","meting":-2.76},
-                {"puntnr":7,"afstand":2.44,"puntsoort":"vast","meting":-2.95},
-                {"puntnr":8,"afstand":2.44,"puntsoort":"bagger","meting":-2.88},
-                {"puntnr":9,"afstand":2.87,"puntsoort":"vast","meting":-2.95},
-                {"puntnr":10,"afstand":2.87,"puntsoort":"bagger","meting":-2.88},
-                {"puntnr":11,"afstand":3.4,"puntsoort":"baggervasteb","meting":-2.74},
-                {"puntnr":12,"afstand":3.88,"puntsoort":"baggervasteb","meting":-2.59},
-                {"puntnr":13,"afstand":4.33,"puntsoort":"baggervasteb","meting":-2.46},
-                {"puntnr":14,"afstand":4.83,"puntsoort":"baggervasteb","meting":-2.33},
-                {"puntnr":15,"afstand":5.44,"puntsoort":"baggervasteb","meting":-2.24},
-                {"puntnr":16,"afstand":5.98,"puntsoort":"baggervasteb","meting":-2.05},
-                {"puntnr":17,"afstand":8.08,"puntsoort":"insteek","meting":-1.24}
-            ]
-            },
-            
-        { 
-            "profielcode": "29_15_A", 
-            "project": "BARE2621",
-            "opdrachtgever": "Gemeente Barendrecht", 
-            "omschrijving": "Baggeren Begraafplaats Ouden Dyck", 
-            "baggercode": "-", 
-            "legger": "-1.75", 
-            "polderpeil": "-1.1", 
-            "waterpeil": "-1.0",
-            "dynamic_fields":[
-             {
-                "inpeildatum": "-",
-                "Bagger m3 / strekkende meter":"2.17",
-                "Profiel lengte":"x",
-                "Bagger m3":"x"
-            }
-            ],
-            "punten":[
-                {"puntnr":1,"afstand":0,"puntsoort":"insteek","meting":0.19},
-                {"puntnr":2,"afstand":3.94,"puntsoort":"baggervasteb","meting":-1.82},
-                {"puntnr":3,"afstand":4.43,"puntsoort":"baggervasteb","meting":-2.47},
-                {"puntnr":4,"afstand":4.87,"puntsoort":"vast","meting":-2.65},
-                {"puntnr":5,"afstand":4.87,"puntsoort":"bagger","meting":-2.58},
-                {"puntnr":6,"afstand":5.41,"puntsoort":"vast","meting":-2.83},
-                {"puntnr":7,"afstand":5.41,"puntsoort":"bagger","meting":-2.67},
-                {"puntnr":8,"afstand":5.98,"puntsoort":"vast","meting":-3.12},
-                {"puntnr":9,"afstand":5.98,"puntsoort":"bagger","meting":-2.76},
-                {"puntnr":10,"afstand":6.39,"puntsoort":"vast","meting":-3.36},
-                {"puntnr":11,"afstand":6.39,"puntsoort":"bagger","meting":-2.83},
-                {"puntnr":12,"afstand":6.97,"puntsoort":"vast","meting":-3.42},
-                {"puntnr":13,"afstand":6.97,"puntsoort":"bagger","meting":-2.85},
-                {"puntnr":14,"afstand":7.93,"puntsoort":"vast","meting":-3.48},
-                {"puntnr":15,"afstand":7.93,"puntsoort":"bagger","meting":-2.85},
-                {"puntnr":16,"afstand":9.01,"puntsoort":"vast","meting":-3.26},
-                {"puntnr":17,"afstand":9.01,"puntsoort":"bagger","meting":-2.85},
-                {"puntnr":18,"afstand":9.49,"puntsoort":"vast","meting":-3.25},
-                {"puntnr":19,"afstand":9.49,"puntsoort":"bagger","meting":-2.84},
-                {"puntnr":20,"afstand":9.92,"puntsoort":"vast","meting":-2.8},
-                {"puntnr":21,"afstand":9.92,"puntsoort":"bagger","meting":-2.75},
-                {"puntnr":22,"afstand":10.41,"puntsoort":"baggervasteb","meting":-2.72},
-                {"puntnr":23,"afstand":10.82,"puntsoort":"baggervasteb","meting":-2.04},
-                {"puntnr":24,"afstand":11.47,"puntsoort":"baggervasteb","meting":-1.84},
-                {"puntnr":25,"afstand":16.73,"puntsoort":"insteek","meting":-1.44}
-            ]
-        }
+{
+  "adminServiceInfo" : {
+    "name" : "WOONCOMPAS_DL_Objecten", 
+    "type" : "FeatureServer", 
+    "cacheMaxAge" : 0, 
+    "status" : "Started", 
+    "allowedReferrers" : "", 
+    "database" : {
+      "datasource" : {
+        "name" : "db"
+      }
+    }
+  }, 
+  "preserveLayerIds" : true, 
+  "enforceFieldVisibility" : false, 
+  "supportedFieldTypes" : [
+    "esriFieldTypeSmallInteger", 
+    "esriFieldTypeInteger", 
+    "esriFieldTypeSingle", 
+    "esriFieldTypeDouble", 
+    "esriFieldTypeString", 
+    "esriFieldTypeDate", 
+    "esriFieldTypeOID", 
+    "esriFieldTypeGeometry", 
+    "esriFieldTypeBlob", 
+    "esriFieldTypeRaster", 
+    "esriFieldTypeGUID", 
+    "esriFieldTypeGlobalID", 
+    "esriFieldTypeXML", 
+    "esriFieldTypeBigInteger", 
+    "esriFieldTypeDateOnly", 
+    "esriFieldTypeTimeOnly", 
+    "esriFieldTypeTimestampOffset"
+  ], 
+  "maxFieldNameLength" : 128, 
+  "supportedGUIDFormats" : "B,D,O", 
+  "guidFormat" : "", 
+  "currentVersion" : 12, 
+  "serviceItemId" : "484ecfbf4d6b437db1ec7565c14cde10", 
+  "serviceDescription" : "", 
+  "hasVersionedData" : false, 
+  "supportsDisconnectedEditing" : false, 
+  "hasStaticData" : false, 
+  "hasSharedDomains" : false, 
+  "maxRecordCount" : 2000, 
+  "maxIdsCount" : 1000000, 
+  "supportedQueryFormats" : "JSON", 
+  "supportsVCSProjection" : false, 
+  "supportedExportFormats" : "csv,shapefile,sqlite,geoPackage,filegdb,featureCollection,geojson,kml,excel", 
+  "supportedConvertFileFormats" : "JSON,PBF", 
+  "supportedConvertContentFormats" : "LayerEditCollection", 
+  "supportedFullTextLocales" : [
+    "neutral", 
+    "ar-SA", 
+    "bg-BG", 
+    "bn-IN", 
+    "ca-ES", 
+    "cs-CZ", 
+    "da-DK", 
+    "de-DE", 
+    "el-GR", 
+    "en-GB", 
+    "en-US", 
+    "es-ES", 
+    "fr-FR", 
+    "gu-IN", 
+    "he-IL", 
+    "hi-IN", 
+    "hr-HR", 
+    "id-ID", 
+    "is-IS", 
+    "it-IT", 
+    "ja-JP", 
+    "kn-IN", 
+    "ko-KR", 
+    "lt-LT", 
+    "lv-LV", 
+    "ml-IN", 
+    "mr-IN", 
+    "ms-MY", 
+    "nb-NO", 
+    "nl-NL", 
+    "pa-IN", 
+    "pl-PL", 
+    "pt-BR", 
+    "pt-PT", 
+    "ro-RO", 
+    "ru-RU", 
+    "sk-SK", 
+    "sl-SI", 
+    "sr-Cyrl-CS", 
+    "sr-Latn-CS", 
+    "sv-SE", 
+    "ta-IN", 
+    "te-IN", 
+    "th-TH", 
+    "tr-TR", 
+    "uk-UA", 
+    "ur-PK", 
+    "vi-VN", 
+    "zh-CN", 
+    "zh-HK", 
+    "zh-MO", 
+    "zh-SG", 
+    "zh-TW"
+  ], 
+  "capabilities" : "Create,Delete,Query,Update,Editing", 
+  "description" : "", 
+  "copyrightText" : "", 
+  "spatialReference" : {
+    "wkid" : 102100, 
+    "latestWkid" : 3857
+  }, 
+  "initialExtent" : {
+    "xmin" : -17811118.526923772, 
+    "ymin" : -15538711.096309224, 
+    "xmax" : 17811118.526923772, 
+    "ymax" : 15538711.096309224, 
+    "spatialReference" : {
+      "wkid" : 102100, 
+      "latestWkid" : 3857
+    }
+  }, 
+  "fullExtent" : {
+    "xmin" : -17811118.526923772, 
+    "ymin" : -15538711.096309224, 
+    "xmax" : 17811118.526923772, 
+    "ymax" : 15538711.096309224, 
+    "spatialReference" : {
+      "wkid" : 102100, 
+      "latestWkid" : 3857
+    }
+  }, 
+  "allowGeometryUpdates" : true, 
+  "supportsTrueCurve" : true, 
+  "trueCurveSupportMode" : "OGC", 
+  "supportedCurveTypes" : [
+    "esriGeometryCircularArc"
+  ], 
+  "supportedTrueCurvePbfFeatureEncodings" : [
+    "esriCompressedShapeBuffer", 
+    "esriDefault"
+  ], 
+  "allowTrueCurvesUpdates" : true, 
+  "onlyAllowTrueCurveUpdatesByTrueCurveClients" : false, 
+  "units" : "esriMeters", 
+  "supportsAppend" : true, 
+  "supportedAppendCapabilities" : "Features,Attachments", 
+  "supportsSharedDomains" : true, 
+  "supportsWebHooks" : true, 
+  "supportsTemporalLayers" : true, 
+  "enableZDefaults" : false, 
+  "zDefault" : 0, 
+  "layerOverridesEnabled" : true, 
+  "supportsRelationshipsResource" : true, 
+  "syncEnabled" : false, 
+  "supportsApplyEditsWithGlobalIds" : true, 
+  "supportsReturnDeleteResults" : true, 
+  "supportsLayerOverrides" : true, 
+  "supportsTilesAndBasicQueriesMode" : true, 
+  "supportsQueryContingentValues" : true, 
+  "supportedContingentValuesFormats" : "JSON, PBF", 
+  "supportsContingentValuesJson" : 2, 
+  "advancedEditingCapabilities" : {
+    "supportsSplit" : false, 
+    "supportsReturnServiceEditsInSourceSR" : false, 
+    "supportsAsyncApplyEdits" : true, 
+    "supportsReturnEditResults" : true, 
+    "supportsApplyEditsbyUploadID" : true, 
+    "supportedApplyEditsUploadIDFormats" : "JSON,PBF"
+  }, 
+  "editorTrackingInfo" : {
+    "enableEditorTracking" : false, 
+    "enableOwnershipAccessControl" : false, 
+    "allowOthersToQuery" : true, 
+    "allowOthersToUpdate" : true, 
+    "allowOthersToDelete" : false, 
+    "allowAnonymousToQuery" : true, 
+    "allowAnonymousToUpdate" : true, 
+    "allowAnonymousToDelete" : true
+  }, 
+  "xssPreventionInfo" : {
+    "xssPreventionEnabled" : true, 
+    "xssPreventionRule" : "InputOnly", 
+    "xssInputRule" : "rejectInvalid"
+  }, 
+  "serviceAdminOperationsOptions" : {
+    "deleteFromDefinition" : [
+      "layers", 
+      "tables"
+    ], 
+    "addToDefiniton" : [
+      "layers", 
+      "tables", 
+      "relationships"
+    ], 
+    "updateDefinition" : [
+      "serviceDescription", 
+      "datumTransformations", 
+      "maxRecordCount", 
+      "maxIdsCount", 
+      "capabilities", 
+      "guidFormat", 
+      "preferredTimeReference", 
+      "description", 
+      "copyrightText", 
+      "initialExtent", 
+      "editorTrackingInfo", 
+      "units", 
+      "xssPreventionInfo", 
+      "hasStaticData", 
+      "syncRowsMovedOutsideFilter", 
+      "preserveLayerIds", 
+      "allowGeometryUpdates", 
+      "syncEnabled", 
+      "layerOverridesEnabled", 
+      "onlyAllowTrueCurveUpdatesByTrueCurveClients", 
+      "allowTrueCurvesUpdates", 
+      "enforceDefinitionQueryDuringEdit"
     ]
+  }, 
+  "layers" : [
+    {
+      "adminLayerInfo" : {
+        "tableName" : "db_42723.user_42723.WOONCOMPAS_DL_Objecten_PUNTEN", 
+        "geometryField" : {"name" : "Shape"}, 
+        "xssTrustedFields" : ""
+      }, 
+      "id" : 0, 
+      "enableUseOfScaleOutReplicasWhenEditable" : true, 
+      "supportedFieldTypes" : [
+        "esriFieldTypeSmallInteger", 
+        "esriFieldTypeInteger", 
+        "esriFieldTypeSingle", 
+        "esriFieldTypeDouble", 
+        "esriFieldTypeString", 
+        "esriFieldTypeDate", 
+        "esriFieldTypeOID", 
+        "esriFieldTypeGeometry", 
+        "esriFieldTypeBlob", 
+        "esriFieldTypeRaster", 
+        "esriFieldTypeGUID", 
+        "esriFieldTypeGlobalID", 
+        "esriFieldTypeXML", 
+        "esriFieldTypeBigInteger", 
+        "esriFieldTypeDateOnly", 
+        "esriFieldTypeTimeOnly", 
+        "esriFieldTypeTimestampOffset"
+      ], 
+      "layerAdminOperationsOptions" : {
+        "deleteFromDefinition" : [
+          "xssTrustedFields", 
+          "fields", 
+          "indexes", 
+          "relationships"
+        ], 
+        "addToDefiniton" : [
+          "fields", 
+          "indexes"
+        ], 
+        "updateDefinition" : [
+          "name", 
+          "type", 
+          "xssTrustedFields", 
+          "displayField", 
+          "description", 
+          "copyrightText", 
+          "editFieldsInfo", 
+          "minScale", 
+          "maxScale", 
+          "fields", 
+          "maxRecordCount", 
+          "drawingInfo", 
+          "types", 
+          "templates", 
+          "indexes", 
+          "defaultVisibility", 
+          "hasAttachments", 
+          "propagateVisibleFields", 
+          "hasGeometryProperties", 
+          "attachmentProperties", 
+          "lodInfos", 
+          "typeIdField", 
+          "timeInfo", 
+          "allowUpdateWithoutMValues", 
+          "maxRecordCountFactor", 
+          "allowGeometryUpdates", 
+          "capabilities", 
+          "ownershipBasedAccessControlForFeatures", 
+          "enableNullGeometry", 
+          "onlyAllowTrueCurveUpdatesByTrueCurveClients", 
+          "allowTrueCurvesUpdates"
+        ]
+      }, 
+      "maxFieldNameLength" : 128, 
+      "name" : "Punten", 
+      "type" : "Feature Layer", 
+      "displayField" : "", 
+      "description" : "", 
+      "copyrightText" : "", 
+      "defaultVisibility" : true, 
+      "editingInfo" : {
+        "lastEditDate" : 1795778710785, 
+        "schemaLastEditDate" : 1795778594134, 
+        "dataLastEditDate" : 1795778594134
+      }, 
+      "relationships" : [], 
+      "isDataVersioned" : false, 
+      "hasContingentValuesDefinition" : false, 
+      "supportsAppend" : true, 
+      "supportsCalculate" : true, 
+      "supportsASyncCalculate" : true, 
+      "supportsTruncate" : false, 
+      "supportsAttachmentsByUploadId" : true, 
+      "supportsAttachmentsResizing" : true, 
+      "supportsRollbackOnFailureParameter" : true, 
+      "supportsStatistics" : true, 
+      "supportsExceedsLimitStatistics" : true, 
+      "supportsAdvancedQueries" : true, 
+      "supportsValidateSql" : true, 
+      "supportsCoordinatesQuantization" : true, 
+      "supportsLayerOverrides" : true, 
+      "supportsTilesAndBasicQueriesMode" : true, 
+      "supportsFieldDescriptionProperty" : true, 
+      "supportsQuantizationEditMode" : true, 
+      "supportsColumnStoreIndex" : true, 
+      "supportsApplyEditsWithGlobalIds" : true, 
+      "supportsReturningQueryGeometry" : true, 
+      "enableNullGeometry" : false, 
+      "advancedQueryCapabilities" : {
+        "supportsPagination" : true, 
+        "supportsPaginationOnAggregatedQueries" : true, 
+        "supportsQueryRelatedPagination" : true, 
+        "supportsQueryWithDistance" : true, 
+        "supportsOutDistance" : true, 
+        "supportsReturningQueryExtent" : true, 
+        "supportsStatistics" : true, 
+        "supportsOrderBy" : true, 
+        "supportsDistinct" : true, 
+        "supportsQueryWithResultType" : true, 
+        "supportsSqlExpression" : true, 
+        "supportsTimeRelation" : true, 
+        "supportsAdvancedQueryRelated" : true, 
+        "supportsCountDistinct" : true, 
+        "supportsPercentileStatistics" : true, 
+        "supportsApproxPercentileStatistics" : true, 
+        "supportsSpatialAggregationStatistics" : true, 
+        "supportedSpatialAggregationStatistics" : [
+          "EnvelopeAggregate", 
+          "CentroidAggregate", 
+          "ConvexHullAggregate"
+        ], 
+        "supportsQueryAttachments" : true, 
+        "supportsQueryAttachmentsCountOnly" : true, 
+        "supportsQueryAttachmentOrderByFields" : true, 
+        "supportsQueryAttachmentWithTypeWildcard" : true, 
+        "supportsReturningGeometryCentroid" : false, 
+        "supportsReturningGeometryEnvelope" : false, 
+        "supportsQueryWithDatumTransformation" : true, 
+        "supportsCurrentUserQueries" : true, 
+        "supportsHavingClause" : true, 
+        "supportsOutFieldSQLExpression" : true, 
+        "supportsMaxRecordCountFactor" : true, 
+        "supportsTopFeaturesQuery" : true, 
+        "supportsDisjointSpatialRel" : true, 
+        "supportsQueryWithCacheHint" : true, 
+        "supportedOperationsWithCacheHint" : [
+          "query", 
+          "queryTopFilter", 
+          "queryAnalytics", 
+          "queryAttachments", 
+          "queryRelated", 
+          "queryBins", 
+          "queryPivot"
+        ], 
+        "supportsQueryAttachmentsWithReturnUrl" : true, 
+        "supportsQueryAnalytic" : true, 
+        "supportsQueryPivot" : true, 
+        "supportsQueryBins" : true, 
+        "supportsDefaultSR" : true, 
+        "supportsTranslations" : false, 
+        "supportsAggIds" : true, 
+        "supportsQueryWithCollation" : true, 
+        "supportsISODOW" : true, 
+        "supportsISOWeek" : true, 
+        "supportsFullTextSearch" : true, 
+        "fullTextSearchCapabilities" : {
+          "supportsAccentSensitivity" : true, 
+          "supportsStopWords" : true, 
+          "supportsSearchOperator" : true, 
+          "supportsOperator" : true
+        }
+      }, 
+      "advancedQueryAnalyticCapabilities" : {
+        "supportsLinearRegression" : true, 
+        "supportsTrendlineRegression" : true, 
+        "supportsAsync" : true, 
+        "supportsPercentileAnalytic" : true
+      }, 
+      "queryBinsCapabilities" : {
+        "supportsAsync" : true, 
+        "supportsAutoIntervalBin" : true, 
+        "supportsFixedIntervalBin" : true, 
+        "supportsFixedBoundariesBin" : true, 
+        "supportsDateBin" : true, 
+        "supportsClassificationBin" : true, 
+        "supportsStackBy" : true, 
+        "supportsSplitBy" : true, 
+        "supportsFirstDayOfWeek" : true, 
+        "supportsSnapToData" : true, 
+        "supportsReturnFullIntervalBin" : true, 
+        "supportsReturnStackValueRange" : true, 
+        "supportsNormalization" : true, 
+        "supportedStatisticTypes" : [
+          "COUNT", 
+          "SUM", 
+          "AVG", 
+          "VAR", 
+          "VAR_SAMP", 
+          "VAR_POP", 
+          "STDDEV", 
+          "STDDEV_SAMP", 
+          "STDDEV_POP", 
+          "MIN", 
+          "MAX", 
+          "PERCENTILE_CONT", 
+          "PERCENTILE_DISC", 
+          "APPROX_PERCENTILE_CONT", 
+          "APPROX_PERCENTILE_DISC", 
+          "CentroidAggregate", 
+          "EnvelopeAggregate", 
+          "ConvexHullAggregate"
+        ], 
+        "supportedNormalizationTypes" : [
+          "boxCox", 
+          "field", 
+          "inverse", 
+          "log", 
+          "naturalLog", 
+          "percentOfTotal", 
+          "squareRoot"
+        ]
+      }, 
+      "supportedOperationsWithCollation" : "query,addField,updateField", 
+      "advancedEditingCapabilities" : {
+        "supportedSqlFormatsInCalculate" : [
+          "standard"
+        ], 
+        "supportsAsyncApplyEdits" : true, 
+        "supportsReturnEditResults" : true, 
+        "supportsApplyEditsbyUploadID" : true, 
+        "supportedApplyEditsUploadIDFormats" : "JSON,PBF", 
+        "supportsTranslation" : false, 
+        "supportsMaxTranslations" : 10
+      }, 
+      "infoInEstimates" : [
+        "extent", 
+        "count"
+      ], 
+      "useStandardizedQueries" : true, 
+      "geometryType" : "esriGeometryPoint", 
+      "minScale" : 0, 
+      "maxScale" : 0, 
+      "extent" : {
+        "xmin" : -17811118.526923772, 
+        "ymin" : -15538711.096309224, 
+        "xmax" : 17811118.526923772, 
+        "ymax" : 15538711.096309224, 
+        "spatialReference" : {
+          "wkid" : 102100, 
+          "latestWkid" : 3857
+        }
+      }, 
+      "spatialReference" : {
+        "wkid" : 102100, 
+        "latestWkid" : 3857
+      }, 
+      "drawingInfo":{"renderer":{"type":"simple","symbol":{"type":"esriPMS","url":"RedSphere.png","imageData":"iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRTb2Z0d2FyZQBQYWludC5ORVQgdjMuNS4xTuc4+QAAB3VJREFUeF7tmPlTlEcexnve94U5mANQbgQSbgiHXHINlxpRIBpRI6wHorLERUmIisKCQWM8cqigESVQS1Kx1piNi4mW2YpbcZONrilE140RCTcy3DDAcL/zbJP8CYPDL+9Ufau7uqb7eZ7P+/a8PS8hwkcgIBAQCAgEBAICAYGAQEAgIBAQCAgEBAICAYGAQEAgIBAQCDx/AoowKXFMUhD3lQrioZaQRVRS+fxl51eBTZUTdZ41U1Rox13/0JF9csGJ05Qv4jSz/YPWohtvLmSKN5iTGGqTm1+rc6weICOBRbZs1UVnrv87T1PUeovxyNsUP9P6n5cpHtCxu24cbrmwKLdj+osWiqrVKhI0xzbmZ7m1SpJ+1pFpvE2DPvGTomOxAoNLLKGLscZYvB10cbYYjrJCb7A5mrxleOBqim+cWJRakZY0JfnD/LieI9V1MrKtwokbrAtU4Vm0A3TJnphJD4B+RxD0u0LA7w7FTE4oprOCMbklEGNrfdGf4IqnQTb4wc0MFTYibZqM7JgjO8ZdJkpMln/sKu16pHZGb7IfptIWg389DPp9kcChWODoMuDdBOhL1JgpisbUvghM7AqFbtNiaFP80RLnhbuBdqi0N+1dbUpWGde9gWpuhFi95yL7sS7BA93JAb+Fn8mh4QujgPeTgb9kAZf3Apd2A+fXQ38yHjOHozB1IAJjOSEY2RSIwVUv4dd4X9wJccGHNrJ7CYQ4GGjLeNNfM+dyvgpzQstKf3pbB2A6m97uBRE0/Ergcxr8hyqg7hrwn0vAtRIKIRX6Y2pMl0RhIj8co9nBGFrvh55l3ngU7YObng7IVnFvGS+BYUpmHziY/Ls2zgP9SX50by/G9N5w6I+ogYvpwK1SoOlHQNsGfWcd9Peqof88B/rTyzF9hAIopAByQzC0JQB9ST5oVnvhnt+LOGsprvUhxNIwa0aY7cGR6Cp7tr8+whkjawIxkRWC6YJI6N+lAKq3Qf/Tx+B77oGfaQc/8hB8w2Xwtw9Bf3kzZspXY/JIDEbfpAB2BKLvVV90Jvjgoac9vpRxE8kciTVCBMMkNirJ7k/tRHyjtxwjKV4Yp3t/6s+R4E+/DH3N6+BrS8E314Dvvg2+/Sb4hxfBf5sP/up2TF3ZhonK1zD6dhwGdwail26DzqgX8MRKiq9ZBpkSkmeYOyPM3m9Jjl+1Z9D8AgNtlAq6bZ70qsZi+q+bwV/7I/hbB8D/dAr8Axq89iz474p/G5++koHJy1sx/lkGdBc2YjA3HF0rHNHuboomuQj/5DgclIvOGCGCYRKFFuTMV7YUAD3VDQaLMfyqBcZORGPy01QKYSNm/rYV/Nd/Av9NHvgbueBrsjDzRQamKKDxT9Kgq1iLkbIUDOSHoiNcgnYHgnYZi+9ZExSbiSoMc2eE2flKcuJLa4KGRQz6/U0wlGaP0feiMH4uFpMXEjBVlYjp6lWY+SSZtim0kulYMiYuJEJXuhTDJ9UYPByOvoIwdCxfgE4bAo0Jh39xLAoVpMwIEQyTyFCQvGpLon9sJ0K3J4OBDDcMH1dj9FQsxkrjMPFRPCbOx2GyfLal9VEcxstioTulxjAFNfROJPqLl6Bnfyg6V7ugz5yBhuHwrZjBdiU5YJg7I8wOpifAKoVIW7uQ3rpOBH2b3ekVjYT2WCRG3o+mIGKgO0OrlIaebU/HYOQDNbQnojB4NJyGD0NPfjA0bwTRE6Q7hsUcWhkWN8yZqSQlWWGECAZLmJfJmbrvVSI8taK37xpbdB/wQW8xPee/8xIGjvlj8IQ/hk4G0JbWcX8MHPVDX4kveoq8ocn3xLM33NCZRcPHOGJYZIKfpQyq7JjHS6yJjcHujLHADgkpuC7h8F8zEVqXSNC2awE69lqhs8AamkO26HrbDt2H7dBVQov2NcW26CiwQtu+BWjdY4n2nZboTbfCmKcCnRyDO/YmyLPnDlHvjDH8G6zhS9/wlEnYR7X00fWrFYuWdVI0ZpuhcbcczW/R2qdAcz6t/bRov4mONeaaoYl+p22rHF0bVNAmKtBvweIXGxNcfFH8eNlC4m6wMWMusEnKpn5hyo48pj9gLe4SNG9QoGGLAk8z5XiaJUd99u8122/IpBA2K9BGg2vWWKAvRYVeLzEa7E1R422m2+MsSTem97nSYnfKyN6/mzATv7AUgqcMrUnmaFlLX3ysM0fj+t/b5lQLtK22QEfyAmiSLKFZpUJ7kBRPXKW4HqCYynWVHKSG2LkyZex1uO1mZM9lKem9Tx9jjY5iNEYo0bKMhn7ZAu0r6H5PpLXCAq0rKJClSjSGynE/QIkrQYqBPe6S2X+AJsY2Ped6iWZk6RlL0c2r5szofRsO9R5S1IfQLRCpQL1aifoYFerpsbkuTImaUJXuXIDiH6/Ys8vm3Mg8L2i20YqsO7fItKLcSXyn0kXccclVqv3MS6at9JU/Ox+ouns+SF6Z4cSupz7l8+z1ucs7LF1AQjOdxfGZzmx8Iu1TRcfnrioICAQEAgIBgYBAQCAgEBAICAQEAgIBgYBAQCAgEBAICAQEAv8H44b/6ZiGvGAAAAAASUVORK5CYII=","contentType":"image/png","width":15,"height":15}}}, 
+      "allowGeometryUpdates" : true, 
+      "hasAttachments" : true, 
+      
+      "attachmentProperties" : [
+        {
+          "name" : "id", 
+          "fieldName" : "ATTACHMENTID", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "globalId", 
+          "fieldName" : "AttachmentGlobalID", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "name", 
+          "fieldName" : "ATT_NAME", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "size", 
+          "fieldName" : "DATA_SIZE", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "contentType", 
+          "fieldName" : "CONTENT_TYPE", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "keywords", 
+          "fieldName" : "Keywords", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "exifInfo", 
+          "fieldName" : "ExifInfo", 
+          "isEnabled" : true
+        }
+      ], 
+      "htmlPopupType" : "esriServerHTMLPopupTypeNone", 
+      "hasM" : false, 
+      "hasZ" : false, 
+      "objectIdField" : "OBJECTID", 
+      "globalIdField" : "GlobalID", 
+      "typeIdField" : "", 
+      "collation" : {
+        "locale" : "neutral", 
+        "caseSensitive" : false, 
+        "accentSensitive" : true
+      }, 
+      "fields" : [
+        {
+          "name" : "OBJECTID", 
+          "type" : "esriFieldTypeOID", 
+          "alias" : "OBJECTID", 
+          "sqlType" : "sqlTypeOther", 
+          "nullable" : false, 
+          "editable" : false, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "GlobalID", 
+          "type" : "esriFieldTypeGlobalID", 
+          "alias" : "GlobalID", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 38, 
+          "nullable" : false, 
+          "editable" : false, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Eigenaar", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Eigenaar", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Bronhouder", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Bronhouder", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Plaats", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Plaats", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Straat", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Straat", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Hoofdgroep", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Hoofdgroep", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Beheergroep", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Beheergroep", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Subbeheergroep", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Subbeheergroep", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Boom_hoogte_klasse", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Boom hoogte klasse", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Boom_diameter_klasse", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Boom diameter klasse", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Opmerkingen", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Opmerkingen", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Objectvorm", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Objectvorm", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }
+      ], 
+      "indexes" : [
+        {
+          "name" : "GlobalID_Index", 
+          "fields" : "GlobalID", 
+          "isAscending" : false, 
+          "isUnique" : true, 
+          "description" : "", 
+          "indexType" : "Attribute"
+        }, 
+        {
+          "name" : "WOONCOMPAS_DL_Objecten_PUNTEN_Shape_sidx", 
+          "fields" : "Shape", 
+          "isAscending" : true, 
+          "isUnique" : false, 
+          "description" : "Shape Index", 
+          "indexType" : "Spatial"
+        }, 
+        {
+          "name" : "PK__WOONCOMP__F4B70D85169A4158", 
+          "fields" : "OBJECTID", 
+          "isAscending" : true, 
+          "isUnique" : true, 
+          "description" : "clustered, unique, primary key", 
+          "indexType" : "Attribute"
+        }
+      ], 
+      "dateFieldsTimeReference" : {
+        "timeZone" : "UTC", 
+        "timeZoneIANA" : "Etc/UTC", 
+        "respectsDaylightSaving" : false
+      }, 
+      "preferredTimeReference" : null, 
+      "types" : [], 
+      "templates" : [
+        {
+          "name" : "New Feature", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPoint", 
+          "prototype" : {
+            "attributes" : {
+              "Eigenaar" : null, 
+              "Bronhouder" : null, 
+              "Plaats" : null, 
+              "Straat" : null, 
+              "Hoofdgroep" : null, 
+              "Beheergroep" : null, 
+              "Subbeheergroep" : null, 
+              "Boom_hoogte_klasse" : null, 
+              "Boom_diameter_klasse" : null, 
+              "Opmerkingen" : null, 
+              "Objectvorm" : null
+            }
+          }
+        }
+      ], 
+      "supportedQueryFormats" : "JSON, geoJSON, PBF", 
+      "supportedAppendFormats" : "sqlite,geoPackage,shapefile,filegdb,featureCollection,geojson,csv,excel,jsonl,featureService,pbf,imageCollection", 
+      "supportedAppendSourceFilterFormats" : "sqlite,geoPackage,shapefile,filegdb,featureService", 
+      "supportedAppendCapabilities" : "Features,Attachments", 
+      "supportedExportFormats" : "csv,shapefile,sqlite,geoPackage,filegdb,featureCollection,geojson,kml,excel,parquet", 
+      "supportedConvertFileFormats" : "JSON,PBF,Parquet", 
+      "supportedConvertContentFormats" : "LayerEditCollection,FeatureCollection", 
+      "supportedSpatialRelationships" : [
+        "esriSpatialRelIntersects", 
+        "esriSpatialRelContains", 
+        "esriSpatialRelCrosses", 
+        "esriSpatialRelEnvelopeIntersects", 
+        "esriSpatialRelIndexIntersects", 
+        "esriSpatialRelOverlaps", 
+        "esriSpatialRelTouches", 
+        "esriSpatialRelWithin", 
+        "esriSpatialRelDisjoint", 
+        "esriSpatialRelRelation"
+      ], 
+      "guidFormat" : "", 
+      "supportsContingentValues" : true, 
+      "supportsEditingContingentValues" : true, 
+      "supportedContingentValuesFormats" : "JSON, PBF", 
+      "supportsFieldGroups" : true, 
+      "supportedSyncDataOptions" : 49412, 
+      "hasStaticData" : false, 
+      "maxRecordCount" : 2000, 
+      "standardMaxRecordCount" : 16000, 
+      "maxIdsCount" : 1000000, 
+      "standardMaxRecordCountNoGeometry" : 32000, 
+      "tileMaxRecordCount" : 8000, 
+      "maxRecordCountFactor" : 1, 
+      "capabilities" : "Create,Delete,Query,Update,Editing", 
+      "exceedsLimitFactor" : 1
+    }, 
+    {
+      "adminLayerInfo" : {
+        "tableName" : "db_42723.user_42723.WOONCOMPAS_DL_Objecten_LIJNEN", 
+        "geometryField" : {"name" : "Shape"}, 
+        "xssTrustedFields" : ""
+      }, 
+      "id" : 1, 
+      "enableUseOfScaleOutReplicasWhenEditable" : true, 
+      "supportedFieldTypes" : [
+        "esriFieldTypeSmallInteger", 
+        "esriFieldTypeInteger", 
+        "esriFieldTypeSingle", 
+        "esriFieldTypeDouble", 
+        "esriFieldTypeString", 
+        "esriFieldTypeDate", 
+        "esriFieldTypeOID", 
+        "esriFieldTypeGeometry", 
+        "esriFieldTypeBlob", 
+        "esriFieldTypeRaster", 
+        "esriFieldTypeGUID", 
+        "esriFieldTypeGlobalID", 
+        "esriFieldTypeXML", 
+        "esriFieldTypeBigInteger", 
+        "esriFieldTypeDateOnly", 
+        "esriFieldTypeTimeOnly", 
+        "esriFieldTypeTimestampOffset"
+      ], 
+      "layerAdminOperationsOptions" : {
+        "deleteFromDefinition" : [
+          "xssTrustedFields", 
+          "fields", 
+          "indexes", 
+          "relationships"
+        ], 
+        "addToDefiniton" : [
+          "fields", 
+          "indexes"
+        ], 
+        "updateDefinition" : [
+          "name", 
+          "type", 
+          "xssTrustedFields", 
+          "displayField", 
+          "description", 
+          "copyrightText", 
+          "editFieldsInfo", 
+          "minScale", 
+          "maxScale", 
+          "fields", 
+          "maxRecordCount", 
+          "drawingInfo", 
+          "types", 
+          "templates", 
+          "indexes", 
+          "defaultVisibility", 
+          "hasAttachments", 
+          "propagateVisibleFields", 
+          "hasGeometryProperties", 
+          "attachmentProperties", 
+          "lodInfos", 
+          "typeIdField", 
+          "timeInfo", 
+          "allowUpdateWithoutMValues", 
+          "maxRecordCountFactor", 
+          "allowGeometryUpdates", 
+          "capabilities", 
+          "ownershipBasedAccessControlForFeatures", 
+          "enableNullGeometry", 
+          "onlyAllowTrueCurveUpdatesByTrueCurveClients", 
+          "allowTrueCurvesUpdates"
+        ]
+      }, 
+      "maxFieldNameLength" : 128, 
+      "name" : "Lijnen", 
+      "type" : "Feature Layer", 
+      "displayField" : "", 
+      "description" : "", 
+      "copyrightText" : "", 
+      "defaultVisibility" : true, 
+      "editingInfo" : {
+        "lastEditDate" : 1795778710785, 
+        "schemaLastEditDate" : 1795778594134, 
+        "dataLastEditDate" : 1795778594134
+      }, 
+      "relationships" : [], 
+      "isDataVersioned" : false, 
+      "hasContingentValuesDefinition" : false, 
+      "supportsAppend" : true, 
+      "supportsCalculate" : true, 
+      "supportsASyncCalculate" : true, 
+      "supportsTruncate" : false, 
+      "supportsAttachmentsByUploadId" : true, 
+      "supportsAttachmentsResizing" : true, 
+      "supportsRollbackOnFailureParameter" : true, 
+      "supportsStatistics" : true, 
+      "supportsExceedsLimitStatistics" : true, 
+      "supportsAdvancedQueries" : true, 
+      "supportsValidateSql" : true, 
+      "supportsCoordinatesQuantization" : true, 
+      "supportsLayerOverrides" : true, 
+      "supportsTilesAndBasicQueriesMode" : true, 
+      "supportsFieldDescriptionProperty" : true, 
+      "supportsQuantizationEditMode" : true, 
+      "supportsColumnStoreIndex" : true, 
+      "supportsApplyEditsWithGlobalIds" : true, 
+      "supportsMultiScaleGeometry" : true, 
+      "supportsReturningQueryGeometry" : true, 
+      "enableNullGeometry" : false, 
+      "hasGeometryProperties" : true, 
+      "geometryProperties" : 
+      {
+        "shapeLengthFieldName" : "Shape__Length"
+      }, 
+      "advancedQueryCapabilities" : {
+        "supportsPagination" : true, 
+        "supportsPaginationOnAggregatedQueries" : true, 
+        "supportsQueryRelatedPagination" : true, 
+        "supportsQueryWithDistance" : true, 
+        "supportsOutDistance" : true, 
+        "supportsReturningQueryExtent" : true, 
+        "supportsStatistics" : true, 
+        "supportsOrderBy" : true, 
+        "supportsDistinct" : true, 
+        "supportsQueryWithResultType" : true, 
+        "supportsSqlExpression" : true, 
+        "supportsTimeRelation" : true, 
+        "supportsAdvancedQueryRelated" : true, 
+        "supportsCountDistinct" : true, 
+        "supportsPercentileStatistics" : true, 
+        "supportsApproxPercentileStatistics" : true, 
+        "supportsSpatialAggregationStatistics" : true, 
+        "supportsTrueCurve" : true, 
+        "supportedSpatialAggregationStatistics" : [
+          "EnvelopeAggregate", 
+          "CentroidAggregate", 
+          "ConvexHullAggregate"
+        ], 
+        "supportsQueryAttachments" : true, 
+        "supportsQueryAttachmentsCountOnly" : true, 
+        "supportsQueryAttachmentOrderByFields" : true, 
+        "supportsQueryAttachmentWithTypeWildcard" : true, 
+        "supportsReturningGeometryCentroid" : false, 
+        "supportsReturningGeometryEnvelope" : true, 
+        "supportsReturningGeometryProperties" : true, 
+        "supportsQueryWithDatumTransformation" : true, 
+        "supportsCurrentUserQueries" : true, 
+        "supportsHavingClause" : true, 
+        "supportsOutFieldSQLExpression" : true, 
+        "supportsMaxRecordCountFactor" : true, 
+        "supportsTopFeaturesQuery" : true, 
+        "supportsDisjointSpatialRel" : true, 
+        "supportsQueryWithCacheHint" : true, 
+        "supportedOperationsWithCacheHint" : [
+          "query", 
+          "queryTopFilter", 
+          "queryAnalytics", 
+          "queryAttachments", 
+          "queryRelated", 
+          "queryBins", 
+          "queryPivot"
+        ], 
+        "supportsQueryAttachmentsWithReturnUrl" : true, 
+        "supportsQueryAnalytic" : true, 
+        "supportsQueryPivot" : true, 
+        "supportsQueryBins" : true, 
+        "supportsDefaultSR" : true, 
+        "supportsTranslations" : false, 
+        "supportsAggIds" : true, 
+        "supportsQueryWithCollation" : true, 
+        "supportsISODOW" : true, 
+        "supportsISOWeek" : true, 
+        "supportsFullTextSearch" : true, 
+        "fullTextSearchCapabilities" : {
+          "supportsAccentSensitivity" : true, 
+          "supportsStopWords" : true, 
+          "supportsSearchOperator" : true, 
+          "supportsOperator" : true
+        }
+      }, 
+      "advancedQueryAnalyticCapabilities" : {
+        "supportsLinearRegression" : true, 
+        "supportsTrendlineRegression" : true, 
+        "supportsAsync" : true, 
+        "supportsPercentileAnalytic" : true
+      }, 
+      "queryBinsCapabilities" : {
+        "supportsAsync" : true, 
+        "supportsAutoIntervalBin" : true, 
+        "supportsFixedIntervalBin" : true, 
+        "supportsFixedBoundariesBin" : true, 
+        "supportsDateBin" : true, 
+        "supportsClassificationBin" : true, 
+        "supportsStackBy" : true, 
+        "supportsSplitBy" : true, 
+        "supportsFirstDayOfWeek" : true, 
+        "supportsSnapToData" : true, 
+        "supportsReturnFullIntervalBin" : true, 
+        "supportsReturnStackValueRange" : true, 
+        "supportsNormalization" : true, 
+        "supportedStatisticTypes" : [
+          "COUNT", 
+          "SUM", 
+          "AVG", 
+          "VAR", 
+          "VAR_SAMP", 
+          "VAR_POP", 
+          "STDDEV", 
+          "STDDEV_SAMP", 
+          "STDDEV_POP", 
+          "MIN", 
+          "MAX", 
+          "PERCENTILE_CONT", 
+          "PERCENTILE_DISC", 
+          "APPROX_PERCENTILE_CONT", 
+          "APPROX_PERCENTILE_DISC", 
+          "CentroidAggregate", 
+          "EnvelopeAggregate", 
+          "ConvexHullAggregate"
+        ], 
+        "supportedNormalizationTypes" : [
+          "boxCox", 
+          "field", 
+          "inverse", 
+          "log", 
+          "naturalLog", 
+          "percentOfTotal", 
+          "squareRoot"
+        ]
+      }, 
+      "supportedOperationsWithCollation" : "query,addField,updateField", 
+      "advancedEditingCapabilities" : {
+        "supportedSqlFormatsInCalculate" : [
+          "standard"
+        ], 
+        "supportsAsyncApplyEdits" : true, 
+        "supportsReturnEditResults" : true, 
+        "supportsApplyEditsbyUploadID" : true, 
+        "supportedApplyEditsUploadIDFormats" : "JSON,PBF", 
+        "supportsTranslation" : false, 
+        "supportsMaxTranslations" : 10
+      }, 
+      "infoInEstimates" : [
+        "extent", 
+        "count"
+      ], 
+      "useStandardizedQueries" : true, 
+      "geometryType" : "esriGeometryPolyline", 
+      "minScale" : 0, 
+      "maxScale" : 0, 
+      "extent" : {
+        "xmin" : -17811118.526923772, 
+        "ymin" : -15538711.096309224, 
+        "xmax" : 17811118.526923772, 
+        "ymax" : 15538711.096309224, 
+        "spatialReference" : {
+          "wkid" : 102100, 
+          "latestWkid" : 3857
+        }
+      }, 
+      "spatialReference" : {
+        "wkid" : 102100, 
+        "latestWkid" : 3857
+      }, 
+      "drawingInfo":{"renderer":{"type":"simple","symbol":{"type":"esriSLS","style":"esriSLSSolid","color":[165,83,183,255],"width":1}},"transparency":0,"labelingInfo":null}, 
+      "allowGeometryUpdates" : true, 
+      "trueCurveSupportMode" : "OGC", 
+      "supportedCurveTypes" : [
+        "esriGeometryCircularArc"
+      ], 
+      "supportedTrueCurvePbfFeatureEncodings" : [
+        "esriCompressedShapeBuffer", 
+        "esriDefault"
+      ], 
+      "allowTrueCurvesUpdates" : true, 
+      "onlyAllowTrueCurveUpdatesByTrueCurveClients" : false, 
+      "hasAttachments" : true, 
+      
+      "attachmentProperties" : [
+        {
+          "name" : "id", 
+          "fieldName" : "ATTACHMENTID", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "globalId", 
+          "fieldName" : "AttachmentGlobalID", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "name", 
+          "fieldName" : "ATT_NAME", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "size", 
+          "fieldName" : "DATA_SIZE", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "contentType", 
+          "fieldName" : "CONTENT_TYPE", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "keywords", 
+          "fieldName" : "Keywords", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "exifInfo", 
+          "fieldName" : "ExifInfo", 
+          "isEnabled" : true
+        }
+      ], 
+      "htmlPopupType" : "esriServerHTMLPopupTypeNone", 
+      "hasM" : false, 
+      "hasZ" : false, 
+      "objectIdField" : "OBJECTID", 
+      "globalIdField" : "GlobalID", 
+      "typeIdField" : "", 
+      "collation" : {
+        "locale" : "neutral", 
+        "caseSensitive" : false, 
+        "accentSensitive" : true
+      }, 
+      "fields" : [
+        {
+          "name" : "OBJECTID", 
+          "type" : "esriFieldTypeOID", 
+          "alias" : "OBJECTID", 
+          "sqlType" : "sqlTypeOther", 
+          "nullable" : false, 
+          "editable" : false, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "GlobalID", 
+          "type" : "esriFieldTypeGlobalID", 
+          "alias" : "GlobalID", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 38, 
+          "nullable" : false, 
+          "editable" : false, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Shape__Length", 
+          "type" : "esriFieldTypeDouble", 
+          "alias" : "Shape__Length", 
+          "sqlType" : "sqlTypeDouble", 
+          "nullable" : true, 
+          "editable" : false, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Eigenaar", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Eigenaar", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Bronhouder", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Bronhouder", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Plaats", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Plaats", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Straat", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Straat", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Hoofdgroep", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Hoofdgroep", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Beheergroep", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Beheergroep", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Subbeheergroep", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Subbeheergroep", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Opmerkingen", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Opmerkingen", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Objectvorm", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Objectvorm", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }
+      ], 
+      "indexes" : [
+        {
+          "name" : "GlobalID_Index", 
+          "fields" : "GlobalID", 
+          "isAscending" : false, 
+          "isUnique" : true, 
+          "description" : "", 
+          "indexType" : "Attribute"
+        }, 
+        {
+          "name" : "Shape__Length_Index", 
+          "fields" : "Shape__Length", 
+          "isAscending" : true, 
+          "isUnique" : false, 
+          "description" : "", 
+          "indexType" : "Attribute"
+        }, 
+        {
+          "name" : "WOONCOMPAS_DL_Objecten_LIJNEN_Shape_sidx", 
+          "fields" : "Shape", 
+          "isAscending" : true, 
+          "isUnique" : false, 
+          "description" : "Shape Index", 
+          "indexType" : "Spatial"
+        }, 
+        {
+          "name" : "PK__WOONCOMP__F4B70D8537709799", 
+          "fields" : "OBJECTID", 
+          "isAscending" : true, 
+          "isUnique" : true, 
+          "description" : "clustered, unique, primary key", 
+          "indexType" : "Attribute"
+        }
+      ], 
+      "dateFieldsTimeReference" : {
+        "timeZone" : "UTC", 
+        "timeZoneIANA" : "Etc/UTC", 
+        "respectsDaylightSaving" : false
+      }, 
+      "preferredTimeReference" : null, 
+      "types" : [], 
+      "templates" : [
+        {
+          "name" : "New Feature", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolLine", 
+          "prototype" : {
+            "attributes" : {
+              "Eigenaar" : null, 
+              "Bronhouder" : null, 
+              "Plaats" : null, 
+              "Straat" : null, 
+              "Hoofdgroep" : null, 
+              "Beheergroep" : null, 
+              "Subbeheergroep" : null, 
+              "Opmerkingen" : null, 
+              "Objectvorm" : null
+            }
+          }
+        }
+      ], 
+      "supportedQueryFormats" : "JSON, geoJSON, PBF", 
+      "supportedAppendFormats" : "sqlite,geoPackage,shapefile,filegdb,featureCollection,geojson,csv,excel,jsonl,featureService,pbf,imageCollection", 
+      "supportedAppendSourceFilterFormats" : "sqlite,geoPackage,shapefile,filegdb,featureService", 
+      "supportedAppendCapabilities" : "Features,Attachments", 
+      "supportedExportFormats" : "csv,shapefile,sqlite,geoPackage,filegdb,featureCollection,geojson,kml,excel,parquet", 
+      "supportedConvertFileFormats" : "JSON,PBF,Parquet", 
+      "supportedConvertContentFormats" : "LayerEditCollection,FeatureCollection", 
+      "supportedSpatialRelationships" : [
+        "esriSpatialRelIntersects", 
+        "esriSpatialRelContains", 
+        "esriSpatialRelCrosses", 
+        "esriSpatialRelEnvelopeIntersects", 
+        "esriSpatialRelIndexIntersects", 
+        "esriSpatialRelOverlaps", 
+        "esriSpatialRelTouches", 
+        "esriSpatialRelWithin", 
+        "esriSpatialRelDisjoint", 
+        "esriSpatialRelRelation"
+      ], 
+      "guidFormat" : "", 
+      "supportsContingentValues" : true, 
+      "supportsEditingContingentValues" : true, 
+      "supportedContingentValuesFormats" : "JSON, PBF", 
+      "supportsFieldGroups" : true, 
+      "supportedSyncDataOptions" : 49412, 
+      "hasStaticData" : false, 
+      "maxRecordCount" : 2000, 
+      "standardMaxRecordCount" : 2000, 
+      "maxIdsCount" : 1000000, 
+      "standardMaxRecordCountNoGeometry" : 32000, 
+      "tileMaxRecordCount" : 4000, 
+      "maxRecordCountFactor" : 1, 
+      "capabilities" : "Create,Delete,Query,Update,Editing", 
+      "exceedsLimitFactor" : 1
+    }, 
+    {
+      "adminLayerInfo" : {
+        "tableName" : "db_42723.user_42723.WOONCOMPAS_DL_Objecten_VLAKKEN", 
+        "geometryField" : {"name" : "Shape"}, 
+        "xssTrustedFields" : ""
+      }, 
+      "id" : 2, 
+      "enableUseOfScaleOutReplicasWhenEditable" : true, 
+      "supportedFieldTypes" : [
+        "esriFieldTypeSmallInteger", 
+        "esriFieldTypeInteger", 
+        "esriFieldTypeSingle", 
+        "esriFieldTypeDouble", 
+        "esriFieldTypeString", 
+        "esriFieldTypeDate", 
+        "esriFieldTypeOID", 
+        "esriFieldTypeGeometry", 
+        "esriFieldTypeBlob", 
+        "esriFieldTypeRaster", 
+        "esriFieldTypeGUID", 
+        "esriFieldTypeGlobalID", 
+        "esriFieldTypeXML", 
+        "esriFieldTypeBigInteger", 
+        "esriFieldTypeDateOnly", 
+        "esriFieldTypeTimeOnly", 
+        "esriFieldTypeTimestampOffset"
+      ], 
+      "layerAdminOperationsOptions" : {
+        "deleteFromDefinition" : [
+          "xssTrustedFields", 
+          "fields", 
+          "indexes", 
+          "relationships"
+        ], 
+        "addToDefiniton" : [
+          "fields", 
+          "indexes"
+        ], 
+        "updateDefinition" : [
+          "name", 
+          "type", 
+          "xssTrustedFields", 
+          "displayField", 
+          "description", 
+          "copyrightText", 
+          "editFieldsInfo", 
+          "minScale", 
+          "maxScale", 
+          "fields", 
+          "maxRecordCount", 
+          "drawingInfo", 
+          "types", 
+          "templates", 
+          "indexes", 
+          "defaultVisibility", 
+          "hasAttachments", 
+          "propagateVisibleFields", 
+          "hasGeometryProperties", 
+          "attachmentProperties", 
+          "lodInfos", 
+          "typeIdField", 
+          "timeInfo", 
+          "allowUpdateWithoutMValues", 
+          "maxRecordCountFactor", 
+          "allowGeometryUpdates", 
+          "capabilities", 
+          "ownershipBasedAccessControlForFeatures", 
+          "enableNullGeometry", 
+          "onlyAllowTrueCurveUpdatesByTrueCurveClients", 
+          "allowTrueCurvesUpdates"
+        ]
+      }, 
+      "maxFieldNameLength" : 128, 
+      "name" : "Vlakken", 
+      "type" : "Feature Layer", 
+      "displayField" : "", 
+      "description" : "", 
+      "copyrightText" : "", 
+      "defaultVisibility" : true, 
+      "editingInfo" : {
+        "lastEditDate" : 1795778710785, 
+        "schemaLastEditDate" : 1795778594134, 
+        "dataLastEditDate" : 1795778594134
+      }, 
+      "relationships" : [], 
+      "isDataVersioned" : false, 
+      "hasContingentValuesDefinition" : false, 
+      "supportsAppend" : true, 
+      "supportsCalculate" : true, 
+      "supportsASyncCalculate" : true, 
+      "supportsTruncate" : false, 
+      "supportsAttachmentsByUploadId" : true, 
+      "supportsAttachmentsResizing" : true, 
+      "supportsRollbackOnFailureParameter" : true, 
+      "supportsStatistics" : true, 
+      "supportsExceedsLimitStatistics" : true, 
+      "supportsAdvancedQueries" : true, 
+      "supportsValidateSql" : true, 
+      "supportsCoordinatesQuantization" : true, 
+      "supportsLayerOverrides" : true, 
+      "supportsTilesAndBasicQueriesMode" : true, 
+      "supportsFieldDescriptionProperty" : true, 
+      "supportsQuantizationEditMode" : true, 
+      "supportsColumnStoreIndex" : true, 
+      "supportsApplyEditsWithGlobalIds" : true, 
+      "supportsMultiScaleGeometry" : true, 
+      "supportsReturningQueryGeometry" : true, 
+      "enableNullGeometry" : false, 
+      "hasGeometryProperties" : true, 
+      "geometryProperties" : 
+      {
+        "shapeAreaFieldName" : "Shape__Area", 
+        "shapeLengthFieldName" : "Shape__Length"
+      }, 
+      "advancedQueryCapabilities" : {
+        "supportsPagination" : true, 
+        "supportsPaginationOnAggregatedQueries" : true, 
+        "supportsQueryRelatedPagination" : true, 
+        "supportsQueryWithDistance" : true, 
+        "supportsOutDistance" : true, 
+        "supportsReturningQueryExtent" : true, 
+        "supportsStatistics" : true, 
+        "supportsOrderBy" : true, 
+        "supportsDistinct" : true, 
+        "supportsQueryWithResultType" : true, 
+        "supportsSqlExpression" : true, 
+        "supportsTimeRelation" : true, 
+        "supportsAdvancedQueryRelated" : true, 
+        "supportsCountDistinct" : true, 
+        "supportsPercentileStatistics" : true, 
+        "supportsApproxPercentileStatistics" : true, 
+        "supportsSpatialAggregationStatistics" : true, 
+        "supportsTrueCurve" : true, 
+        "supportedSpatialAggregationStatistics" : [
+          "EnvelopeAggregate", 
+          "CentroidAggregate", 
+          "ConvexHullAggregate"
+        ], 
+        "supportsQueryAttachments" : true, 
+        "supportsQueryAttachmentsCountOnly" : true, 
+        "supportsQueryAttachmentOrderByFields" : true, 
+        "supportsQueryAttachmentWithTypeWildcard" : true, 
+        "supportsReturningGeometryCentroid" : true, 
+        "supportsReturningGeometryEnvelope" : true, 
+        "supportsReturningGeometryProperties" : true, 
+        "supportsQueryWithDatumTransformation" : true, 
+        "supportsCurrentUserQueries" : true, 
+        "supportsHavingClause" : true, 
+        "supportsOutFieldSQLExpression" : true, 
+        "supportsMaxRecordCountFactor" : true, 
+        "supportsTopFeaturesQuery" : true, 
+        "supportsDisjointSpatialRel" : true, 
+        "supportsQueryWithCacheHint" : true, 
+        "supportedOperationsWithCacheHint" : [
+          "query", 
+          "queryTopFilter", 
+          "queryAnalytics", 
+          "queryAttachments", 
+          "queryRelated", 
+          "queryBins", 
+          "queryPivot"
+        ], 
+        "supportsQueryAttachmentsWithReturnUrl" : true, 
+        "supportsQueryAnalytic" : true, 
+        "supportsQueryPivot" : true, 
+        "supportsQueryBins" : true, 
+        "supportsDefaultSR" : true, 
+        "supportsTranslations" : false, 
+        "supportsAggIds" : true, 
+        "supportsQueryWithCollation" : true, 
+        "supportsISODOW" : true, 
+        "supportsISOWeek" : true, 
+        "supportsFullTextSearch" : true, 
+        "fullTextSearchCapabilities" : {
+          "supportsAccentSensitivity" : true, 
+          "supportsStopWords" : true, 
+          "supportsSearchOperator" : true, 
+          "supportsOperator" : true
+        }
+      }, 
+      "advancedQueryAnalyticCapabilities" : {
+        "supportsLinearRegression" : true, 
+        "supportsTrendlineRegression" : true, 
+        "supportsAsync" : true, 
+        "supportsPercentileAnalytic" : true
+      }, 
+      "queryBinsCapabilities" : {
+        "supportsAsync" : true, 
+        "supportsAutoIntervalBin" : true, 
+        "supportsFixedIntervalBin" : true, 
+        "supportsFixedBoundariesBin" : true, 
+        "supportsDateBin" : true, 
+        "supportsClassificationBin" : true, 
+        "supportsStackBy" : true, 
+        "supportsSplitBy" : true, 
+        "supportsFirstDayOfWeek" : true, 
+        "supportsSnapToData" : true, 
+        "supportsReturnFullIntervalBin" : true, 
+        "supportsReturnStackValueRange" : true, 
+        "supportsNormalization" : true, 
+        "supportedStatisticTypes" : [
+          "COUNT", 
+          "SUM", 
+          "AVG", 
+          "VAR", 
+          "VAR_SAMP", 
+          "VAR_POP", 
+          "STDDEV", 
+          "STDDEV_SAMP", 
+          "STDDEV_POP", 
+          "MIN", 
+          "MAX", 
+          "PERCENTILE_CONT", 
+          "PERCENTILE_DISC", 
+          "APPROX_PERCENTILE_CONT", 
+          "APPROX_PERCENTILE_DISC", 
+          "CentroidAggregate", 
+          "EnvelopeAggregate", 
+          "ConvexHullAggregate"
+        ], 
+        "supportedNormalizationTypes" : [
+          "boxCox", 
+          "field", 
+          "inverse", 
+          "log", 
+          "naturalLog", 
+          "percentOfTotal", 
+          "squareRoot"
+        ]
+      }, 
+      "supportedOperationsWithCollation" : "query,addField,updateField", 
+      "advancedEditingCapabilities" : {
+        "supportedSqlFormatsInCalculate" : [
+          "standard"
+        ], 
+        "supportsAsyncApplyEdits" : true, 
+        "supportsReturnEditResults" : true, 
+        "supportsApplyEditsbyUploadID" : true, 
+        "supportedApplyEditsUploadIDFormats" : "JSON,PBF", 
+        "supportsTranslation" : false, 
+        "supportsMaxTranslations" : 10
+      }, 
+      "infoInEstimates" : [
+        "extent", 
+        "count"
+      ], 
+      "useStandardizedQueries" : true, 
+      "geometryType" : "esriGeometryPolygon", 
+      "minScale" : 0, 
+      "maxScale" : 0, 
+      "extent" : {
+        "xmin" : -17811118.526923772, 
+        "ymin" : -15538711.096309224, 
+        "xmax" : 17811118.526923772, 
+        "ymax" : 15538711.096309224, 
+        "spatialReference" : {
+          "wkid" : 102100, 
+          "latestWkid" : 3857
+        }
+      }, 
+      "spatialReference" : {
+        "wkid" : 102100, 
+        "latestWkid" : 3857
+      }, 
+      "drawingInfo":{"renderer":{"type":"simple","symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[76,129,205,191],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[0,0,0,255],"width":0.75}}},"transparency":0,"labelingInfo":null}, 
+      "allowGeometryUpdates" : true, 
+      "trueCurveSupportMode" : "OGC", 
+      "supportedCurveTypes" : [
+        "esriGeometryCircularArc"
+      ], 
+      "supportedTrueCurvePbfFeatureEncodings" : [
+        "esriCompressedShapeBuffer", 
+        "esriDefault"
+      ], 
+      "allowTrueCurvesUpdates" : true, 
+      "onlyAllowTrueCurveUpdatesByTrueCurveClients" : false, 
+      "hasAttachments" : true, 
+      
+      "attachmentProperties" : [
+        {
+          "name" : "id", 
+          "fieldName" : "ATTACHMENTID", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "globalId", 
+          "fieldName" : "AttachmentGlobalID", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "name", 
+          "fieldName" : "ATT_NAME", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "size", 
+          "fieldName" : "DATA_SIZE", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "contentType", 
+          "fieldName" : "CONTENT_TYPE", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "keywords", 
+          "fieldName" : "Keywords", 
+          "isEnabled" : true
+        }, 
+        {
+          "name" : "exifInfo", 
+          "fieldName" : "ExifInfo", 
+          "isEnabled" : true
+        }
+      ], 
+      "htmlPopupType" : "esriServerHTMLPopupTypeNone", 
+      "hasM" : false, 
+      "hasZ" : false, 
+      "objectIdField" : "OBJECTID", 
+      "globalIdField" : "GlobalID", 
+      "typeIdField" : "", 
+      "collation" : {
+        "locale" : "neutral", 
+        "caseSensitive" : false, 
+        "accentSensitive" : true
+      }, 
+      "fields" : [
+        {
+          "name" : "OBJECTID", 
+          "type" : "esriFieldTypeOID", 
+          "alias" : "OBJECTID", 
+          "sqlType" : "sqlTypeOther", 
+          "nullable" : false, 
+          "editable" : false, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "GlobalID", 
+          "type" : "esriFieldTypeGlobalID", 
+          "alias" : "GlobalID", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 38, 
+          "nullable" : false, 
+          "editable" : false, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Shape__Area", 
+          "type" : "esriFieldTypeDouble", 
+          "alias" : "Shape__Area", 
+          "sqlType" : "sqlTypeDouble", 
+          "nullable" : true, 
+          "editable" : false, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Shape__Length", 
+          "type" : "esriFieldTypeDouble", 
+          "alias" : "Shape__Length", 
+          "sqlType" : "sqlTypeDouble", 
+          "nullable" : true, 
+          "editable" : false, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Eigenaar", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Eigenaar", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Bronhouder", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Bronhouder", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Plaats", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Plaats", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Straat", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Straat", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Hoofdgroep", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Hoofdgroep", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : 
+          {
+            "type" : "codedValue", 
+            "name" : "Vlakken_Hoofdgroep_31093fae-90b8-45d0-aa80-6585d26a60fc", 
+            "codedValues" : [
+              {
+                "name" : "Bebouwing", 
+                "code" : "Bebouwing"
+              }, 
+              {
+                "name" : "Beplanting", 
+                "code" : "Beplanting"
+              },
+              {
+                "name" : "Gras", 
+                "code" : "Gras"
+              },
+              {
+                "name" : "Water", 
+                "code" : "Water"
+              },
+              {
+                "name" : "Weginrichting", 
+                "code" : "Weginrichting"
+              }
+            ]
+          }, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Beheergroep", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Beheergroep", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Subbeheergroep", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Subbeheergroep", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Haag_breedte_klasse", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Haag breedte klasse", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Haag_hoogte_klasse", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Haag hoogte klasse", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Haag_knipoppervlakte_m2", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Haag knipoppervlakte m2", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Haag_bewerking_zijde", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Haag bewerking zijde", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Opmerkingen", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Opmerking", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }, 
+        {
+          "name" : "Objectvorm", 
+          "type" : "esriFieldTypeString", 
+          "alias" : "Objectvorm", 
+          "sqlType" : "sqlTypeOther", 
+          "length" : 256, 
+          "nullable" : true, 
+          "editable" : true, 
+          "visible" : true, 
+          "domain" : null, 
+          "defaultValue" : null
+        }
+      ], 
+      "indexes" : [
+        {
+          "name" : "GlobalID_Index", 
+          "fields" : "GlobalID", 
+          "isAscending" : false, 
+          "isUnique" : true, 
+          "description" : "", 
+          "indexType" : "Attribute"
+        }, 
+        {
+          "name" : "Shape__Area_Index", 
+          "fields" : "Shape__Area", 
+          "isAscending" : true, 
+          "isUnique" : false, 
+          "description" : "", 
+          "indexType" : "Attribute"
+        }, 
+        {
+          "name" : "Shape__Length_Index", 
+          "fields" : "Shape__Length", 
+          "isAscending" : true, 
+          "isUnique" : false, 
+          "description" : "", 
+          "indexType" : "Attribute"
+        }, 
+        {
+          "name" : "WOONCOMPAS_DL_Objecten_VLAKKEN_Shape_sidx", 
+          "fields" : "Shape", 
+          "isAscending" : true, 
+          "isUnique" : false, 
+          "description" : "Shape Index", 
+          "indexType" : "Spatial"
+        }, 
+        {
+          "name" : "PK__WOONCOMP__F4B70D85BFFE8814", 
+          "fields" : "OBJECTID", 
+          "isAscending" : true, 
+          "isUnique" : true, 
+          "description" : "clustered, unique, primary key", 
+          "indexType" : "Attribute"
+        }
+      ], 
+      "dateFieldsTimeReference" : {
+        "timeZone" : "UTC", 
+        "timeZoneIANA" : "Etc/UTC", 
+        "respectsDaylightSaving" : false
+      }, 
+      "preferredTimeReference" : null, 
+      "types" : [], 
+      "templates" : [
+        {
+          "name" : "New Feature", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "Eigenaar" : null, 
+              "Bronhouder" : null, 
+              "Plaats" : null, 
+              "Straat" : null, 
+              "Hoofdgroep" : null, 
+              "Beheergroep" : null, 
+              "Subbeheergroep" : null, 
+              "Haag_breedte_klasse" : null, 
+              "Haag_hoogte_klasse" : null, 
+              "Haag_knipoppervlakte_m2" : null, 
+              "Haag_bewerking_zijde" : null, 
+              "Opmerkingen" : null, 
+              "Objectvorm" : null
+            }
+          }
+        }
+      ], 
+      "supportedQueryFormats" : "JSON, geoJSON, PBF", 
+      "supportedAppendFormats" : "sqlite,geoPackage,shapefile,filegdb,featureCollection,geojson,csv,excel,jsonl,featureService,pbf,imageCollection", 
+      "supportedAppendSourceFilterFormats" : "sqlite,geoPackage,shapefile,filegdb,featureService", 
+      "supportedAppendCapabilities" : "Features,Attachments", 
+      "supportedExportFormats" : "csv,shapefile,sqlite,geoPackage,filegdb,featureCollection,geojson,kml,excel,parquet", 
+      "supportedConvertFileFormats" : "JSON,PBF,Parquet", 
+      "supportedConvertContentFormats" : "LayerEditCollection,FeatureCollection", 
+      "supportedSpatialRelationships" : [
+        "esriSpatialRelIntersects", 
+        "esriSpatialRelContains", 
+        "esriSpatialRelCrosses", 
+        "esriSpatialRelEnvelopeIntersects", 
+        "esriSpatialRelIndexIntersects", 
+        "esriSpatialRelOverlaps", 
+        "esriSpatialRelTouches", 
+        "esriSpatialRelWithin", 
+        "esriSpatialRelDisjoint", 
+        "esriSpatialRelRelation"
+      ], 
+      "guidFormat" : "", 
+      "supportsContingentValues" : true, 
+      "supportsEditingContingentValues" : true, 
+      "supportedContingentValuesFormats" : "JSON, PBF", 
+      "supportsFieldGroups" : true, 
+      "supportedSyncDataOptions" : 49412, 
+      "hasStaticData" : false, 
+      "maxRecordCount" : 2000, 
+      "standardMaxRecordCount" : 2000, 
+      "maxIdsCount" : 1000000, 
+      "standardMaxRecordCountNoGeometry" : 32000, 
+      "tileMaxRecordCount" : 4000, 
+      "maxRecordCountFactor" : 1, 
+      "capabilities" : "Create,Delete,Query,Update,Editing", 
+      "exceedsLimitFactor" : 1
+    }
+  ]
+}
+
+
+/// update service fields for Hoofdgroep
+{"fields":[
+    {"alias":"Hoofdgroep",
+    "name":"Hoofdgroep",
+    "type":"esriFieldTypeString",
+    "sqlType":"sqlTypeOther",
+    "length":256,
+    "nullable":true,
+    "editable":true,
+    "domain":{
+        "type":"codedValue",
+        "codedValues":[{
+            "name":"Bebouwing","code":"Bebouwing"},
+            {"name":"Beplanting","code":"Beplanting"},
+            {"name":"Gras","code":"Gras"},
+            {"name":"Water","code":"Water"},
+            {"name":"Weginrichting","code":"Weginrichting"}
+        ],
+        "name":"Vlakken_Hoofdgroep_31093fae-90b8-45d0-aa80-6585d26a60fc"
+    },
+    "defaultValue":null
+}]
 }

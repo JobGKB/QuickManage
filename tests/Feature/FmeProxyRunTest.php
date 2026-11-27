@@ -68,6 +68,18 @@ class FmeProxyRunTest extends TestCase
             && $request[0]['filename'] === 'data.xlsx');
     }
 
+    public function test_too_large_upload_returns_413_with_message(): void
+    {
+        $this->withMiddleware();
+
+        $this->call('POST', '/apps/abc123/fme/upload', [], [], [], [
+            'CONTENT_LENGTH' => PHP_INT_MAX,
+            'HTTP_ACCEPT'    => 'application/json',
+        ])
+            ->assertStatus(413)
+            ->assertExactJson(['message' => 'Het bestand is te groot om te uploaden (maximaal '.ini_get('post_max_size').').']);
+    }
+
     public function test_timeout_returns_504_with_message(): void
     {
         Http::fake(['fme.test/*' => Http::failedConnection('cURL error 28: Operation timed out')]);

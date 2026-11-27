@@ -500,8 +500,14 @@ async function ensureRunOk(response) {
                                 },
                                 body: formData
                             })
-                            .then(response => {
-                                if (!response.ok) throw new Error(`Upload failed. Status: ${response.status}`);
+                            .then(async response => {
+                                if (!response.ok) {
+                                    console.error("Upload failed with status: " + response.status);
+                                    const fallback = response.status === 413
+                                        ? 'Het bestand is te groot om te uploaden.'
+                                        : `Uploaden mislukt (status ${response.status}).`;
+                                    throw new Error(await extractErrorMessage(response, fallback));
+                                }
                                 return response.json();
                             })
                             .then(uploadResult => {
@@ -529,6 +535,10 @@ async function ensureRunOk(response) {
                             })
                             .catch(error => {
                                 console.error("Upload or start failed:", error);
+                                // TypeError = network failure, e.g. the server dropped a too-large upload.
+                                showFormError(error instanceof TypeError
+                                    ? 'Uploaden mislukt: de server is niet bereikbaar of het bestand is te groot.'
+                                    : error.message);
                             });
                 }
 

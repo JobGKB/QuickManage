@@ -50,4 +50,16 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (\PDOException $e) use ($dbConnectionHandler) {
             return $dbConnectionHandler($e);
         });
+
+        // Request body exceeds PHP's post_max_size: tell the user instead of a bare 413.
+        $exceptions->render(function (\Illuminate\Http\Exceptions\PostTooLargeException $e, Request $request) {
+            $message = sprintf(
+                'Het bestand is te groot om te uploaden (maximaal %s).',
+                ini_get('post_max_size')
+            );
+
+            return $request->expectsJson()
+                ? response()->json(['message' => $message], 413)
+                : response($message, 413);
+        });
     })->create();

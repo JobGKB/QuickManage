@@ -176,23 +176,35 @@ class FmeProxyController extends Controller
             'files.*' => 'file|max:512000', // 500 MB per file
         ])->validate();
 
-        $http = Http::withHeaders([
+        // Large uploads to FME can take a while; keep PHP alive past the HTTP timeout.
+        set_time_limit($this->runTimeout() + 30);
+
+        $http = Http::timeout($this->runTimeout())->withHeaders([
             'Authorization' => 'fmetoken token=' . $token,
             'Accept'        => 'application/json',
         ]);
 
+        // Stream from disk so large files aren't loaded into memory.
         foreach ($files as $file) {
             $http = $http->attach(
                 'files',
-                file_get_contents($file->getRealPath()),
+                fopen($file->getRealPath(), 'r'),
                 $file->getClientOriginalName()
             );
         }
 
-        // 'path' is a required query parameter; empty uploads to the connection root.
-        $response = $http->post(
-            $this->baseUrl() . '/fmeapiv4/resources/connections/FME_SHAREDRESOURCE_TEMP/upload?path=&overwrite=true'
-        );
+        try {
+            // 'path' is a required query parameter; empty uploads to the connection root.
+            $response = $http->post(
+                $this->baseUrl() . '/fmeapiv4/resources/connections/FME_SHAREDRESOURCE_TEMP/upload?path=&overwrite=true'
+            );
+        } catch (ConnectionException $e) {
+            Log::warning('FME upload timed out or unreachable', ['error' => $e->getMessage()]);
+
+            return response()->json([
+                'message' => 'Uploaden naar FME is mislukt: geen antwoord of niet bereikbaar. Probeer het later opnieuw.',
+            ], 504);
+        }
 
         return response($response->body(), $response->status())
             ->header('Content-Type', $response->header('Content-Type') ?: 'application/json');
